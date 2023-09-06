@@ -1,8 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@tailwind forms;
-
 
 .app {
     height: 100vh;
@@ -16,28 +14,21 @@
     grid-area: header;
     box-shadow: 0px 1px 3px 0px rgba(44, 44, 44, 0.25);
 }
-/*.app > main {*/
-/*    grid-area: main;*/
-/*    padding: 20px;*/
-/*}*/
-.app > reg {
-
-
-    box-shadow: 0px 0px 10px 0px rgba(166, 170, 181, 0.25);
+.app > main {
+    grid-area: main;
+    padding: 20px;
 }
 .app > footer {
-    /*position: absolute;*/
-    /*justify-content: space-between;*/
-    /*display: flex;*/
-    /*bottom: 0;*/
-    /*width: 100%;*/
     grid-area: footer;
     background: #F1F5F9;
     display: flex;
     justify-content: space-between;
-    /*background: #F00;*/
-
 }
+
+.reg {
+    box-shadow: 0px 0px 10px 0px rgba(166, 170, 181, 0.25);
+}
+
 
 /*#app {*/
 /*    height: 100vh;*/

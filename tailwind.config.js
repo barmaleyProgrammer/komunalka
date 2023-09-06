@@ -15,7 +15,7 @@ module.exports = {
       'backgr_reg': '#FFF',
     },
     plugins: [
-        // require('@tailwindcss/forms'),
+      require('@tailwindcss/forms')
     ],
   }
 }

@@ -6,7 +6,9 @@ export default () => {
     return (
         <div className="app">
             <Header />
-            <Main />
+            <main>
+                <Main />
+            </main>
             <Footer />
         </div>
     );
