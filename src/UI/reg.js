@@ -18,41 +18,22 @@ export default () => {
                 <InputField label={'Email'} type={'email'} placeholder={'example@gmail.com'} required={true} />
                 <InputField label={'Прізвище'} placeholder={'Бандера'} required={true} />
                 <InputField label={'імʼя'} placeholder={'Степан'} required={true} />
-
-                <div>
-                    <label className="text-sm" htmlFor="fathername">По батькові</label>
-                    <div>
-                        <input className="outline-none" type="text"
-                               id="fathername" name="fathername" required placeholder="Андрійович"/>
-                    </div>
-                </div>
-                <div>
-                    <label htmlFor="phone">Телефон</label>
-                    <div>
-                        <input className="outline-none" type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-                               required placeholder="+38(0_ _) _ _ _ - _ _ _ - _ _"/>
-                    </div>
-                </div>
-                <div>
-                    <label htmlFor="password">Пароль</label>
-                    <div>
-                        <input className="outline-none border-yellow_figma mb-4" type="password" id="password" name="password"
-                               required/>
-                    </div>
-                </div>
+                <InputField label={'По батькові'} placeholder={'Андрійович'} required={true} />
+                <InputField label={'Телефон'} type={'phone'} placeholder={'+38(0_ _) _ _ _ - _ _ _ - _ _'} required={true} />
+                <InputField label={'Пароль'} type={'password'}required={true} />
                 <hr/>
                 <div>
                     <p className="text-[#2A3744]">При вході через сайти партнерів є змога</p>
                     <p className="text-[#2A3744]"> автоматично додати адреси</p>
                 </div>
-                <div className="flex flex-row space-x-2">
-                    <div className="basis-1/2 border border-[#E8E8E8;] rounded-[2px] w-[188px] h-[44px]">
+                <div className="flex space-x-1">
+                    <div className="basis-1/2 border border-[#E8E8E8;] rounded-[2px]">
                         <div className="logo_komunalka">
                             <img src={icon}/>
                             <img src={text_komunalka}/>
                         </div>
                     </div>
-                    <div className="basis-1/2 text-center border border-[#E8E8E8;] rounded-[2px] w-[188px] h-[44px]">
+                    <div className="basis-1/2 text-center border border-[#E8E8E8;] rounded-[2px]">
                         <div className="logo_komunalka">
                             <img src={logo_gerc} className="" />
                         </div>
