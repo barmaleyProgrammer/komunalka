@@ -28,8 +28,65 @@
 .reg {
     box-shadow: 0px 0px 10px 0px rgba(166, 170, 181, 0.25);
 }
-
-
+.reg input {
+    align-items: center;
+    border-radius: 4px;
+    border: 1px solid #E7E7E7;
+    background: #FFF;
+}
+.reg #email {
+    border-radius: 4px;
+    border: 1px solid #E6A00B;
+    background: #FFF;
+}
+.reg input, #name {
+    display: flex;
+    width: 368px;
+    height: 48px;
+    padding: 0px 200px 0px 12px;
+}
+.reg label {
+    color: #2A3744;
+    font-family: "Gotham Pro", serif;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.reg h4 {
+    font-family: Gotham Pro, serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%; /* 27px */
+    color: #2A3744;
+    text-align: center;
+}
+.reg #password {
+    border-radius: 4px;
+    border: 1px solid #E6A00B;
+    background: #FFF;
+}
+.reg svg {
+    width: 120px;
+    height: 59px;
+    flex-shrink: 0;
+    /*margin: 32px 0 0 172px;*/
+}
+.reg hr {
+    width: 368px;
+    height: 1px;
+    background: #E2E8F0;
+    color: #E7E7E7;
+}
+.reg p {
+    font-family: Gotham Pro, serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%; /* 21px */
+    width: 368px;
+}
 /*#app {*/
 /*    height: 100vh;*/
 /*    display: grid;*/

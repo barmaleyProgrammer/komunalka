@@ -1,7 +1,9 @@
 import logo from "../img/logo.svg";
 import Button from "./button";
 
+
 export default () => {
+
     return (
         <header className="w-full">
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
