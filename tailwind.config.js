@@ -13,10 +13,10 @@ module.exports = {
       'black_figma': '#2A3744',
       'backgr_footer': '#F1F5F9',
       'backgr_reg': '#FFF',
+      'borderColor': '#E7E7E7'
     },
     plugins: [
       require('@tailwindcss/forms')
     ],
   }
 }
-

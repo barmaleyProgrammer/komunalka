@@ -1,6 +1,6 @@
 export default ({ type = 'button', label = 'Save', cssType = 'primary'}) => {
 
-    let className = ['py-2.5', 'px-5', 'mr-2', 'mb-2', 'text-sm', 'font-medium', 'rounded'];
+    let className = ['py-2.5', 'px-5', 'mr-2', 'mb-2', 'text-sm', 'font-medium', 'rounded', 'w-full'];
     switch (cssType) {
         case 'primary':
             className = className.concat(['text-white_figma', 'bg-yellow_figma']);

@@ -1,49 +1,104 @@
-import React from "react";
+import { useState } from "react";
 import InputField from "../components/inputField";
 import logo from "../img/logo.svg";
 import icon from "../img/icon_komunalka.svg";
 import text_komunalka from "../img/komunalka_text.svg";
 import logo_gerc from "../img/logo_gerc.png";
-import './reg.css';
 import Button from "../components/button";
 
 export default () => {
+    const [form, setForm] = useState({
+        email: '',
+        firstName: '',
+        lastName: '',
+        middleName: '',
+        phone: '',
+        password: '',
+    });
+
+    const handleInputChange = (event) => {
+        const { name, value } = event.target;
+        setForm((prevProps) => ({
+            ...prevProps,
+            [name]: value
+        }));
+    };
+
+    const Submit = (event) => {
+        event.preventDefault();
+        console.log(form);
+        // вот тут нужно отправить запрос на сервер для регистрации нового пользователя
+    };
+
     return (
-        <div className="reg mt-10 p-10 mx-auto rounded-[8px]">
-            <div className="mt-0 ml-0 mb-8">
-                <img src={logo} className="h-16 mx-auto" alt="Flowbite Logo"/>
-            </div>
-            <h4 className="">Реєстрація</h4>
-            <form className="space-y-2" action="#" autoComplete="off">
-                <InputField label={'Email'} type={'email'} placeholder={'example@gmail.com'} required={true} />
-                <InputField label={'Прізвище'} placeholder={'Бандера'} required={true} />
-                <InputField label={'імʼя'} placeholder={'Степан'} required={true} />
-                <InputField label={'По батькові'} placeholder={'Андрійович'} required={true} />
-                <InputField label={'Телефон'} type={'phone'} placeholder={'+38(0_ _) _ _ _ - _ _ _ - _ _'} required={true} />
-                <InputField label={'Пароль'} type={'password'}required={true} />
-                <hr/>
-                <div>
-                    <p className="text-[#2A3744]">При вході через сайти партнерів є змога</p>
-                    <p className="text-[#2A3744]"> автоматично додати адреси</p>
+        <div className="mt-10 p-10 mx-auto rounded-lg shadow-lg min-w-[25%]">
+            <img src={logo} className="h-16 mb-8 mx-auto" alt="Flowbite Logo" />
+            <h4 className="text-black_figma text-center">Реєстрація</h4>
+            <form className="space-y-2" action="#" autoComplete="off" onSubmit={Submit}>
+                <InputField
+                    label={'Email'}
+                    type={'email'}
+                    placeholder={'example@gmail.com'}
+                    name={'email'}
+                    required={true}
+                    value={form.email}
+                    onChange={handleInputChange}
+                />
+                <InputField
+                    label={'Прізвище'}
+                    placeholder={'Бандера'}
+                    name={'firstName'}
+                    required={true}
+                    value={form.firstName}
+                    onChange={handleInputChange}
+                />
+                <InputField
+                    label={'Імʼя'}
+                    placeholder={'Степан'}
+                    name={'lastName'}
+                    required={true}
+                    value={form.lastName}
+                    onChange={handleInputChange}
+                />
+                <InputField
+                    label={'По батькові'}
+                    placeholder={'Андрійович'}
+                    name={'middleName'}
+                    required={true}
+                    value={form.middleName}
+                    onChange={handleInputChange}
+                />
+                <InputField
+                    label={'Телефон'}
+                    type={'phone'}
+                    placeholder={'+38(0_ _) _ _ _ - _ _ _ - _ _'}
+                    name={'phone'}
+                    required={true}
+                    value={form.phone}
+                    onChange={handleInputChange}
+                />
+                <InputField
+                    label={'Пароль'}
+                    type={'password'}
+                    name={'password'}
+                    required={true}
+                    value={form.password}
+                    onChange={handleInputChange}
+                />
+                <hr className="w-full text-borderColor"/>
+                <div className="text-black_figma text-sm">
+                    При вході через сайти партнерів є змога<br />автоматично додати адреси
                 </div>
                 <div className="flex space-x-1">
-                    <div className="basis-1/2 border border-[#E8E8E8;] rounded-[2px]">
-                        <div className="logo_komunalka">
-                            <img src={icon}/>
-                            <img src={text_komunalka}/>
-                        </div>
+                    <div className="basis-1/2 border border-borderColor rounded-sm flex justify-center items-center py-2">
+                        <img src={icon} />
+                        <img src={text_komunalka} />
                     </div>
-                    <div className="basis-1/2 text-center border border-[#E8E8E8;] rounded-[2px]">
-                        <div className="logo_komunalka">
-                            <img src={logo_gerc} className="" />
-                        </div>
+                    <div className="basis-1/2 border border-borderColor rounded-sm flex justify-center items-center py-2">
+                        <img src={logo_gerc} />
                     </div>
                 </div>
-                <div>
-                    <Button type="button" label={'Зареєструватися'} cssType={'primary'} />
-                </div>
-
-
+                <Button type="submit" label={'Зареєструватися'} cssType={'primary'} />
             </form>
         </div>
     );

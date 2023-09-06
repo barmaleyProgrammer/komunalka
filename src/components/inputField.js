@@ -1,13 +1,16 @@
-export default ({ type = 'text', label = '', placeholder = '', required = false}) => {
+export default ({ type = 'text', label = '', name = '', value = '', placeholder = '', required = false, onChange}) => {
     return (
         <div>
-            <label className="text-sm">{label}</label>
+            <label className="text-sm text-black_figma">{label}</label>
             <div>
                 <input
-                    className="border-yellow_figma"
+                    className="text-sm outline-none rounded border border-borderColor focus:border-yellow_figma w-full p-2"
                     type={type}
+                    name={name}
+                    value={value}
                     placeholder={placeholder}
                     required={required}
+                    onChange={onChange}
                 />
             </div>
         </div>
