@@ -1,9 +1,8 @@
 import { useState } from "react";
 import InputField from "../components/inputField";
 import logo from "../img/logo.svg";
-import icon from "../img/icon_komunalka.svg";
-import text_komunalka from "../img/komunalka_text.svg";
 import logo_gerc from "../img/logo_gerc.png";
+import logo_komunalka from "../img/logo_komunalka.png";
 import Button from "../components/button";
 
 export default () => {
@@ -91,8 +90,7 @@ export default () => {
                 </div>
                 <div className="flex space-x-1">
                     <div className="basis-1/2 border border-borderColor rounded-sm flex justify-center items-center py-2">
-                        <img src={icon} />
-                        <img src={text_komunalka} />
+                        <img src={logo_komunalka} />
                     </div>
                     <div className="basis-1/2 border border-borderColor rounded-sm flex justify-center items-center py-2">
                         <img src={logo_gerc} />
