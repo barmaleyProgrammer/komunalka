@@ -4,16 +4,18 @@ import logo from "../img/logo.svg";
 import logo_gerc from "../img/logo_gerc.png";
 import logo_komunalka from "../img/logo_komunalka.png";
 import Button from "../components/button";
+import api from "../api";
 
 export default () => {
     const [form, setForm] = useState({
-        email: '',
-        firstName: '',
-        lastName: '',
-        middleName: '',
-        phone: '',
-        password: '',
+        email: 'grebenyukvd@gmail.com',
+        password: 'Test_Drive1',
+        firstName: 'Barm',
+        lastName: 'aley',
+        secondName: 'Bob',
+        phone: '876454876',
     });
+    const [formError, setFormError] = useState('');
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -23,16 +25,21 @@ export default () => {
         }));
     };
 
-    const Submit = (event) => {
+    const Submit = async (event) => {
         event.preventDefault();
-        console.log(form);
-        // вот тут нужно отправить запрос на сервер для регистрации нового пользователя
+        try {
+            const res = await api.signUp(form);
+        } catch (e) {
+            console.error(e.message);
+            setFormError(e.message);
+        }
     };
 
     return (
         <div className="mt-10 p-10 mx-auto rounded-lg shadow-lg min-w-[25%]">
             <img src={logo} className="h-16 mb-8 mx-auto" alt="Flowbite Logo" />
             <h4 className="text-black_figma text-center">Реєстрація</h4>
+            <div className="text-xs text-red-900 text-center">{formError}</div>
             <form className="space-y-2" action="#" autoComplete="off" onSubmit={Submit}>
                 <InputField
                     label={'Email'}
@@ -62,9 +69,9 @@ export default () => {
                 <InputField
                     label={'По батькові'}
                     placeholder={'Андрійович'}
-                    name={'middleName'}
+                    name={'secondName'}
                     required={true}
-                    value={form.middleName}
+                    value={form.secondName}
                     onChange={handleInputChange}
                 />
                 <InputField
@@ -97,6 +104,9 @@ export default () => {
                     </div>
                 </div>
                 <Button type="submit" label={'Зареєструватися'} cssType={'primary'} />
+                <div className="flex">
+                    <p className="not-italic text-[15px] leading-[1.5rem] font-[400]"><a className=" text-[#2A3744)]">Вже є аккаунт? </a><a className="text-[#3E77AA]">Вхід</a></p>
+                </div>
             </form>
         </div>
     );
