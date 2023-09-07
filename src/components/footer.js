@@ -1,4 +1,4 @@
-import logo from "../img/logo.svg";
+import logo_lichylnyk from "../img/logo_lichylnyk.svg";
 
 function Footer() {
     return (
@@ -6,7 +6,7 @@ function Footer() {
             <div className="grid grid-cols-4 gap-20 mx-auto">
                 <div className="mb-1 md:mb-0">
                     <a href="https://komunalka.ua/" className="flex items-center">
-                        <img src={logo} className="h-8 mr-2" alt="kamunalka logo"/>
+                        <img src={logo_lichylnyk} className="h-8 mr-2" alt="kamunalka logo"/>
                     </a>
                     <ul className="text-gray-500">
                         <li className="mb-1 mt-3 text-xs">

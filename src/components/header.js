@@ -1,4 +1,4 @@
-import logo from "../img/logo.svg";
+import logo_lichylnyk from "../img/logo_lichylnyk.svg";
 import Button from "./button";
 
 
@@ -8,7 +8,7 @@ export default () => {
         <header className="w-full">
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                 <a href="/">
-                    <img src={logo} className="h-8 mr-3" alt="Flowbite Logo"/>
+                    <img src={logo_lichylnyk} className="h-8 mr-3" alt="Flowbite Logo"/>
                 </a>
                 <div className="flex md:order-2">
                     <Button type="button" label={'Увійти'} cssType={'secondary'}/>

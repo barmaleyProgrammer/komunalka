@@ -14,8 +14,8 @@ const signUp = (data) => {
         .then((res) => res.data);
 }
 
-const signIn = (email = 'grebenyukvd@gmail.com', password = 'Test_Drive1') => {
-    return axios.post('/account/signin', { email, password }, config).then((res) => {
+const signIn = (data) => {
+    return axios.post('/account/signin', data, config).then((res) => {
         // console.log('додано', res.data);
         // localStorage.setItem('accessToken', res.data.accessToken);
         // localStorage.setItem('refreshToken', res.data.refreshToken);

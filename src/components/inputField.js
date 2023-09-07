@@ -1,7 +1,7 @@
 export default ({ type = 'text', label = '', name = '', value = '', placeholder = '', required = false, onChange}) => {
     return (
         <div>
-            <label className="text-sm text-black_figma">{label}</label>
+            <label className="text-sm text-black_figma font-normal">{label}</label>
             <div>
                 <input
                     className="text-sm outline-none rounded border border-borderColor focus:border-yellow_figma w-full p-2"
