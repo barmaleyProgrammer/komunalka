@@ -10,6 +10,11 @@ import Button from "../components/button";
 import api from "../api";
 
 export default () => {
+
+    const [toggleIcon, setToggleIcon] = useState('o');
+    const [toggleIconClasses, setToggleIconClasses] = useState('pass-icon-passive');
+    const [type, setTape] = useState('password');
+
     const [form, setForm] = useState({
         email: '',
         password: '',
@@ -37,6 +42,15 @@ export default () => {
         setForm('')
     };
 
+    const togglePassInput = (e) => {
+        if (type === 'password') {
+            setTape('text')
+            setToggleIcon('X')
+        } else {
+            setTape('password')
+            setToggleIcon('o')
+        }
+    }
     return (
         <div className="mt-10 p-10 mx-auto rounded-lg shadow-lg min-w-[464px]">
             <img src={logo_lichylnyk} className="h-16 mb-8 mx-auto" alt="Flowbite Logo" />
@@ -56,12 +70,14 @@ export default () => {
                     {/*<img  src={eye} />*/}
                 <InputField
                     label={'Пароль'}
-                    type={'password'}
+                    type={type}
                     name={'password'}
                     required={true}
                     value={form.password}
                     onChange={handleInputChange}
                 />
+                    <span onClick={togglePassInput} className={`toggle ${toggleIconClasses}`}>{toggleIcon}</span>
+
                 </div>
                 <div className="flex">
                     <div className="flex basis-1/2 mt-1">
