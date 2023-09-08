@@ -1,5 +1,4 @@
-import React, {useState} from 'react';
-import {list_imgs} from "../components/assets/news/list_imgs";
+import list_imgs from "../components/assets/list_imgs";
 
 
 // const News = () => {
@@ -59,14 +58,13 @@ import {list_imgs} from "../components/assets/news/list_imgs";
 //
 const News = () => {
     return (
-        list_imgs.map((list_img) =>
-            <div key={list_img.image} className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                <div>
-                    <img className="h-auto max-w-full rounded-lg"
-                         src= {list_img.image } alt=""/>
+        <div className="w-[70%] mx-auto grid grid-flow-row grid-cols-4 gap-10">
+            {list_imgs.map((item, index) =>
+                <div key={index}>
+                    <img className="h-auto w-60 rounded-lg" src= {item.image } alt=""/>
                 </div>
-            </div>
-        )
+            )}
+        </div>
     )
 };
 export default News;
