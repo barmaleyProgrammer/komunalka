@@ -12,7 +12,6 @@ import api from "../api";
 export default () => {
 
     const [toggleIcon, setToggleIcon] = useState('o');
-    const [toggleIconClasses, setToggleIconClasses] = useState('pass-icon-passive');
     const [type, setTape] = useState('password');
 
     const [form, setForm] = useState({
@@ -76,7 +75,7 @@ export default () => {
                     value={form.password}
                     onChange={handleInputChange}
                 />
-                    <span onClick={togglePassInput} className={`toggle ${toggleIconClasses}`}>{toggleIcon}</span>
+                    <span onClick={togglePassInput}>{toggleIcon}</span>
 
                 </div>
                 <div className="flex">
