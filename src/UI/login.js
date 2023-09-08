@@ -5,7 +5,7 @@ import logo_gerc from "../img/logo_gerc.svg";
 import icon_komunalka from "../img/icon_komunalka.svg";
 import google from "../img/google.svg";
 import facebook from "../img/facebook.svg";
-import eye from '../img/eye.svg';
+import eye from "../img/eye.svg";
 import Button from "../components/button";
 import api from "../api";
 
@@ -55,7 +55,7 @@ const Login = () => {
         }
     }
     return (
-        <div className="mt-10 p-10 mx-auto rounded-lg shadow-lg min-w-[464px]">
+        <div className="mt-10 p-10 mx-auto rounded-lg shadow-lg w-[464px]">
             <img src={logo_lichylnyk} className="h-16 mb-8 mx-auto" alt="Flowbite Logo" />
             <h4 className="text-black_figma text-center">Вхід</h4>
             <div className="text-xs text-red-900 text-center">{formError}</div>
