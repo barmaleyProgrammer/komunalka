@@ -17,33 +17,33 @@ export default [
     {
         image: '/news/News6.png'
     },
-    // {
-    //     image: News7
-    // },
-    // {
-    //     image: News8
-    // },
-    // {
-    //     image: News9
-    // },
-    // {
-    //     image: News10
-    // },
-    // {
-    //     image: News11
-    // },
-    // {
-    //     image: News12
-    // },
-    // {
-    //     image: News13
-    // },
-    // {
-    //     image: News14
-    // },
-    // {
-    //     image: News15
-    // },
+    {
+        image: '/news/News7.png'
+    },
+    {
+        image: '/news/News8.png'
+    },
+    {
+        image: '/news/News9.png'
+    },
+    {
+        image: '/news/News10.png'
+    },
+    {
+        image: '/news/News11.png'
+    },
+    {
+        image: '/news/News12.png'
+    },
+    {
+        image: '/news/News13.png'
+    },
+    {
+        image: '/news/News14.png'
+    },
+    {
+        image: '/news/News15.png'
+    },
 ];
 
 

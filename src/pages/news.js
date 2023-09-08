@@ -58,7 +58,7 @@ import list_imgs from "../components/assets/list_imgs";
 //
 const News = () => {
     return (
-        <div className="w-[70%] mx-auto grid grid-flow-row grid-cols-4 gap-10">
+        <div className="w-[70%] mx-auto grid grid-flow-row grid-cols-5 gap-10">
             {list_imgs.map((item, index) =>
                 <div key={index}>
                     <img className="h-auto w-60 rounded-lg" src= {item.image } alt=""/>
