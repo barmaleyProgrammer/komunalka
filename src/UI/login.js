@@ -15,8 +15,8 @@ export default () => {
     const [type, setTape] = useState('password');
 
     const [form, setForm] = useState({
-        email: '',
-        password: '',
+        email: 'grebenyukvd@gmail.com',
+        password: 'Test_Drive2',
         // password: 'Test_Drive2',
 
     });
@@ -38,7 +38,10 @@ export default () => {
             console.error(e.message);
             setFormError(e.message);
         }
-        setForm('')
+        setForm({
+            email: '',
+            password: '',
+        });
     };
 
     const togglePassInput = (e) => {
@@ -65,18 +68,18 @@ export default () => {
                     value={form.email}
                     onChange={handleInputChange}
                 />
-                <div>
-                    {/*<img  src={eye} />*/}
-                <InputField
-                    label={'Пароль'}
-                    type={type}
-                    name={'password'}
-                    required={true}
-                    value={form.password}
-                    onChange={handleInputChange}
-                />
-                    <span onClick={togglePassInput}>{toggleIcon}</span>
-
+                <div className={'relative'}>
+                    <InputField
+                        label={'Пароль'}
+                        type={type}
+                        name={'password'}
+                        required={true}
+                        value={form.password}
+                        onChange={handleInputChange}
+                    />
+                    <span onClick={togglePassInput} className={'eye-ico'}>
+                        <img src={eye} />
+                    </span>
                 </div>
                 <div className="flex">
                     <div className="flex basis-1/2 mt-1">

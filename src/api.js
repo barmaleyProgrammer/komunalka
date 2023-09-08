@@ -10,12 +10,16 @@ const config = {
 };
 
 const signUp = (data) => {
-    return axios.post('/account/signup', data, config)
+    const newConfig = {...config};
+    delete newConfig.apiauthorization;
+    return axios.post('/account/signup', data, newConfig)
         .then((res) => res.data);
 }
 
 const signIn = (data) => {
-    return axios.post('/account/signin', data, config).then((res) => {
+    const newConfig = {...config};
+    delete newConfig.apiauthorization;
+    return axios.post('/account/signin', data, newConfig).then((res) => {
         // console.log('додано', res.data);
         // localStorage.setItem('accessToken', res.data.accessToken);
         // localStorage.setItem('refreshToken', res.data.refreshToken);

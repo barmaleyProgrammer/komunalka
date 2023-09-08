@@ -89,3 +89,10 @@
     display: flex;
     justify-content: space-between;
 }
+
+.eye-ico {
+    position: absolute;
+    z-index: 20;
+    top: 36px;
+    right: 14px;
+}
