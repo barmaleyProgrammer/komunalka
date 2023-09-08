@@ -35,7 +35,7 @@ const Header = () => {
                             <NavLink className="block py-2 pl-3 pr-4 text-sm text-white bg-black rounded md:bg-transparent md:p-0 md:dark:text-black" to="news">Новини</NavLink>
                         </li>
                         <li>
-                            <NavLink className="block py-2 pl-3 pr-4 text-sm text-white bg-black rounded md:bg-transparent md:p-0 md:dark:text-black" to="questions">Часті питання</NavLink>
+                            <NavLink className="block py-2 pl-3 pr-4 text-sm text-white bg-black rounded md:bg-transparent md:p-0 md:dark:text-black" to="faq">Часті питання</NavLink>
                         </li>
                         <li>
                             <NavLink className="block py-2 pl-3 pr-4 text-sm text-white bg-black rounded md:bg-transparent md:p-0 md:dark:text-black" to="about">Про нас</NavLink>

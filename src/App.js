@@ -5,6 +5,7 @@ import News from "./pages/news.js";
 import About from "./pages/about.js";
 import Reg from "./UI/reg";
 import Login from "./UI/login";
+import Faq from "./pages/FAQ";
 
 const App = () => {
     return (
@@ -15,6 +16,7 @@ const App = () => {
                 <Routes>
                     {/*<Route path="main" element={<Main/>} />*/}
                     <Route path="about" element={<About/>} />
+                    <Route path="faq" element={<Faq/>} />
                     <Route path="news" element={<News />} />
                     <Route path="login" element={<Login />} />
                 </Routes>
