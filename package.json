@@ -1,5 +1,5 @@
 {
-  "name": "komunalka2",
+  "name": "komunalka",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -7,8 +7,13 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "autoprefixer": "^10.4.15",
     "axios": "^1.5.0",
+    "eslint": "^8.48.0",
+    "eslint-plugin-react": "^7.33.2",
+    "flowbite": "^1.8.1",
     "flowbite-react": "^0.5.0",
+    "postcss": "^8.4.29",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.15.0",
@@ -24,6 +29,7 @@
   "eslintConfig": {
     "extends": [
       "react-app",
+      "plugin:react/recommended",
       "react-app/jest"
     ]
   },

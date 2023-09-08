@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  front:
+    image: komunalka:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "84:80/tcp"
+    logging:
+      options:
+        max-size: "1m"
+        max-file: "1"
