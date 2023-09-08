@@ -1,5 +1,4 @@
-export default ({ type = 'button', label = 'Save', cssType = 'primary'}) => {
-
+const Button = ({ type = 'button', label = 'Save', cssType = 'primary'}) => {
     let className = ['py-2.5', 'px-5', 'mr-2', 'mb-2', 'text-sm', 'font-medium', 'rounded', 'w-full'];
     switch (cssType) {
         case 'primary':
@@ -11,9 +10,9 @@ export default ({ type = 'button', label = 'Save', cssType = 'primary'}) => {
         default:
             className = [];
     }
-
-
     return (
         <button type={type} className={className.join(' ')}>{label}</button>
     );
 };
+
+export default Button;

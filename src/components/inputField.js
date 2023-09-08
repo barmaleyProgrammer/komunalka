@@ -1,4 +1,4 @@
-export default ({ type = 'text', label = '', name = '', value = '', placeholder = '', required = false, onChange}) => {
+const InputField = ({ type = 'text', label = '', name = '', value = '', placeholder = '', required = false, onChange}) => {
     return (
         <div>
             <label className="text-sm text-black_figma font-normal">{label}</label>
@@ -16,3 +16,5 @@ export default ({ type = 'text', label = '', name = '', value = '', placeholder 
         </div>
     );
 };
+
+export default InputField;

@@ -10,6 +10,7 @@
     "autoprefixer": "^10.4.15",
     "axios": "^1.5.0",
     "eslint": "^8.48.0",
+    "eslint-config-react-app": "^7.0.1",
     "eslint-plugin-react": "^7.33.2",
     "flowbite": "^1.8.1",
     "flowbite-react": "^0.5.0",
@@ -31,7 +32,13 @@
       "react-app",
       "plugin:react/recommended",
       "react-app/jest"
-    ]
+    ],
+    "rules": {
+      "react/react-in-jsx-scope": "off",
+      "react/jsx-uses-react": "off",
+      "react/prop-types": "off",
+      "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }]
+    }
   },
   "browserslist": {
     "production": [

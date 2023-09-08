@@ -9,7 +9,7 @@ import eye from '../img/eye.svg';
 import Button from "../components/button";
 import api from "../api";
 
-export default () => {
+const Login = () => {
 
     const [toggleIcon, setToggleIcon] = useState('o');
     const [type, setTape] = useState('password');
@@ -144,4 +144,6 @@ export default () => {
             </form>
         </div>
     );
-}
+};
+
+export default Login;

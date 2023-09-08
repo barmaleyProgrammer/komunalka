@@ -1,6 +1,6 @@
 import logo_lichylnyk from "../img/logo_lichylnyk.svg";
 
-function Footer() {
+const Footer = () => {
     return (
         <footer className="w-full p-4 py-6">
             <div className="grid grid-cols-4 gap-20 mx-auto">

@@ -6,7 +6,7 @@ import icon_komunalka from "../img/icon_komunalka.svg";
 import Button from "../components/button";
 import api from "../api";
 
-export default () => {
+const Reg = () => {
     const [form, setForm] = useState({
         email: 'grebenyukvd@gmail.com',
         password: 'Test_Drive2',
@@ -115,4 +115,6 @@ export default () => {
             </form>
         </div>
     );
-}
+};
+
+export default Reg;
