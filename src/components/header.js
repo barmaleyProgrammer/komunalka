@@ -1,4 +1,5 @@
 import logo_lichylnyk from "../img/logo_lichylnyk.svg";
+import {NavLink} from "react-router-dom";
 import Button from "./button";
 
 const Header = () => {
@@ -31,19 +32,13 @@ const Header = () => {
                                aria-current="page">Послуги</a>
                         </li>
                         <li>
-                            <a href="#news"
-                               className="block py-2 pl-3 pr-4 text-sm text-white bg-black rounded md:bg-transparent md:p-0 md:dark:text-black"
-                               aria-current="page">Новини</a>
+                            <NavLink className="block py-2 pl-3 pr-4 text-sm text-white bg-black rounded md:bg-transparent md:p-0 md:dark:text-black" to="news">Новини</NavLink>
                         </li>
                         <li>
-                            <a href="#questions"
-                               className="block py-2 pl-3 pr-4 text-sm text-white bg-black rounded md:bg-transparent md:p-0 md:dark:text-black"
-                               aria-current="page">Часті питання</a>
+                            <NavLink className="block py-2 pl-3 pr-4 text-sm text-white bg-black rounded md:bg-transparent md:p-0 md:dark:text-black" to="questions">Часті питання</NavLink>
                         </li>
                         <li>
-                            <a href="#about"
-                               className="block py-2 pl-3 pr-4 text-sm text-white bg-black rounded md:bg-transparent md:p-0 md:dark:text-black"
-                               aria-current="page">Про нас</a>
+                            <NavLink className="block py-2 pl-3 pr-4 text-sm text-white bg-black rounded md:bg-transparent md:p-0 md:dark:text-black" to="about">Про нас</NavLink>
                         </li>
                         <li>
                             <a href="#contacts"

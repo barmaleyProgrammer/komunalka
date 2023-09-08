@@ -13,6 +13,7 @@ const Login = () => {
 
     const [toggleIcon, setToggleIcon] = useState('o');
     const [type, setTape] = useState('password');
+    const eye = toggleIcon;
 
     const [form, setForm] = useState({
         email: 'grebenyukvd@gmail.com',
