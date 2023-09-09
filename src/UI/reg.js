@@ -36,7 +36,7 @@ const Reg = () => {
     };
 
     return (
-        <div className="mt-10 p-10 mx-auto rounded-lg shadow-lg min-w-[25%]">
+        <div className="mt-10 p-10 mx-auto rounded-lg shadow-lg min-w-[25%] w-[464px]">
             <img src={logo_lichylnyk} className="h-16 mb-8 mx-auto" alt="Flowbite Logo" />
             <h4 className="text-black_figma text-center">Реєстрація</h4>
             <div className="text-xs text-red-900 text-center">{formError}</div>

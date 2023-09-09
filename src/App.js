@@ -6,6 +6,7 @@ import About from "./pages/about.js";
 import Reg from "./UI/reg";
 import Login from "./UI/login";
 import Faq from "./pages/FAQ";
+import Contacts from "./pages/contacts";
 
 const App = () => {
     return (
@@ -18,7 +19,9 @@ const App = () => {
                     <Route path="about" element={<About/>} />
                     <Route path="faq" element={<Faq/>} />
                     <Route path="news" element={<News />} />
+                    <Route path="contacts" element={<Contacts />} />
                     <Route path="login" element={<Login />} />
+                    <Route path="reg" element={<Reg />} />
                 </Routes>
                 </main>
                 <Footer  />
