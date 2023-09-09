@@ -1,4 +1,5 @@
 import logo_lichylnyk from "../img/logo_lichylnyk.svg";
+import {NavLink} from "react-router-dom";
 
 const Footer = () => {
     return (
@@ -22,17 +23,17 @@ const Footer = () => {
                         <li className="mb-2  text-sm">
                             <a href="#services" className="hover:underline">Послуги</a>
                         </li>
-                        <li className="mb-2 text-sm">
-                            <a href="#news" className="hover:underline">Новини</a>
+                        <li>
+                            <NavLink className="block py-2 pl-3 pr-4 text-sm text-white bg-black rounded md:bg-transparent md:p-0 md:dark:text-black" to="news">Новини</NavLink>
                         </li>
-                        <li className="mb-2 text-sm">
-                            <a href="#questions" className="hover:underline">Часті питання</a>
+                        <li>
+                            <NavLink className="block py-2 pl-3 pr-4 text-sm text-white bg-black rounded md:bg-transparent md:p-0 md:dark:text-black" to="faq">Часті питання</NavLink>
                         </li>
-                        <li className="mb-2 text-sm">
-                            <a href="#about" className="hover:underline">Про нас</a>
+                        <li>
+                            <NavLink className="block py-2 pl-3 pr-4 text-sm text-white bg-black rounded md:bg-transparent md:p-0 md:dark:text-black" to="about">Про нас</NavLink>
                         </li>
-                        <li className="mb-2 text-sm">
-                            <a href="#contacts" className="hover:underline">Контакти</a>
+                        <li>
+                            <NavLink className="block py-2 pl-3 pr-4 text-sm text-white bg-black rounded md:bg-transparent md:p-0 md:dark:text-black" to="contacts">Контакти</NavLink>
                         </li>
                     </ul>
                 </div>

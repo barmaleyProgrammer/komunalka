@@ -2,7 +2,7 @@ import React from 'react';
 
 const About = () => {
     return (
-        <div className="w-[1152px] text-sm py-6 mx-auto text-justify">
+        <div className="w-[1152px] text-sm py-6 mx-auto text-justify ">
          <h2 className="text-base mb-4">Про нас</h2>
             <div>
                 <p>Основною метою діяльності Концерну – є відкриття та організація роботи сервісних центрів для обслуговування
