@@ -1,48 +1,46 @@
-import React from "react";
+import React from 'react';
+import {useState} from "react";
+import AccordionItem from "../components/assets/accordionItem";
 
-export default function Accordion() {
+const Faq = () => {
+    const [open, setOpen] = useState(false);
+    const toggle = (index) => {
+        if(open === index){
+            return setOpen(null)
+        }
+        setOpen(index)
+    }
+    const AccordionData = [
+        {
+            title: "Чому саме Лічильники?",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+        },
+        {
+            title: "Які послуги є на сайті?",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+        },
+        {
+            title: "Чи передадуться мої показники лічильників до обранної компанії?",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+        },
+    ];
     return (
-        <div>
-            <div className="w-full px-8 mx-auto mt-20 space-y-2 shadow lg:max-w-md">
-                <details className="p-4 rounded-lg">
-                    <summary className="font-semibold">How to create Accordion (FAQ) in react ?</summary>
-                    <div className="mt-3">
-                        <p className="text-sm leading-6 text-gray-600">
-                            React with Tailwind CSS Faq Accordion 1
-                        </p>
-                    </div>
-                </details>
-                <details className="p-4 rounded-lg">
-                    <summary className="font-semibold">
-                        How to use tailwind css 3 in react
-                    </summary>
-                    <div className="mt-3">
-                        <p className="text-sm leading-6 text-gray-600">
-                            React with Tailwind CSS Faq Accordion 2
-                        </p>
-                    </div>
-                </details>
-                <details className="p-4 rounded-lg">
-                    <summary className="font-semibold">
-                        How to install Tailwind CSS 3 ?
-                    </summary>
-                    <div className="mt-3">
-                        <p className="text-sm leading-6 text-gray-600">
-                            React with Tailwind CSS Faq Accordion 3
-                        </p>
-                    </div>
-                </details>
-                <details className="p-4 rounded-lg">
-                    <summary className="font-semibold">
-                        How to send feedback ?
-                    </summary>
-                    <div className="mt-3">
-                        <p className="text-sm leading-6 text-gray-600">
-                            React with Tailwind CSS Faq Accordion 4
-                        </p>
-                    </div>
-                </details>
+        <section className=" w-[1152px] h-[317px] grid mx-auto">
+            <h2 className="text-center text-[24px]">Часті питання</h2>
+            <h4 className="text-center text-[18px]">Про сервіс LYCHYLNYK</h4>
+            <div className="px-[40px] ">
+                {AccordionData.map((data, index) => {
+                    return <AccordionItem
+                        key={index}
+                        open={index === open}
+                        tittle={data.title}
+                        desc={data.desc}
+                        toggle={() =>toggle(index)}
+                    />;
+                })}
+
             </div>
-        </div>
+        </section>
     );
 }
+export default Faq;
