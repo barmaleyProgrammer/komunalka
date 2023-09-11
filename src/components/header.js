@@ -11,8 +11,12 @@ const Header = () => {
                     <img src={logo_lichylnyk} className="h-8 mr-3" alt="Flowbite Logo"/>
                 </a>
                 <div className="flex md:order-2">
+                    <a href="login">
                     <Button type="button" label={'Увійти'} cssType={'secondary'}/>
+                    </a>
+                    <a href="reg">
                     <Button type="button" label={'Зареєструватися'} cssType={'primary'} />
+                    </a>
                     <button data-collapse-toggle="navbar-sticky" type="button"
                             className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
                             aria-controls="navbar-sticky" aria-expanded="false">
@@ -40,12 +44,6 @@ const Header = () => {
                         </li>
                         <li>
                             <NavLink className="block py-2 pl-3 pr-4 text-sm text-white bg-black rounded md:bg-transparent md:p-0 md:dark:text-black" to="contacts">Контакти</NavLink>
-                        </li>
-                        <li>
-                            <NavLink className="block py-2 pl-3 pr-4 text-sm text-white bg-black rounded md:bg-transparent md:p-0 md:dark:text-black" to="reg">Регістрація</NavLink>
-                        </li>
-                        <li>
-                            <NavLink className="block py-2 pl-3 pr-4 text-sm text-white bg-black rounded md:bg-transparent md:p-0 md:dark:text-black" to="login">Авторизація</NavLink>
                         </li>
                     </ul>
                 </div>
