@@ -16,8 +16,8 @@ const Login = () => {
     const eye = toggleIcon;
 
     const [form, setForm] = useState({
-        email: '',
-        password: '',
+        email: 'grebenyukvd@gmail.com',
+        password: 'Test_Drive2',
         // password: 'Test_Drive2',
 
     });
@@ -61,9 +61,9 @@ const Login = () => {
             <div className="text-xs text-red-900 text-center">{formError}</div>
             <form className="space-y-2" action="#" autoComplete="off" onSubmit={Submit}>
                 <InputField
-                    label={'Телефон або Email'}
+                    label={'Email'}
                     type={'email'}
-                    placeholder={'Введіть свій телефон або Email'}
+                    placeholder={'Введіть свій email'}
                     name={'email'}
                     required={true}
                     value={form.email}
