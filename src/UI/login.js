@@ -16,8 +16,9 @@ const Login = () => {
     const eye = toggleIcon;
 
     const [form, setForm] = useState({
-        email: 'grebenyukvd@gmail.com',
-        password: 'Test_Drive2',
+        email: '',
+        password: '',
+        // email: 'grebenyukvd@gmail.com',
         // password: 'Test_Drive2',
 
     });
