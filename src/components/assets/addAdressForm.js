@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import Select from "../MySelect";
 import api from "../../api";
 import InputField from "../inputField";
