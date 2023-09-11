@@ -29,12 +29,23 @@ const signIn = (data) => {
         console.log(error);
     });
 }
+// const validation = () => {
+//     return axios.get(`/account/?=<<--->>&email=<<--->>`, config).then((res) => {
+//         return res.data.map((item) => ({
+//             value: Number(item.district_id),
+//             label: item.name.trim()
+//         }));
+//     })
+// }
 
 const getRegions = () => {
     if (!sessionStorage.getItem('accessToken')) {
         return [];
     }
-    return axios.get('/address/regions?country=1', config).then((res) => {
+    const newConfig = {...config};
+    delete newConfig.apiauthorization;
+    return axios.get('/address/regions?country=1', newConfig).then((res) => {
+        console.log(res)
         return res.data.map((item) => ({
             value: Number(item.region_id),
             label: item.name.trim()
@@ -147,12 +158,12 @@ export default {
     signUp,
     signIn,
     // getService,
-    // getRegions,
-    // getDistricts,
-    // getTowns,
-    // getStreets,
-    // getHouses,
-    // getFlats,
+    getRegions,
+    getDistricts,
+    getTowns,
+    getStreets,
+    getHouses,
+    getFlats,
     // getObject,
     // addObject,
     // deleteObject,

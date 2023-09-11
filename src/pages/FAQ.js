@@ -1,6 +1,7 @@
 import React from 'react';
 import {useState} from "react";
 import AccordionItem from "../components/assets/accordionItem";
+import Breadcrumb from "../components/breadcrumb";
 
 const Faq = () => {
     const [open, setOpen] = useState(false);
@@ -26,6 +27,7 @@ const Faq = () => {
     ];
     return (
         <section className=" w-[1152px] h-[317px] grid mx-auto">
+            <Breadcrumb />
             <h2 className="text-center text-[24px]">Часті питання</h2>
             <h4 className="text-center text-[18px]">Про сервіс LYCHYLNYK</h4>
             <div className="px-[40px] ">

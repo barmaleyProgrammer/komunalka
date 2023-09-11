@@ -96,3 +96,23 @@
     top: 36px;
     right: 14px;
 }
+.logo_minion {
+    position: relative;
+    z-index: 20;
+    top: 30px;
+    right: 0px;
+}
+.logo_counter {
+    position: relative;
+    top: -30px;
+    right: 0px;
+}
+/*.parent {*/
+/*position: relative;*/
+/*}*/
+/*.text_cabinet {*/
+/*    position: absolute;*/
+/*    top: 50%;*/
+/*    left: 50%;*/
+/*    transform: translate(-50%, -50%);*/
+/*}*/

@@ -9,7 +9,7 @@ import api from "../api";
 const Reg = () => {
     const [form, setForm] = useState({
         // email: 'grebenyukvd@gmail.com',
-        // password: 'Test_Drive2',
+        // password: 'Test_Drive3',
         // firstName: 'Barm',
         // lastName: 'aley',
         // secondName: 'Bob',
@@ -20,6 +20,7 @@ const Reg = () => {
         lastName: '',
         secondName: '',
         phone: '',
+        source: '2',
     });
     const [formError, setFormError] = useState('');
 

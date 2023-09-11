@@ -8,6 +8,8 @@ import Reg from "./UI/reg";
 import Login from "./UI/login";
 import Faq from "./pages/FAQ";
 import Contacts from "./pages/contacts";
+import CabinetMyAdresses from "./pages/cabinetMyAdresses";
+import AddAdressForm from "./components/assets/addAdressForm";
 
 const App = () => {
     return (
@@ -23,6 +25,8 @@ const App = () => {
                     <Route path="contacts" element={<Contacts />} />
                     <Route path="login" element={<Login />} />
                     <Route path="reg" element={<Reg />} />
+                    <Route path="cabinet" element={<CabinetMyAdresses />} />
+                    <Route path="addAdressForm" element={<AddAdressForm />} />
                 </Routes>
                 </main>
                 <Footer  />
