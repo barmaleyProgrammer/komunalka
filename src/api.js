@@ -11,14 +11,14 @@ const config = {
 
 const signUp = (data) => {
     const newConfig = {...config};
-    delete newConfig.apiauthorization;
+    delete newConfig.headers.apiauthorization;
     return axios.post('/account/signup', data, newConfig)
         .then((res) => res.data);
 }
 
 const signIn = (data) => {
     const newConfig = {...config};
-    delete newConfig.apiauthorization;
+    delete newConfig.headers.apiauthorization;
     return axios.post('/account/signin', data, newConfig).then((res) => {
         // console.log('додано', res.data);
         // localStorage.setItem('accessToken', res.data.accessToken);
@@ -29,14 +29,13 @@ const signIn = (data) => {
         console.log(error);
     });
 }
-// const validation = () => {
-//     return axios.get(`/account/?=<<--->>&email=<<--->>`, config).then((res) => {
-//         return res.data.map((item) => ({
-//             value: Number(item.district_id),
-//             label: item.name.trim()
-//         }));
-//     })
-// }
+const validation = (email, token) => {
+    const newConfig = {...config};
+    delete newConfig.headers;
+    // delete newConfig.Authorization;
+    // return axios.get(`account/validate/email?email=${encodeURIComponent(email)}&token=${token}`, newConfig).then((res) => res);
+    return axios.get('https://api-test.komunalka.ua/api/v2/account/validate/email?email=grebenyukvd%40gmail.com&token=0c42b8bcef554ce534f2ec1067c106a2').then((res) => res);
+}
 
 const getRegions = () => {
     if (!sessionStorage.getItem('accessToken')) {
@@ -157,6 +156,7 @@ const getDebt = (objectId) => {
 export default {
     signUp,
     signIn,
+    validation,
     // getService,
     getRegions,
     getDistricts,

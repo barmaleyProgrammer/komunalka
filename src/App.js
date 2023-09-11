@@ -10,6 +10,7 @@ import Faq from "./pages/FAQ";
 import Contacts from "./pages/contacts";
 import CabinetMyAdresses from "./pages/cabinetMyAdresses";
 import AddAdressForm from "./components/assets/addAdressForm";
+import ValidateEmail from "./pages/validateEmail";
 
 const App = () => {
     return (
@@ -27,6 +28,7 @@ const App = () => {
                     <Route path="reg" element={<Reg />} />
                     <Route path="cabinet" element={<CabinetMyAdresses />} />
                     <Route path="addAdressForm" element={<AddAdressForm />} />
+                    <Route path="validate/email" element={<ValidateEmail />} />
                 </Routes>
                 </main>
                 <Footer  />
