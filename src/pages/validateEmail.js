@@ -21,7 +21,7 @@ const ValidateEmail = () => {
     }, []);
     return (
         <div className="w-[50%] mx-auto">
-            <h2 className="py-1 text-[24px]">Контакти</h2>
+            <h2 className="py-1 text-[24px]">валідовано</h2>
         </div>
     );
 };
