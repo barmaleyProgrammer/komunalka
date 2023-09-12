@@ -31,10 +31,11 @@ const signIn = (data) => {
 }
 const validation = (email, token) => {
     const newConfig = {...config};
-    delete newConfig.headers;
-    // delete newConfig.Authorization;
-    // return axios.get(`account/validate/email?email=${encodeURIComponent(email)}&token=${token}`, newConfig).then((res) => res);
-    return axios.get('https://api-test.komunalka.ua/api/v2/account/validate/email?email=grebenyukvd%40gmail.com&token=0c42b8bcef554ce534f2ec1067c106a2').then((res) => res);
+    // delete newConfig.headers;
+    // delete newConfig.headers.Authorization;
+    delete newConfig.headers.apiauthorization;
+    return axios.get(`account/validate/email?email=${encodeURIComponent(email)}&token=${token}`, newConfig).then((res) => res);
+    // return axios.get('https://api-test.komunalka.ua/api/v2/account/validate/email?email=grebenyukvd%40gmail.com&token=1d44f6f4f0bc4ed9ded14ccafec87cbf').then((res) => res);
 }
 
 const getRegions = () => {
@@ -165,7 +166,7 @@ export default {
     getHouses,
     getFlats,
     // getObject,
-    // addObject,
+    addObject,
     // deleteObject,
     // getCounterValue,
     // getDebt

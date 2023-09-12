@@ -6,6 +6,7 @@ const ValidateEmail = () => {
     useEffect(() => {
         const fetchData = async () => {
             const url = new URL(window.location);
+            console.log(url);
             const email = url.searchParams.get('email') || '';
             const token = url.searchParams.get('code') || '';
             if (email && token) {

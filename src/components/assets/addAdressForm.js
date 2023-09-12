@@ -22,6 +22,16 @@ const AddAdressForm = () => {
     const [flats, setFlats] = useState([]);
     const [flat, setFlat] = useState(0);
 
+    const [flatName, setFlatName] = useState('');
+
+    // const handleInputChange = (event) => {
+    //     const { name, value } = event.target;
+    //     setFlatName((prevProps) => ({
+    //         ...prevProps,
+    //         [name]: value
+    //     }));
+    // };
+
     useEffect( () => {
         const fetchData = async () => {
             const result = await api.getRegions();
@@ -143,6 +153,20 @@ const AddAdressForm = () => {
                     onChange={value => setFlat(Number(value))}
                     value={flat}
                 />
+
+            </div>
+            <div>
+            <InputField
+                label={'Адреса'}
+                type={'text'}
+                placeholder={'Назва адреси'}
+                name={'name'}
+                required={true}
+                value={flatName}
+                onChange={event => setFlatName(event.target.value)}
+            />
+            {/*<input value={flatName} onChange={event => setFlatName(event.target.value)} /><br />*/}
+            <button onClick={() => api.addObject(flat, flatName)}>Save</button>
             </div>
         </div>
     );
