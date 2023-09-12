@@ -155,7 +155,7 @@ const AddAdressForm = () => {
                 />
 
             </div>
-            <div>
+            <div className="ml-[47px]">
             <InputField
                 label={'Адреса'}
                 type={'text'}
@@ -165,8 +165,10 @@ const AddAdressForm = () => {
                 value={flatName}
                 onChange={event => setFlatName(event.target.value)}
             />
+            </div>
+            <div>
             {/*<input value={flatName} onChange={event => setFlatName(event.target.value)} /><br />*/}
-            <button onClick={() => api.addObject(flat, flatName)}>Save</button>
+            <button className="w-[242px] h-[48px] ml-[110px] py-2.5 px-5 mr-2 mb-2 text-lg font-medium rounded text-white_figma bg-yellow_figma" onClick={() => api.addObject(flat, flatName)}>Зберігти</button>
             </div>
         </div>
     );

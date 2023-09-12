@@ -11,6 +11,8 @@ import Contacts from "./pages/contacts";
 import CabinetMyAdresses from "./pages/cabinetMyAdresses";
 import AddAdressForm from "./components/assets/addAdressForm";
 import ValidateEmail from "./pages/validateEmail";
+import Counters from "./pages/counters";
+
 
 const App = () => {
     return (
@@ -29,6 +31,7 @@ const App = () => {
                     <Route path="cabinet" element={<CabinetMyAdresses />} />
                     <Route path="addAdressForm" element={<AddAdressForm />} />
                     <Route path="validate/email" element={<ValidateEmail />} />
+                    <Route path="counters" element={<Counters />} />
                 </Routes>
                 </main>
                 <Footer  />

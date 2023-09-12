@@ -48,6 +48,9 @@ const Header = () => {
                         <li>
                             <NavLink className="py-2 pl-3 pr-4 text-sm text-white bg-black rounded md:bg-transparent md:p-0 md:dark:text-black" to="cabinet">Особистий кабінет</NavLink>
                         </li>
+                        <li>
+                            <NavLink className="py-2 pl-3 pr-4 text-sm text-white bg-black rounded md:bg-transparent md:p-0 md:dark:text-black" to="counters">Лічильники</NavLink>
+                        </li>
                     </ul>
                 </div>
             </div>

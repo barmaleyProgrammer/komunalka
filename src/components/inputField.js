@@ -4,7 +4,7 @@ const InputField = ({ type = 'text', label = '', name = '', value = '', placehol
             <label className="text-sm text-black_figma font-normal">{label}</label>
             <div>
                 <input
-                    className="text-sm outline-none rounded border border-borderColor focus:border-yellow_figma w-full p-2"
+                    className="text-sm outline-none rounded-lg border border-borderColor focus:border-yellow_figma w-[368px] h-[48px] p-2"
                     type={type}
                     name={name}
                     value={value}
