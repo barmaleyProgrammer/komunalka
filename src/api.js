@@ -100,8 +100,8 @@ const getFlats = (house_id) => {
 }
 const getCounterValue = (objectId) => {
     return axios.get(`/counter/meter/device?objectId=${objectId}`, config).then((res) => {
-        console.log('отримано getCounterValue', res);
-        return res.data;
+        // console.log('отримано getCounterValue', res.data.data.data);
+        return res.data.data;
     }).catch((error) => {
         console.log(error);
     });
@@ -148,7 +148,7 @@ const deleteObject = (objectId) => {
 const getDebt = (objectId) => {
     return axios.get(`/accrual/debt/${objectId}`, config).then((response) => {
         console.log('отримано getObj', response);
-        return response;
+        return response.data.debts;
     }).catch((error) => {
         console.log(error);
     });
@@ -165,9 +165,9 @@ export default {
     getStreets,
     getHouses,
     getFlats,
-    // getObject,
+    getObject,
     addObject,
     // deleteObject,
-    // getCounterValue,
-    // getDebt
+    getCounterValue,
+    getDebt
 };

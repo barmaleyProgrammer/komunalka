@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import InputField from "../components/inputField";
 import logo_lichylnyk from "../img/logo_lichylnyk.svg";
 import logo_gerc from "../img/logo_gerc.svg";
@@ -11,7 +12,7 @@ import api from "../api";
 import {NavLink} from "react-router-dom";
 
 const Login = () => {
-
+    const navigate = useNavigate();
     const [toggleIcon, setToggleIcon] = useState('o');
     const [type, setTape] = useState('password');
     const eye = toggleIcon;
@@ -37,6 +38,7 @@ const Login = () => {
         event.preventDefault();
         try {
             const res = await api.signIn(form);
+            navigate("/cabinet");
         } catch (e) {
             console.error(e.message);
             setFormError(e.message);

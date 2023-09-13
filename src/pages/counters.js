@@ -1,10 +1,61 @@
-import React from 'react';
+import {useEffect, useState} from 'react';
+import { useParams } from "react-router-dom";
 import {NavLink} from "react-router-dom";
 import water from "../img/logo_counters/water.svg";
 import gas from "../img/logo_counters/gas.svg";
 import electric from "../img/logo_counters/electric.svg";
+import api from "../api";
 
 const Counters = () => {
+    const { objectId } = useParams();
+    const [counter, setCounter] = useState([]);
+    const [debt, setDebt] = useState([]);
+    console.log(objectId)
+    // getCounterValue
+
+    useEffect( () => {
+        const fetchData = async () => {
+            const result = await api.getCounterValue(objectId);
+            setCounter(result);
+            const result3 = await api.getDebt(objectId);
+            setDebt(result3);
+        };
+        fetchData();
+    }, []);
+
+    const CounterBlock = (item) => {
+        return (
+            <>
+                <div className="gap-[82px] grid-cols-3 grid rounded-[4px] border border-borderColor w-[956px] h-auto">
+                    <div className="flex text-[16px] w-[338px] h-auto">
+                        <div className="flex items-center h-auto px-4">
+                            <input className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                               type="checkbox"
+                               value={item.item.id}
+                            />
+                        </div>
+                        <div className="ml-2 text-sm">
+                            <h2 className="text-[12px]">Лічильник №1</h2>
+                            <ul >
+                                <li><h5 className="">{item.item.deviceNumber}</h5></li>
+                                <li><p className="">КПВОК “КИЇВТЕПЛОЕНЕРГО” <br/>{item.item.namePlat}</p></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div>
+                        <p>Попередні показники<br/>{item.item.currentReadings}</p>
+                    </div>
+                    <div>
+                        <p>Актуальні показники</p>
+                        <input type="text"/>
+                    </div>
+                </div>
+            </>
+        );
+    };
+
+
+
     return (
         <div className="font-light mt-10 p-10 py-6 mx-auto w-[1152px]">
             <h2 className="mb-4 text-[24px]">Назва адреси</h2>
@@ -52,52 +103,9 @@ const Counters = () => {
                 </div>
                 <h5 className="py-4 text-[16px] ">Обрати всі</h5>
                 <div className="space-y-2">
-                    <div className="gap-[82px] grid-cols-3 grid rounded-[4px] border border-borderColor w-[956px] h-auto">
-                        <div className="flex text-[16px] w-[338px] h-auto">
-                                <div className="flex items-center h-auto px-4">
-                                    <input id="helper-radio" aria-describedby="helper-radio-text" type="radio" value=""
-                                           className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
-                                </div>
-                                <div className="ml-2 text-sm">
-                                    <h2 className="text-[12px]">Лічильник №1</h2>
-                                    <ul >
-                                        <li><h5 className="">ХВ SENSUS - 2.5 N10162528</h5></li>
-                                        <li><p className="">КПВОК “КИЇВТЕПЛОЕНЕРГО” централізоване постачання гарячої води</p></li>
-                                    </ul>
-                                </div>
-                        </div>
-                        <div>
-                            <p>Попередні показники</p>
-
-                        </div>
-                        <div>
-                            <p>Актуальні показники</p>
-                            <input type="text"/>
-                        </div>
-                    </div>
-                    <div className="gap-[82px] grid-cols-3 grid rounded-[4px] border border-borderColor w-[956px] h-auto">
-                        <div className="flex text-[16px] w-[338px] h-auto">
-                                <div className="flex items-center h-auto px-4">
-                                    <input id="helper-radio" aria-describedby="helper-radio-text" type="radio" value=""
-                                           className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
-                                </div>
-                                <div className="ml-2 text-sm">
-                                    <h2 className="text-[12px]">Лічильник №3</h2>
-                                    <ul >
-                                        <li><h5 className="">ХВ SENSUS - 2.5 N10162528</h5></li>
-                                        <li><p className="">КПВОК “КИЇВТЕПЛОЕНЕРГО” централізоване постачання гарячої води</p></li>
-                                    </ul>
-                                </div>
-                        </div>
-                        <div>
-                        <p>Попередні показники</p>
-
-                        </div>
-                        <div>
-                            <p>Актуальні показники</p>
-                            <input type="text"/>
-                        </div>
-                    </div>
+                    {counter.map((item, key) => {
+                        return <CounterBlock item={item} key={key}/>
+                    })}
                 </div>
             </div>
         </div>

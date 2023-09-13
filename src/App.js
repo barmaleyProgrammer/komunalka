@@ -31,7 +31,7 @@ const App = () => {
                     <Route path="cabinet" element={<CabinetMyAdresses />} />
                     <Route path="addAdressForm" element={<AddAdressForm />} />
                     <Route path="validate/email" element={<ValidateEmail />} />
-                    <Route path="counters" element={<Counters />} />
+                    <Route path="counters/:objectId" element={<Counters />} />
                 </Routes>
                 </main>
                 <Footer  />
