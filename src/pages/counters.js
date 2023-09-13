@@ -82,7 +82,7 @@ const Counters = () => {
                                            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
                                 </div>
                                 <div className="ml-2 text-sm">
-                                    <h2 className="text-[12px]">Лічильник №2</h2>
+                                    <h2 className="text-[12px]">Лічильник №3</h2>
                                     <ul >
                                         <li><h5 className="">ХВ SENSUS - 2.5 N10162528</h5></li>
                                         <li><p className="">КПВОК “КИЇВТЕПЛОЕНЕРГО” централізоване постачання гарячої води</p></li>
