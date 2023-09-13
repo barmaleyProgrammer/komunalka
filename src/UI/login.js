@@ -8,6 +8,7 @@ import facebook from "../img/facebook.svg";
 import eye from "../img/eye.svg";
 import Button from "../components/button";
 import api from "../api";
+import {NavLink} from "react-router-dom";
 
 const Login = () => {
 
@@ -16,10 +17,12 @@ const Login = () => {
     const eye = toggleIcon;
 
     const [form, setForm] = useState({
-        email: 'grebenyukvd@gmail.com',
-        password: 'Test_Drive5',
-        // email: '',
-        // password: '',
+        // email: 'grebenyukvd@gmail.com',
+        // password: 'Test_Drive5',
+        // email: 'chishin@ukr.net',
+        // password: 'Asop$97O',
+        email: '',
+        password: '',
 
     });
     const [formError, setFormError] = useState('');
@@ -96,8 +99,8 @@ const Login = () => {
                         <p>Забули пароль?</p>
                     </div>
                 </div>
-
-                <Button type="submit" label={'Увійти'} cssType={'primary'} />
+<NavLink to="/">
+                <Button type="submit" label={'Увійти'} cssType={'primary'} /></NavLink>
                 <div className="flex">
                     <p className="not-italic text-[15px] leading-[1.5rem] font-[400]">
                         <a className=" text-[#2A3744)]">Ще немає аккаунту? </a>

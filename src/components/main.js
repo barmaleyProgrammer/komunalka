@@ -12,7 +12,8 @@ const Main = () => {
                 </div>
             </div>
             <div className="">
-                <h2 className=" text-center text-[42px] leading-normal tracking-normal">Передати покази лічильника – легко та швидко!</h2>
+                {/*<h2 className=" text-center text-[42px] leading-normal tracking-normal">Передати покази лічильника – легко та швидко!</h2>*/}
+                <h2 className=" text-center text-[42px] leading-normal tracking-normal">Доброго Дня Шановний Ігоре Анатольйовичу ! Що бажаєте ?</h2>
             </div>
         </section>
     );
