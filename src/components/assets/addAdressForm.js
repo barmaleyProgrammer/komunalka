@@ -168,8 +168,8 @@ const AddAdressForm = () => {
             />
             </div>
             <div>
-                <NavLink to={`/cabinet`} onClick={() => api.addObject(flat, flatName)}>
-                    <button className="w-[242px] h-[48px] ml-[110px] py-2.5 px-5 mr-2 mb-2 text-lg font-medium rounded text-white_figma bg-yellow_figma" >Зберігти</button>
+                <NavLink to={`/cabinet`} >
+                    <button onClick={() => api.addObject(flat, flatName)}  className="w-[242px] h-[48px] ml-[110px] py-2.5 px-5 mr-2 mb-2 text-lg font-medium rounded text-white_figma bg-yellow_figma" >Зберігти</button>
                 </NavLink>
 
             </div>
