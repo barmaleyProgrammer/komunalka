@@ -2,6 +2,7 @@ import {useEffect, useState} from 'react';
 import Select from "../MySelect";
 import api from "../../api";
 import InputField from "../inputField";
+import {NavLink} from "react-router-dom";
 
 const AddAdressForm = () => {
     const [regions, setRegions] = useState([]);
@@ -167,8 +168,10 @@ const AddAdressForm = () => {
             />
             </div>
             <div>
-            {/*<input value={flatName} onChange={event => setFlatName(event.target.value)} /><br />*/}
-            <button className="w-[242px] h-[48px] ml-[110px] py-2.5 px-5 mr-2 mb-2 text-lg font-medium rounded text-white_figma bg-yellow_figma" onClick={() => api.addObject(flat, flatName)}>Зберігти</button>
+                <NavLink to={`/cabinet`} onClick={() => api.addObject(flat, flatName)}>
+                    <button className="w-[242px] h-[48px] ml-[110px] py-2.5 px-5 mr-2 mb-2 text-lg font-medium rounded text-white_figma bg-yellow_figma" >Зберігти</button>
+                </NavLink>
+
             </div>
         </div>
     );

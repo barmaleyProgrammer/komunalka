@@ -25,6 +25,7 @@ const signIn = (data) => {
         // localStorage.setItem('refreshToken', res.data.refreshToken);
         sessionStorage.setItem('accessToken', res.data.accessToken);
         sessionStorage.setItem('refreshToken', res.data.refreshToken);
+        config.headers.apiauthorization = `Bearer ${res.data.accessToken}`;
     }).catch((error) => {
         console.log(error);
     });
@@ -167,7 +168,7 @@ export default {
     getFlats,
     getObject,
     addObject,
-    // deleteObject,
+    deleteObject,
     getCounterValue,
     getDebt
 };

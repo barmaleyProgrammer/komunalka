@@ -26,26 +26,24 @@ const Counters = () => {
     const CounterBlock = (item) => {
         return (
             <>
-                <div className="gap-[82px] grid-cols-3 grid rounded-[4px] border border-borderColor w-[956px] h-auto">
-                    <div className="flex text-[16px] w-[338px] h-auto">
-                        <div className="flex items-center h-auto px-4">
-                            <input className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                <div className="flex gap-x-4 rounded-lg border border-borderColor w-full h-auto">
+                    <div className="w-1">
+                        <input className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                                type="checkbox"
                                value={item.item.id}
-                            />
-                        </div>
-                        <div className="ml-2 text-sm">
-                            <h2 className="text-[12px]">Лічильник №1</h2>
-                            <ul >
-                                <li><h5 className="">{item.item.deviceNumber}</h5></li>
-                                <li><p className="">КПВОК “КИЇВТЕПЛОЕНЕРГО” <br/>{item.item.namePlat}</p></li>
-                            </ul>
-                        </div>
+                        />
                     </div>
-                    <div>
+                    <div className="w-2/3">
+                        <ul>
+                            <li className="text-xs">(Лічильник №1)</li>
+                            <li className="text-sm">{item.item.deviceNumber}</li>
+                            <li className="text-sm">(КПВОК “КИЇВТЕПЛОЕНЕРГО”)<br/>{item.item.namePlat}</li>
+                        </ul>
+                    </div>
+                    <div className="w-44">
                         <p>Попередні показники<br/>{item.item.currentReadings}</p>
                     </div>
-                    <div>
+                    <div className="w-44">
                         <p>Актуальні показники</p>
                         <input type="text"/>
                     </div>
@@ -102,7 +100,7 @@ const Counters = () => {
                     </ul>
                 </div>
                 <h5 className="py-4 text-[16px] ">Обрати всі</h5>
-                <div className="space-y-2">
+                <div>
                     {counter.map((item, key) => {
                         return <CounterBlock item={item} key={key}/>
                     })}
