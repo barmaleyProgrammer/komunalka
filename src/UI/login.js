@@ -19,8 +19,6 @@ const Login = () => {
     const [form, setForm] = useState({
         // email: 'grebenyukvd@gmail.com',
         // password: 'Test_Drive5',
-        // email: 'chishin@ukr.net',
-        // password: 'Asop$97O',
         email: '',
         password: '',
 
@@ -99,8 +97,9 @@ const Login = () => {
                         <p>Забули пароль?</p>
                     </div>
                 </div>
-<NavLink to="/">
-                <Button type="submit" label={'Увійти'} cssType={'primary'} /></NavLink>
+                {/*<NavLink to="/">*/}
+                <Button type="submit" label={'Увійти'} cssType={'primary'} />
+                {/*</NavLink>*/}
                 <div className="flex">
                     <p className="not-italic text-[15px] leading-[1.5rem] font-[400]">
                         <a className=" text-[#2A3744)]">Ще немає аккаунту? </a>
