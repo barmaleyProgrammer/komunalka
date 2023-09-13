@@ -8,18 +8,18 @@ import api from "../api";
 
 const Reg = () => {
     const [form, setForm] = useState({
-        email: 'grebenyukvd@gmail.com',
-        password: 'Test_Drive5',
-        firstName: 'Barm',
-        lastName: 'aley',
-        secondName: 'Bob',
-        phone: '876454876',
-        // email: '',
-        // password: '',
-        // firstName: '',
-        // lastName: '',
-        // secondName: '',
-        // phone: '',
+        // email: 'grebenyukvd@gmail.com',
+        // password: 'Test_Drive5',
+        // firstName: 'Barm',
+        // lastName: 'aley',
+        // secondName: 'Bob',
+        // phone: '876454876',
+        email: '',
+        password: '',
+        firstName: '',
+        lastName: '',
+        secondName: '',
+        phone: '',
         source: '2',
     });
     const [formError, setFormError] = useState('');
