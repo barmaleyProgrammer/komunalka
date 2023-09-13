@@ -1,5 +1,4 @@
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
-import Header from "./components/header";
 import Footer from "./components/footer";
 import News from "./pages/news.js";
 import About from "./pages/about.js";
@@ -12,6 +11,7 @@ import CabinetMyAdresses from "./pages/cabinetMyAdresses";
 import AddAdressForm from "./components/assets/addAdressForm";
 import ValidateEmail from "./pages/validateEmail";
 import Counters from "./pages/counters";
+import Header from "./components/header";
 
 
 const App = () => {
@@ -38,7 +38,6 @@ const App = () => {
             </Router>
             {/*<Login />*/}
             {/*<Reg/>*/}
-            {/*<Header />*/}
             {/*<main>*/}
             {/*    <Main />*/}
             {/*</main>*/}
