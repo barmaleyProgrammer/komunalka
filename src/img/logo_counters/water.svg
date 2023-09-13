@@ -1,0 +1,16 @@
+<svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="&#208;&#146;&#208;&#190;&#208;&#180;&#208;&#190;&#208;&#191;&#208;&#190;&#209;&#129;&#209;&#130;&#208;&#176;&#209;&#135;&#208;&#176;&#208;&#189;&#208;&#189;&#209;&#143;">
+<rect id="Rectangle 1247" x="0.5" y="0.5" width="71" height="71" rx="5.5" fill="white" stroke="#E7E7E7"/>
+<g id="Group 27">
+<path id="Ellipse 11" d="M53 39.5C53 49.165 45.165 57 35.5 57C25.835 57 18 49.165 18 39.5C18 29.835 34.1875 15 35.5 15C36.8125 15 53 29.835 53 39.5Z" fill="url(#paint0_linear_630_4368)"/>
+<path id="Ellipse 12" d="M20.9988 41.2524C22.3349 46.8197 26.1947 51.1209 31.073 53.2335" stroke="white" stroke-linecap="round"/>
+<path id="Ellipse 13" d="M20.6347 37.8503C20.6389 38.3433 20.6309 38.5865 20.675 39.0689" stroke="white" stroke-linecap="round"/>
+</g>
+</g>
+<defs>
+<linearGradient id="paint0_linear_630_4368" x1="32.1112" y1="18.5084" x2="50.0362" y2="101.639" gradientUnits="userSpaceOnUse">
+<stop stop-color="#FD7900"/>
+<stop offset="1" stop-color="#FDC500" stop-opacity="0"/>
+</linearGradient>
+</defs>
+</svg>

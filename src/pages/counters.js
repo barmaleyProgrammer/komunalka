@@ -6,7 +6,7 @@ import electric from "../img/logo_counters/electric.svg";
 
 const Counters = () => {
     return (
-        <div className="mt-10 p-10 py-6 mx-auto text-justify w-[1152px]">
+        <div className="font-light mt-10 p-10 py-6 mx-auto w-[1152px]">
             <h2 className="mb-4 text-[24px]">Назва адреси</h2>
             <div className="mt-[34px]">
                 <p className="text-[16px]">Лічильники</p>
@@ -51,8 +51,53 @@ const Counters = () => {
                     </ul>
                 </div>
                 <h5 className="py-4 text-[16px] ">Обрати всі</h5>
-                <div className="text-sm  rounded-[4px] border border-borderColor w-[956px] h-[130px]">
-kjhkj
+                <div className="space-y-2">
+                    <div className="gap-[82px] grid-cols-3 grid rounded-[4px] border border-borderColor w-[956px] h-auto">
+                        <div className="flex text-[16px] w-[338px] h-auto">
+                                <div className="flex items-center h-auto px-4">
+                                    <input id="helper-radio" aria-describedby="helper-radio-text" type="radio" value=""
+                                           className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
+                                </div>
+                                <div className="ml-2 text-sm">
+                                    <h2 className="text-[12px]">Лічильник №1</h2>
+                                    <ul >
+                                        <li><h5 className="">ХВ SENSUS - 2.5 N10162528</h5></li>
+                                        <li><p className="">КПВОК “КИЇВТЕПЛОЕНЕРГО” централізоване постачання гарячої води</p></li>
+                                    </ul>
+                                </div>
+                        </div>
+                        <div>
+                            <p>Попередні показники</p>
+
+                        </div>
+                        <div>
+                            <p>Актуальні показники</p>
+                            <input type="text"/>
+                        </div>
+                    </div>
+                    <div className="gap-[82px] grid-cols-3 grid rounded-[4px] border border-borderColor w-[956px] h-auto">
+                        <div className="flex text-[16px] w-[338px] h-auto">
+                                <div className="flex items-center h-auto px-4">
+                                    <input id="helper-radio" aria-describedby="helper-radio-text" type="radio" value=""
+                                           className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
+                                </div>
+                                <div className="ml-2 text-sm">
+                                    <h2 className="text-[12px]">Лічильник №2</h2>
+                                    <ul >
+                                        <li><h5 className="">ХВ SENSUS - 2.5 N10162528</h5></li>
+                                        <li><p className="">КПВОК “КИЇВТЕПЛОЕНЕРГО” централізоване постачання гарячої води</p></li>
+                                    </ul>
+                                </div>
+                        </div>
+                        <div>
+                        <p>Попередні показники</p>
+
+                        </div>
+                        <div>
+                            <p>Актуальні показники</p>
+                            <input type="text"/>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
