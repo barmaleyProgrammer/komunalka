@@ -37,8 +37,10 @@ const CabinetMyAdresses = () => {
         console.log(item);
         return (
             <>
-                <div className="space-x-2 border rounded-[4px] border-[#E7E7E7] w-[360px] h-[204px]">
+                <div className="relative space-x-2 border rounded-[4px] border-[#E7E7E7] w-[360px] h-[204px]">
+                    <div className="absolute right-0">
                     <DropDownMenu />
+                    </div>
                     <div className="komunalka ml-[16px] mt-[16px] space-x-1">
                         <ul>
                             <li className="flex">
@@ -71,10 +73,10 @@ const CabinetMyAdresses = () => {
             <div className="mt-4 mb-4 items-center justify-between hidden w-full md:flex md:w-auto md:order-1">
                 <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 ">
                     <li>
-                        <NavLink className="w-auto h-[48px] py-2.5 px-5 mr-2 mb-2 text-sm font-medium rounded text-black_figma bg-[#CEDDE9]" to="">Мої адреси</NavLink>
+                        <NavLink to="/cabinet" className="w-auto h-[48px] py-2.5 px-5 mr-2 mb-2 text-sm font-medium rounded text-black_figma bg-[#CEDDE9]">Мої адреси</NavLink>
                     </li>
                     <li>
-                        <NavLink className="w-auto h-[48px] py-2.5 px-5 mr-2 mb-2 text-sm font-medium rounded text-black_figma bg-[#CEDDE9]" to="">Мої дані</NavLink>
+                        <NavLink to="/myData" className="w-auto h-[48px] py-2.5 px-5 mr-2 mb-2 text-sm font-medium rounded text-black_figma bg-[#CEDDE9]">Мої дані</NavLink>
                     </li>
                     <li>
                         <NavLink className="w-auto h-[48px] py-2.5 px-5 mr-2 mb-2 text-sm font-medium rounded text-black_figma bg-[#CEDDE9]" to="">Оповіщення</NavLink>

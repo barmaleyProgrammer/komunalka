@@ -12,6 +12,7 @@ import AddAdressForm from "./components/assets/addAdressForm";
 import ValidateEmail from "./pages/validateEmail";
 import Counters from "./pages/counters";
 import Header from "./components/header";
+import MyData from "./pages/myData";
 
 
 const App = () => {
@@ -32,6 +33,7 @@ const App = () => {
                     <Route path="addAdressForm" element={<AddAdressForm />} />
                     <Route path="validate/email" element={<ValidateEmail />} />
                     <Route path="counters/:objectId" element={<Counters />} />
+                    <Route path="myData" element={<MyData />} />
                 </Routes>
                 </main>
                 <Footer  />
