@@ -37,7 +37,7 @@ const CabinetMyAdresses = () => {
         console.log(item);
         return (
             <>
-                <div className="relative space-x-2 border rounded-[4px] border-[#E7E7E7] w-[360px] h-[204px]">
+                <div className="mb-4 relative space-x-2 border rounded-lg border-[#E7E7E7] w-[360px] h-[204px]">
                     <div className="absolute right-0">
                     <DropDownMenu />
                     </div>
@@ -53,7 +53,7 @@ const CabinetMyAdresses = () => {
                         </ul>
                     </div>
                     <div className="mt-4">
-                        <NavLink to={`/counters/${item.item.objectId}`} className="py-2.5 px-5 mr-2 mb-2 text-[16px] font-medium rounded-[4px] w-full text-black_figma bg-white_figma border border-yellow_figma">
+                        <NavLink to={`/counters/${item.item.objectId}`} className="py-2.5 px-5 mr-2 mb-2 text-sm font-medium rounded-lg w-full text-black_figma bg-white_figma border border-yellow_figma">
                             Перейти
                         </NavLink>
                         <button onClick={() => deleteAddress(item.item.objectId)}>Видалити</button>
@@ -86,7 +86,7 @@ const CabinetMyAdresses = () => {
             <div className=" space-y-2 rounded-lg shadow-lg  h-auto">
                 <h3 className="text-center text-[20px] pb-6">Мої адреси</h3>
                 <div className="flex justify-center gap-x-10">
-                        <div className="cursor-pointer space-x-2 flex justify-center items-center border rounded-[4px] border-[#E7E7E7] w-[360px] h-[204px]"
+                        <div className="cursor-pointer space-x-2 flex justify-center items-center border rounded-lg border-[#E7E7E7] w-[360px] h-[204px]"
                              onClick={() => navigate("/addAdressForm")}>
                             <AiOutlinePlus />
                             <p className="">Додати адресу</p>
