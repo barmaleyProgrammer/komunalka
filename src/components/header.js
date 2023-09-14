@@ -1,6 +1,7 @@
 import logo_lichylnyk from "../img/logo_lichylnyk.svg";
 import { NavLink } from "react-router-dom";
 import Button from "./button";
+import Logout from "./assets/Logout";
 
 const Header = () => {
     return (
@@ -10,6 +11,7 @@ const Header = () => {
                     <img src={logo_lichylnyk} className="h-8 mr-3" alt="Flowbite Logo" />
                 </NavLink>
                 <div className="flex md:order-2">
+                    <Logout />
                     <NavLink to="login" className="py-2.5 px-5 mr-2 mb-2 text-sm font-medium rounded w-full text-black_figma bg-white_figma border border-yellow_figma">
                         Увійти
                     </NavLink>

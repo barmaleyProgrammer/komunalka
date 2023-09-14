@@ -9,6 +9,7 @@ import api from "../api";
 const Counters = () => {
     const { objectId } = useParams();
     const [counter, setCounter] = useState([]);
+    const [address, setAddress] = useState({});
     const [debt, setDebt] = useState([]);
     console.log(objectId)
     // getCounterValue
@@ -19,6 +20,10 @@ const Counters = () => {
             setCounter(result);
             const result3 = await api.getDebt(objectId);
             setDebt(result3);
+            await api.getAddress(objectId).then((result) => {
+                const address = result.filter((item) => item.objectId == objectId);
+                setAddress(address);
+            });
         };
         fetchData();
     }, []);

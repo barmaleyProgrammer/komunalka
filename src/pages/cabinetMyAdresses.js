@@ -17,8 +17,12 @@ const CabinetMyAdresses = () => {
 
     useEffect( () => {
         const fetchData = async () => {
-            const result = await api.getObject();
-            setMyObjects(result.addresses);
+            // const result = await api.getObject();
+            // setMyObjects(result.addresses);
+            await api.getAddress().then((result) => {
+                setMyObjects(result);
+            });
+
         };
         fetchData();
     }, []);
@@ -42,7 +46,7 @@ const CabinetMyAdresses = () => {
                                 <p className="text-[16px]">{ item.item.name }</p>
                             </li>
                             <li>
-                                <p>вул. Софіївська, 16/16</p>
+                                <p className="text-sm">{ item.item.address }</p>
                             </li>
                         </ul>
                     </div>

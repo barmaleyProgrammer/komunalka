@@ -30,6 +30,13 @@ const signIn = (data) => {
         console.log(error);
     });
 }
+
+const signOut = () => {
+    sessionStorage.removeItem('accessToken');
+    sessionStorage.removeItem('refreshToken');
+    config.headers.apiauthorization = '';
+}
+
 const validation = (email, token) => {
     const newConfig = {...config};
     // delete newConfig.headers;
@@ -115,6 +122,14 @@ const getService = (objectId) => {
         console.log(error);
     });
 }
+const getAddress = () => {
+    return axios.get(`/account/address`, config).then((res) => {
+        console.log('отримано geService', res);
+        return res.data;
+    }).catch((error) => {
+        console.log(error);
+    });
+}
 
 const getObject = () => {
     return axios.get('/account', config).then((response) => {
@@ -158,6 +173,7 @@ const getDebt = (objectId) => {
 export default {
     signUp,
     signIn,
+    signOut,
     validation,
     // getService,
     getRegions,
@@ -167,6 +183,7 @@ export default {
     getHouses,
     getFlats,
     getObject,
+    getAddress,
     addObject,
     deleteObject,
     getCounterValue,
