@@ -20,7 +20,6 @@ const signIn = (data) => {
     const newConfig = {...config};
     delete newConfig.headers.apiauthorization;
     return axios.post('/account/signin', data, newConfig).then((res) => {
-        // console.log('додано', res.data);
         // localStorage.setItem('accessToken', res.data.accessToken);
         // localStorage.setItem('refreshToken', res.data.refreshToken);
         sessionStorage.setItem('accessToken', res.data.accessToken);
@@ -39,11 +38,8 @@ const signOut = () => {
 
 const validation = (email, token) => {
     const newConfig = {...config};
-    // delete newConfig.headers;
-    // delete newConfig.headers.Authorization;
     delete newConfig.headers.apiauthorization;
     return axios.get(`account/validate/email?email=${encodeURIComponent(email)}&token=${token}`, newConfig).then((res) => res);
-    // return axios.get('https://api-test.komunalka.ua/api/v2/account/validate/email?email=grebenyukvd%40gmail.com&token=1d44f6f4f0bc4ed9ded14ccafec87cbf').then((res) => res);
 }
 
 const getRegions = () => {

@@ -1,6 +1,5 @@
-import React from 'react';
 import BreadcrumbCadinetMyData from "../components/breadcrumbCadinetMyData";
-import {NavLink} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import InputField from "../components/inputField";
 import RadioMyData from "../components/assets/radioMyData";
 

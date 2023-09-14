@@ -1,4 +1,4 @@
-import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Footer from "./components/footer";
 import News from "./pages/news.js";
 import About from "./pages/about.js";
@@ -18,26 +18,26 @@ import MyData from "./pages/myData";
 const App = () => {
     return (
         <div className="app">
-            <Router>
+            <BrowserRouter>
                 <Header />
                 <main>
-                <Routes>
-                    <Route path="/" element={<Main/>} />
-                    <Route path="about" element={<About/>} />
-                    <Route path="faq" element={<Faq/>} />
-                    <Route path="news" element={<News />} />
-                    <Route path="contacts" element={<Contacts />} />
-                    <Route path="login" element={<Login />} />
-                    <Route path="reg" element={<Reg />} />
-                    <Route path="cabinet" element={<CabinetMyAdresses />} />
-                    <Route path="addAdressForm" element={<AddAdressForm />} />
-                    <Route path="validate/email" element={<ValidateEmail />} />
-                    <Route path="counters/:objectId" element={<Counters />} />
-                    <Route path="myData" element={<MyData />} />
-                </Routes>
+                    <Routes>
+                        <Route path="/" element={<Main/>} />
+                        <Route path="about" element={<About/>} />
+                        <Route path="faq" element={<Faq/>} />
+                        <Route path="news" element={<News />} />
+                        <Route path="contacts" element={<Contacts />} />
+                        <Route path="login" element={<Login />} />
+                        <Route path="reg" element={<Reg />} />
+                        <Route path="cabinet" element={<CabinetMyAdresses />} />
+                        <Route path="addAdressForm" element={<AddAdressForm />} />
+                        <Route path="validate/email" element={<ValidateEmail />} />
+                        <Route path="counters/:objectId" element={<Counters />} />
+                        <Route path="myData" element={<MyData />} />
+                    </Routes>
                 </main>
-                <Footer  />
-            </Router>
+                <Footer />
+            </BrowserRouter>
             {/*<Login />*/}
             {/*<Reg/>*/}
             {/*<main>*/}
