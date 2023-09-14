@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react';
 import { useNavigate } from "react-router-dom";
 import {AiOutlinePlus} from "react-icons/ai";
-import Breadcrumb from "../components/breadcrumb";
+import BreadcrumbCadinetAdresses from "../components/breadcrumbCadinetAdresses";
 import icon_house from "../img/icon_house.svg";
 // import addAdressForm from "../components/assets/addAdressForm";
 // import logo_lichylnyk from "../img/logo_lichylnyk.svg";
@@ -66,7 +66,20 @@ const CabinetMyAdresses = () => {
     return (
         <div className="mt-2 mx-auto w-[1152px]">
             <div>
-                <Breadcrumb />
+                <BreadcrumbCadinetAdresses />
+            </div>
+            <div className="mt-4 mb-4 items-center justify-between hidden w-full md:flex md:w-auto md:order-1">
+                <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 ">
+                    <li>
+                        <NavLink className="w-auto h-[48px] py-2.5 px-5 mr-2 mb-2 text-sm font-medium rounded text-black_figma bg-[#CEDDE9]" to="">Мої адреси</NavLink>
+                    </li>
+                    <li>
+                        <NavLink className="w-auto h-[48px] py-2.5 px-5 mr-2 mb-2 text-sm font-medium rounded text-black_figma bg-[#CEDDE9]" to="">Мої дані</NavLink>
+                    </li>
+                    <li>
+                        <NavLink className="w-auto h-[48px] py-2.5 px-5 mr-2 mb-2 text-sm font-medium rounded text-black_figma bg-[#CEDDE9]" to="">Оповіщення</NavLink>
+                    </li>
+                </ul>
             </div>
             <div className=" space-y-2 rounded-lg shadow-lg  h-auto">
                 <h3 className="text-center text-[20px] pb-6">Мої адреси</h3>

@@ -5,6 +5,8 @@ import water from "../img/logo_counters/water.svg";
 import gas from "../img/logo_counters/gas.svg";
 import electric from "../img/logo_counters/electric.svg";
 import api from "../api";
+import BreadcrumbCadinetAdresses from "../components/breadcrumbCadinetAdresses";
+import BreadcrumbCadinetCounters from "../components/breadcrumbCadinetCounters";
 
 const Counters = () => {
     const { objectId } = useParams();
@@ -60,8 +62,11 @@ const Counters = () => {
 
 
     return (
-        <div className="font-light mt-10 p-10 py-6 mx-auto w-[1152px]">
-            <h2 className="mb-4 text-[24px]">Назва адреси</h2>
+        <div className="font-light mt-2 mx-auto w-[1152px]">
+            <div>
+                <BreadcrumbCadinetCounters />
+            </div>
+            <h2 className="mb-4 mt-3 text-[24px]">Назва адреси</h2>
             <div className="mt-[34px]">
                 <p className="text-[16px]">Лічильники</p>
             </div>
