@@ -26,7 +26,7 @@ const signIn = (data) => {
         sessionStorage.setItem('refreshToken', res.data.refreshToken);
         config.headers.apiauthorization = `Bearer ${res.data.accessToken}`;
     }).catch((error) => {
-        console.log(error);
+        console.error(error);
     });
 }
 
@@ -49,7 +49,6 @@ const getRegions = () => {
     const newConfig = {...config};
     delete newConfig.apiauthorization;
     return axios.get('/address/regions?country=1', newConfig).then((res) => {
-        console.log(res)
         return res.data.map((item) => ({
             value: Number(item.region_id),
             label: item.name.trim()
@@ -103,44 +102,40 @@ const getFlats = (house_id) => {
     });
 }
 const getCounterValue = (objectId) => {
-    return axios.get(`/counter/meter/device?objectId=${objectId}`, config).then((res) => {
-        // console.log('отримано getCounterValue', res.data.data.data);
-        return res.data.data;
-    }).catch((error) => {
-        console.log(error);
-    });
+    return axios.get(`/counter/meter/device?objectId=${objectId}`, config)
+        .then((res) => res.data.data)
+        .catch((error) => {
+            console.error(error);
+        });
 }
 const getService = (objectId) => {
-    return axios.get(`/counter/service?objectId=${objectId}`, config).then((res) => {
-        console.log('отримано geService', res);
-        return res.data;
-    }).catch((error) => {
-        console.log(error);
-    });
+    return axios.get(`/counter/service?objectId=${objectId}`, config)
+        .then((res) => res.data)
+        .catch((error) => {
+            console.error(error);
+        });
 }
 const getAddress = () => {
-    return axios.get(`/account/address`, config).then((res) => {
-        console.log('отримано geService', res);
-        return res.data;
-    }).catch((error) => {
-        console.log(error);
-    });
+    return axios.get(`/account/address`, config)
+        .then((res) => res.data)
+        .catch((error) => {
+            console.error(error);
+        });
 }
 
 const getObject = () => {
-    return axios.get('/account', config).then((response) => {
-        console.log('отримано getObj', response.data);
-        return response.data;
-    }).catch((error) => {
-        console.log(error);
-    });
+    return axios.get('/account', config)
+        .then((response) => response.data)
+        .catch((error) => {
+            console.error(error);
+        });
 }
 
 const addObject = (objectId, name = '') => {
     return axios.post('/account/address', { objectId, name }, config).then((response) => {
         console.log('додано', response);
     }).catch((error) => {
-        console.log(error);
+        console.error(error);
     });
 }
 
@@ -153,17 +148,16 @@ const deleteObject = (objectId) => {
     return axios.delete('/account/address', payload).then((response) => {
         console.log('delete', response);
     }).catch((error) => {
-        console.log(error);
+        console.error(error);
     });
 }
 
 const getDebt = (objectId) => {
-    return axios.get(`/accrual/debt/${objectId}`, config).then((response) => {
-        console.log('отримано getObj', response);
-        return response.data.debts;
-    }).catch((error) => {
-        console.log(error);
-    });
+    return axios.get(`/accrual/debt/${objectId}`, config)
+        .then((response) => response.data.debts)
+        .catch((error) => {
+            console.error(error);
+        });
 }
 
 export default {

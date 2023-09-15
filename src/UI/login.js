@@ -10,8 +10,10 @@ import facebook from "../img/facebook.svg";
 import eye from "../img/eye.svg";
 import Button from "../components/button";
 import api from "../api";
+import { Context } from "../App";
 
 const Login = () => {
+    const [, dispatch] = useContext(Context);
     const navigate = useNavigate();
     const [toggleIcon, setToggleIcon] = useState('o');
     const [type, setTape] = useState('password');
@@ -39,6 +41,7 @@ const Login = () => {
         event.preventDefault();
         try {
             await api.signIn(form);
+            dispatch({ type: 'logIn' });
             navigate('/cabinet');
         } catch (e) {
             console.error(e.message);
@@ -89,7 +92,7 @@ const Login = () => {
                 </div>
                 <div className="flex">
                     <div className="flex basis-1/2 mt-1">
-                        <input checked id="rememberMe" type="checkbox" value="true" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                        <input id="rememberMe" type="checkbox" value="true" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
                         <label htmlFor="rememberMe" className="ml-2 text-sm text-gray-400 dark:text-gray-500">
                             Запам’ятати мене
                         </label>
