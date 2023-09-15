@@ -36,7 +36,7 @@ const Reg = () => {
     const Submit = async (event) => {
         event.preventDefault();
         try {
-            const res = await api.signUp(form);
+            await api.signUp(form);
         } catch (e) {
             console.error(e.message);
             setFormError(e.message);
@@ -105,13 +105,13 @@ const Reg = () => {
                 <div className="flex flex-row space-x-2">
                     <div className="basis-1/2 border border-[#E8E8E8;] rounded-[2px] w-[188px] h-[44px]">
                         <div className="komunalka flex p-2 ml-8 space-x-1">
-                            <img src={icon_komunalka}/>
+                            <img src={icon_komunalka} alt=""/>
                             <p>Комуналка</p>
                         </div>
                     </div>
                     <div className="basis-1/2 text-center border border-[#E8E8E8;] rounded-[2px] w-[188px] h-[44px]">
                         <div className="logo_gerc p-1.5 ml-14">
-                            <img src={logo_gerc} className="" />
+                            <img src={logo_gerc} alt="" />
                         </div>
                     </div>
                 </div>
