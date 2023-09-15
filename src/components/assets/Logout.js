@@ -18,7 +18,7 @@ const Logout = () => {
 
     return (
         <div className="relative">
-            <button className="py-2.5 px-5 mr-2 mb-2 text-sm font-medium rounded w-full text-white_figma bg-yellow_figma inline-flex items-center"
+            <button className="py-2.5 px-2 text-sm font-medium rounded w-full text-white_figma bg-yellow_figma inline-flex items-center"
                 type="button"
                 onClick={() => setState(!state)}
             >

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 import InputField from "../components/inputField";
 import logo_lichylnyk from "../img/logo_lichylnyk.svg";
 import logo_gerc from "../img/logo_gerc.svg";
@@ -43,7 +44,7 @@ const Reg = () => {
     };
 
     return (
-        <div className="mt-10 p-10 mx-auto rounded-lg shadow-lg min-w-[25%] w-[464px]">
+        <div className="mt-20 p-10 mx-auto rounded-lg shadow-lg w-1/4">
             <img src={logo_lichylnyk} className="h-16 mb-8 mx-auto" alt="Flowbite Logo" />
             <h4 className="text-black_figma text-center">Реєстрація</h4>
             <div className="text-xs text-red-900 text-center">{formError}</div>
@@ -98,7 +99,6 @@ const Reg = () => {
                     value={form.password}
                     onChange={handleInputChange}
                 />
-                <hr className="w-full text-borderColor"/>
                 <div className="text-black_figma text-sm">
                     При вході через сайти партнерів є змога<br />автоматично додати адреси
                 </div>
@@ -116,8 +116,8 @@ const Reg = () => {
                     </div>
                 </div>
                 <Button type="submit" label={'Зареєструватися'} cssType={'primary'} />
-                <div className="flex">
-                    <p className="not-italic text-[15px] leading-[1.5rem] font-[400]"><a className=" text-[#2A3744)]">Вже є аккаунт? </a><a className="text-[#3E77AA]">Вхід</a></p>
+                <div>
+                    Вже є аккаунт? <NavLink to="/login" className="text-[#3E77AA]">Вхід</NavLink>
                 </div>
             </form>
         </div>

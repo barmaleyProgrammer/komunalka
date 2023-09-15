@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import InputField from "../components/inputField";
@@ -15,9 +15,7 @@ import { Context } from "../App";
 const Login = () => {
     const [, dispatch] = useContext(Context);
     const navigate = useNavigate();
-    const [toggleIcon, setToggleIcon] = useState('o');
     const [type, setTape] = useState('password');
-    const eye = toggleIcon;
 
     const [form, setForm] = useState({
         email: 'grebenyukvd@gmail.com',
@@ -53,13 +51,11 @@ const Login = () => {
         }
     };
 
-    const togglePassInput = (e) => {
+    const togglePassInput = () => {
         if (type === 'password') {
             setTape('text')
-            setToggleIcon('X')
         } else {
             setTape('password')
-            setToggleIcon('o')
         }
     }
     return (
