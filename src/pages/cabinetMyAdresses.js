@@ -39,7 +39,7 @@ const CabinetMyAdresses = () => {
             <>
                 <div className="mb-4 relative space-x-2 border rounded-lg border-[#E7E7E7] w-[360px] h-[204px]">
                     <div className="absolute right-0">
-                    <DropDownMenu />
+                    <DropDownMenu delete={() => deleteAddress(item.item.objectId)}/>
                     </div>
                     <div className="komunalka ml-[16px] mt-[16px] space-x-1">
                         <ul>
@@ -56,7 +56,7 @@ const CabinetMyAdresses = () => {
                         <NavLink to={`/counters/${item.item.objectId}`} className="py-2.5 px-5 mr-2 mb-2 text-sm font-medium rounded-lg w-full text-black_figma bg-white_figma border border-yellow_figma">
                             Перейти
                         </NavLink>
-                        <button onClick={() => deleteAddress(item.item.objectId)}>Видалити</button>
+                        {/*<button onClick={() => deleteAddress(item.item.objectId)}>Видалити</button>*/}
 
                     </div>
                 </div>

@@ -29,6 +29,18 @@ const signIn = (data) => {
         console.error(error);
     });
 }
+const updateUser = (data) => {
+    return axios.put('/account', data, config).then((res) => {
+        // localStorage.setItem('accessToken', res.data.accessToken);
+        // localStorage.setItem('refreshToken', res.data.refreshToken);
+        // sessionStorage.setItem('accessToken', res.data.accessToken);
+        // sessionStorage.setItem('refreshToken', res.data.refreshToken);
+        // config.headers.apiauthorization = `Bearer ${res.data.accessToken}`;
+        console.log(res)
+    }).catch((error) => {
+        console.error(error);
+    });
+}
 
 const signOut = () => {
     sessionStorage.removeItem('accessToken');
@@ -181,5 +193,6 @@ export default {
     addObject,
     deleteObject,
     getCounterValue,
-    getDebt
+    getDebt,
+    updateUser
 };

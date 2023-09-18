@@ -23,7 +23,7 @@ const Counters = () => {
             const result3 = await api.getDebt(objectId);
             setDebt(result3);
             await api.getAddress(objectId).then((result) => {
-                const address = result.filter((item) => item.objectId == objectId);
+                const address = result.find((item) => item.objectId == objectId);
                 setAddress(address);
             });
         };
@@ -66,7 +66,7 @@ const Counters = () => {
             <div>
                 <BreadcrumbCadinetCounters />
             </div>
-            <h2 className="mb-4 mt-3 text-[24px]">Назва адреси</h2>
+            <h2 className="mb-4 mt-3 text-[24px]">{address.name}</h2>
             <div className="mt-[34px]">
                 <p className="text-[16px]">Лічильники</p>
             </div>
