@@ -33,6 +33,7 @@ const signIn = (data) => {
 const signOut = () => {
     sessionStorage.removeItem('accessToken');
     sessionStorage.removeItem('refreshToken');
+    sessionStorage.removeItem('user');
     config.headers.apiauthorization = '';
 }
 
@@ -125,7 +126,10 @@ const getAddress = () => {
 
 const getObject = () => {
     return axios.get('/account', config)
-        .then((response) => response.data)
+        .then((response) => {
+            sessionStorage.setItem('user', JSON.stringify(response.data.account));
+            return response.data;
+        })
         .catch((error) => {
             console.error(error);
         });

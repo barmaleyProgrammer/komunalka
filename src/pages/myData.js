@@ -22,7 +22,7 @@ const MyData = () => {
                     </li>
                 </ul>
             </div>
-            <div className="px-10 font-light space-y-2 rounded-lg shadow-lg h-[700px]">
+            <div className="p-20 font-light space-y-2 rounded-lg shadow-lg ">
                 <h1 className="font-normal text-lg pb-2 py-4">Основна інформація</h1>
                 <div className="grid grid-flow-row grid-cols-2 gap-4 py-4">
                     <div className="p-2 mx-auto">

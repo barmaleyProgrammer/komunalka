@@ -7,7 +7,7 @@
 
 const initialSate = {
     isLoggedIn: () => !!sessionStorage.getItem('accessToken'),
-    user: {
+    user: JSON.parse(sessionStorage.getItem('user')) || {
         email: '',
         accountId: '',
         firstName: '',
