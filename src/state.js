@@ -8,8 +8,16 @@
 const initialSate = {
     isLoggedIn: () => !!sessionStorage.getItem('accessToken'),
     user: {
-
-    }
+        email: '',
+        accountId: '',
+        firstName: '',
+        lastName: '',
+        secondName: '',
+        phone: '',
+        createdDateTime: '',
+        updatedDateTime: '',
+    },
+    addresses: []
 };
 
 const reducer = (state, action) => {
@@ -23,6 +31,16 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 isLoggedIn: false
+            };
+        case 'setAccount':
+            return {
+                ...state,
+                user: action.payload
+            };
+        case 'setAddresses':
+            return {
+                ...state,
+                addresses: action.payload
             };
         default:
             return state;

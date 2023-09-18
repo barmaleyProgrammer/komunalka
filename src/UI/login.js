@@ -39,7 +39,10 @@ const Login = () => {
         event.preventDefault();
         try {
             await api.signIn(form);
+            const data = await api.getObject();
             dispatch({ type: 'logIn' });
+            dispatch({ type: 'setAccount', payload: data.account });
+            dispatch({ type: 'setAddresses', payload: data.addresses });
             navigate('/cabinet');
         } catch (e) {
             console.error(e.message);
