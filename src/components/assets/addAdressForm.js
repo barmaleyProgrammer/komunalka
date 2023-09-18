@@ -2,9 +2,11 @@ import {useEffect, useState} from 'react';
 import Select from "../MySelect";
 import api from "../../api";
 import InputField from "../inputField";
-import {NavLink} from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+
 
 const AddAdressForm = () => {
+    const navigate = useNavigate();
     const [regions, setRegions] = useState([]);
     const [region, setRegion] = useState(0);
 
@@ -102,6 +104,11 @@ const AddAdressForm = () => {
         fetchData();
     }, [house]);
 
+    const addObj = async (flat, flatName) => {
+        await api.addObject(flat, flatName);
+        navigate('/cabinet');
+    }
+
     return (
         <div className="space-y-3 mt-2 mx-auto w-[464px] rounded-lg shadow-lg">
                 <h4 className="text-black_figma text-center">Додати адресу</h4>
@@ -169,9 +176,9 @@ const AddAdressForm = () => {
             />
             </div>
             <div>
-                <NavLink to={`/cabinet`} >
-                    <button onClick={() => api.addObject(flat, flatName)}  className="w-[242px] h-[48px] ml-[110px] py-2.5 px-5 mr-2 mb-2 text-lg font-medium rounded text-white_figma bg-yellow_figma" >Зберігти</button>
-                </NavLink>
+
+            <button onClick={() => addObj(flat, flatName)}  className="w-[242px] h-[48px] ml-[110px] py-2.5 px-5 mr-2 mb-2 text-lg font-medium rounded text-white_figma bg-yellow_figma" >Зберігти</button>
+
 
 
 
