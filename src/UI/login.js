@@ -18,10 +18,10 @@ const Login = () => {
     const [type, setTape] = useState('password');
 
     const [form, setForm] = useState({
-        email: 'grebenyukvd@gmail.com',
-        password: 'Test_Drive5',
-        // email: '',
-        // password: '',
+        // email: 'grebenyukvd@gmail.com',
+        // password: 'Test_Drive5',
+        email: '',
+        password: '',
         rememberMe: false
 
     });
