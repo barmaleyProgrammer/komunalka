@@ -7,19 +7,19 @@ import electric from "../img/logo_counters/electric.svg";
 import api from "../api";
 import BreadcrumbCadinetAdresses from "../components/breadcrumbCadinetAdresses";
 import BreadcrumbCadinetCounters from "../components/breadcrumbCadinetCounters";
+import InputField from "../components/inputField";
 
 const Counters = () => {
     const { objectId } = useParams();
-    const [counter, setCounter] = useState([]);
+    const [counters, setCounters] = useState([]);
     const [address, setAddress] = useState({});
     const [debt, setDebt] = useState([]);
-    console.log(objectId)
     // getCounterValue
 
     useEffect( () => {
         const fetchData = async () => {
             const result = await api.getCounterValue(objectId);
-            setCounter(result);
+            setCounters(result);
             const result3 = await api.getDebt(objectId);
             setDebt(result3);
             await api.getAddress(objectId).then((result) => {
@@ -30,29 +30,67 @@ const Counters = () => {
         fetchData();
     }, []);
 
-    const CounterBlock = (item) => {
+
+    const handleInputChange = (index) => (e) => {
+        const newArray = counters.map((item, i) => {
+            if (index === i) {
+                return { ...item, [e.target.name]: e.target.value };
+            } else {
+                return item;
+            }
+        });
+        setCounters(newArray);
+    };
+    // const handleInputChange = (key, value) => {
+    //     setCounters(prevProps => {
+    //         const newArr = [...prevProps];
+    //         newArr[key].currentReadings2 = value;
+    //
+    //         return newArr;
+    //     });
+        // const allCounters = [...counters];
+        // const current = { ...allCounters[key] };
+        // current.currentReadings2 = value;
+        // allCounters[key] = current;
+        // setCounters(() => [...allCounters]);
+
+
+        // const current = { ...counters[key] };
+        // current.currentReadings2 = value;
+        // setCounters(
+        //     [...counters, current ]
+        // );
+    // };
+
+    const CounterBlock = ({item, index}) => {
         return (
             <>
-                <div className="flex gap-x-4 rounded-lg border border-borderColor w-full h-auto">
+                <div className="flex gap-x-4 rounded-lg border border-borderColor w-full h-auto" key={`CounterBlock_${index}`}>
                     <div className="w-1">
                         <input className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                                type="checkbox"
-                               value={item.item.id}
+                               value={item.id}
                         />
                     </div>
                     <div className="w-2/3">
                         <ul>
                             <li className="text-xs">(Лічильник №1)</li>
-                            <li className="text-sm">{item.item.deviceNumber}</li>
-                            <li className="text-sm">(КПВОК “КИЇВТЕПЛОЕНЕРГО”)<br/>{item.item.namePlat}</li>
+                            <li className="text-sm">{item.deviceNumber}</li>
+                            <li className="text-sm">(КПВОК “КИЇВТЕПЛОЕНЕРГО”)<br/>{item.namePlat}</li>
                         </ul>
                     </div>
                     <div className="w-44">
-                        <p>Попередні показники<br/>{item.item.currentReadings}</p>
+                        <p>Попередні показники<br/>{item.currentReadings}</p>
                     </div>
                     <div className="w-44">
                         <p>Актуальні показники</p>
-                        <input type="text"/>
+                        <InputField
+                            key={`InputField_${index}`}
+                            type={'text'}
+                            name={'currentReadings2'}
+                            value={item.currentReadings2 || ''}
+                            onChange={handleInputChange(index)}
+                        />
                     </div>
                 </div>
             </>
@@ -111,8 +149,8 @@ const Counters = () => {
                 </div>
                 <h5 className="py-4 text-[16px] ">Обрати всі</h5>
                 <div>
-                    {counter.map((item, key) => {
-                        return <CounterBlock item={item} key={key}/>
+                    {counters.map((item, key) => {
+                        return <CounterBlock item={item} key={key} index={key} />
                     })}
                 </div>
             </div>

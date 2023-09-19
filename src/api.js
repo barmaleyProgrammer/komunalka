@@ -182,7 +182,13 @@ const getDebt = (objectId) => {
             console.error(error);
         });
 }
-
+const sendCounterData = (deviceId, payload) => {
+    return axios.post(`/counter/meter/device/${deviceId}`, payload, config).then((response) => {
+        console.log('додано', response);
+    }).catch((error) => {
+        console.error(error);
+    });
+}
 export default {
     signUp,
     signIn,
@@ -202,5 +208,6 @@ export default {
     getCounterValue,
     getDebt,
     updateUser,
-    renameAddress
+    renameAddress,
+    sendCounterData
 };
