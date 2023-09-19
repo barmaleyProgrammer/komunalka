@@ -41,6 +41,13 @@ const updateUser = (data) => {
         console.error(error);
     });
 }
+const renameAddress = (objectId, name = '') => {
+    return axios.put('/account/address', { objectId, name }, config).then((response) => {
+        console.log('renamed', response);
+    }).catch((error) => {
+        console.error(error);
+    });
+}
 
 const signOut = () => {
     sessionStorage.removeItem('accessToken');
@@ -194,5 +201,6 @@ export default {
     deleteObject,
     getCounterValue,
     getDebt,
-    updateUser
+    updateUser,
+    renameAddress
 };

@@ -1,13 +1,11 @@
+const checkToken = () => {
+    const token = sessionStorage.getItem('accessToken');
+    return token ? true : false;
+};
 
-// const checkTocken = () => {
-//     const token = sessionStorage.getItem('accessToken');
-//     return token ? true : false;
-// }
-
-
-const initialSate = {
-    isLoggedIn: () => !!sessionStorage.getItem('accessToken'),
-    user: JSON.parse(sessionStorage.getItem('user')) || {
+const checkUser = () => {
+    const user = sessionStorage.getItem('user');
+    return user ? JSON.parse(user) : {
         email: '',
         accountId: '',
         firstName: '',
@@ -16,7 +14,13 @@ const initialSate = {
         phone: '',
         createdDateTime: '',
         updatedDateTime: '',
-    },
+    };
+};
+
+
+const initialSate = {
+    isLoggedIn: checkToken(),
+    user: checkUser(),
     addresses: []
 };
 
