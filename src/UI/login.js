@@ -13,6 +13,7 @@ import api from "../api";
 import { Context } from "../App";
 
 const Login = () => {
+    console.log(process.env.NODE_ENV);
     const [, dispatch] = useContext(Context);
     const navigate = useNavigate();
     const [type, setTape] = useState('password');
@@ -20,8 +21,8 @@ const Login = () => {
     const [form, setForm] = useState({
         // email: 'grebenyukvd@gmail.com',
         // password: 'Test_Drive5',
-        email: '',
-        password: '',
+        email: (process.env.NODE_ENV === 'development') ? 'grebenyukvd@gmail.com' : '',
+        password: (process.env.NODE_ENV === 'development') ? 'Test_Drive5' : '',
         rememberMe: false
 
     });
