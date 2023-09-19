@@ -9,11 +9,17 @@ import icon_house from "../img/icon_house.svg";
 import {NavLink} from "react-router-dom";
 import api from "../api";
 import DropDownMenu from "../components/assets/dropDownMenu";
+import Modal from '../components/modal/modal'
+import InputField from "../components/inputField";
+import Button from "../components/button";
+
 
 
 const CabinetMyAdresses = () => {
     const navigate = useNavigate();
     const [myObjects, setMyObjects] = useState([]);
+    const [modalActive, setModalActive] = useState(false);
+    const [currentAddress, setCurrentAddress] = useState('');
 
     useEffect( () => {
         const fetchData = async () => {
@@ -33,13 +39,38 @@ const CabinetMyAdresses = () => {
         setMyObjects(newObjects);
     };
 
+    const handleInputChange = (event) => {
+        // console.log(event);
+        const { name, value } = event.target;
+        setCurrentAddress((prevProps) => ({
+            ...prevProps,
+            [name]: value
+        }));
+    };
+
+    const openModal = (objectId) => {
+        const res =  myObjects.find((item) => item.objectId === objectId);
+        setCurrentAddress(res);
+        setModalActive(true);
+    };
+
+    const updateAddress = async () => {
+        const {objectId, name} = currentAddress;
+        await api.renameAddress(objectId, name);
+        setCurrentAddress('');
+        setModalActive(false);
+        await api.getAddress().then((result) => setMyObjects(result));
+    }
+
     const AddresBlock = (item) => {
-        console.log(item);
         return (
             <>
                 <div className="mb-4 relative space-x-2 border rounded-lg border-[#E7E7E7] w-[360px] h-[204px]">
                     <div className="absolute right-0">
-                    <DropDownMenu delete={() => deleteAddress(item.item.objectId)}/>
+                    <DropDownMenu
+                        delete={() => deleteAddress(item.item.objectId)}
+                        popup={() => openModal(item.item.objectId)}
+                    />
                     </div>
                     <div className="komunalka ml-[16px] mt-[16px] space-x-1">
                         <ul>
@@ -56,8 +87,6 @@ const CabinetMyAdresses = () => {
                         <NavLink to={`/counters/${item.item.objectId}`} className="py-2.5 px-5 mr-2 mb-2 text-sm font-medium rounded-lg w-full text-black_figma bg-white_figma border border-yellow_figma">
                             Перейти
                         </NavLink>
-                        {/*<button onClick={() => deleteAddress(item.item.objectId)}>Видалити</button>*/}
-
                     </div>
                 </div>
             </>
@@ -66,6 +95,7 @@ const CabinetMyAdresses = () => {
 
 
     return (
+        <>
         <div className="mt-2 mx-auto w-[1152px]">
             <div>
                 <BreadcrumbCadinetAdresses />
@@ -97,6 +127,19 @@ const CabinetMyAdresses = () => {
                 </div>
             </div>
         </div>
+        <Modal active={modalActive} setActive={setModalActive}>
+            <InputField
+                label={'Перейменувати адресу'}
+                type={'text'}
+                placeholder={'Назва адреси'}
+                name={'name'}
+                required={true}
+                value={currentAddress.name}
+                onChange={handleInputChange}
+            />
+            <Button type="button" onClick={updateAddress} label={'Оновити'} cssType={'primary'} />
+        </Modal>
+        </>
     );
 };
 

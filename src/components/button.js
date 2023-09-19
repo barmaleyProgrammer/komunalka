@@ -1,4 +1,4 @@
-const Button = ({ type = 'button', label = 'Save', cssType = 'primary'}) => {
+const Button = ({ type = 'button', label = 'Save', cssType = 'primary', onClick}) => {
     let className = ['py-2.5', 'px-5', 'mr-2', 'mb-2', 'text-sm', 'font-medium', 'rounded', 'w-full'];
     switch (cssType) {
         case 'primary':
@@ -11,7 +11,7 @@ const Button = ({ type = 'button', label = 'Save', cssType = 'primary'}) => {
             className = [];
     }
     return (
-        <button type={type} className={className.join(' ')}>{label}</button>
+        <button type={type} className={className.join(' ')} onClick={onClick}>{label}</button>
     );
 };
 

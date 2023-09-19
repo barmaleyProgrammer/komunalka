@@ -16,7 +16,7 @@ const DropDownMenu = (props) => {
             </button>
             <div className={`absolute z-10 bg-white_figma divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600 ${state ? '':'hidden'}`}>
                 <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
-                    <li><NavLink to="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Перейменувати адресу</NavLink></li>
+                    <li><NavLink to="#" onClick={props.popup} className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Перейменувати адресу</NavLink></li>
                     <li><a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Налаштування сповішень</a></li>
                     <li><NavLink to="#" onClick={props.delete} className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Видалити</NavLink></li>
                 </ul>
