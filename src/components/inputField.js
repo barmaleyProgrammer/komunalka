@@ -1,4 +1,4 @@
-const InputField = ({ type = 'text', label = '', name = '', value = '', placeholder = '', required = false, onChange}) => {
+const InputField = ({ type = 'text', label = '', name = '', value = '', placeholder = '', required = false, onChange, readOnly = false }) => {
     return (
         <div>
             <label className="text-sm text-black_figma font-normal">{label}</label>
@@ -11,6 +11,7 @@ const InputField = ({ type = 'text', label = '', name = '', value = '', placehol
                     placeholder={placeholder}
                     required={required}
                     onChange={onChange}
+                    readOnly={readOnly}
                 />
             </div>
         </div>

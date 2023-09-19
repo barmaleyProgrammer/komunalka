@@ -14,6 +14,7 @@
     "eslint-plugin-react": "^7.33.2",
     "flowbite": "^1.8.1",
     "flowbite-react": "^0.5.0",
+    "moment": "^2.29.4",
     "postcss": "^8.4.29",
     "react": "^18.2.0",
     "react-collapse": "^5.1.1",
