@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react';
 import { useNavigate } from "react-router-dom";
 import {AiOutlinePlus} from "react-icons/ai";
-import BreadcrumbCadinetAdresses from "../components/breadcrumbCadinetAdresses";
+import Breadcrumbs from "../components/breadcrumbs";
 import icon_house from "../img/icon_house.svg";
 // import addAdressForm from "../components/assets/addAdressForm";
 // import logo_lichylnyk from "../img/logo_lichylnyk.svg";
@@ -20,6 +20,20 @@ const CabinetMyAdresses = () => {
     const [myObjects, setMyObjects] = useState([]);
     const [modalActive, setModalActive] = useState(false);
     const [currentAddress, setCurrentAddress] = useState('');
+    const breadCrumbs = [
+        {
+            "to": '/',
+            "label": 'Головна'
+        },
+        {
+            "to": '/cabinet',
+            "label": 'Особистий кабінет'
+        },
+        {
+            "to": '',
+            "label": 'Мої адреси'
+        },
+    ]
 
     useEffect( () => {
         const fetchData = async () => {
@@ -98,7 +112,7 @@ const CabinetMyAdresses = () => {
         <>
         <div className="mt-2 mx-auto w-[1152px]">
             <div>
-                <BreadcrumbCadinetAdresses />
+                <Breadcrumbs items={breadCrumbs}/>
             </div>
             <div className="mt-4 mb-4 items-center justify-between hidden w-full md:flex md:w-auto md:order-1">
                 <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 ">

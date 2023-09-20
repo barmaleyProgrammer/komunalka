@@ -1,5 +1,5 @@
 import list_imgs from "../components/assets/list_imgs";
-
+import Breadcrumbs from "../components/breadcrumbs";
 
 // const News = () => {
 //     return (
@@ -57,14 +57,30 @@ import list_imgs from "../components/assets/list_imgs";
 // };
 //
 const News = () => {
+    const breadCrumbs = [
+        {
+            "to": '/',
+            "label": 'Головна'
+        },
+        {
+            "to": '',
+            "label": 'Новини'
+        },
+    ]
     return (
+        <>
+            <div className="ml-64 mb-4">
+                <Breadcrumbs items={breadCrumbs}/>
+            </div>
         <div className="w-[70%] mx-auto grid grid-flow-row grid-cols-5 gap-10">
+
             {list_imgs.map((item, index) =>
                 <div key={index}>
                     <img className="h-auto w-60 rounded-lg" src= {item.image } alt=""/>
                 </div>
             )}
         </div>
+        </>
     )
 };
 export default News;

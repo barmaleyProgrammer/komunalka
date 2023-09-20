@@ -1,8 +1,21 @@
 import React from 'react';
-
+import Breadcrumbs from "../components/breadcrumbs";
 const About = () => {
+    const breadCrumbs = [
+        {
+            "to": '/',
+            "label": 'Головна'
+        },
+        {
+            "to": '',
+            "label": 'Про нас'
+        },
+    ]
     return (
         <div className="w-[1152px] text-sm py-6 mx-auto text-justify ">
+            <div className="mb-4">
+                <Breadcrumbs items={breadCrumbs}/>
+            </div>
          <h2 className="text-base mb-4">Про нас</h2>
             <div>
                 <p>Основною метою діяльності Концерну – є відкриття та організація роботи сервісних центрів для обслуговування

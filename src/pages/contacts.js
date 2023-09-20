@@ -1,8 +1,22 @@
 import React from 'react';
+import Breadcrumbs from "../components/breadcrumbs";
 
 const Contacts = () => {
+    const breadCrumbs = [
+        {
+            "to": '/',
+            "label": 'Головна'
+        },
+        {
+            "to": '',
+            "label": 'Контакти'
+        },
+    ]
     return (
     <div className="w-[50%] mx-auto">
+        <div>
+            <Breadcrumbs items={breadCrumbs}/>
+        </div>
             <h2 className="py-1 text-[24px]">Контакти</h2>
                 <ul className="grid grid-flow-row grid-cols-3 gap-10 py-4 text-[18px]">
                     <li><h2>Телефон</h2></li>

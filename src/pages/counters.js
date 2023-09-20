@@ -5,8 +5,7 @@ import water from "../img/logo_counters/water.svg";
 import gas from "../img/logo_counters/gas.svg";
 import electric from "../img/logo_counters/electric.svg";
 import api from "../api";
-import BreadcrumbCadinetAdresses from "../components/breadcrumbCadinetAdresses";
-import BreadcrumbCadinetCounters from "../components/breadcrumbCadinetCounters";
+import Breadcrumbs from "../components/breadcrumbs";
 import InputField from "../components/inputField";
 import Button from "../components/button";
 import moment from "moment";
@@ -16,6 +15,24 @@ const Counters = () => {
     const [counters, setCounters] = useState([]);
     // const counters = useRef(undefined);
     const [address, setAddress] = useState({});
+    const breadCrumbs = [
+        {
+            "to": '/',
+            "label": 'Головна'
+        },
+        {
+            "to": '/cabinet',
+            "label": 'Особистий кабінет'
+        },
+        {
+            "to": '/cabinet',
+            "label": 'Мої адреси'
+        },
+        {
+            "to": '',
+            "label": 'Лічильники'
+        },
+    ]
 
     useEffect( () => {
         const fetchData = async () => {
@@ -25,22 +42,27 @@ const Counters = () => {
                 const address = result.find((item) => item.objectId == objectId);
                 setAddress(address);
             });
+            // const result3 = await api.getDebt(objectId);
         };
         fetchData();
     }, []);
 
-    const Save = () => {
+    const Save = async () => {
         const currentDate = moment().format('YYYY-MM-D');
+        const promises = [];
         counters
-            .filter((item) => (item.currentReadings != 0))
+            .filter((item) => (item.currentReadings > 0))
             .forEach((item, key) => {
                 const payload = {
                     customerId: "string",
                     currentDate,
                     currentReadings: item.currentReadings
                 };
-                api.sendCounterData(item.objectId, payload);
+                const res = api.sendCounterData(item.objectId, payload);
+                promises.push(res);
             });
+        await Promise.all(promises);
+        await api.getCounterValue(objectId).then((result) => setCounters(result));
     };
     const handleInputChange = (event, index) => {
         // counters.current[index].currentReadings = event.target.value;
@@ -89,7 +111,7 @@ const Counters = () => {
     return (
         <div className="font-light mt-2 mx-auto w-[1152px]">
             <div>
-                <BreadcrumbCadinetCounters />
+                <Breadcrumbs items={breadCrumbs}/>
             </div>
             <h2 className="mb-4 mt-3 text-[24px]">{address.name}</h2>
             <div className="mt-[34px]">

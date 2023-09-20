@@ -13,16 +13,16 @@ const MyData = () => {
     const [formError, setFormError] = useState('');
     const breadCrumbs = [
         {
-            "to": '/cabinet',
-            "label": 'Мої адреси'
+            "to": '/',
+            "label": 'Головна'
         },
         {
-            "to": '/myData',
-            "label": 'Мої дані'
+            "to": '/cabinet',
+            "label": 'Особистий кабінет'
         },
         {
             "to": '',
-            "label": 'Оповіщення'
+            "label": 'Мої дані'
         },
     ]
 

@@ -1,11 +1,20 @@
 import React from 'react';
 import {useState} from "react";
 import AccordionItem from "../components/assets/accordionItem";
-import BreadcrumbCadinetAdresses from "../components/breadcrumbCadinetAdresses";
-import BreadcrumbCadinetFAQ from "../components/breadcrumbCadinetFAQ";
+import Breadcrumbs from "../components/breadcrumbs";
 
 const Faq = () => {
     const [open, setOpen] = useState(0);
+    const breadCrumbs = [
+        {
+            "to": '/',
+            "label": 'Головна'
+        },
+        {
+            "to": '',
+            "label": 'Часті питання'
+        },
+    ]
     const toggle = (index) => {
         if (open === index) {
             setOpen(0);
@@ -41,7 +50,7 @@ const Faq = () => {
     ];
     return (
         <section className=" w-[1152px] h-[317px] grid mx-auto">
-            <BreadcrumbCadinetFAQ />
+            <Breadcrumbs items={breadCrumbs}/>
             <h2 className="text-center text-[24px]">Часті питання</h2>
             <h4 className="text-center text-[18px]">Про сервіс LYCHYLNYK</h4>
             <div className="px-[40px] ">
