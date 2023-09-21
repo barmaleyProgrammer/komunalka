@@ -41,7 +41,7 @@ const CountersHistory = () => {
     useEffect( () => {
         const fetchData = async () => {
             // await api.getCounterValue(objectId).then((result) => counters.current = [...result]);
-            // await api.getCounterValue(objectId).then((result) => setCounters(result));
+            await api.getCounterValue(objectId).then((result) => setCounters(result));
             await api.getAddress(objectId).then((result) => {
                 // const address = result.find((item) => item.objectId == objectId);
                 console.log('отримано', objectId)
@@ -73,9 +73,9 @@ const CountersHistory = () => {
                 </div>
                 <div className="w-2/3">
                     <ul>
-                        <li className="text-xs">(Лічильник №1)</li>
-                        <li className="text-sm">{item.deviceNumber}</li>
-                        <li className="text-sm">(КПВОК “КИЇВТЕПЛОЕНЕРГО”)<br/>{item.namePlat}</li>
+                        <li className="text-xs">Лічильник №{item.counterNo}</li>
+                        <li className="text-sm">{item.abcounter}</li>
+                        <li className="text-sm">{item.nameFirme}<br/>{item.namePlat}</li>
                     </ul>
                 </div>
                 <div className="w-44">

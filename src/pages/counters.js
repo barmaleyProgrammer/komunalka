@@ -42,7 +42,7 @@ const Counters = () => {
                 const address = result.find((item) => item.objectId == objectId);
                 setAddress(address);
             });
-            const result3 = await api.getDebt(objectId);
+            // const result3 = await api.getDebt(objectId);
         };
         fetchData();
     }, []);
@@ -84,7 +84,7 @@ const Counters = () => {
                 </div>
                 <div className="w-2/3">
                     <ul>
-                        <li className="text-xs">(Лічильник №1)</li>
+                        <li className="text-xs">Лічильник №{item.counterNo}</li>
                         <li className="text-sm">{item.abcounter}</li>
                         <li className="text-sm">{item.nameFirme}<br/>{item.namePlat}</li>
                     </ul>
@@ -93,7 +93,7 @@ const Counters = () => {
                     <InputField
                         label={'Попередні показники'}
                         readOnly={true}
-                        value={item.preValue}
+                        value={item.oldValue}
                     />
                 </div>
                 <div className="w-44">
