@@ -128,6 +128,13 @@ const getCounterValue = (objectId) => {
             console.error(error);
         });
 }
+const getCountersHistory = (objectId) => {
+    return axios.get(`/counter/meters/history/data?objectId=870036&dateStart=2022-01-01&dateEnd=2023-08-01`, config)
+        .then((res) => res.data.data)
+        .catch((error) => {
+            console.error(error);
+        });
+}
 const getService = (objectId) => {
     return axios.get(`/counter/service?objectId=${objectId}`, config)
         .then((res) => res.data)
@@ -209,5 +216,6 @@ export default {
     getDebt,
     updateUser,
     renameAddress,
-    sendCounterData
+    sendCounterData,
+    getCountersHistory
 };

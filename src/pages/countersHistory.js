@@ -41,7 +41,7 @@ const CountersHistory = () => {
     useEffect( () => {
         const fetchData = async () => {
             // await api.getCounterValue(objectId).then((result) => counters.current = [...result]);
-            await api.getCounterValue(objectId).then((result) => setCounters(result));
+            await api.getCountersHistory(objectId).then((result) => setCounters(result));
             await api.getAddress(objectId).then((result) => {
                 // const address = result.find((item) => item.objectId == objectId);
                 console.log('отримано', objectId)
@@ -65,12 +65,6 @@ const CountersHistory = () => {
     const CounterBlock = ({item, index}) => {
         return (
             <div className="flex gap-x-4 rounded-lg border border-borderColor w-full h-auto">
-                <div className="w-1">
-                    <input className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
-                       type="checkbox"
-                       value={item.id}
-                    />
-                </div>
                 <div className="w-2/3">
                     <ul>
                         <li className="text-xs">Лічильник №{item.counterNo}</li>
@@ -79,10 +73,10 @@ const CountersHistory = () => {
                     </ul>
                 </div>
                 <div className="w-44">
-                   <p>Передані показники</p>
+                   <p>Передані показники<br/>{item.oldValue}</p>
                 </div>
                 <div className="w-44">
-                    <p>data</p>
+                    <p>{item.newTransmissionTime}</p>
                 </div>
             </div>
         );
@@ -126,6 +120,16 @@ const CountersHistory = () => {
                         <li><NavLink to="#" className="py-2 pl-3 pr-4 text-sm text-white bg-black rounded md:bg-transparent md:p-0 md:dark:text-black">Історія показань</NavLink></li>
                         <li><NavLink to="#" className="py-2 pl-3 pr-4 text-sm text-white bg-black rounded md:bg-transparent md:p-0 md:dark:text-black">Графіки споживань</NavLink></li>
                         <li><NavLink to="#" className="py-2 pl-3 pr-4 text-sm text-white bg-black rounded md:bg-transparent md:p-0 md:dark:text-black">Історія фотографій</NavLink></li>
+                    </ul>
+                </div>
+                <div className="mt-4 mb-4 items-center justify-between hidden w-full md:flex md:w-auto md:order-1">
+                    <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 ">
+                        <li>
+                            <NavLink to="/cabinet" className="w-auto h-[48px] py-2.5 px-5 mr-2 mb-2 text-sm font-medium rounded text-[#FD9800] bg-[#F7F9FE]">Обрати місяць</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to="/myData" className="w-auto h-[48px] py-2.5 px-5 mr-2 mb-2 text-sm font-medium rounded text-[#FD9800] bg-[#F7F9FE]">Обрати рік</NavLink>
+                        </li>
                     </ul>
                 </div>
                 <div>
