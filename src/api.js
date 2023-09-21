@@ -122,7 +122,7 @@ const getFlats = (house_id) => {
     });
 }
 const getCounterValue = (objectId) => {
-    return axios.get(`/counter/meter/device?objectId=${objectId}`, config)
+    return axios.get(`/counter/meters/data?objectId=${objectId}`, config)
         .then((res) => res.data.data)
         .catch((error) => {
             console.error(error);

@@ -85,15 +85,15 @@ const Counters = () => {
                 <div className="w-2/3">
                     <ul>
                         <li className="text-xs">(Лічильник №1)</li>
-                        <li className="text-sm">{item.deviceNumber}</li>
-                        <li className="text-sm">(КПВОК “КИЇВТЕПЛОЕНЕРГО”)<br/>{item.namePlat}</li>
+                        <li className="text-sm">{item.abcounter}</li>
+                        <li className="text-sm">{item.nameFirme}<br/>{item.namePlat}</li>
                     </ul>
                 </div>
                 <div className="w-44">
                     <InputField
                         label={'Попередні показники'}
                         readOnly={true}
-                        value={item.currentReadings}
+                        value={item.preValue}
                     />
                 </div>
                 <div className="w-44">
