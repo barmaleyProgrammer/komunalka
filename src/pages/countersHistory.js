@@ -1,4 +1,4 @@
-import {useEffect, useState, useRef } from 'react';
+import {useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
 import {NavLink} from "react-router-dom";
 import water from "../img/logo_counters/water.svg";
@@ -6,11 +6,11 @@ import gas from "../img/logo_counters/gas.svg";
 import electric from "../img/logo_counters/electric.svg";
 import api from "../api";
 import Breadcrumbs from "../components/breadcrumbs";
-import InputField from "../components/inputField";
+// import InputField from "../components/inputField";
 import Button from "../components/button";
-import moment from "moment";
 
-const Counters = () => {
+
+const CountersHistory = () => {
     const { objectId } = useParams();
     const [counters, setCounters] = useState([]);
     // const counters = useRef(undefined);
@@ -29,49 +29,38 @@ const Counters = () => {
             "label": 'Мої адреси'
         },
         {
-            "to": '',
+            "to": `/counters/${objectId}`,
             "label": 'Лічильники'
+        },
+        {
+            "to": '',
+            "label": 'Історія показань'
         },
     ]
 
     useEffect( () => {
         const fetchData = async () => {
             // await api.getCounterValue(objectId).then((result) => counters.current = [...result]);
-            await api.getCounterValue(objectId).then((result) => setCounters(result));
+            // await api.getCounterValue(objectId).then((result) => setCounters(result));
             await api.getAddress(objectId).then((result) => {
-                const address = result.find((item) => item.objectId == objectId);
+                // const address = result.find((item) => item.objectId == objectId);
+                console.log('отримано', objectId)
                 setAddress(address);
             });
-            const result3 = await api.getDebt(objectId);
+            // const result3 = await api.getDebt(objectId);
         };
         fetchData();
     }, []);
 
-    const Save = async () => {
-        const currentDate = moment().format('YYYY-MM-D');
-        const promises = [];
-        counters
-            .filter((item) => (item.currentReadings > 0))
-            .forEach((item, key) => {
-                const payload = {
-                    customerId: "string",
-                    currentDate,
-                    currentReadings: item.currentReadings
-                };
-                const res = api.sendCounterData(item.objectId, payload);
-                promises.push(res);
-            });
-        await Promise.all(promises);
-        await api.getCounterValue(objectId).then((result) => setCounters(result));
-    };
-    const handleInputChange = (event, index) => {
-        // counters.current[index].currentReadings = event.target.value;
-        setCounters((prevData) => {
-            const clone = [...prevData];
-            clone[index].currentReadings = event.target.value;
-            return clone;
-        });
-    };
+
+    // const handleInputChange = (event, index) => {
+    //     // counters.current[index].currentReadings = event.target.value;
+    //     setCounters((prevData) => {
+    //         const clone = [...prevData];
+    //         clone[index].currentReadings = event.target.value;
+    //         return clone;
+    //     });
+    // };
 
     const CounterBlock = ({item, index}) => {
         return (
@@ -90,19 +79,10 @@ const Counters = () => {
                     </ul>
                 </div>
                 <div className="w-44">
-                    <InputField
-                        label={'Попередні показники'}
-                        readOnly={true}
-                        value={item.currentReadings}
-                    />
+                   <p>Передані показники</p>
                 </div>
                 <div className="w-44">
-                    <InputField
-                        label={'Актуальні показники'}
-                        name={'currentReadings'}
-                        value={item.currentReadings}
-                        onChange={(e) => handleInputChange(e, index)}
-                    />
+                    <p>data</p>
                 </div>
             </div>
         );
@@ -143,21 +123,20 @@ const Counters = () => {
                 <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
                     <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 ">
                         <li><NavLink to="#" className="py-2 pl-3 pr-4 text-sm text-white bg-black rounded md:bg-transparent md:p-0 md:dark:text-black">Мої лічильники</NavLink></li>
-                        <li><NavLink to={`/countersHistory/${objectId}`} className="py-2 pl-3 pr-4 text-sm text-white bg-black rounded md:bg-transparent md:p-0 md:dark:text-black">Історія показань</NavLink></li>
+                        <li><NavLink to="#" className="py-2 pl-3 pr-4 text-sm text-white bg-black rounded md:bg-transparent md:p-0 md:dark:text-black">Історія показань</NavLink></li>
                         <li><NavLink to="#" className="py-2 pl-3 pr-4 text-sm text-white bg-black rounded md:bg-transparent md:p-0 md:dark:text-black">Графіки споживань</NavLink></li>
                         <li><NavLink to="#" className="py-2 pl-3 pr-4 text-sm text-white bg-black rounded md:bg-transparent md:p-0 md:dark:text-black">Історія фотографій</NavLink></li>
                     </ul>
                 </div>
-                <h5 className="py-4">Обрати всі</h5>
                 <div>
                     {counters.map((item, key) => <CounterBlock item={item} key={`CounterBlock_${item.id}`} index={key} />)}
                     {/*{counters.current?.map((item, key) => <CounterBlock item={item} key={`CounterBlock_${item.id}`} index={key} />)}*/}
 
-                    <Button type="button" label={'Зберегті'} onClick={Save} cssType={'primary'} />
+                    <Button type="button" label={'Переглянути ще'} cssType={'primary'} />
                 </div>
             </div>
         </div>
     );
 };
 
-export default Counters;
+export default CountersHistory;

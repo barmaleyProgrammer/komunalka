@@ -12,6 +12,7 @@ import CabinetMyAdresses from "./pages/cabinetMyAdresses";
 import AddAdressForm from "./components/assets/addAdressForm";
 import ValidateEmail from "./pages/validateEmail";
 import Counters from "./pages/counters";
+import CountersHistory from "./pages/countersHistory";
 import Header from "./components/header";
 import MyData from "./pages/myData";
 import { initialSate, reducer } from "./state";
@@ -37,6 +38,7 @@ const App = () => {
                             <Route path="addAdressForm" element={<AddAdressForm />} />
                             <Route path="validate/email" element={<ValidateEmail />} />
                             <Route path="counters/:objectId" element={<Counters />} />
+                            <Route path="countersHistory/:objectId" element={<CountersHistory />} />
                             <Route path="myData" element={<MyData />} />
                         </Routes>
                     </main>
