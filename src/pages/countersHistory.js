@@ -8,13 +8,17 @@ import api from "../api";
 import Breadcrumbs from "../components/breadcrumbs";
 // import InputField from "../components/inputField";
 import Button from "../components/button";
-
+import Calendar from 'react-calendar';
+import  'react-calendar/dist/Calendar.css' ;
+import Modal from '../components/modal/modal'
 
 const CountersHistory = () => {
     const { objectId } = useParams();
     const [counters, setCounters] = useState([]);
     // const counters = useRef(undefined);
     const [address, setAddress] = useState({});
+    const [modalActive, setModalActive] = useState(false);
+
     const breadCrumbs = [
         {
             "to": '/',
@@ -39,20 +43,30 @@ const CountersHistory = () => {
     ]
 
     useEffect( () => {
+
         const fetchData = async () => {
-            // await api.getCounterValue(objectId).then((result) => counters.current = [...result]);
-            await api.getCountersHistory(objectId).then((result) => setCounters(result));
-            await api.getAddress(objectId).then((result) => {
-                // const address = result.find((item) => item.objectId == objectId);
-                console.log('отримано', objectId)
-                setAddress(address);
-            });
-            // const result3 = await api.getDebt(objectId);
+            const payload = {
+                // objectId: "870036",
+                dateStart: '2020-01-01',
+                dateEnd: '2023-08-01'
+            };
+            await api.getCountersHistory(objectId, payload).then((result) => setCounters(result));
+            console.log(payload);
+
         };
         fetchData();
     }, []);
 
-
+    const openModal1 = (objectId) => {
+        // const res =  myObjects.find((item) => item.objectId === objectId);
+        // setCurrentAddress(res);
+        setModalActive(true);
+    };
+    const openModal2 = (objectId) => {
+        // const res =  myObjects.find((item) => item.objectId === objectId);
+        // setCurrentAddress(res);
+        setModalActive(true);
+    };
     // const handleInputChange = (event, index) => {
     //     // counters.current[index].currentReadings = event.target.value;
     //     setCounters((prevData) => {
@@ -125,10 +139,16 @@ const CountersHistory = () => {
                 <div className="mt-4 mb-4 items-center justify-between hidden w-full md:flex md:w-auto md:order-1">
                     <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 ">
                         <li>
-                            <NavLink to="/cabinet" className="w-auto h-[48px] py-2.5 px-5 mr-2 mb-2 text-sm font-medium rounded text-[#FD9800] bg-[#F7F9FE]">Обрати місяць</NavLink>
+                            <NavLink to="#" onClick={openModal1} className="w-auto h-[48px] py-2.5 px-5 mr-2 mb-2 text-sm font-medium rounded text-[#FD9800] bg-[#F7F9FE]">Обрати початкову дату</NavLink>
+                            <Modal active={modalActive} setActive={setModalActive}>
+                                <Calendar />
+                            </Modal>
                         </li>
                         <li>
-                            <NavLink to="/myData" className="w-auto h-[48px] py-2.5 px-5 mr-2 mb-2 text-sm font-medium rounded text-[#FD9800] bg-[#F7F9FE]">Обрати рік</NavLink>
+                            <NavLink to="#" onClick={openModal2} className="w-auto h-[48px] py-2.5 px-5 mr-2 mb-2 text-sm font-medium rounded text-[#FD9800] bg-[#F7F9FE]">Обрати кінцеву дату</NavLink>
+                            <Modal active={modalActive} setActive={setModalActive}>
+                                <Calendar />
+                            </Modal>
                         </li>
                     </ul>
                 </div>
