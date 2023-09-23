@@ -4,7 +4,7 @@ import api from "../../api";
 import InputField from "../../components/inputField";
 import { useNavigate } from "react-router-dom";
 
-const AddAdress = () => {
+const AddAddress = () => {
     const navigate = useNavigate();
     const [regions, setRegions] = useState([]);
     const [region, setRegion] = useState(0);
@@ -171,4 +171,4 @@ const AddAdress = () => {
     );
 };
 
-export default AddAdress;
+export default AddAddress;

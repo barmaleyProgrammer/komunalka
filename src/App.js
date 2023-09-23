@@ -15,7 +15,7 @@ import Faq from "./pages/faq";
 import Contacts from "./pages/contacts";
 
 import Cabinet from "./pages/cabinet/cabinet";
-import AddAdress from "./pages/cabinet/addAdress";
+import AddAddress from "./pages/cabinet/addAddress";
 import MyData from "./pages/cabinet/myData";
 
 import Counters from "./pages/counters/counters";
@@ -45,7 +45,7 @@ const App = () => {
                             </Route>
                             <Route path="/cabinet">
                                 <Route index element={<Cabinet />} />
-                                <Route path="addAdress" element={<AddAdress />} />
+                                <Route path="addAddress" element={<AddAddress />} />
                                 <Route path="myData" element={<MyData />} />
                             </Route>
                             <Route path="/counters">

@@ -111,7 +111,7 @@ const Cabinet = () => {
                     <h3 className="text-center text-[20px] pb-6">Мої адреси</h3>
                     <div className="flex justify-center gap-x-10">
                             <div className="cursor-pointer space-x-2 flex justify-center items-center border rounded-lg border-[#E7E7E7] w-[360px] h-[204px]"
-                                 onClick={() => navigate("/addAdressForm")}>
+                                 onClick={() => navigate("/cabinet/addAddress")}>
                                 <AiOutlinePlus />
                                 <p className="">Додати адресу</p>
                             </div>
