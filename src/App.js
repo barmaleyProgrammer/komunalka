@@ -16,6 +16,7 @@ import CountersHistory from "./pages/countersHistory";
 import Header from "./components/header";
 import MyData from "./pages/myData";
 import { initialSate, reducer } from "./state";
+import ConsumptionGraphsTables from "./pages/consumptionGraphsTables";
 
 export const Context = createContext(null);
 
@@ -39,6 +40,7 @@ const App = () => {
                             <Route path="validate/email" element={<ValidateEmail />} />
                             <Route path="counters/:objectId" element={<Counters />} />
                             <Route path="countersHistory/:objectId" element={<CountersHistory />} />
+                            <Route path="consumptionGraphsTables/:objectId" element={<ConsumptionGraphsTables />} />
                             <Route path="myData" element={<MyData />} />
                         </Routes>
                     </main>

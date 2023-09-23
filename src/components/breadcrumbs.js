@@ -3,7 +3,6 @@ import { NavLink } from "react-router-dom";
 
 
 const Breadcrumbs = ({items}) => {
-    console.log(items);
 
     const itemLink = (item) => {
         return (

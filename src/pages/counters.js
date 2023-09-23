@@ -142,9 +142,9 @@ const Counters = () => {
                 <h3 className="py-4 text-[20px] text-center">Лічильники</h3>
                 <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
                     <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 ">
-                        <li><NavLink to="#" className="py-2 pl-3 pr-4 text-sm text-white bg-black rounded md:bg-transparent md:p-0 md:dark:text-black">Мої лічильники</NavLink></li>
+                        <li><NavLink to={`/counters/${objectId}`} className="py-2 pl-3 pr-4 text-sm text-white bg-black rounded md:bg-transparent md:p-0 md:dark:text-black">Мої лічильники</NavLink></li>
                         <li><NavLink to={`/countersHistory/${objectId}`} className="py-2 pl-3 pr-4 text-sm text-white bg-black rounded md:bg-transparent md:p-0 md:dark:text-black">Історія показань</NavLink></li>
-                        <li><NavLink to="#" className="py-2 pl-3 pr-4 text-sm text-white bg-black rounded md:bg-transparent md:p-0 md:dark:text-black">Графіки споживань</NavLink></li>
+                        <li><NavLink to={`/consumptionGraphsTables/${objectId}`} className="py-2 pl-3 pr-4 text-sm text-white bg-black rounded md:bg-transparent md:p-0 md:dark:text-black">Графіки споживань</NavLink></li>
                         <li><NavLink to="#" className="py-2 pl-3 pr-4 text-sm text-white bg-black rounded md:bg-transparent md:p-0 md:dark:text-black">Історія фотографій</NavLink></li>
                     </ul>
                 </div>

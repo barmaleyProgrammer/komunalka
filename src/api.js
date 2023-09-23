@@ -129,7 +129,7 @@ const getCounterValue = (objectId) => {
         });
 }
 
-const getCountersHistory = (objectId, {dateStart, dateEnd}) => {
+const getCountersHistory = (objectId, dateStart, dateEnd) => {
     return axios.get(`/counter/meters/history/data?objectId=${objectId}&dateStart=${dateStart}&dateEnd=${dateEnd}`, config)
         .then((res) => res.data.data)
         .catch((error) => {

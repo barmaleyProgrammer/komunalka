@@ -6,18 +6,24 @@ import gas from "../img/logo_counters/gas.svg";
 import electric from "../img/logo_counters/electric.svg";
 import api from "../api";
 import Breadcrumbs from "../components/breadcrumbs";
-// import InputField from "../components/inputField";
 import Button from "../components/button";
 import Calendar from 'react-calendar';
 import  'react-calendar/dist/Calendar.css' ;
-import Modal from '../components/modal/modal'
+import Modal from '../components/modal/modal';
+import moment from 'moment';
+import MySelect from "../components/MySelect";
 
 const CountersHistory = () => {
     const { objectId } = useParams();
     const [counters, setCounters] = useState([]);
+    const [firms, setFirms] = useState([]);
+    const [firm, setFirm] = useState('');
     // const counters = useRef(undefined);
     const [address, setAddress] = useState({});
-    const [modalActive, setModalActive] = useState(false);
+    const [modalActive1, setModalActive1] = useState(false);
+    const [modalActive2, setModalActive2] = useState(false);
+    const [startDate, setStartDate] = useState(moment().startOf('month'));
+    const [endDate, setEndDate] = useState(moment().endOf('month'));
 
     const breadCrumbs = [
         {
@@ -43,29 +49,33 @@ const CountersHistory = () => {
     ]
 
     useEffect( () => {
-
         const fetchData = async () => {
-            const payload = {
-                // objectId: "870036",
-                dateStart: '2020-01-01',
-                dateEnd: '2023-08-01'
-            };
-            await api.getCountersHistory(objectId, payload).then((result) => setCounters(result));
-            console.log(payload);
-
+            const dateStart = moment(startDate).format('YYYY-MM-DD');
+            const dateEnd = moment(endDate).format('YYYY-MM-DD');
+            api.getCountersHistory(objectId, dateStart, dateEnd).then((result) => {
+                setCounters(result);
+                let firms = result
+                    .filter((item) => item.codeFirme !== null)
+                    .map((item) => {
+                        return {
+                            label: item.nameFirme,
+                            value: item.codeFirme
+                        }
+                    });
+                firms = Array.from(new Set(firms.map(JSON.stringify))).map(JSON.parse);
+                setFirms(firms);
+            });
         };
         fetchData();
-    }, []);
+    }, [startDate, endDate]);
 
-    const openModal1 = (objectId) => {
-        // const res =  myObjects.find((item) => item.objectId === objectId);
-        // setCurrentAddress(res);
-        setModalActive(true);
+    const setDate1 = (e) => {
+        setStartDate(e);
+        setModalActive1(false);
     };
-    const openModal2 = (objectId) => {
-        // const res =  myObjects.find((item) => item.objectId === objectId);
-        // setCurrentAddress(res);
-        setModalActive(true);
+    const setDate2 = (e) => {
+        setEndDate(e);
+        setModalActive2(false);
     };
     // const handleInputChange = (event, index) => {
     //     // counters.current[index].currentReadings = event.target.value;
@@ -76,22 +86,15 @@ const CountersHistory = () => {
     //     });
     // };
 
-    const CounterBlock = ({item, index}) => {
+    const CounterBlock = ({item}) => {
         return (
             <div className="flex gap-x-4 rounded-lg border border-borderColor w-full h-auto">
                 <div className="w-2/3">
-                    <ul>
-                        <li className="text-xs">Лічильник №{item.counterNo}</li>
-                        <li className="text-sm">{item.abcounter}</li>
-                        <li className="text-sm">{item.nameFirme}<br/>{item.namePlat}</li>
-                    </ul>
+                    <div className="text-xs">Лічильник №{item.counterNo}</div>
+                    <div className="text-sm">{item.abcounter}<br/>{item.nameFirme}<br/>{item.namePlat}</div>
                 </div>
-                <div className="w-44">
-                   <p>Передані показники<br/>{item.oldValue}</p>
-                </div>
-                <div className="w-44">
-                    <p>{item.newTransmissionTime}</p>
-                </div>
+                <div className="w-44 text-right">{Number(item.newValue).toFixed(2)}</div>
+                <div className="w-44 text-right">{moment(item.newTransmissionTime).format('DD.MM.YYYY')}</div>
             </div>
         );
     };
@@ -130,35 +133,45 @@ const CountersHistory = () => {
                 <h3 className="py-4 text-[20px] text-center">Лічильники</h3>
                 <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
                     <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 ">
-                        <li><NavLink to="#" className="py-2 pl-3 pr-4 text-sm text-white bg-black rounded md:bg-transparent md:p-0 md:dark:text-black">Мої лічильники</NavLink></li>
+                        <li><NavLink to={`/counters/${objectId}`} className="py-2 pl-3 pr-4 text-sm text-white bg-black rounded md:bg-transparent md:p-0 md:dark:text-black">Мої лічильники</NavLink></li>
                         <li><NavLink to="#" className="py-2 pl-3 pr-4 text-sm text-white bg-black rounded md:bg-transparent md:p-0 md:dark:text-black">Історія показань</NavLink></li>
-                        <li><NavLink to="#" className="py-2 pl-3 pr-4 text-sm text-white bg-black rounded md:bg-transparent md:p-0 md:dark:text-black">Графіки споживань</NavLink></li>
+                        <li><NavLink to={`/consumptionGraphsTables/${objectId}`} className="py-2 pl-3 pr-4 text-sm text-white bg-black rounded md:bg-transparent md:p-0 md:dark:text-black">Графіки споживань</NavLink></li>
                         <li><NavLink to="#" className="py-2 pl-3 pr-4 text-sm text-white bg-black rounded md:bg-transparent md:p-0 md:dark:text-black">Історія фотографій</NavLink></li>
                     </ul>
                 </div>
                 <div className="mt-4 mb-4 items-center justify-between hidden w-full md:flex md:w-auto md:order-1">
                     <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 ">
                         <li>
-                            <NavLink to="#" onClick={openModal1} className="w-auto h-[48px] py-2.5 px-5 mr-2 mb-2 text-sm font-medium rounded text-[#FD9800] bg-[#F7F9FE]">Обрати початкову дату</NavLink>
-                            <Modal active={modalActive} setActive={setModalActive}>
-                                <Calendar />
-                            </Modal>
+                            <NavLink to="#" onClick={() => setModalActive1(true)} className="w-auto h-[48px] py-2.5 px-5 mr-2 mb-2 text-sm font-medium rounded text-[#FD9800] bg-[#F7F9FE]">Обрати початкову дату</NavLink>
                         </li>
                         <li>
-                            <NavLink to="#" onClick={openModal2} className="w-auto h-[48px] py-2.5 px-5 mr-2 mb-2 text-sm font-medium rounded text-[#FD9800] bg-[#F7F9FE]">Обрати кінцеву дату</NavLink>
-                            <Modal active={modalActive} setActive={setModalActive}>
-                                <Calendar />
-                            </Modal>
+                            <NavLink to="#" onClick={() => setModalActive2(true)} className="w-auto h-[48px] py-2.5 px-5 mr-2 mb-2 text-sm font-medium rounded text-[#FD9800] bg-[#F7F9FE]">Обрати кінцеву дату</NavLink>
+                        </li>
+                        <li>
+                            <MySelect options={firms} defaultValue={"Оберіть постачальника"} value={firm} onChange={setFirm}/>
                         </li>
                     </ul>
                 </div>
                 <div>
-                    {counters.map((item, key) => <CounterBlock item={item} key={`CounterBlock_${item.id}`} index={key} />)}
-                    {/*{counters.current?.map((item, key) => <CounterBlock item={item} key={`CounterBlock_${item.id}`} index={key} />)}*/}
-
+                    {counters?.map((item, key) => {
+                        if (firm) {
+                            if (firm === item.codeFirme) {
+                                return <CounterBlock item={item} key={`CounterBlock_${key}`} />
+                            }
+                        }
+                        else {
+                            return <CounterBlock item={item} key={`CounterBlock_${key}`} />
+                        }
+                    })}
                     <Button type="button" label={'Переглянути ще'} cssType={'primary'} />
                 </div>
             </div>
+            <Modal active={modalActive1} setActive={setModalActive1}>
+                <Calendar onChange={setDate1} value={startDate} />
+            </Modal>
+            <Modal active={modalActive2} setActive={setModalActive2}>
+                <Calendar onChange={setDate2} value={endDate} />
+            </Modal>
         </div>
     );
 };
