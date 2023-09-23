@@ -1,7 +1,7 @@
-import React from 'react';
-import {useState} from "react";
-import AccordionItem from "../components/assets/accordionItem";
+import { useState } from "react";
 import Breadcrumbs from "../components/breadcrumbs";
+import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
+import { Collapse } from "react-collapse";
 
 const Faq = () => {
     const [open, setOpen] = useState(0);
@@ -48,6 +48,24 @@ const Faq = () => {
             desc: "1Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
         },
     ];
+
+    const AccordionItem = ({open, toggle, tittle, desc}) => {
+        return (
+            <div className="pt-[10px]">
+                <div className="bg-white py-[5px] px-[50px] flex justify-between items-center cursor-pointer" onClick={toggle}>
+                    <p className="text-[16px] font-normal">{tittle}</p>
+                    <div className="text-[24px]">
+                        {open ? <AiOutlineMinus /> : <AiOutlinePlus /> }
+                    </div>
+                </div>
+                <Collapse isOpened={open}>
+                    <div className="font-normal text-[14px] px-[50px] pb-[20px]">{desc}</div>
+                </Collapse>
+                <hr className="w-full text-borderColor"/>
+            </div>
+        );
+    };
+
     return (
         <section className=" w-[1152px] h-[317px] grid mx-auto">
             <Breadcrumbs items={breadCrumbs}/>

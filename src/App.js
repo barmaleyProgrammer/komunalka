@@ -1,22 +1,26 @@
 import { useReducer, createContext } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { initialSate, reducer } from "./state";
 import Footer from "./components/footer";
+import Header from "./components/header";
+
+import Register from "./pages/auth/register";
+import Login from "./pages/auth/login";
+import Validate from "./pages/auth/validate";
+
 import News from "./pages/news.js";
 import About from "./pages/about.js";
-import Main from "./components/main.js";
-import Reg from "./UI/reg";
-import Login from "./UI/login";
-import Faq from "./pages/FAQ";
+import Home from "./pages/home.js";
+import Faq from "./pages/faq";
 import Contacts from "./pages/contacts";
-import CabinetMyAdresses from "./pages/cabinetMyAdresses";
-import AddAdressForm from "./components/assets/addAdressForm";
-import ValidateEmail from "./pages/validateEmail";
-import Counters from "./pages/counters";
-import CountersHistory from "./pages/countersHistory";
-import Header from "./components/header";
-import MyData from "./pages/myData";
-import { initialSate, reducer } from "./state";
-import ConsumptionGraphsTables from "./pages/consumptionGraphsTables";
+
+import Cabinet from "./pages/cabinet/cabinet";
+import AddAdress from "./pages/cabinet/addAdress";
+import MyData from "./pages/cabinet/myData";
+
+import Counters from "./pages/counters/counters";
+import CountersHistory from "./pages/counters/history";
+import CountersGraphsTables from "./pages/counters/graphsTables";
 
 export const Context = createContext(null);
 
@@ -28,30 +32,31 @@ const App = () => {
                     <Header />
                     <main>
                         <Routes>
-                            <Route path="/" element={<Main />} />
-                            <Route path="about" element={<About />} />
-                            <Route path="faq" element={<Faq />} />
-                            <Route path="news" element={<News />} />
-                            <Route path="contacts" element={<Contacts />} />
-                            <Route path="login" element={<Login />} />
-                            <Route path="reg" element={<Reg />} />
-                            <Route path="cabinet" element={<CabinetMyAdresses />} />
-                            <Route path="addAdressForm" element={<AddAdressForm />} />
-                            <Route path="validate/email" element={<ValidateEmail />} />
-                            <Route path="counters/:objectId" element={<Counters />} />
-                            <Route path="countersHistory/:objectId" element={<CountersHistory />} />
-                            <Route path="consumptionGraphsTables/:objectId" element={<ConsumptionGraphsTables />} />
-                            <Route path="myData" element={<MyData />} />
+                            <Route path="/" element={<Home />} />
+                            <Route path="/about" element={<About />} />
+                            <Route path="/faq" element={<Faq />} />
+                            <Route path="/news" element={<News />} />
+                            <Route path="/contacts" element={<Contacts />} />
+
+                            <Route path="/auth">
+                                <Route path="login" element={<Login />} />
+                                <Route path="register" element={<Register />} />
+                                <Route path="validate" element={<Validate />} />
+                            </Route>
+                            <Route path="/cabinet">
+                                <Route index element={<Cabinet />} />
+                                <Route path="addAdress" element={<AddAdress />} />
+                                <Route path="myData" element={<MyData />} />
+                            </Route>
+                            <Route path="/counters">
+                                <Route index path=":objectId" element={<Counters />} />
+                                <Route path=":objectId/history" element={<CountersHistory />} />
+                                <Route path=":objectId/graphsTables" element={<CountersGraphsTables />} />
+                            </Route>
                         </Routes>
                     </main>
                     <Footer />
                 </BrowserRouter>
-                {/*<Login />*/}
-                {/*<Reg/>*/}
-                {/*<main>*/}
-                {/*    <Main />*/}
-                {/*</main>*/}
-                {/*<Footer />*/}
             </Context.Provider>
         </div>
     );

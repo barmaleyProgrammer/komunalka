@@ -1,6 +1,6 @@
 import logo_counter from '../img/logo_counter.png';
-import logo_minion from './../img/logo_minion.png'
-const Main = () => {
+import logo_minion from '../img/logo_minion.png';
+const Home = () => {
     return (
         <section className="bg-[#F0F9FF]">
             <div>
@@ -17,9 +17,4 @@ const Main = () => {
         </section>
     );
 };
-export default Main;
-
-
-
-
-
+export default Home;

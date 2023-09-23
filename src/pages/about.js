@@ -1,5 +1,5 @@
-import React from 'react';
 import Breadcrumbs from "../components/breadcrumbs";
+
 const About = () => {
     const breadCrumbs = [
         {
@@ -16,7 +16,7 @@ const About = () => {
             <div className="mb-4">
                 <Breadcrumbs items={breadCrumbs}/>
             </div>
-         <h2 className="text-base mb-4">Про нас</h2>
+            <h2 className="text-base mb-4">Про нас</h2>
             <div>
                 <p>Основною метою діяльності Концерну – є відкриття та організація роботи сервісних центрів для обслуговування
                     споживачів з усіх питань надання житлово-комунальних послуг. Створення мережі сервісних центрів – це,

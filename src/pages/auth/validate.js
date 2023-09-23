@@ -1,12 +1,11 @@
-import {useEffect, useState} from 'react';
-import api from "../api";
+import { useEffect, useState } from 'react';
+import api from "../../api";
 
-const ValidateEmail = () => {
+const Validate = () => {
     const [validateFlag, setValidateFlag] = useState(false);
     useEffect(() => {
         const fetchData = async () => {
             const url = new URL(window.location);
-            console.log(url);
             const email = url.searchParams.get('email') || '';
             const token = url.searchParams.get('code') || '';
             if (email && token) {
@@ -25,4 +24,4 @@ const ValidateEmail = () => {
         </div>
     );
 };
-export default ValidateEmail;
+export default Validate;

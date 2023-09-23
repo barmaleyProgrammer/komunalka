@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
-import InputField from "../components/inputField";
-import logo_lichylnyk from "../img/logo_lichylnyk.svg";
-import logo_gerc from "../img/logo_gerc.svg";
-import icon_komunalka from "../img/icon_komunalka.svg";
-import Button from "../components/button";
-import api from "../api";
+import InputField from "../../components/inputField";
+import logo_lichylnyk from "../../img/logo_lichylnyk.svg";
+import logo_gerc from "../../img/logo_gerc.svg";
+import icon_komunalka from "../../img/icon_komunalka.svg";
+import Button from "../../components/button";
+import api from "../../api";
 
-const Reg = () => {
+const Register = () => {
     const [form, setForm] = useState({
         // email: 'grebenyukvd@gmail.com',
         // password: 'Test_Drive5',
@@ -117,11 +117,11 @@ const Reg = () => {
                 </div>
                 <Button type="submit" label={'Зареєструватися'} cssType={'primary'} />
                 <div>
-                    Вже є аккаунт? <NavLink to="/login" className="text-[#3E77AA]">Вхід</NavLink>
+                    Вже є аккаунт? <NavLink to="/auth/login" className="text-[#3E77AA]">Вхід</NavLink>
                 </div>
             </form>
         </div>
     );
 };
 
-export default Reg;
+export default Register;

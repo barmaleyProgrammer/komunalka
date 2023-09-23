@@ -1,16 +1,16 @@
 import { useState, useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import InputField from "../components/inputField";
-import logo_lichylnyk from "../img/logo_lichylnyk.svg";
-import logo_gerc from "../img/logo_gerc.svg";
-import icon_komunalka from "../img/icon_komunalka.svg";
-import google from "../img/google.svg";
-import facebook from "../img/facebook.svg";
-import eye from "../img/eye.svg";
-import Button from "../components/button";
-import api from "../api";
-import { Context } from "../App";
+import InputField from "../../components/inputField";
+import logo_lichylnyk from "../../img/logo_lichylnyk.svg";
+import logo_gerc from "../../img/logo_gerc.svg";
+import icon_komunalka from "../../img/icon_komunalka.svg";
+import google from "../../img/google.svg";
+import facebook from "../../img/facebook.svg";
+import eye from "../../img/eye.svg";
+import Button from "../../components/button";
+import api from "../../api";
+import { Context } from "../../App";
 
 const Login = () => {
     const [, dispatch] = useContext(Context);
@@ -89,8 +89,8 @@ const Login = () => {
                 </div>
                 <div className="flex">
                     <div className="flex basis-1/2 mt-1">
-                        <input id="rememberMe" type="checkbox" value="true" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                        <label htmlFor="rememberMe" className="ml-2 text-sm text-gray-400 dark:text-gray-500">
+                        <input id="rememberMe" type="checkbox" value="true" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2" />
+                        <label htmlFor="rememberMe" className="ml-2 text-sm text-gray-400">
                             Запам’ятати мене
                         </label>
                     </div>
@@ -100,7 +100,7 @@ const Login = () => {
                 </div>
                 <Button type="submit" label={'Увійти'} cssType={'primary'} />
                 <div>
-                    Ще немає аккаунту? <NavLink to="/reg" className="text-[#3E77AA]">Зареєструватися</NavLink>
+                    Ще немає аккаунту? <NavLink to="/auth/register" className="text-[#3E77AA]">Зареєструватися</NavLink>
                 </div>
 
                 <div className="flex gap-2">

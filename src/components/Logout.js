@@ -1,8 +1,8 @@
 import { useState, useContext } from 'react';
-import { Context } from "../../App";
+import { Context } from "../App";
 import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
-import api from "./../../api";
+import api from "../api";
 
 const Logout = () => {
     const [state, dispatch] = useContext(Context);
@@ -27,12 +27,12 @@ const Logout = () => {
                     <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4"/>
                 </svg>
             </button>
-            <div className={`z-30 absolute bg-white_figma divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 ${show ? '':'hidden'}`} onClick={() => setShow(false)}>
-                <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
-                    <li><NavLink to="/cabinet" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Мої адреса</NavLink></li>
-                    <li><NavLink to="/myData" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Мої дані</NavLink></li>
-                    <li><NavLink to="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Оповіщення</NavLink></li>
-                    <li><NavLink to="#" onClick={signOut} className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Вийти</NavLink></li>
+            <div className={`z-30 absolute bg-white_figma divide-y divide-gray-100 rounded-lg shadow w-44 ${show ? '':'hidden'}`} onClick={() => setShow(false)}>
+                <ul className="py-2 text-sm text-gray-700">
+                    <li><NavLink to="/cabinet" className="block px-4 py-2 hover:bg-gray-100">Мої адреса</NavLink></li>
+                    <li><NavLink to="/myData" className="block px-4 py-2 hover:bg-gray-100">Мої дані</NavLink></li>
+                    <li><NavLink to="#" className="block px-4 py-2 hover:bg-gray-100">Оповіщення</NavLink></li>
+                    <li><NavLink to="#" onClick={signOut} className="block px-4 py-2 hover:bg-gray-100">Вийти</NavLink></li>
                 </ul>
             </div>
 

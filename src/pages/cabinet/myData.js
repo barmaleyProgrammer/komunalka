@@ -1,11 +1,10 @@
-import {useContext, useState} from 'react';
-import { NavLink } from "react-router-dom";
-import InputField from "../components/inputField";
-import RadioMyData from "../components/assets/radioMyData";
-import {Context} from "../App";
-import Breadcrumbs from "../components/breadcrumbs";
-import api from "../api";
-import Button from "../components/button";
+import { useContext, useState } from 'react';
+import InputField from "../../components/inputField";
+import Tabs from "../../components/tabs";
+import {Context} from "../../App";
+import Breadcrumbs from "../../components/breadcrumbs";
+import api from "../../api";
+import Button from "../../components/button";
 
 const MyData = () => {
     const [state, dispatch] = useContext(Context);
@@ -34,11 +33,7 @@ const MyData = () => {
 
         } catch (e) {
             console.error(e.message);
-            // setFormError(e.message);
-            // setForm({
-            //     email: '',
-            //     password: '',
-            // });
+            setFormError(e.message);
         }
     };
     const handleInputChange = (event) => {
@@ -50,22 +45,12 @@ const MyData = () => {
     };
 
     return (
-        <div className="mt-2 mx-auto w-[1152px]">
+        <div className="mt-2 mx-auto w-1/2">
             <div>
                 <Breadcrumbs items={breadCrumbs}/>
             </div>
             <div className="mt-4 mb-4 items-center justify-between hidden w-full md:flex md:w-auto md:order-1">
-                <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 ">
-                    <li>
-                        <NavLink to="/cabinet" className="w-auto h-[48px] py-2.5 px-5 mr-2 mb-2 text-sm font-medium rounded text-black_figma bg-[#CEDDE9]">Мої адреси</NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/myData" className="w-auto h-[48px] py-2.5 px-5 mr-2 mb-2 text-sm font-medium rounded text-black_figma bg-[#CEDDE9]">Мої дані</NavLink>
-                    </li>
-                    <li>
-                        <NavLink className="w-auto h-[48px] py-2.5 px-5 mr-2 mb-2 text-sm font-medium rounded text-black_figma bg-[#CEDDE9]" to="">Оповіщення</NavLink>
-                    </li>
-                </ul>
+                <Tabs />
             </div>
             <div className="w-2/3 mx-auto p-20 font-light space-y-2 rounded-lg shadow-lg ">
                 <h1 className="font-normal text-lg pb-2 py-4">Основна інформація</h1>
@@ -121,27 +106,12 @@ const MyData = () => {
                             // value={form.password}
                             // onChange={handleInputChange}
                         />
-                        <h1 className="font-normal text-lg pb-2 py-4">Додадково</h1>
                     </div>
-                    <div className="px-2">
-                        <RadioMyData />
+                    <div className="w-40 mx-auto">
+                        <Button type="submit" cssType="primary" label={'Зберігти зміни'} />
                     </div>
-                    <div className="mb-4">
-                    <InputField
-                        label={'Дата народження'}
-                        type={'date'}
-                        name={'data'}
-                        // required={true}
-                        // value={form.password}
-                        // onChange={handleInputChange}
-                    />
-                    </div>
-                    <Button type="submit" cssType="primary">
-                        Зберігти зміни
-                    </Button>
                 </form>
             </div>
-
         </div>
     );
 };
