@@ -30,7 +30,7 @@ const Logout = () => {
             <div className={`z-30 absolute bg-white_figma divide-y divide-gray-100 rounded-lg shadow w-44 ${show ? '':'hidden'}`} onClick={() => setShow(false)}>
                 <ul className="py-2 text-sm text-gray-700">
                     <li><NavLink to="/cabinet" className="block px-4 py-2 hover:bg-gray-100">Мої адреса</NavLink></li>
-                    <li><NavLink to="/myData" className="block px-4 py-2 hover:bg-gray-100">Мої дані</NavLink></li>
+                    <li><NavLink to="/cabinet/myData" className="block px-4 py-2 hover:bg-gray-100">Мої дані</NavLink></li>
                     <li><NavLink to="#" className="block px-4 py-2 hover:bg-gray-100">Оповіщення</NavLink></li>
                     <li><NavLink to="#" onClick={signOut} className="block px-4 py-2 hover:bg-gray-100">Вийти</NavLink></li>
                 </ul>
