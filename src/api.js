@@ -136,8 +136,8 @@ const getCountersHistory = (objectId, dateStart, dateEnd) => {
             console.error(error);
         });
 }
-const getService = (objectId) => {
-    return axios.get(`/counter/service?objectId=${objectId}`, config)
+const getService = () => {
+    return axios.get(`/counter/service/type`, config)
         .then((res) => res.data)
         .catch((error) => {
             console.error(error);
@@ -202,7 +202,7 @@ export default {
     signIn,
     signOut,
     validation,
-    // getService,
+    getService,
     getRegions,
     getDistricts,
     getTowns,

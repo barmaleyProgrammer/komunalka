@@ -2,28 +2,39 @@ import { NavLink } from "react-router-dom";
 import water from "../img/logo_counters/water.svg";
 import gas from "../img/logo_counters/gas.svg";
 import electric from "../img/logo_counters/electric.svg";
+import warm from "../img/logo_counters/warm.svg";
+
+import { useEffect, useState } from "react";
+import api from "../api";
 
 const ServiceTypes = () => {
+    const [myService, setMyService] = useState([]);
+    const serviceIcons = {
+        1: warm,
+        2: electric,
+        3: gas,
+        4: water
+    };
+
+    useEffect( () => {
+        const fetchData = async () => {
+            await api.getService().then((result) => setMyService(result.data));
+        };
+        fetchData();
+    }, []);
+
     return (
-        <div className="mt-[24px] h-[234px] rounded-lg shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] ">
-            <h3 className="py-4 text-[20px] text-center">Тип послуги</h3>
-            <div className="flex space-x-[100px] text-[14px] justify-center">
-                <NavLink to="#">
-                    <img src={water} className="h-[72px]" alt="Flowbite Logo" />
-                    <p className="py-[9px] text-center">вода</p>
-                </NavLink>
-                <NavLink to="#">
-                    <img src={gas} className="h-[72px]" alt="Flowbite Logo" />
-                    <p className="py-[9px] text-center">газ</p>
-                </NavLink>
-                <NavLink to="#">
-                    <img src={electric} className="h-[72px]" alt="Flowbite Logo" />
-                    <p className="py-[9px] text-center">Електроенергія</p>
-                </NavLink>
-                <NavLink to="#">
-                    <img src={water} className="h-[72px]" alt="Flowbite Logo" />
-                    <p className="py-[9px] text-center">Тепло</p>
-                </NavLink>
+        <div className="p-5 rounded-lg shadow-lg">
+            <h3 className="py-4 text-lg text-center">Тип послуги</h3>
+            <div className="flex space-x-32 text-sm justify-center">
+                {myService?.map((item, key) => {
+                    return (
+                        <NavLink to="#" key={key} className="flex flex-col w-36 items-center">
+                            <img src={serviceIcons[item.id]} className="h-20" alt={item.name} />
+                            <p className="pt-4">{item.name}</p>
+                        </NavLink>
+                    );
+                })}
             </div>
         </div>
     );

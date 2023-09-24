@@ -35,18 +35,18 @@ const GraphsTables = () => {
         },
     ]
 
-    useEffect( () => {
-
-        const fetchData = async () => {
-            const payload = {
-                // objectId: "870036",
-                dateStart: '2020-01-01',
-                dateEnd: '2023-08-01'
-            };
-            await api.getCountersHistory(objectId, payload).then((result) => setCounters(result));
-        };
-        fetchData();
-    }, []);
+    // useEffect( () => {
+    //
+    //     const fetchData = async () => {
+    //         const payload = {
+    //             // objectId: "870036",
+    //             dateStart: '2020-01-01',
+    //             dateEnd: '2023-08-01'
+    //         };
+    //         await api.getCountersHistory(objectId, payload).then((result) => setCounters(result));
+    //     };
+    //     fetchData();
+    // }, []);
 
     return (
         <div className="font-light mt-2 mx-auto w-[1152px]">

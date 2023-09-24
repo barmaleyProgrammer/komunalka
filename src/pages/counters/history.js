@@ -54,11 +54,11 @@ const History = () => {
             api.getCountersHistory(objectId, dateStart, dateEnd).then((result) => {
                 setCounters(result);
                 let firms = result
-                    .filter((item) => item.codeFirme !== null)
+                    .filter((item) => item.idFirme !== null)
                     .map((item) => {
                         return {
                             label: item.nameFirme,
-                            value: item.codeFirme
+                            value: item.idFirme
                         }
                     });
                 firms = Array.from(new Set(firms.map(JSON.stringify))).map(JSON.parse);
@@ -76,14 +76,12 @@ const History = () => {
         setEndDate(e);
         setModalActive2(false);
     };
-    // const handleInputChange = (event, index) => {
-    //     // counters.current[index].currentReadings = event.target.value;
-    //     setCounters((prevData) => {
-    //         const clone = [...prevData];
-    //         clone[index].currentReadings = event.target.value;
-    //         return clone;
-    //     });
-    // };
+
+    const handleInputChange = (event) => {
+        setFirm(event.target.value);
+        // const { value } = event.target;
+        // setFirm(value);
+    };
 
     const CounterBlock = ({item}) => {
         return (
@@ -128,8 +126,9 @@ const History = () => {
                 </div>
                 <div>
                     {counters?.map((item, key) => {
+                        console.log('firm', firm);
                         if (firm) {
-                            if (firm === item.codeFirme) {
+                            if (firm === item.idFirme) {
                                 return <CounterBlock item={item} key={`CounterBlock_${key}`} />
                             }
                         }
@@ -137,7 +136,7 @@ const History = () => {
                             return <CounterBlock item={item} key={`CounterBlock_${key}`} />
                         }
                     })}
-                    <Button type="button" label={'Переглянути ще'} cssType={'primary'} />
+                    <Button type="button" label={'Переглянути ще'} cssType={'primary'} onClick={handleInputChange}/>
                 </div>
             </div>
             <Modal active={modalActive1} setActive={setModalActive1}>
