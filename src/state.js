@@ -17,11 +17,21 @@ const checkUser = () => {
     };
 };
 
+const checkAddresses = () => {
+    const addresses = sessionStorage.getItem('addresses');
+    return addresses ? JSON.parse(addresses) : [];
+};
+
+const checkServiceTypes = () => {
+    const data = sessionStorage.getItem('serviceTypes');
+    return data ? JSON.parse(data) : [];
+};
 
 const initialSate = {
     isLoggedIn: checkToken(),
     user: checkUser(),
-    addresses: []
+    addresses: checkAddresses(),
+    serviceTypes: checkServiceTypes(),
 };
 
 const reducer = (state, action) => {
@@ -45,6 +55,11 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 addresses: action.payload
+            };
+        case 'serviceTypes':
+            return {
+                ...state,
+                serviceTypes: action.payload
             };
         default:
             return state;

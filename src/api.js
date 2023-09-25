@@ -50,9 +50,7 @@ const renameAddress = (objectId, name) => {
 }
 
 const signOut = () => {
-    sessionStorage.removeItem('accessToken');
-    sessionStorage.removeItem('refreshToken');
-    sessionStorage.removeItem('user');
+    sessionStorage.clear();
     config.headers.apiauthorization = '';
 }
 
@@ -138,7 +136,10 @@ const getCountersHistory = (objectId, dateStart, dateEnd) => {
 }
 const getService = () => {
     return axios.get(`/counter/service/type`, config)
-        .then((res) => res.data)
+        .then((res) => {
+            sessionStorage.setItem('serviceTypes', JSON.stringify(res.data.data));
+            return res.data.data;
+        })
         .catch((error) => {
             console.error(error);
         });
@@ -155,6 +156,7 @@ const getObject = () => {
     return axios.get('/account', config)
         .then((response) => {
             sessionStorage.setItem('user', JSON.stringify(response.data.account));
+            sessionStorage.setItem('addresses', JSON.stringify(response.data.addresses));
             return response.data;
         })
         .catch((error) => {

@@ -37,10 +37,14 @@ const Login = () => {
         event.preventDefault();
         try {
             await api.signIn(form);
-            const data = await api.getObject();
             dispatch({ type: 'logIn' });
-            dispatch({ type: 'setAccount', payload: data.account });
-            dispatch({ type: 'setAddresses', payload: data.addresses });
+            await api.getObject().then((data) => {
+                dispatch({ type: 'setAccount', payload: data.account });
+                dispatch({ type: 'setAddresses', payload: data.addresses });
+            });
+            await api.getService().then((data) => {
+                dispatch({ type: 'serviceTypes', payload: data });
+            });
             navigate('/cabinet');
         } catch (e) {
             console.error(e.message);

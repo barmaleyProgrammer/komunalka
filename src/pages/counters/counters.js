@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useParams } from "react-router-dom";
-import { NavLink } from "react-router-dom";
+import { Context } from "../../App";
 
 import api from "../../api";
 import Breadcrumbs from "../../components/breadcrumbs";
@@ -12,9 +12,10 @@ import moment from "moment";
 
 const Counters = () => {
     const { objectId } = useParams();
+    const [state,] = useContext(Context);
     const [counters, setCounters] = useState([]);
-    // const counters = useRef(undefined);
-    const [address, setAddress] = useState({});
+    const [serviceTypes, setServiceTypes] = useState([]);
+    const address = state.addresses.find((item) => item.objectId == objectId);
     const breadCrumbs = [
         {
             "to": '/',
@@ -36,13 +37,13 @@ const Counters = () => {
 
     useEffect( () => {
         const fetchData = async () => {
-            // await api.getCounterValue(objectId).then((result) => counters.current = [...result]);
-            await api.getCounterValue(objectId).then((result) => setCounters(result));
-            await api.getAddress(objectId).then((result) => {
-                const address = result.find((item) => item.objectId == objectId);
-                setAddress(address);
+            await api.getCounterValue(objectId).then((result) => {
+                setCounters(result);
+                const types = result
+                    .map((item) => Number(item.serviceType))
+                    .filter((item, i, ar) => ar.indexOf(item) === i);
+                setServiceTypes(types);
             });
-            // const result3 = await api.getDebt(objectId);
         };
         fetchData();
     }, []);
@@ -65,7 +66,6 @@ const Counters = () => {
         await api.getCounterValue(objectId).then((result) => setCounters(result));
     };
     const handleInputChange = (event, index) => {
-        // counters.current[index].currentReadings = event.target.value;
         setCounters((prevData) => {
             const clone = [...prevData];
             clone[index].currentReadings = event.target.value;
@@ -75,13 +75,7 @@ const Counters = () => {
 
     const CounterBlock = ({item, index}) => {
         return (
-            <div className="flex gap-x-4 rounded-lg border border-borderColor w-full h-auto">
-                <div className="w-1">
-                    <input className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
-                       type="checkbox"
-                       value={item.id}
-                    />
-                </div>
+            <div className="my-4 p-4 flex gap-x-4 rounded-lg border border-borderColor w-full">
                 <div className="w-2/3">
                     <ul>
                         <li className="text-xs">Лічильник №{item.counterNo}</li>
@@ -113,22 +107,18 @@ const Counters = () => {
             <div>
                 <Breadcrumbs items={breadCrumbs}/>
             </div>
-            <h2 className="mb-4 mt-3 text-[24px]">{address.name}</h2>
-            <div className="mt-[34px]">
-                <p className="text-[16px]">Лічильники</p>
-            </div>
-            <ServiceTypes />
-            <div className="mt-[24px] py-4 px-[58px] h-auto rounded-lg shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] ">
-                <h3 className="py-4 text-[20px] text-center">Лічильники</h3>
-                <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
+            <h2 className="mb-4 mt-3 text-2xl">{address.name}</h2>
+            <ServiceTypes types={serviceTypes} />
+            <div className="mt-5 py-4 px-10 h-auto rounded-lg shadow-lg">
+                <h3 className="py-4 text-xl text-center">Лічильники</h3>
+                <div className="items-center justify-between w-full flex">
                     <Tabs2 objectId={objectId} />
                 </div>
-                <h5 className="py-4">Обрати всі</h5>
                 <div>
-                    {counters.map((item, key) => <CounterBlock item={item} key={`CounterBlock_${item.id}`} index={key} />)}
-                    {/*{counters.current?.map((item, key) => <CounterBlock item={item} key={`CounterBlock_${item.id}`} index={key} />)}*/}
-
-                    <Button type="button" label={'Зберегті'} onClick={Save} cssType={'primary'} />
+                    {counters?.map((item, key) => <CounterBlock item={item} key={`CounterBlock_${item.id}`} index={key} />)}
+                </div>
+                <div className="inline-block w-28">
+                    <Button type="button" label={'Зберегти'} onClick={() => Save} cssType={'primary'} />
                 </div>
             </div>
         </div>
