@@ -9,19 +9,20 @@ import api from "../../api";
 
 const Register = () => {
     const [form, setForm] = useState({
-        // email: 'grebenyukvd@gmail.com',
-        // password: 'Test_Drive5',
-        // firstName: 'Barm',
-        // lastName: 'aley',
-        // secondName: 'Bob',
-        // phone: '876454876',
-        email: '',
-        password: '',
-        firstName: '',
-        lastName: '',
-        secondName: '',
-        phone: '',
+        email: 'grebenyukvd@gmail.com',
+        password: 'Test_Drive5',
+        firstName: 'Barm',
+        lastName: 'aley',
+        secondName: 'Bob',
+        phone: '876454876',
+        // email: '',
+        // password: '',
+        // firstName: '',
+        // lastName: '',
+        // secondName: '',
+        // phone: '',
         source: '2',
+        // source: `${window.location.protocol}//${window.location.host}/auth/validate`,
     });
     const [formError, setFormError] = useState('');
 

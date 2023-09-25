@@ -23,6 +23,7 @@ const History = () => {
     const [modalActive2, setModalActive2] = useState(false);
     const [startDate, setStartDate] = useState(moment().startOf('month'));
     const [endDate, setEndDate] = useState(moment().endOf('month'));
+    const [serviceTypes, setServiceTypes] = useState([]);
 
     const breadCrumbs = [
         {
@@ -53,6 +54,11 @@ const History = () => {
             const dateEnd = moment(endDate).format('YYYY-MM-DD');
             api.getCountersHistory(objectId, dateStart, dateEnd).then((result) => {
                 setCounters(result);
+                setCounters(result);
+                const types = result
+                    .map((item) => Number(item.serviceType))
+                    .filter((item, i, ar) => ar.indexOf(item) === i);
+                setServiceTypes(types);
                 let firms = result
                     .filter((item) => item.idFirme !== null)
                     .map((item) => {
@@ -105,7 +111,20 @@ const History = () => {
             <div className="mt-[34px]">
                 <p className="text-[16px]">Лічильники</p>
             </div>
-            <ServiceTypes />
+            <ServiceTypes types={serviceTypes}/>
+            <div className=" mt-4 mb-4 items-center justify-center hidden w-full md:flex md:w-auto md:order-1">
+                <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 ">
+                    <li>
+                        <NavLink to="#" onClick={() => setModalActive1(true)} className="w-auto h-[48px] py-2.5 px-5 mr-2 mb-2 text-sm font-medium rounded text-[#FD9800] bg-[#F7F9FE]">Обрати початкову дату</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="#" onClick={() => setModalActive2(true)} className="w-auto h-[48px] py-2.5 px-5 mr-2 mb-2 text-sm font-medium rounded text-[#FD9800] bg-[#F7F9FE]">Обрати кінцеву дату</NavLink>
+                    </li>
+                    <li>
+                        <MySelect options={firms} defaultValue={"Оберіть постачальника"} value={firm} onChange={setFirm}/>
+                    </li>
+                </ul>
+            </div>
             <div className="mt-[24px] py-4 px-[58px] h-auto rounded-lg shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] ">
                 <h3 className="py-4 text-[20px] text-center">Лічильники</h3>
                 <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
@@ -114,14 +133,18 @@ const History = () => {
                 <div className="mt-4 mb-4 items-center justify-between hidden w-full md:flex md:w-auto md:order-1">
                     <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 ">
                         <li>
-                            <NavLink to="#" onClick={() => setModalActive1(true)} className="w-auto h-[48px] py-2.5 px-5 mr-2 mb-2 text-sm font-medium rounded text-[#FD9800] bg-[#F7F9FE]">Обрати початкову дату</NavLink>
+                            <div className="w-auto p-2 mr-2 mb-2 text-sm font-medium rounded text-[#FD9800] bg-[#F7F9FE]">
+                                <p>обрана початкова дата<br/>{moment(startDate).format('DD.MM.YYYY')}</p>
+                            </div>
                         </li>
                         <li>
-                            <NavLink to="#" onClick={() => setModalActive2(true)} className="w-auto h-[48px] py-2.5 px-5 mr-2 mb-2 text-sm font-medium rounded text-[#FD9800] bg-[#F7F9FE]">Обрати кінцеву дату</NavLink>
+                            <div className="w-auto p-2  mr-2 mb-2 text-sm font-medium rounded text-[#FD9800] bg-[#F7F9FE]">
+                                <p>обрана кінцева дата<br/>{moment(endDate).format('DD.MM.YYYY')}</p>
+                            </div>
                         </li>
-                        <li>
-                            <MySelect options={firms} defaultValue={"Оберіть постачальника"} value={firm} onChange={setFirm}/>
-                        </li>
+                        {/*<li>*/}
+                        {/*    <MySelect options={firms} defaultValue={"Оберіть постачальника"} value={firm} onChange={setFirm}/>*/}
+                        {/*</li>*/}
                     </ul>
                 </div>
                 <div>

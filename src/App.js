@@ -43,6 +43,7 @@ const App = () => {
                                 <Route path="register" element={<Register />} />
                                 <Route path="validate" element={<Validate />} />
                             </Route>
+                            <Route path="/validate/email" element={<Validate />} />
                             <Route path="/cabinet">
                                 <Route index element={<Cabinet />} />
                                 <Route path="addAddress" element={<AddAddress />} />
