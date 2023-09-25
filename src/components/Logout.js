@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react';
-import { Context } from "../App";
+import { Context } from "../store";
 import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import api from "../api";

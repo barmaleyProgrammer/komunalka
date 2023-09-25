@@ -1,12 +1,14 @@
 import { useContext, useState } from 'react';
 import InputField from "../../components/inputField";
 import Tabs from "../../components/tabs";
-import {Context} from "../../App";
+import { Context } from "../../store";
 import Breadcrumbs from "../../components/breadcrumbs";
 import api from "../../api";
 import Button from "../../components/button";
+import { useNavigate } from "react-router-dom";
 
 const MyData = () => {
+    const navigate = useNavigate();
     const [state, dispatch] = useContext(Context);
     const [form, setForm] = useState(state.user);
     const [formError, setFormError] = useState('');
@@ -29,8 +31,8 @@ const MyData = () => {
         event.preventDefault();
         try {
             await api.updateUser(form);
-            dispatch({ type:'setAccount', payload: form })
-
+            dispatch({ type: 'setAccount', payload: form })
+            navigate('/cabinet');
         } catch (e) {
             console.error(e.message);
             setFormError(e.message);
@@ -49,7 +51,7 @@ const MyData = () => {
             <div>
                 <Breadcrumbs items={breadCrumbs}/>
             </div>
-            <div className="mt-4 mb-4 items-center justify-between hidden w-full md:flex md:w-auto md:order-1">
+            <div className="my-4">
                 <Tabs />
             </div>
             <div className="w-2/3 mx-auto p-20 font-light space-y-2 rounded-lg shadow-lg ">
@@ -98,14 +100,14 @@ const MyData = () => {
                             value={form.secondName}
                             onChange={handleInputChange}
                         />
-                        <InputField
-                            label={'Пароль'}
-                            type={'type'}
-                            name={'password'}
-                            // required={true}
-                            // value={form.password}
-                            // onChange={handleInputChange}
-                        />
+                        {/*<InputField*/}
+                        {/*    label={'Пароль'}*/}
+                        {/*    type={'type'}*/}
+                        {/*    name={'password'}*/}
+                        {/*    required={true}*/}
+                        {/*    value={form.password}*/}
+                        {/*    onChange={handleInputChange}*/}
+                        {/*/>*/}
                     </div>
                     <div className="w-40 mx-auto">
                         <Button type="submit" cssType="primary" label={'Зберігти зміни'} />

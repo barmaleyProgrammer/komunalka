@@ -9,18 +9,12 @@ import api from "../../api";
 
 const Register = () => {
     const [form, setForm] = useState({
-        email: 'grebenyukvd@gmail.com',
-        password: 'Test_Drive5',
-        firstName: 'Barm',
-        lastName: 'aley',
-        secondName: 'Bob',
-        phone: '876454876',
-        // email: '',
-        // password: '',
-        // firstName: '',
-        // lastName: '',
-        // secondName: '',
-        // phone: '',
+        email: (process.env.NODE_ENV === 'development') ? 'grebenyukvd@gmail.com' : '',
+        password: (process.env.NODE_ENV === 'development') ? 'Test_Drive5' : '',
+        firstName: (process.env.NODE_ENV === 'development') ? 'Barm' : '',
+        lastName: (process.env.NODE_ENV === 'development') ? 'aley' : '',
+        secondName: (process.env.NODE_ENV === 'development') ? 'Bob' : '',
+        phone: (process.env.NODE_ENV === 'development') ? '876454876' : '',
         source: '2',
         // source: `${window.location.protocol}//${window.location.host}/auth/validate`,
     });

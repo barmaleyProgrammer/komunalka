@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useParams } from "react-router-dom";
+import { Context } from "../../store";
 import {NavLink} from "react-router-dom";
 import api from "../../api";
 import Breadcrumbs from "../../components/breadcrumbs";
@@ -14,11 +15,11 @@ import MySelect from "../../components/MySelect";
 
 const History = () => {
     const { objectId } = useParams();
+    const [state] = useContext(Context);
     const [counters, setCounters] = useState([]);
     const [firms, setFirms] = useState([]);
     const [firm, setFirm] = useState('');
-    // const counters = useRef(undefined);
-    const [address, setAddress] = useState({});
+    const address = state.addresses.find((item) => item.objectId == objectId);
     const [modalActive1, setModalActive1] = useState(false);
     const [modalActive2, setModalActive2] = useState(false);
     const [startDate, setStartDate] = useState(moment().startOf('month'));
@@ -54,7 +55,6 @@ const History = () => {
             const dateEnd = moment(endDate).format('YYYY-MM-DD');
             api.getCountersHistory(objectId, dateStart, dateEnd).then((result) => {
                 setCounters(result);
-                setCounters(result);
                 const types = result
                     .map((item) => Number(item.serviceType))
                     .filter((item, i, ar) => ar.indexOf(item) === i);
@@ -72,7 +72,7 @@ const History = () => {
             });
         };
         fetchData();
-    }, [startDate, endDate]);
+    }, [objectId, startDate, endDate]);
 
     const setDate1 = (e) => {
         setStartDate(e);
@@ -91,27 +91,24 @@ const History = () => {
 
     const CounterBlock = ({item}) => {
         return (
-            <div className="flex gap-x-4 rounded-lg border border-borderColor w-full h-auto">
+            <div className="my-4 p-4 flex items-stretch gap-x-4 rounded-lg border border-borderColor">
                 <div className="w-2/3">
                     <div className="text-xs">Лічильник №{item.counterNo}</div>
                     <div className="text-sm">{item.abcounter}<br/>{item.nameFirme}<br/>{item.namePlat}</div>
                 </div>
-                <div className="w-44 text-right">{Number(item.newValue).toFixed(2)}</div>
-                <div className="w-44 text-right">{moment(item.newTransmissionTime).format('DD.MM.YYYY')}</div>
+                <div className="w-44 pt-4 text-right">{Number(item.newValue).toFixed(2)}</div>
+                <div className="w-44 pt-4 text-right">{moment(item.newTransmissionTime).format('DD.MM.YYYY')}</div>
             </div>
         );
     };
 
     return (
-        <div className="font-light mt-2 mx-auto w-[1152px]">
+        <div className="font-light mt-2 mx-auto max-w-screen-xl">
             <div>
                 <Breadcrumbs items={breadCrumbs}/>
             </div>
-            <h2 className="mb-4 mt-3 text-[24px]">{address.name}</h2>
-            <div className="mt-[34px]">
-                <p className="text-[16px]">Лічильники</p>
-            </div>
-            <ServiceTypes types={serviceTypes}/>
+            <h2 className="mb-4 mt-3 text-2xl">{address.name}</h2>
+            <ServiceTypes types={serviceTypes} />
             <div className=" mt-4 mb-4 items-center justify-center hidden w-full md:flex md:w-auto md:order-1">
                 <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 ">
                     <li>
@@ -125,11 +122,9 @@ const History = () => {
                     </li>
                 </ul>
             </div>
-            <div className="mt-[24px] py-4 px-[58px] h-auto rounded-lg shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] ">
-                <h3 className="py-4 text-[20px] text-center">Лічильники</h3>
-                <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
-                    <Tabs2 objectId={objectId} />
-                </div>
+            <div className="mt-5 py-4 px-10 h-auto rounded-lg shadow-lg">
+                <h3 className="py-4 text-xl text-center">Лічильники</h3>
+                <Tabs2 objectId={objectId} />
                 <div className="mt-4 mb-4 items-center justify-between hidden w-full md:flex md:w-auto md:order-1">
                     <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 ">
                         <li>
@@ -159,7 +154,9 @@ const History = () => {
                             return <CounterBlock item={item} key={`CounterBlock_${key}`} />
                         }
                     })}
-                    <Button type="button" label={'Переглянути ще'} cssType={'primary'} onClick={handleInputChange}/>
+                    <div className="mx-auto w-48">
+                        <Button type="button" label={'Переглянути ще'} cssType={'primary'} onClick={handleInputChange}/>
+                    </div>
                 </div>
             </div>
             <Modal active={modalActive1} setActive={setModalActive1}>

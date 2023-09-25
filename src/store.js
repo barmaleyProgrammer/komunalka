@@ -1,3 +1,5 @@
+import { createContext } from "react";
+
 const checkToken = () => {
     const token = sessionStorage.getItem('accessToken');
     return token ? true : false;
@@ -26,6 +28,8 @@ const checkServiceTypes = () => {
     const data = sessionStorage.getItem('serviceTypes');
     return data ? JSON.parse(data) : [];
 };
+
+const Context = createContext(null);
 
 const initialSate = {
     isLoggedIn: checkToken(),
@@ -68,5 +72,6 @@ const reducer = (state, action) => {
 
 export {
     initialSate,
+    Context,
     reducer
 }

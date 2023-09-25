@@ -1,35 +1,36 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
+import { Context } from "../../store";
 import Select from "../../components/MySelect";
 import api from "../../api";
 import InputField from "../../components/inputField";
 import { useNavigate } from "react-router-dom";
 
 const AddAddress = () => {
+    const [,dispatch] = useContext(Context);
     const navigate = useNavigate();
     const [regions, setRegions] = useState([]);
-    const [region, setRegion] = useState(0);
+    const [region, setRegion] = useState('');
 
     const [districts, setDistricts] = useState([]);
-    const [district, setDistrict] = useState(0);
+    const [district, setDistrict] = useState('');
 
     const [towns, setTowns] = useState([]);
-    const [town, setTown] = useState(0);
+    const [town, setTown] = useState('');
 
     const [streets, setStreets] = useState([]);
-    const [street, setStreet] = useState(0);
+    const [street, setStreet] = useState('');
 
     const [houses, setHouses] = useState([]);
-    const [house, setHouse] = useState(0);
+    const [house, setHouse] = useState('');
 
     const [flats, setFlats] = useState([]);
-    const [flat, setFlat] = useState(0);
+    const [flat, setFlat] = useState('');
 
     const [flatName, setFlatName] = useState('');
 
     useEffect( () => {
         const fetchData = async () => {
-            const result = await api.getRegions();
-            setRegions(result);
+            await api.getRegions().then((data) => setRegions(data));
         };
         fetchData();
     }, []);
@@ -96,40 +97,38 @@ const AddAddress = () => {
 
     const addObj = async (flat, flatName) => {
         await api.addObject(flat, flatName);
+        await api.getAddress().then((data) => dispatch({ type: 'setAddresses', payload: data }));
         navigate('/cabinet');
     }
 
     return (
-        <div className="space-y-3 mt-2 mx-auto w-[464px] rounded-lg shadow-lg">
+        <div className="p-5 space-y-3 mt-2 mx-auto w-1/4 rounded-lg shadow-lg">
             <h4 className="text-black_figma text-center">Додати адресу</h4>
-            <div className="p-2 mx-auto rounded-lg border border-[#E7E7E7]  w-[368px] h-[48px]">
-                <p>Назва адреси</p>
-            </div>
-            <div className="p-2 mx-auto rounded-lg border border-[#E7E7E7]  w-[368px] h-[48px]">
+            <div>
                 <Select
                     options={regions}
-                    defaultValue={'область'}
+                    defaultValue={'Область'}
                     onChange={value => setRegion(Number(value))}
                     value={region}
                 />
             </div>
-            <div className="p-2 mx-auto rounded-lg border border-[#E7E7E7]  w-[368px] h-[48px]">
+            <div>
                 <Select
                     options={districts}
-                    defaultValue={'район'}
+                    defaultValue={'Район'}
                     onChange={value => setDistrict(Number(value))}
                     value={district}
                 />
             </div>
-            <div className="p-2 mx-auto rounded-lg border border-[#E7E7E7]  w-[368px] h-[48px]">
+            <div>
                 <Select
                     options={towns}
-                    defaultValue={'місто'}
+                    defaultValue={'Місто'}
                     onChange={value => setTown(Number(value))}
                     value={town}
                 />
             </div>
-            <div className="p-2 mx-auto rounded-lg border border-[#E7E7E7]  w-[368px] h-[48px]">
+            <div>
                 <Select
                     options={streets}
                     defaultValue={'Вулиця'}
@@ -137,15 +136,15 @@ const AddAddress = () => {
                     value={street}
                 />
             </div>
-            <div className="p-2 mx-auto rounded-lg border border-[#E7E7E7]  w-[368px] h-[48px]">
+            <div>
                 <Select
                     options={houses}
-                    defaultValue={'Дом'}
+                    defaultValue={'Дім'}
                     onChange={value => setHouse(Number(value))}
                     value={house}
                 />
             </div>
-            <div className="p-2 mx-auto rounded-lg border border-[#E7E7E7]  w-[368px] h-[48px]">
+            <div>
                 <Select
                     options={flats}
                     defaultValue={'Квартира'}
@@ -153,9 +152,8 @@ const AddAddress = () => {
                     value={flat}
                 />
             </div>
-            <div className="ml-[47px]">
+            <div>
                 <InputField
-                    label={'Адреса'}
                     type={'text'}
                     placeholder={'Назва адреси'}
                     name={'name'}
@@ -164,8 +162,10 @@ const AddAddress = () => {
                     onChange={event => setFlatName(event.target.value)}
                 />
             </div>
-            <div>
-                <button onClick={() => addObj(flat, flatName)}  className="w-[242px] h-[48px] ml-[110px] py-2.5 px-5 mr-2 mb-2 text-lg font-medium rounded text-white_figma bg-yellow_figma">Зберігти</button>
+            <div className="text-center">
+                <button
+                    className="w-28 text-sm py-2 rounded text-white_figma bg-yellow_figma"
+                    onClick={() => addObj(flat, flatName)}>Зберегти</button>
             </div>
         </div>
     );

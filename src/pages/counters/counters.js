@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from 'react';
 import { useParams } from "react-router-dom";
-import { Context } from "../../App";
+import { Context } from "../../store";
 
 import api from "../../api";
 import Breadcrumbs from "../../components/breadcrumbs";
@@ -12,7 +12,7 @@ import moment from "moment";
 
 const Counters = () => {
     const { objectId } = useParams();
-    const [state,] = useContext(Context);
+    const [state] = useContext(Context);
     const [counters, setCounters] = useState([]);
     const [serviceTypes, setServiceTypes] = useState([]);
     const address = state.addresses.find((item) => item.objectId == objectId);
@@ -46,7 +46,7 @@ const Counters = () => {
             });
         };
         fetchData();
-    }, []);
+    }, [objectId]);
 
     const Save = async () => {
         const currentDate = moment().format('YYYY-MM-D');
@@ -111,14 +111,12 @@ const Counters = () => {
             <ServiceTypes types={serviceTypes} />
             <div className="mt-5 py-4 px-10 h-auto rounded-lg shadow-lg">
                 <h3 className="py-4 text-xl text-center">Лічильники</h3>
-                <div className="items-center justify-between w-full flex">
-                    <Tabs2 objectId={objectId} />
-                </div>
+                <Tabs2 objectId={objectId} />
                 <div>
                     {counters?.map((item, key) => <CounterBlock item={item} key={`CounterBlock_${item.id}`} index={key} />)}
                 </div>
-                <div className="inline-block w-28">
-                    <Button type="button" label={'Зберегти'} onClick={() => Save} cssType={'primary'} />
+                <div className="mx-auto w-28">
+                    <Button type="button" label={'Зберегти'} onClick={Save} cssType={'primary'} />
                 </div>
             </div>
         </div>

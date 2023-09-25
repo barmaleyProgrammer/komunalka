@@ -10,10 +10,10 @@ import facebook from "../../img/facebook.svg";
 import eye from "../../img/eye.svg";
 import Button from "../../components/button";
 import api from "../../api";
-import { Context } from "../../App";
+import { Context } from "../../store";
 
 const Login = () => {
-    const [, dispatch] = useContext(Context);
+    const [,dispatch] = useContext(Context);
     const navigate = useNavigate();
     const [type, setTape] = useState('password');
 
@@ -40,11 +40,14 @@ const Login = () => {
             dispatch({ type: 'logIn' });
             await api.getObject().then((data) => {
                 dispatch({ type: 'setAccount', payload: data.account });
-                dispatch({ type: 'setAddresses', payload: data.addresses });
+                // dispatch({ type: 'setAddresses', payload: data.addresses });
             });
             await api.getService().then((data) => {
                 dispatch({ type: 'serviceTypes', payload: data });
             });
+            await api.getAddress().then((data) => {
+                dispatch({ type: 'setAddresses', payload: data });
+            })
             navigate('/cabinet');
         } catch (e) {
             console.error(e.message);

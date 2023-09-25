@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Context } from "../App";
+import { Context } from "../store";
 import { NavLink } from "react-router-dom";
 import water from "../img/logo_counters/water.svg";
 import gas from "../img/logo_counters/gas.svg";

@@ -20,30 +20,24 @@ const signIn = (data) => {
     const newConfig = {...config};
     delete newConfig.headers.apiauthorization;
     return axios.post('/account/signin', data, newConfig).then((res) => {
-        // localStorage.setItem('accessToken', res.data.accessToken);
-        // localStorage.setItem('refreshToken', res.data.refreshToken);
         sessionStorage.setItem('accessToken', res.data.accessToken);
         sessionStorage.setItem('refreshToken', res.data.refreshToken);
         config.headers.apiauthorization = `Bearer ${res.data.accessToken}`;
+        return res.data;
     }).catch((error) => {
         console.error(error);
     });
 }
 const updateUser = (data) => {
     return axios.put('/account', data, config).then((res) => {
-        // localStorage.setItem('accessToken', res.data.accessToken);
-        // localStorage.setItem('refreshToken', res.data.refreshToken);
-        // sessionStorage.setItem('accessToken', res.data.accessToken);
-        // sessionStorage.setItem('refreshToken', res.data.refreshToken);
-        // config.headers.apiauthorization = `Bearer ${res.data.accessToken}`;
-        console.log(res)
+        sessionStorage.setItem('user', JSON.stringify(data));
     }).catch((error) => {
         console.error(error);
     });
 }
 const renameAddress = (objectId, name) => {
     return axios.put(`/account/address/${objectId}`, { name }, config).then((response) => {
-        console.log('renamed', response);
+        return response;
     }).catch((error) => {
         console.error(error);
     });
@@ -146,7 +140,10 @@ const getService = () => {
 }
 const getAddress = () => {
     return axios.get(`/account/address`, config)
-        .then((res) => res.data)
+        .then((res) => {
+            sessionStorage.setItem('addresses', JSON.stringify(res.data));
+            return res.data;
+        })
         .catch((error) => {
             console.error(error);
         });
@@ -156,7 +153,7 @@ const getObject = () => {
     return axios.get('/account', config)
         .then((response) => {
             sessionStorage.setItem('user', JSON.stringify(response.data.account));
-            sessionStorage.setItem('addresses', JSON.stringify(response.data.addresses));
+            // sessionStorage.setItem('addresses', JSON.stringify(response.data.addresses));
             return response.data;
         })
         .catch((error) => {
@@ -166,7 +163,7 @@ const getObject = () => {
 
 const addObject = (objectId, name = '') => {
     return axios.post('/account/address', { objectId, name }, config).then((response) => {
-        console.log('додано', response);
+        return response;
     }).catch((error) => {
         console.error(error);
     });
@@ -179,7 +176,7 @@ const deleteObject = (objectId) => {
         baseURL: config.baseURL
     };
     return axios.delete('/account/address', payload).then((response) => {
-        console.log('delete', response);
+        return response;
     }).catch((error) => {
         console.error(error);
     });
@@ -194,7 +191,7 @@ const getDebt = (objectId) => {
 }
 const sendCounterData = (deviceId, payload) => {
     return axios.post(`/counter/meter/device/${deviceId}`, payload, config).then((response) => {
-        console.log('додано', response);
+        return response;
     }).catch((error) => {
         console.error(error);
     });

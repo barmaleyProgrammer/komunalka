@@ -1,6 +1,6 @@
-import { useReducer, createContext } from "react";
+import { useReducer } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { initialSate, reducer } from "./state";
+import { initialSate, Context, reducer } from "./store";
 import Footer from "./components/footer";
 import Header from "./components/header";
 
@@ -21,8 +21,6 @@ import MyData from "./pages/cabinet/myData";
 import Counters from "./pages/counters/counters";
 import CountersHistory from "./pages/counters/history";
 import CountersGraphsTables from "./pages/counters/graphsTables";
-
-export const Context = createContext(null);
 
 const App = () => {
     return (

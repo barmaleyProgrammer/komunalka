@@ -1,11 +1,11 @@
 import { useContext } from "react";
-import { Context } from "../App";
+import { Context } from "../store";
 import logo_lichylnyk from "../img/logo_lichylnyk.svg";
 import { NavLink } from "react-router-dom";
 import Logout from "./Logout";
 
 const Header = () => {
-    const [state,] = useContext(Context);
+    const [state] = useContext(Context);
     const NotLoggedIn = () => {
         return (
             <>
