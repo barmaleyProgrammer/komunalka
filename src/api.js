@@ -25,7 +25,7 @@ const signIn = (data) => {
         config.headers.apiauthorization = `Bearer ${res.data.accessToken}`;
         return res.data;
     }).catch((error) => {
-        console.error(error);
+        throw error.response.data.error;
     });
 }
 const updateUser = (data) => {

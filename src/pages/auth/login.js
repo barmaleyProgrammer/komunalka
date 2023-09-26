@@ -26,10 +26,10 @@ const Login = () => {
     const [formError, setFormError] = useState('');
 
     const handleInputChange = (event) => {
-        const { name, value } = event.target;
+        const value = (event.target.type === 'checkbox') ? event.target.checked : event.target.value;
         setForm((prevProps) => ({
             ...prevProps,
-            [name]: value
+            [event.target.name]: value
         }));
     };
 
@@ -50,8 +50,7 @@ const Login = () => {
             })
             navigate('/cabinet');
         } catch (e) {
-            console.error(e.message);
-            setFormError(e.message);
+            setFormError(e);
             setForm({
                 email: '',
                 password: '',
@@ -67,10 +66,10 @@ const Login = () => {
         }
     }
     return (
-        <div className="mt-10 p-10 mx-auto rounded-lg shadow-lg w-[464px]">
-            <img src={logo_lichylnyk} className="h-16 mb-8 mx-auto" alt="Flowbite Logo" />
+        <div className="mt-10 p-10 mx-auto rounded-lg shadow-lg w-1/4">
+            <img src={logo_lichylnyk} className="h-16 mb-8 mx-auto" alt="" />
             <h4 className="text-black_figma text-center">Вхід</h4>
-            <div className="text-xs text-red-900 text-center">{formError}</div>
+            <div className="text-red-950 text-center">{ formError }</div>
             <form className="space-y-2" action="#" autoComplete="off" onSubmit={Submit}>
                 <InputField
                     label={'Email'}
@@ -96,14 +95,18 @@ const Login = () => {
                 </div>
                 <div className="flex">
                     <div className="flex basis-1/2 mt-1">
-                        <input id="rememberMe" type="checkbox" value="true" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2" />
+                        <input className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
+                           id="rememberMe"
+                           name={'rememberMe'}
+                           type="checkbox"
+                           checked={form.rememberMe}
+                           onChange={handleInputChange}
+                        />
                         <label htmlFor="rememberMe" className="ml-2 text-sm text-gray-400">
                             Запам’ятати мене
                         </label>
                     </div>
-                    <div className="text-black_figma basis-1/2 text-right">
-                        Забули пароль?
-                    </div>
+                    <div className="text-black_figma basis-1/2 text-sm text-right">Забули пароль?</div>
                 </div>
                 <Button type="submit" label={'Увійти'} cssType={'primary'} />
                 <div>
