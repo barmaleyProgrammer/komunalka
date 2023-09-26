@@ -81,7 +81,7 @@
 }
 .app > main {
     grid-area: main;
-    padding: 20px;
+    padding: 20px 0px 0 0;
 }
 .app > footer {
     grid-area: footer;

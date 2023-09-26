@@ -8,9 +8,7 @@ import api from "../../api";
 import { Context } from "../../store";
 
 const Login = () => {
-    // const [,dispatch] = useContext(Context);
     const navigate = useNavigate();
-    const [type, setTape] = useState('password');
 
     const [form, setForm] = useState({
         email: (process.env.NODE_ENV === 'development') ? 'grebenyukvd@gmail.com' : '',
@@ -29,37 +27,19 @@ const Login = () => {
 
     const Submit = async (event) => {
         event.preventDefault();
-        try {
-            await api.signIn(form);
-            // dispatch({ type: 'logIn' });
-            await api.getObject().then((data) => {
-                // dispatch({ type: 'setAccount', payload: data.account });
-                // dispatch({ type: 'setAddresses', payload: data.addresses });
-            });
-            await api.getService().then((data) => {
-                // dispatch({ type: 'serviceTypes', payload: data });
-            });
             await api.getAddress().then((data) => {
                 // dispatch({ type: 'setAddresses', payload: data });
             })
             navigate('/cabinet');
-        } catch (e) {
-            console.error(e.message);
-            setFormError(e.message);
-            setForm({
-                email: '',
-                password: '',
-            });
-        }
+        // } catch (e) {
+        //     console.error(e.message);
+        //     setFormError(e.message);
+        //     setForm({
+        //         email: '',
+        //     });
+        // }
     };
 
-    const togglePassInput = () => {
-        if (type === 'password') {
-            setTape('text')
-        } else {
-            setTape('password')
-        }
-    }
     return (
         <div className="mt-10 p-10 mx-auto rounded-lg shadow-lg w-[464px]">
             <img src={logo_lichylnyk} className="h-16 mb-8 mx-auto" alt="Flowbite Logo" />

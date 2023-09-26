@@ -3,53 +3,53 @@ import {NavLink} from "react-router-dom";
 
 const Footer = () => {
     return (
-        <footer className="w-full p-4 py-6">
+        <footer className="w-full py-6">
             <div className="grid grid-cols-4 gap-20 mx-auto">
-                <div className="mb-1 md:mb-0">
-                    <a href="https://komunalka.ua/" className="flex items-center">
-                        <img src={logo_lichylnyk} className="h-8 mr-2" alt="kamunalka logo"/>
+                <div className="flex flex-col items-center">
+                    <a href="https://komunalka.ua/">
+                        <img src={logo_lichylnyk} className="h-[59px] w-[120px] mb-2" alt="kamunalka logo"/>
                     </a>
-                    <div className="text-gray-500 mb-1 mt-3 text-xs">
-                        made by GERC<br/>
-                        lichylnyk.com.ua © 2023
+                    <div className="text-gray-500 mb-1 mt-1 text-xs ">
+                        <p className="mb-2 text-center">made by GERC</p>
+                        <p>lichylnyk.com.ua © 2023</p>
                     </div>
                 </div>
                 <div>
-                    <ul className="text-gray-500 font-medium">
+                    <ul className="text-gray-500 font-normal text-xs space-y-2">
                         <li>
-                            <NavLink to="/main" className="block py-2 pl-3 pr-4 text-sm text-white bg-black rounded md:bg-transparent md:p-0">Послуги</NavLink>
+                            <NavLink to="/main">Послуги</NavLink>
                         </li>
                         <li>
-                            <NavLink to="/news" className="block py-2 pl-3 pr-4 text-sm text-white bg-black rounded md:bg-transparent md:p-0">Новини</NavLink>
+                            <NavLink to="/news">Новини</NavLink>
                         </li>
                         <li>
-                            <NavLink to="faq" className="block py-2 pl-3 pr-4 text-sm text-white bg-black rounded md:bg-transparent md:p-0">Часті питання</NavLink>
+                            <NavLink to="faq">Часті питання</NavLink>
                         </li>
                         <li>
-                            <NavLink to="about" className="block py-2 pl-3 pr-4 text-sm text-white bg-black rounded md:bg-transparent md:p-0">Про нас</NavLink>
+                            <NavLink to="about">Про нас</NavLink>
                         </li>
                         <li>
-                            <NavLink to="contacts" className="block py-2 pl-3 pr-4 text-sm text-white bg-black rounded md:bg-transparent md:p-0">Контакти</NavLink>
+                            <NavLink to="contacts">Контакти</NavLink>
                         </li>
                     </ul>
                 </div>
                 <div>
-                    <ul className="text-gray-500 font-medium">
+                    <ul className="text-gray-500 font-medium text-xs space-y-2">
                         <li className="mb-2 text-sm font-sans Goth">
                             Контакти
                         </li>
-                        <li className="mb-2 text-sm">
+                        <li>
                             <a href="tel:380449998877">+38 (044) - 999- 88- 77</a>
                         </li>
-                        <li className="mb-2 text-sm">
+                        <li>
                             <a href="tel:380800666555">0 - 800 - 666- 555</a>
                         </li>
-                        <li className="mb-2 text-sm">
+                        <li>
                             <a href="mailto:support@lichilnyk.com.ua">support@lichilnyk.com.ua</a>
                         </li>
                     </ul>
                 </div>
-                <div className="flex mt-4 justify-between">
+                <div className="flex mt-4 space-x-4">
                     <a href="https://www.facebook.com/">
                         <svg className="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 8 19">
                             <path d="M6.135 3H8V0H6.135a4.147 4.147 0 0 0-4.142 4.142V6H0v3h2v9.938h3V9h2.021l.592-3H5V3.591A.6.6 0 0 1 5.592 3h.543Z"/>

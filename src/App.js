@@ -21,7 +21,7 @@ import MyData from "./pages/cabinet/myData";
 import Counters from "./pages/counters/counters";
 import CountersHistory from "./pages/counters/history";
 import CountersGraphsTables from "./pages/counters/graphsTables";
-import ResetParol from "./pages/auth/resetParol";
+import ResetParol from "./pages/auth/resetPassword";
 
 const App = () => {
     return (

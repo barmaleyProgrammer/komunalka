@@ -9,7 +9,7 @@ const Header = () => {
     const NotLoggedIn = () => {
         return (
             <>
-                <NavLink to="/auth/login" className="py-2.5 px-5 mr-2 mb-2 text-sm font-medium rounded w-full text-black_figma bg-white_figma border border-yellow_figma">
+                <NavLink to="/auth/login" className="py-2.5 px-5 mr-5 mb-2 text-sm font-medium rounded w-full text-black_figma bg-white_figma border border-yellow_figma">
                     Увійти
                 </NavLink>
                 <NavLink to="/auth/register" className="py-2.5 px-5 mr-2 mb-2 text-sm font-medium rounded w-full text-white_figma bg-yellow_figma">
@@ -21,9 +21,9 @@ const Header = () => {
 
     return (
         <header className="w-full">
-            <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+            <div className=" flex flex-wrap gap-24 items-center justify-center mx-auto p-4">
                 <NavLink to="/">
-                    <img src={logo_lichylnyk} className="h-8 mr-3" alt="Flowbite Logo" />
+                    <img src={logo_lichylnyk} className="h-[59px] w-[120px] mr-3" alt="Flowbite Logo" />
                 </NavLink>
                 <div className="flex md:order-2">
                     { state.isLoggedIn ? <Logout /> : <NotLoggedIn />}
