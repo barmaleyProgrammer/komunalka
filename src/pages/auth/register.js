@@ -41,7 +41,7 @@ const Register = () => {
     return (
         <div className="mt-20 p-10 mx-auto rounded-lg shadow-lg w-1/4">
             <img src={logo_lichylnyk} className="h-16 mb-8 mx-auto" alt="Flowbite Logo" />
-            <h4 className="text-black_figma text-center">Реєстрація</h4>
+            <h4 className="text-black_figma text-center text-lg">Реєстрація</h4>
             <div className="text-xs text-red-900 text-center">{formError}</div>
             <form className="space-y-2" action="#" autoComplete="off" onSubmit={Submit}>
                 <InputField
@@ -55,7 +55,7 @@ const Register = () => {
                 />
                 <InputField
                     label={'Прізвище'}
-                    placeholder={'Бандера'}
+                    placeholder={'Іванов'}
                     name={'firstName'}
                     required={true}
                     value={form.firstName}
@@ -63,7 +63,7 @@ const Register = () => {
                 />
                 <InputField
                     label={'Імʼя'}
-                    placeholder={'Степан'}
+                    placeholder={'Іван'}
                     name={'lastName'}
                     required={true}
                     value={form.lastName}
@@ -71,7 +71,7 @@ const Register = () => {
                 />
                 <InputField
                     label={'По батькові'}
-                    placeholder={'Андрійович'}
+                    placeholder={'Іванович'}
                     name={'secondName'}
                     required={true}
                     value={form.secondName}
@@ -94,7 +94,7 @@ const Register = () => {
                     value={form.password}
                     onChange={handleInputChange}
                 />
-                <div className="text-black_figma text-sm">
+                <div className="text-black_figma text-sm font-light">
                     При вході через сайти партнерів є змога<br />автоматично додати адреси
                 </div>
                 <div className="flex flex-row space-x-2">
@@ -111,7 +111,7 @@ const Register = () => {
                     </div>
                 </div>
                 <Button type="submit" label={'Зареєструватися'} cssType={'primary'} />
-                <div>
+                <div className="font-light">
                     Вже є аккаунт? <NavLink to="/auth/login" className="text-[#3E77AA]">Вхід</NavLink>
                 </div>
             </form>
