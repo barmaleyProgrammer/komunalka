@@ -122,13 +122,13 @@ const Login = () => {
                     <div className="basis-1/2 border border-[#E8E8E8;] rounded-xs w-1/2 h-11">
                         <div className="flex p-2 ml-2 space-x-1">
                             <img src={google} alt="" />
-                            <p>Войти с Google</p>
+                            <p className="text-sm">Войти с Google</p>
                         </div>
                     </div>
                     <div className="basis-1/2 border border-[#E8E8E8;] rounded-xs w-1/2 h-11">
-                        <div className=" flex p-1 ml-0 mt-1 space-x-1">
+                        <div className=" lex p-1 ml-0 mt-1 space-x-1">
                             <img src={facebook} alt="" />
-                            <p>Войти с Facebook</p>
+                            <p className="text-sm">Войти с Facebook</p>
                         </div>
                     </div>
                 </div>

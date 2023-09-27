@@ -104,7 +104,7 @@ const Register = () => {
                             <p className="text-sm pt-1">Комуналка</p>
                         </div>
                     </div>
-                    <div className="basis-1/2 border border-[#E8E8E8;] rounded">
+                    <div className="basis-1/2 border border-[#E8E8E8;] rounded" title="">
                         <div className="flex p-2 justify-center space-x-1">
                             <img src={logo_gerc} alt="" />
                         </div>

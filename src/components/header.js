@@ -9,10 +9,10 @@ const Header = () => {
     const NotLoggedIn = () => {
         return (
             <>
-                <NavLink to="/auth/login" className="py-2.5 px-5 mr-5 mb-2 text-sm font-medium rounded w-full text-black_figma bg-white_figma border border-yellow_figma">
+                <NavLink to="/auth/login" className="py-2.5 px-5 mr-5 mb-2 text-sm rounded w-full text-black_figma bg-white_figma border border-yellow_figma">
                     Увійти
                 </NavLink>
-                <NavLink to="/auth/register" className="py-2.5 px-5 mr-2 mb-2 text-sm font-medium rounded w-full text-white_figma bg-yellow_figma">
+                <NavLink to="/auth/register" className="py-2.5 px-5 mr-2 mb-2 text-sm rounded w-full text-white_figma bg-yellow_figma">
                     Зареєструватися
                 </NavLink>
             </>
@@ -20,35 +20,32 @@ const Header = () => {
     }
 
     return (
-        <header className="w-full">
-            <div className=" flex flex-wrap gap-24 items-center justify-center mx-auto p-4">
+        <header>
+            <div className="flex flex-wrap gap-24 items-center justify-center mx-auto p-4">
                 <NavLink to="/">
-                    <img src={logo_lichylnyk} className="h-[59px] w-[120px] mr-3" alt="Flowbite Logo" />
+                    <img src={logo_lichylnyk} className="mr-3" alt="" />
                 </NavLink>
-                <div className="flex md:order-2">
-                    { state.isLoggedIn ? <Logout /> : <NotLoggedIn />}
-                </div>
-                <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
-                    <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 ">
+                <div className="flex items-center justify-between">
+                    <ul className="flex flex-row p-0 mt-0 space-x-8 border-0">
                         <li>
-                            <NavLink className="py-2 pl-3 pr-4 text-sm text-white bg-black rounded md:bg-transparent md:p-0" to="/main">Послуги</NavLink>
+                            <NavLink className="p-0 text-sm" to="/main">Послуги</NavLink>
                         </li>
                         <li>
-                            <NavLink className="py-2 pl-3 pr-4 text-sm text-white bg-black rounded md:bg-transparent md:p-0" to="/news">Новини</NavLink>
+                            <NavLink className="p-0 text-sm" to="/news">Новини</NavLink>
                         </li>
                         <li>
-                            <NavLink className="py-2 pl-3 pr-4 text-sm text-white bg-black rounded md:bg-transparent md:p-0" to="/faq">Часті питання</NavLink>
+                            <NavLink className="p-0 text-sm" to="/faq">Часті питання</NavLink>
                         </li>
                         <li>
-                            <NavLink className="py-2 pl-3 pr-4 text-sm text-white bg-black rounded md:bg-transparent md:p-0" to="/about">Про нас</NavLink>
+                            <NavLink className="p-0 text-sm" to="/about">Про нас</NavLink>
                         </li>
                         <li>
-                            <NavLink className="py-2 pl-3 pr-4 text-sm text-white bg-black rounded md:bg-transparent md:p-0" to="/contacts">Контакти</NavLink>
+                            <NavLink className="p-0 text-sm" to="/contacts">Контакти</NavLink>
                         </li>
-                        {/*<li>*/}
-                        {/*    <NavLink className="py-2 pl-3 pr-4 text-sm text-white bg-black rounded md:bg-transparent md:p-0" to="cabinet">Особистий кабінет</NavLink>*/}
-                        {/*</li>*/}
                     </ul>
+                </div>
+                <div className="flex">
+                    { state.isLoggedIn ? <Logout /> : <NotLoggedIn />}
                 </div>
             </div>
         </header>
