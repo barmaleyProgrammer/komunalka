@@ -66,11 +66,11 @@ const Login = () => {
         }
     }
     return (
-        <div className="mt-10 p-10 mx-auto rounded-lg shadow-lg w-1/4">
+        <div className="mt-20 mb-20 p-10 mx-auto rounded-lg shadow-lg sm:w-3/4 md:w-1/2 lg:w-1/2 xl:w-1/3">
             <img src={logo_lichylnyk} className="h-16 mb-8 mx-auto" alt="" />
             <h4 className="text-black_figma text-center">Вхід</h4>
             <div className="text-red-950 text-center">{ formError }</div>
-            <form className="space-y-2" action="#" autoComplete="off" onSubmit={Submit}>
+            <form className="space-y-2" onSubmit={Submit}>
                 <InputField
                     label={'Email'}
                     type={'email'}
@@ -89,7 +89,7 @@ const Login = () => {
                         value={form.password}
                         onChange={handleInputChange}
                     />
-                    <div onClick={togglePassInput} className={'eye-ico'}>
+                    <div onClick={togglePassInput} className={'eye-ico_login'}>
                         <img src={eye} alt="" />
                     </div>
                 </div>
@@ -119,28 +119,28 @@ const Login = () => {
                     <hr className="w-1/3 text-borderColor mt-3"/>
                 </div>
                 <div className="flex flex-row space-x-2">
-                    <div className="basis-1/2 border border-[#E8E8E8;] rounded-xs w-1/2 h-11">
-                        <div className="flex p-2 ml-2 space-x-1">
+                    <div className="basis-1/2 border border-[#E8E8E8;] rounded">
+                        <div className="flex py-3 justify-center space-x-1">
                             <img src={google} alt="" />
-                            <p className="text-sm">Войти с Google</p>
+                            <p className="text-xs">Войти с Google</p>
                         </div>
                     </div>
-                    <div className="basis-1/2 border border-[#E8E8E8;] rounded-xs w-1/2 h-11">
-                        <div className=" lex p-1 ml-0 mt-1 space-x-1">
+                    <div className="basis-1/2 border border-[#E8E8E8;] rounded">
+                        <div className="flex py-3 justify-center space-x-1">
                             <img src={facebook} alt="" />
-                            <p className="text-sm">Войти с Facebook</p>
+                            <p className="text-xs">Войти с Facebook</p>
                         </div>
                     </div>
                 </div>
                 <div className="flex flex-row space-x-2">
-                    <div className="basis-1/2 border border-[#E8E8E8;] rounded-xs w-1/2 h-11">
-                        <div className="komunalka flex p-2 ml-8 space-x-1">
+                    <div className="basis-1/2 border border-[#E8E8E8;] rounded">
+                        <div className="flex p-2 justify-center space-x-1">
                             <img src={icon_komunalka} alt="" />
-                            <p>Комуналка</p>
+                            <p className="text-sm pt-1">Комуналка</p>
                         </div>
                     </div>
-                    <div className="basis-1/2 text-center border border-[#E8E8E8;] rounded-xs w-1/2 h-11">
-                        <div className="logo_gerc p-1.5 ml-14">
+                    <div className="basis-1/2 border border-[#E8E8E8;] rounded">
+                        <div className="flex p-2 justify-center">
                             <img src={logo_gerc} alt="" />
                         </div>
                     </div>

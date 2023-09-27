@@ -6,6 +6,7 @@ import logo_gerc from "../../img/logo_gerc.svg";
 import icon_komunalka from "../../img/icon_komunalka.svg";
 import Button from "../../components/button";
 import api from "../../api";
+import eye from "../../img/eye.svg";
 
 const Register = () => {
     const [form, setForm] = useState({
@@ -19,6 +20,7 @@ const Register = () => {
         // source: `${window.location.protocol}//${window.location.host}/auth/validate`,
     });
     const [formError, setFormError] = useState('');
+    const [type, setTape] = useState('password');
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -27,7 +29,13 @@ const Register = () => {
             [name]: value
         }));
     };
-
+    const togglePassInput = () => {
+        if (type === 'password') {
+            setTape('text')
+        } else {
+            setTape('password')
+        }
+    }
     const Submit = async (event) => {
         event.preventDefault();
         try {
@@ -39,11 +47,11 @@ const Register = () => {
     };
 
     return (
-        <div className="mt-20 p-10 mx-auto rounded-lg shadow-lg sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/4">
+        <div className="mt-20 mb-20 p-10 mx-auto rounded-lg shadow-lg sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/4">
             <img src={logo_lichylnyk} className="h-16 mb-8 mx-auto" alt="Flowbite Logo" />
             <h4 className="text-black_figma text-center text-lg">Реєстрація</h4>
             <div className="text-xs text-red-900 text-center">{formError}</div>
-            <form className="space-y-2" action="#" autoComplete="off" onSubmit={Submit}>
+            <form className="space-y-2" onSubmit={Submit}>
                 <InputField
                     label={'Email'}
                     type={'email'}
@@ -88,12 +96,15 @@ const Register = () => {
                 />
                 <InputField
                     label={'Пароль'}
-                    type={'password'}
+                    type={type}
                     name={'password'}
                     required={true}
                     value={form.password}
                     onChange={handleInputChange}
                 />
+                <div onClick={togglePassInput} className={'eye-ico_register'}>
+                    <img src={eye} alt="" />
+                </div>
                 <div className="text-black_figma text-sm font-light">
                     При вході через сайти партнерів є змога<br />автоматично додати адреси
                 </div>
