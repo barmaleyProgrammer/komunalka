@@ -39,7 +39,7 @@ const Register = () => {
     };
 
     return (
-        <div className="mt-20 p-10 mx-auto rounded-lg shadow-lg w-1/4">
+        <div className="mt-20 p-10 mx-auto rounded-lg shadow-lg sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/4">
             <img src={logo_lichylnyk} className="h-16 mb-8 mx-auto" alt="Flowbite Logo" />
             <h4 className="text-black_figma text-center text-lg">Реєстрація</h4>
             <div className="text-xs text-red-900 text-center">{formError}</div>
@@ -98,14 +98,14 @@ const Register = () => {
                     При вході через сайти партнерів є змога<br />автоматично додати адреси
                 </div>
                 <div className="flex flex-row space-x-2">
-                    <div className="basis-1/2 border border-[#E8E8E8;] rounded-[2px] w-[188px] h-[44px]">
-                        <div className="komunalka flex p-2 ml-8 space-x-1">
+                    <div className="basis-1/2 border border-[#E8E8E8;] rounded">
+                        <div className="flex p-2 justify-center space-x-1">
                             <img src={icon_komunalka} alt=""/>
-                            <p>Комуналка</p>
+                            <p className="text-sm pt-1">Комуналка</p>
                         </div>
                     </div>
-                    <div className="basis-1/2 text-center border border-[#E8E8E8;] rounded-[2px] w-[188px] h-[44px]">
-                        <div className="logo_gerc p-1.5 ml-14">
+                    <div className="basis-1/2 border border-[#E8E8E8;] rounded">
+                        <div className="flex p-2 justify-center space-x-1">
                             <img src={logo_gerc} alt="" />
                         </div>
                     </div>
