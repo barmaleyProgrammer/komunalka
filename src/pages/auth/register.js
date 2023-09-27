@@ -64,17 +64,17 @@ const Register = () => {
                 <InputField
                     label={'Прізвище'}
                     placeholder={'Іванов'}
-                    name={'firstName'}
+                    name={'lastName'}
                     required={true}
-                    value={form.firstName}
+                    value={form.lastName}
                     onChange={handleInputChange}
                 />
                 <InputField
                     label={'Імʼя'}
                     placeholder={'Іван'}
-                    name={'lastName'}
+                    name={'firstName'}
                     required={true}
-                    value={form.lastName}
+                    value={form.firstName}
                     onChange={handleInputChange}
                 />
                 <InputField
