@@ -89,7 +89,7 @@ const Login = () => {
                         value={form.password}
                         onChange={handleInputChange}
                     />
-                    <div onClick={togglePassInput} className={'eye-ico_login'}>
+                    <div onClick={togglePassInput} className={'eye-ico'}>
                         <img src={eye} alt="" />
                     </div>
                 </div>

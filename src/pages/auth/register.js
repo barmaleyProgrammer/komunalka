@@ -94,6 +94,7 @@ const Register = () => {
                     value={form.phone}
                     onChange={handleInputChange}
                 />
+                <div className={'relative'}>
                 <InputField
                     label={'Пароль'}
                     type={type}
@@ -102,8 +103,9 @@ const Register = () => {
                     value={form.password}
                     onChange={handleInputChange}
                 />
-                <div onClick={togglePassInput} className={'eye-ico_register'}>
+                <div onClick={togglePassInput} className={'eye-ico'}>
                     <img src={eye} alt="" />
+                </div>
                 </div>
                 <div className="text-black_figma text-sm font-light">
                     При вході через сайти партнерів є змога<br />автоматично додати адреси

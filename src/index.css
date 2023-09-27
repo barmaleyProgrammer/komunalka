@@ -28,18 +28,13 @@
     justify-content: space-between;
 }
 
-.eye-ico_login {
+.eye-ico {
     position: absolute;
     z-index: 20;
     top: 36px;
     right: 14px;
 }
-.eye-ico_register {
-    position: relative;
-    z-index: 20;
-    top: -35px;
-    right: -350px;
-}
+
 .logo_minion {
     position: relative;
     z-index: 1;
