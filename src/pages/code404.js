@@ -3,8 +3,8 @@ import Button from "../components/button";
 
 const Code404 = () => {
     return (
-        <div className=" ">
-            <div className=" ">
+        <div>
+            <div>
                 <img className="mx-auto p-10" src={icon404} alt=""/>
                 <p className="text-center text-5xl font-semibold">Сторінку не знайдено</p>
                 <p className="text-center text-base font-normal py-6">На жаль, запитану вами сторінку не знайдено. Будь ласка, поверніться на головну сторінку.</p>
