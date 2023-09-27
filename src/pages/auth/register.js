@@ -41,8 +41,7 @@ const Register = () => {
         try {
             await api.signUp(form);
         } catch (e) {
-            console.error(e.message);
-            setFormError(e.message);
+            setFormError(e);
         }
     };
 
@@ -50,7 +49,7 @@ const Register = () => {
         <div className="mt-20 mb-20 p-10 mx-auto rounded-lg shadow-lg sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/4">
             <img src={logo_lichylnyk} className="h-16 mb-8 mx-auto" alt="Flowbite Logo" />
             <h4 className="text-black_figma text-center text-lg">Реєстрація</h4>
-            <div className="text-xs text-red-900 text-center">{formError}</div>
+            <div className="text-xs text-red-900 text-center">{ formError }</div>
             <form className="space-y-2" onSubmit={Submit}>
                 <InputField
                     label={'Email'}

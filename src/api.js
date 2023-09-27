@@ -13,7 +13,10 @@ const signUp = (data) => {
     const newConfig = {...config};
     delete newConfig.headers.apiauthorization;
     return axios.post('/account/signup', data, newConfig)
-        .then((res) => res.data);
+        .then((res) => res.data)
+        .catch((error) => {
+            throw error.response.data.error;
+        });
 }
 
 const signIn = (data) => {
