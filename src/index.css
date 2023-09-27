@@ -60,3 +60,13 @@ fieldset {
     bottom: 8px;
     right: 10px;
 }
+.pointer {
+    width: 6px;
+    height: 7px;
+    display: block;
+    box-sizing: border-box;
+    position: relative;
+    left: 0;
+    top: 3px;
+    margin-right: 3px;
+}

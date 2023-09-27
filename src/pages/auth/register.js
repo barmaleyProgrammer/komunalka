@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import InputField from "../../components/inputField";
 import logo_lichylnyk from "../../img/logo_lichylnyk.svg";
@@ -21,6 +21,9 @@ const Register = () => {
     });
     const [formError, setFormError] = useState('');
     const [type, setTape] = useState('password');
+    const [smallChars, setSmallChars] = useState(false);
+    const [bigChars, setBigChars] = useState(false);
+    const [digitChars, setDigitChars] = useState(false);
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -44,6 +47,31 @@ const Register = () => {
             setFormError(e);
         }
     };
+
+    useEffect( () => {
+        const smallCheck = new RegExp('[a-z]');
+        const bigCheck = new RegExp('[A-Z]');
+        const digitCheck = new RegExp('[0-9]');
+
+        if (smallCheck.test(form.password)) {
+            setSmallChars(true);
+        } else {
+            setSmallChars(false);
+        }
+
+        if (bigCheck.test(form.password)) {
+            setBigChars(true);
+        } else {
+            setBigChars(false);
+        }
+
+        if (digitCheck.test(form.password)) {
+            setDigitChars(true);
+        } else {
+            setDigitChars(false);
+        }
+
+    }, [form.password]);
 
     return (
         <div className="mt-20 mb-20 p-10 mx-auto rounded-lg shadow-lg sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/4">
@@ -95,17 +123,43 @@ const Register = () => {
                     onChange={handleInputChange}
                 />
                 <div className={'relative'}>
-                <InputField
-                    label={'Пароль'}
-                    type={type}
-                    name={'password'}
-                    required={true}
-                    value={form.password}
-                    onChange={handleInputChange}
-                />
-                <div onClick={togglePassInput} className="eye-ico cursor-pointer">
-                    <img src={eye} alt="" />
-                </div>
+                    <InputField
+                        label={'Пароль'}
+                        type={type}
+                        name={'password'}
+                        required={true}
+                        value={form.password}
+                        onChange={handleInputChange}
+                    />
+                    <div onClick={togglePassInput} className="eye-ico cursor-pointer">
+                        <img src={eye} alt="" />
+                    </div>
+                    <div className="pl-2 flex flex-col text-xs font-light">
+                        <div className="pt-1 flex">
+                            <span className="pointer">
+                                <svg width="6" height="7" viewBox="0 0 6 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="3" cy="3.5" r="3" fill={smallChars ? '#1F9A14': '#E11A00'}/>
+                                </svg>
+                            </span>
+                            Малі літери
+                        </div>
+                        <div className="pt-1 flex">
+                            <span className="pointer">
+                                <svg width="6" height="7" viewBox="0 0 6 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="3" cy="3.5" r="3" fill={bigChars ? '#1F9A14': '#E11A00'}/>
+                                </svg>
+                            </span>
+                            Великі літери
+                        </div>
+                        <div className="pt-1 flex">
+                            <span className="pointer">
+                                <svg width="6" height="7" viewBox="0 0 6 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="3" cy="3.5" r="3" fill={digitChars ? '#1F9A14': '#E11A00'}/>
+                                </svg>
+                            </span>
+                            Цифри
+                        </div>
+                    </div>
                 </div>
                 <div className="text-black_figma text-sm font-light">
                     При вході через сайти партнерів є змога<br />автоматично додати адреси
