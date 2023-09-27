@@ -58,7 +58,7 @@ const Register = () => {
                     placeholder={'example@gmail.com'}
                     name={'email'}
                     required={true}
-                    cssClass={['email-field']}
+                    cssClass="email-field"
                     value={form.email}
                     onChange={handleInputChange}
                 />
