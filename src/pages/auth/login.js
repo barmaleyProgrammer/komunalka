@@ -89,7 +89,7 @@ const Login = () => {
                         value={form.password}
                         onChange={handleInputChange}
                     />
-                    <div onClick={togglePassInput} className={'eye-ico'}>
+                    <div onClick={togglePassInput} className="eye-ico cursor-pointer">
                         <img src={eye} alt="" />
                     </div>
                 </div>
@@ -109,7 +109,7 @@ const Login = () => {
                     <div className="text-black_figma basis-1/2 text-sm text-right">Забули пароль?</div>
                 </div>
                 <Button type="submit" label={'Увійти'} cssType={'primary'} />
-                <div>
+                <div className="py-2 font-light text-sm">
                     Ще немає аккаунту? <NavLink to="/auth/register" className="text-[#3E77AA]">Зареєструватися</NavLink>
                 </div>
 

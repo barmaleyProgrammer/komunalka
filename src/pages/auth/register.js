@@ -58,6 +58,7 @@ const Register = () => {
                     placeholder={'example@gmail.com'}
                     name={'email'}
                     required={true}
+                    cssClass={['email-field']}
                     value={form.email}
                     onChange={handleInputChange}
                 />
@@ -103,7 +104,7 @@ const Register = () => {
                     value={form.password}
                     onChange={handleInputChange}
                 />
-                <div onClick={togglePassInput} className={'eye-ico'}>
+                <div onClick={togglePassInput} className="eye-ico cursor-pointer">
                     <img src={eye} alt="" />
                 </div>
                 </div>
@@ -124,7 +125,7 @@ const Register = () => {
                     </div>
                 </div>
                 <Button type="submit" label={'Зареєструватися'} cssType={'primary'} />
-                <div className="font-light">
+                <div className="py-2 font-light text-sm">
                     Вже є аккаунт? <NavLink to="/auth/login" className="text-[#3E77AA]">Вхід</NavLink>
                 </div>
             </form>

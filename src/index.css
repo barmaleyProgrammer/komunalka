@@ -46,13 +46,17 @@
     top: -30px;
     right: 0px;
 }
-
-/*.parent {*/
-/*position: relative;*/
-/*}*/
-/*.text_cabinet {*/
-/*    position: absolute;*/
-/*    top: 50%;*/
-/*    left: 50%;*/
-/*    transform: translate(-50%, -50%);*/
-/*}*/
+fieldset {
+    position: relative;
+}
+.email-field:valid:after {
+    content: url('./img/icon_done.svg');
+    width: 24px;
+    height: 24px;
+    display: block;
+    box-sizing: border-box;
+    z-index: 2;
+    position: absolute;
+    bottom: 8px;
+    right: 10px;
+}
