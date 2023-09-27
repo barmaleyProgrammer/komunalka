@@ -21,7 +21,7 @@ import MyData from "./pages/cabinet/myData";
 import Counters from "./pages/counters/counters";
 import CountersHistory from "./pages/counters/history";
 import CountersGraphsTables from "./pages/counters/graphsTables";
-import ResetParol from "./pages/auth/resetPassword";
+import ResetPassword from "./pages/auth/resetPassword";
 import NotFound from "./pages/notFound";
 
 const App = () => {
@@ -42,7 +42,7 @@ const App = () => {
                                 <Route path="login" element={<Login />} />
                                 <Route path="register" element={<Register />} />
                                 <Route path="validate" element={<Validate />} />
-                                <Route path="resetParol" element={<ResetParol />} />
+                                <Route path="reset" element={<ResetPassword />} />
                             </Route>
                             <Route path="/validate/email" element={<Validate />} />
                             <Route path="/cabinet">

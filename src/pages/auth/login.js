@@ -106,7 +106,7 @@ const Login = () => {
                             Запам’ятати мене
                         </label>
                     </div>
-                    <div className="text-black_figma basis-1/2 text-sm text-right">Забули пароль?</div>
+                    <NavLink to="/auth/reset" className="text-[#3E77AA] pt-1 basis-1/2 text-sm text-right">Забули пароль?</NavLink>
                 </div>
                 <Button type="submit" label={'Увійти'} cssType={'primary'} />
                 <div className="py-2 font-light text-sm">
