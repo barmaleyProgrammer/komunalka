@@ -22,7 +22,7 @@ import Counters from "./pages/counters/counters";
 import CountersHistory from "./pages/counters/history";
 import CountersGraphsTables from "./pages/counters/graphsTables";
 import ResetParol from "./pages/auth/resetPassword";
-import Code404 from "./pages/code404";
+import NotFound from "./pages/notFound";
 
 const App = () => {
     return (
@@ -45,7 +45,6 @@ const App = () => {
                                 <Route path="resetParol" element={<ResetParol />} />
                             </Route>
                             <Route path="/validate/email" element={<Validate />} />
-                            <Route path="/code404" element={<Code404 />} />
                             <Route path="/cabinet">
                                 <Route index element={<Cabinet />} />
                                 <Route path="addAddress" element={<AddAddress />} />
@@ -56,6 +55,7 @@ const App = () => {
                                 <Route path=":objectId/history" element={<CountersHistory />} />
                                 <Route path=":objectId/graphsTables" element={<CountersGraphsTables />} />
                             </Route>
+                            <Route path="*" element={<NotFound />} />
                         </Routes>
                     </main>
                     <Footer />
