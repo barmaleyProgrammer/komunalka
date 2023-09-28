@@ -12,6 +12,7 @@ import  'react-calendar/dist/Calendar.css' ;
 import Modal from '../../components/modal/modal';
 import moment from 'moment';
 import MySelect from "../../components/MySelect";
+import Loader from "../../components/Loader/loader";
 
 const History = () => {
     const { objectId } = useParams();
@@ -25,6 +26,7 @@ const History = () => {
     const [startDate, setStartDate] = useState(moment().startOf('month'));
     const [endDate, setEndDate] = useState(moment().endOf('month'));
     const [serviceTypes, setServiceTypes] = useState([]);
+    const [isPostLoading, setIsPostLoading] = useState(false);
 
     const breadCrumbs = [
         {
@@ -53,6 +55,7 @@ const History = () => {
         const fetchData = async () => {
             const dateStart = moment(startDate).format('YYYY-MM-DD');
             const dateEnd = moment(endDate).format('YYYY-MM-DD');
+            setIsPostLoading(true);
             api.getCountersHistory(objectId, dateStart, dateEnd).then((result) => {
                 setCounters(result);
                 const types = result
@@ -69,6 +72,7 @@ const History = () => {
                     });
                 firms = Array.from(new Set(firms.map(JSON.stringify))).map(JSON.parse);
                 setFirms(firms);
+                setIsPostLoading(false);
             });
         };
         fetchData();
@@ -103,7 +107,7 @@ const History = () => {
     };
 
     return (
-        <div className="font-light mt-2 mx-auto max-w-screen-xl">
+        <div className="font-light mt-2 mb-4 mx-auto max-w-screen-xl">
             <div>
                 <Breadcrumbs items={breadCrumbs}/>
             </div>
@@ -142,22 +146,25 @@ const History = () => {
                         {/*</li>*/}
                     </ul>
                 </div>
-                <div>
-                    {counters?.map((item, key) => {
-                        console.log('firm', firm);
-                        if (firm) {
-                            if (firm === item.idFirme) {
+                {isPostLoading
+                ? <div className="flex p-10 justify-center"><Loader /></div>
+                : <div>
+                        {counters?.map((item, key) => {
+                            console.log('firm', firm);
+                            if (firm) {
+                                if (firm === item.idFirme) {
+                                    return <CounterBlock item={item} key={`CounterBlock_${key}`} />
+                                }
+                            }
+                            else {
                                 return <CounterBlock item={item} key={`CounterBlock_${key}`} />
                             }
-                        }
-                        else {
-                            return <CounterBlock item={item} key={`CounterBlock_${key}`} />
-                        }
-                    })}
-                    <div className="mx-auto w-48">
-                        <Button type="button" label={'Переглянути ще'} cssType={'primary'} onClick={handleInputChange}/>
+                        })}
+                        <div className="mx-auto w-48">
+                            <Button type="button" label={'Переглянути ще'} cssType={'primary'} onClick={handleInputChange}/>
+                        </div>
                     </div>
-                </div>
+            }
             </div>
             <Modal active={modalActive1} setActive={setModalActive1}>
                 <Calendar onChange={setDate1} value={startDate} />
