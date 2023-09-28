@@ -9,6 +9,7 @@ import Tabs2 from "../../components/tabs2";
 import InputField from "../../components/inputField";
 import Button from "../../components/button";
 import moment from "moment";
+import Loader from "../../components/Loader/loader";
 
 const Counters = () => {
     const { objectId } = useParams();
@@ -16,6 +17,7 @@ const Counters = () => {
     const [counters, setCounters] = useState([]);
     const [serviceTypes, setServiceTypes] = useState([]);
     const address = state.addresses.find((item) => item.objectId == objectId);
+    const [isPostLoading, setIsPostLoading] = useState(false);
     const breadCrumbs = [
         {
             "to": '/',
@@ -37,12 +39,14 @@ const Counters = () => {
 
     useEffect( () => {
         const fetchData = async () => {
+            setIsPostLoading(true);
             await api.getCounterValue(objectId).then((result) => {
                 setCounters(result);
                 const types = result
                     .map((item) => Number(item.serviceType))
                     .filter((item, i, ar) => ar.indexOf(item) === i);
                 setServiceTypes(types);
+                setIsPostLoading(false);
             });
         };
         fetchData();
@@ -109,6 +113,9 @@ const Counters = () => {
             </div>
             <h2 className="mb-4 mt-3 text-2xl">{address.name}</h2>
             <ServiceTypes types={serviceTypes} />
+            {isPostLoading
+                ? <div className="flex p-10 justify-center"><Loader /></div>
+                :
             <div className="mt-5 py-4 px-10 h-auto rounded-lg shadow-lg">
                 <h3 className="py-4 text-xl text-center">Лічильники</h3>
                 <Tabs2 objectId={objectId} />
@@ -119,6 +126,7 @@ const Counters = () => {
                     <Button type="button" label={'Зберегти'} onClick={Save} cssType={'primary'} />
                 </div>
             </div>
+            }
         </div>
     );
 };
