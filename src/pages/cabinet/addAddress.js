@@ -4,6 +4,7 @@ import Select from "../../components/MySelect";
 import api from "../../api";
 import InputField from "../../components/inputField";
 import { useNavigate } from "react-router-dom";
+import Autosuggest from 'react-autosuggest';
 
 const AddAddress = () => {
     const [,dispatch] = useContext(Context);
@@ -101,6 +102,26 @@ const AddAddress = () => {
         navigate('/cabinet');
     }
 
+    const onSuggestionsFetchRequested = () => {
+        return streets;
+    };
+    const onSuggestionsClearRequested = () => {
+        return streets;
+    };
+    const getSuggestionValue = suggestion => suggestion.label;
+
+    const renderSuggestion = suggestion => (
+        <div>
+            {suggestion.label}
+        </div>
+    );
+
+    const inputProps = {
+        placeholder: 'Type a programming language',
+        value: street,
+        onChange: (value) => setStreet(value)
+    };
+
     return (
         <div className="p-5 space-y-3 mt-2 mx-auto w-1/4 rounded-lg shadow-lg">
             <h4 className="text-black_figma text-center">Додати адресу</h4>
@@ -129,12 +150,22 @@ const AddAddress = () => {
                 />
             </div>
             <div>
-                <Select
-                    options={streets}
-                    defaultValue={'Вулиця'}
-                    onChange={value => setStreet(Number(value))}
-                    value={street}
+                {/*<Select*/}
+                {/*    options={streets}*/}
+                {/*    defaultValue={'Вулиця'}*/}
+                {/*    onChange={value => setStreet(Number(value))}*/}
+                {/*    value={street}*/}
+                {/*/>*/}
+
+                <Autosuggest
+                    suggestions={streets}
+                    onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+                    onSuggestionsClearRequested={onSuggestionsClearRequested}
+                    getSuggestionValue={getSuggestionValue}
+                    renderSuggestion={renderSuggestion}
+                    inputProps={inputProps}
                 />
+
             </div>
             <div>
                 <Select
