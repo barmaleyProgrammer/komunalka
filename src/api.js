@@ -59,8 +59,8 @@ const validation = (email, token) => {
 const resetPasswordRequest = (email) => {
     return axios.get(`https://api-test.komunalka.ua/api/v2/account/reset/password?email=${encodeURIComponent(email)}&source=2`, config).then((res) => res);
 }
-const newPassword = (form) => {
-    return axios.post(`account/reset/password`, form, config).then((response) => {
+const newPassword = (payload) => {
+    return axios.post(`account/reset/password`,payload, config).then((response) => {
         return response;
     }).catch((error) => {
         console.error(error);

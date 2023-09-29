@@ -3,8 +3,6 @@ import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import InputField from "../../components/inputField";
 import logo_lichylnyk from "../../img/logo_lichylnyk.svg";
-import logo_gerc from "../../img/logo_gerc.svg";
-import icon_komunalka from "../../img/icon_komunalka.svg";
 import eye from "../../img/eye.svg";
 import Button from "../../components/button";
 import api from "../../api";
@@ -18,12 +16,12 @@ const NewPassword = () => {
     const [form, setForm] = useState({
         email: (process.env.NODE_ENV === 'development') ? 'grebenyukvd@gmail.com' : '',
         password: (process.env.NODE_ENV === 'development') ? 'Test_Drive5' : '',
-        token: (process.env.NODE_ENV === 'development') ? 'b5b7af42291a92382204134ab1b16925' : '',
+        // token: (process.env.NODE_ENV === 'development') ? 'f4f41470cfcddbac0aa1a49ce4a2072a' : '',
         // rememberMe: false
 
     });
     const [formError, setFormError] = useState('');
-    const [validateFlag, setValidateFlag] = useState(false);
+    // const [validateFlag, setValidateFlag] = useState(false);
     const handleInputChange = (event) => {
         const value = (event.target.type === 'checkbox') ? event.target.checked : event.target.value;
         setForm((prevProps) => ({
@@ -31,21 +29,20 @@ const NewPassword = () => {
             [event.target.name]: value
         }));
     };
-    useEffect(() => {
-        const fetchData = async () => {
-            const url = new URL(window.location);
-            const email = url.searchParams.get('email') || '';
-            const token = url.searchParams.get('code') || '';
-            navigate('/cabinet');
-        };
-        fetchData();
-    }, []);
+    const url = new URL(window.location);
+    const token = url.searchParams.get('code') || '';
+    const payload = {
+    email: form.email,
+    password: form.password,
+        token
+    }
     const Submit = async (event) => {
-        const url = new URL(window.location);
-        const token = url.searchParams.get('code') || '';
+
+
+        console.log(form);
         event.preventDefault();
         {
-            await api.newPassword(form);
+            await api.newPassword(payload);
         }
     };
 
