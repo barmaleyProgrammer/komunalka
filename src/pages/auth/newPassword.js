@@ -1,27 +1,20 @@
 import {useState, useContext, useEffect} from "react";
-import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import InputField from "../../components/inputField";
 import logo_lichylnyk from "../../img/logo_lichylnyk.svg";
 import eye from "../../img/eye.svg";
 import Button from "../../components/button";
 import api from "../../api";
-import { Context } from "../../store";
 
 const NewPassword = () => {
-    const [,dispatch] = useContext(Context);
     const navigate = useNavigate();
     const [type, setTape] = useState('password');
 
     const [form, setForm] = useState({
         email: (process.env.NODE_ENV === 'development') ? 'grebenyukvd@gmail.com' : '',
         password: (process.env.NODE_ENV === 'development') ? 'Test_Drive5' : '',
-        // token: (process.env.NODE_ENV === 'development') ? 'f4f41470cfcddbac0aa1a49ce4a2072a' : '',
-        // rememberMe: false
-
     });
     const [formError, setFormError] = useState('');
-    // const [validateFlag, setValidateFlag] = useState(false);
     const handleInputChange = (event) => {
         const value = (event.target.type === 'checkbox') ? event.target.checked : event.target.value;
         setForm((prevProps) => ({
