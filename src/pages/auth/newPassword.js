@@ -37,13 +37,11 @@ const NewPassword = () => {
         token
     }
     const Submit = async (event) => {
-
-
-        console.log(form);
         event.preventDefault();
         {
             await api.newPassword(payload);
         }
+        navigate('/cabinet');
     };
 
     const togglePassInput = () => {
