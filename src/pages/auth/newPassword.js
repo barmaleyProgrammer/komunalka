@@ -18,7 +18,7 @@ const NewPassword = () => {
     const [form, setForm] = useState({
         email: (process.env.NODE_ENV === 'development') ? 'grebenyukvd@gmail.com' : '',
         password: (process.env.NODE_ENV === 'development') ? 'Test_Drive5' : '',
-        // token: (process.env.NODE_ENV === 'development') ? 'b5b7af42291a92382204134ab1b16925' : '',
+        token: (process.env.NODE_ENV === 'development') ? 'b5b7af42291a92382204134ab1b16925' : '',
         // rememberMe: false
 
     });
@@ -31,7 +31,15 @@ const NewPassword = () => {
             [event.target.name]: value
         }));
     };
-
+    useEffect(() => {
+        const fetchData = async () => {
+            const url = new URL(window.location);
+            const email = url.searchParams.get('email') || '';
+            const token = url.searchParams.get('code') || '';
+            navigate('/cabinet');
+        };
+        fetchData();
+    }, []);
     const Submit = async (event) => {
         const url = new URL(window.location);
         const token = url.searchParams.get('code') || '';
@@ -79,19 +87,6 @@ const NewPassword = () => {
                     </div>
                 </div>
                 <Button type="submit" label={'Увійти'} cssType={'primary'} />
-                <div className="flex flex-row space-x-2">
-                    <div className="basis-1/2 border border-[#E8E8E8;] rounded">
-                        <div className="flex p-2 justify-center space-x-1">
-                            <img src={icon_komunalka} alt="" />
-                            <p className="text-sm pt-1">Комуналка</p>
-                        </div>
-                    </div>
-                    <div className="basis-1/2 border border-[#E8E8E8;] rounded">
-                        <div className="flex p-2 justify-center">
-                            <img src={logo_gerc} alt="" />
-                        </div>
-                    </div>
-                </div>
             </form>
         </div>
     );
