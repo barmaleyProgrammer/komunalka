@@ -90,7 +90,9 @@ const Counters = () => {
                 <div className="w-44">
                     <InputField
                         label={'Попередні показники'}
+                        name={'name'}
                         readOnly={true}
+                        autoComplete="off"
                         value={item.oldValue}
                     />
                 </div>
@@ -99,6 +101,7 @@ const Counters = () => {
                         label={'Актуальні показники'}
                         name={'currentReadings'}
                         value={item.currentReadings}
+                        autoComplete="off"
                         onChange={(e) => handleInputChange(e, index)}
                     />
                 </div>

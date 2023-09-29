@@ -56,6 +56,16 @@ const validation = (email, token) => {
     delete newConfig.headers.apiauthorization;
     return axios.get(`account/validate/email?email=${encodeURIComponent(email)}&token=${token}`, newConfig).then((res) => res);
 }
+const resetPasswordRequest = (email) => {
+    return axios.get(`https://api-test.komunalka.ua/api/v2/account/reset/password?email=${encodeURIComponent(email)}&source=2`, config).then((res) => res);
+}
+const newPassword = (form) => {
+    return axios.post(`account/reset/password`, form, config).then((response) => {
+        return response;
+    }).catch((error) => {
+        console.error(error);
+    });
+}
 
 const getRegions = () => {
     if (!sessionStorage.getItem('accessToken')) {
@@ -204,6 +214,8 @@ export default {
     signIn,
     signOut,
     validation,
+    resetPasswordRequest,
+    newPassword,
     getService,
     getRegions,
     getDistricts,

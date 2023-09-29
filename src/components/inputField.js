@@ -7,11 +7,12 @@ const InputField = ({
         required = false,
         onChange,
         readOnly = false,
-        cssClass = ''
+        cssClass = '',
+        autoComplete = ''
     }) => {
     return (
         <fieldset className={cssClass}>
-            <label className="text-sm text-black_figma font-light">{label}</label>
+            {label ? <label className="text-sm text-black_figma font-light">{label}</label> : ''}
             <input
                 className="text-sm outline-none rounded-lg border border-borderColor focus:border-yellow_figma w-full p-2"
                 type={type}
@@ -21,6 +22,7 @@ const InputField = ({
                 required={required}
                 onChange={onChange}
                 readOnly={readOnly}
+                autoComplete={autoComplete}
             />
         </fieldset>
     );
