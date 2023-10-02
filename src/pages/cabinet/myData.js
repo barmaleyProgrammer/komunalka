@@ -11,7 +11,14 @@ import eye from "../../img/eye.svg";
 const MyData = () => {
     const navigate = useNavigate();
     const [state, dispatch] = useContext(Context);
-    const [form, setForm] = useState(state.user);
+    const [form, setForm] = useState({
+        firstName: state.user.firstName,
+        email: state.user.email,
+        lastName: state.user.lastName,
+        secondName: state.user.secondName,
+        phone: state.user.phone,
+        password: state.user.password,
+    });
     const [formError, setFormError] = useState('');
     const [type, setTape] = useState('password');
     const breadCrumbs = [
@@ -81,7 +88,7 @@ const MyData = () => {
                             type={'email'}
                             placeholder={'Введіть свій email'}
                             name={'email'}
-                            required={true}
+                            readOnly={true}
                             value={form.email}
                             autoComplete="off"
                             onChange={handleInputChange}
@@ -121,14 +128,13 @@ const MyData = () => {
                                 name={'password'}
                                 required={true}
                                 value={form.password}
+                                placeholder="Змінити"
                                 autoComplete="off"
                                 onChange={handleInputChange}
                             />
-                            <p className=" text-xs">Змінити</p>
                             <div onClick={togglePassInput} className="eye-ico cursor-pointer">
                                 <img src={eye} alt="" />
                             </div>
-
                         </div>
                     </div>
                     <div className="w-40 mx-auto">
