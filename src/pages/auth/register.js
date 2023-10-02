@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 import InputField from "../../components/inputField";
 import logo_lichylnyk from "../../img/logo_lichylnyk.svg";
 import logo_gerc from "../../img/logo_gerc.svg";
@@ -7,6 +7,7 @@ import icon_komunalka from "../../img/icon_komunalka.svg";
 import Button from "../../components/button";
 import api from "../../api";
 import eye from "../../img/eye.svg";
+import Modal from "../../components/modal/modal";
 
 const Register = () => {
     const [form, setForm] = useState({
@@ -25,6 +26,8 @@ const Register = () => {
     const [bigChars, setBigChars] = useState(false);
     const [digitChars, setDigitChars] = useState(false);
     const [validateFlag, setValidateFlag] = useState(false);
+    const [modalActive, setModalActive] = useState(false);
+    const navigate = useNavigate();
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -46,6 +49,7 @@ const Register = () => {
             const result = await api.signUp(form);
             if (result.status === 200) {
                 setValidateFlag(true);
+                setModalActive(true);
             }
         } catch (e) {
             setFormError(e);
@@ -83,7 +87,19 @@ const Register = () => {
             <h4 className="text-black_figma text-center text-lg">Реєстрація</h4>
             <div className="text-xs text-red-900 text-center">{ formError }</div>
             { validateFlag ?
-                <div className="text-xs text-blue-900 text-center">На вказану адресу вiдправлено листа з посиланням</div> :
+                <Modal active={modalActive} setActive={setModalActive}>
+                    <div className="text-xs text-black_figma p-5 text-center w-[572px] h-auto">
+                        <h1 className="mb-5 text-lg font-medium">Підтвердження акаунту</h1>
+                        <h3 className="mb-3 text-left text-base">Дякуємо за реєстрацію! </h3>
+                        <p className="text-left text-base">Будь ласка, перевірте свою електронну пошту та підтвердіть свою реєстрацію,
+                            щоб розпочати користуватися нашим сервісом. Не забудьте перевірити папку «Спам»,
+                            якщо лист не зʼявиться в основній скринці.<br/> З повагою, команда LYCHYLNYK.</p>
+                        <p className="text-left text-base mt-4"><u>Надіслати мені лист повторно</u></p>
+                    </div>
+                    <div className="pt-2 w-44 mx-auto">
+                        <Button type="button" label={'Ok'} cssType={'primary'} onClick={() => setModalActive(false)} />
+                    </div>
+                </Modal> :
                 <form className="space-y-2" onSubmit={Submit}>
                     <InputField
                         label={'Email'}
