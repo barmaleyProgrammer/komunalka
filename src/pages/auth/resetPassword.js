@@ -1,13 +1,13 @@
-import { useState, useContext } from "react";
+import {useState, useContext, useEffect} from "react";
 // import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import InputField from "../../components/inputField";
 import logo_lichylnyk from "../../img/logo_lichylnyk.svg";
 import Button from "../../components/button";
 import api from "../../api";
-import { Context } from "../../store";
+// import { Context } from "../../store";
 
-const Login = () => {
+const ResetPasswordRequest = () => {
     const navigate = useNavigate();
 
     const [form, setForm] = useState({
@@ -27,10 +27,10 @@ const Login = () => {
 
     const Submit = async (event) => {
         event.preventDefault();
-            await api.getAddress().then((data) => {
+        await api.resetPasswordRequest(form.email).then(() => {
                 // dispatch({ type: 'setAddresses', payload: data });
             })
-            navigate('/cabinet');
+            navigate('/');
         // } catch (e) {
         //     console.error(e.message);
         //     setFormError(e.message);
@@ -60,4 +60,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default ResetPasswordRequest;

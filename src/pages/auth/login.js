@@ -78,6 +78,7 @@ const Login = () => {
                     name={'email'}
                     required={true}
                     value={form.email}
+                    autoComplete="off"
                     onChange={handleInputChange}
                 />
                 <div className={'relative'}>
@@ -87,6 +88,7 @@ const Login = () => {
                         name={'password'}
                         required={true}
                         value={form.password}
+                        autoComplete="off"
                         onChange={handleInputChange}
                     />
                     <div onClick={togglePassInput} className="eye-ico cursor-pointer">

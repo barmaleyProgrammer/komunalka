@@ -17,7 +17,7 @@ const Footer = () => {
                 <div>
                     <ul className="text-gray-500 font-normal text-xs space-y-2">
                         <li>
-                            <NavLink to="/main">Послуги</NavLink>
+                            <NavLink to="/">Послуги</NavLink>
                         </li>
                         <li>
                             <NavLink to="/news">Новини</NavLink>

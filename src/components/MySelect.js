@@ -1,8 +1,9 @@
-const Select = ({options, defaultValue = '', value = '', onChange = null}) => {
+const Select = ({options, defaultValue = '', value = '', onChange = null, name = ''}) => {
     return (
         <select
             className="text-sm outline-none rounded-lg border border-borderColor focus:border-yellow_figma w-full p-2"
             value={value}
+            name={name}
             onChange = {event => onChange(event.target.value)}
         >
             <option disabled value="">{defaultValue}</option>

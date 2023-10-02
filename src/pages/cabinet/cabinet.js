@@ -104,12 +104,13 @@ const Cabinet = () => {
             </div>
             <Modal active={modalActive} setActive={setModalActive}>
                 <InputField
-                    label={'Перейменувати адресу'}
+                    // label={'Перейменувати адресу'}
                     type={'text'}
                     placeholder={'Назва адреси'}
                     name={'name'}
                     required={true}
                     value={currentAddress.name}
+                    autoComplete="off"
                     onChange={handleInputChange}
                 />
                 <div className="pt-2">

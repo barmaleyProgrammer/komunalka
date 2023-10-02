@@ -28,7 +28,7 @@ const Header = () => {
                 <div className="flex items-center justify-between">
                     <ul className="flex flex-row p-0 mt-0 space-x-8 border-0">
                         <li>
-                            <NavLink className="p-0 text-sm" to="/main">Послуги</NavLink>
+                            <NavLink className="p-0 text-sm" to="/">Послуги</NavLink>
                         </li>
                         <li>
                             <NavLink className="p-0 text-sm" to="/news">Новини</NavLink>

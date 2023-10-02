@@ -125,79 +125,88 @@ const AddAddress = () => {
     return (
         <div className="p-5 space-y-3 mt-2 mx-auto w-1/4 rounded-lg shadow-lg">
             <h4 className="text-black_figma text-center">Додати адресу</h4>
-            <div>
-                <Select
-                    options={regions}
-                    defaultValue={'Область'}
-                    onChange={value => setRegion(Number(value))}
-                    value={region}
-                />
-            </div>
-            <div>
-                <Select
-                    options={districts}
-                    defaultValue={'Район'}
-                    onChange={value => setDistrict(Number(value))}
-                    value={district}
-                />
-            </div>
-            <div>
-                <Select
-                    options={towns}
-                    defaultValue={'Місто'}
-                    onChange={value => setTown(Number(value))}
-                    value={town}
-                />
-            </div>
-            <div>
-                {/*<Select*/}
-                {/*    options={streets}*/}
-                {/*    defaultValue={'Вулиця'}*/}
-                {/*    onChange={value => setStreet(Number(value))}*/}
-                {/*    value={street}*/}
-                {/*/>*/}
+            <form onSubmit={() => addObj(flat, flatName)}>
+                <div>
+                    <Select
+                        options={regions}
+                        defaultValue={'Область'}
+                        name={'regions'}
+                        onChange={value => setRegion(Number(value))}
+                        value={region}
+                    />
+                </div>
+                <div>
+                    <Select
+                        options={districts}
+                        defaultValue={'Район'}
+                        name={'districts'}
+                        onChange={value => setDistrict(Number(value))}
+                        value={district}
+                    />
+                </div>
+                <div>
+                    <Select
+                        options={towns}
+                        defaultValue={'Місто'}
+                        name={'towns'}
+                        onChange={value => setTown(Number(value))}
+                        value={town}
+                    />
+                </div>
+                <div>
+                    <Select
+                        options={streets}
+                        defaultValue={'Вулиця'}
+                        name={'streets'}
+                        onChange={value => setStreet(Number(value))}
+                        value={street}
+                    />
 
-                <Autosuggest
-                    suggestions={streets}
-                    onSuggestionsFetchRequested={onSuggestionsFetchRequested}
-                    onSuggestionsClearRequested={onSuggestionsClearRequested}
-                    getSuggestionValue={getSuggestionValue}
-                    renderSuggestion={renderSuggestion}
-                    inputProps={inputProps}
-                />
+                    <Autosuggest
+                        suggestions={streets}
+                        onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+                        onSuggestionsClearRequested={onSuggestionsClearRequested}
+                        getSuggestionValue={getSuggestionValue}
+                        renderSuggestion={renderSuggestion}
+                        inputProps={inputProps}
+                    />
 
-            </div>
-            <div>
-                <Select
-                    options={houses}
-                    defaultValue={'Дім'}
-                    onChange={value => setHouse(Number(value))}
-                    value={house}
-                />
-            </div>
-            <div>
-                <Select
-                    options={flats}
-                    defaultValue={'Квартира'}
-                    onChange={value => setFlat(Number(value))}
-                    value={flat}
-                />
-            </div>
-            <div>
-                <InputField
-                    type={'text'}
-                    placeholder={'Назва адреси'}
-                    name={'name'}
-                    required={true}
-                    value={flatName}
-                    onChange={event => setFlatName(event.target.value)}
-                />
-            </div>
-            <div className="text-center">
-                <button
-                    className="w-28 text-sm py-2 rounded text-white_figma bg-yellow_figma"
-                    onClick={() => addObj(flat, flatName)}>Зберегти</button>
-            </div>
+                </div>
+                <div>
+                    <Select
+                        options={houses}
+                        defaultValue={'Дім'}
+                        name={'houses'}
+                        onChange={value => setHouse(Number(value))}
+                        value={house}
+                    />
+                </div>
+                <div>
+                    <Select
+                        options={flats}
+                        defaultValue={'Квартира'}
+                        name={'flats'}
+                        onChange={value => setFlat(Number(value))}
+                        value={flat}
+                    />
+                </div>
+                <div>
+                    <InputField
+                        type={'text'}
+                        placeholder={'Назва адреси'}
+                        name={'name'}
+                        required={true}
+                        value={flatName}
+                        autoComplete="off"
+                        onChange={event => setFlatName(event.target.value)}
+                    />
+                </div>
+                <div className="text-center">
+                    <button
+                        className="w-28 text-sm py-2 rounded text-white_figma bg-yellow_figma"
+                        type="submit">Зберегти</button>
+                </div>
+            </form>
         </div>
     );
 };

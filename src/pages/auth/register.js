@@ -87,6 +87,7 @@ const Register = () => {
                     required={true}
                     cssClass="email-field"
                     value={form.email}
+                    autoComplete="off"
                     onChange={handleInputChange}
                 />
                 <InputField
@@ -95,6 +96,7 @@ const Register = () => {
                     name={'lastName'}
                     required={true}
                     value={form.lastName}
+                    autoComplete="off"
                     onChange={handleInputChange}
                 />
                 <InputField
@@ -103,6 +105,7 @@ const Register = () => {
                     name={'firstName'}
                     required={true}
                     value={form.firstName}
+                    autoComplete="off"
                     onChange={handleInputChange}
                 />
                 <InputField
@@ -111,6 +114,7 @@ const Register = () => {
                     name={'secondName'}
                     required={true}
                     value={form.secondName}
+                    autoComplete="off"
                     onChange={handleInputChange}
                 />
                 <InputField
@@ -120,6 +124,7 @@ const Register = () => {
                     name={'phone'}
                     required={true}
                     value={form.phone}
+                    autoComplete="off"
                     onChange={handleInputChange}
                 />
                 <div className={'relative'}>
@@ -129,6 +134,7 @@ const Register = () => {
                         name={'password'}
                         required={true}
                         value={form.password}
+                        autoComplete="off"
                         onChange={handleInputChange}
                     />
                     <div onClick={togglePassInput} className="eye-ico cursor-pointer">
