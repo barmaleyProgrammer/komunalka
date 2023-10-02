@@ -52,7 +52,7 @@ const ResetPasswordRequest = () => {
                         <p className="text-left text-base">Будь ласка, перевірте свою електронну пошту та підтвердіть свою реєстрацію,
                             щоб розпочати користуватися нашим сервісом. Не забудьте перевірити папку «Спам»,
                             якщо лист не зʼявиться в основній скринці.<br/> З повагою, команда LYCHYLNYK.</p>
-                        <p className="text-left text-base mt-4"><u>Надіслати мені лист повторно</u></p>
+                        <p className="text-left text-base mt-4 underline underline-offset-4">Надіслати мені лист повторно</p>
                     </div>
                     <div className="pt-2 w-44 mx-auto">
                         <Button type="button" label={'Ok'} cssType={'primary'} onClick={() => setModalActive(false)} />
