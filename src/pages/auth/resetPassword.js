@@ -1,14 +1,10 @@
-import {useState, useContext, useEffect} from "react";
-// import { NavLink } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import InputField from "../../components/inputField";
 import logo_lichylnyk from "../../img/logo_lichylnyk.svg";
 import Button from "../../components/button";
 import api from "../../api";
-// import { Context } from "../../store";
 
 const ResetPasswordRequest = () => {
-    const navigate = useNavigate();
     const [validateFlag, setValidateFlag] = useState(false);
     const [form, setForm] = useState({
         email: (process.env.NODE_ENV === 'development') ? 'grebenyukvd@gmail.com' : '',
@@ -24,17 +20,6 @@ const ResetPasswordRequest = () => {
             [name]: value
         }));
     };
-    // const Submit = async (event) => {
-    //     event.preventDefault();
-    //     try {
-    //         const result = await api.signUp(form);
-    //         if (result.status === 200) {
-    //             setValidateFlag(true);
-    //         }
-    //     } catch (e) {
-    //         setFormError(e);
-    //     }
-    // };
     const Submit = async (event) => {
         event.preventDefault();
         try {
@@ -46,7 +31,6 @@ const ResetPasswordRequest = () => {
         catch (e) {
                 setFormError(e);
             }
-            // navigate('/');
     };
 
     return (
