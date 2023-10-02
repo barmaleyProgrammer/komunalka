@@ -17,7 +17,7 @@ const MyData = () => {
         lastName: state.user.lastName,
         secondName: state.user.secondName,
         phone: state.user.phone,
-        password: state.user.password,
+        // password: state.user.password,
     });
     const [formError, setFormError] = useState('');
     const [type, setTape] = useState('password');
@@ -121,21 +121,21 @@ const MyData = () => {
                             autoComplete="off"
                             onChange={handleInputChange}
                         />
-                        <div className={'relative'}>
-                            <InputField
-                                label={'Пароль'}
-                                type={type}
-                                name={'password'}
-                                required={true}
-                                value={form.password}
-                                placeholder="Змінити"
-                                autoComplete="off"
-                                onChange={handleInputChange}
-                            />
-                            <div onClick={togglePassInput} className="eye-ico cursor-pointer">
-                                <img src={eye} alt="" />
-                            </div>
-                        </div>
+                        {/*<div className={'relative'}>*/}
+                        {/*    <InputField*/}
+                        {/*        label={'Пароль'}*/}
+                        {/*        type={type}*/}
+                        {/*        name={'password'}*/}
+                        {/*        required={true}*/}
+                        {/*        value={form.password}*/}
+                        {/*        placeholder="Змінити"*/}
+                        {/*        autoComplete="off"*/}
+                        {/*        onChange={handleInputChange}*/}
+                        {/*    />*/}
+                        {/*    <div onClick={togglePassInput} className="eye-ico cursor-pointer">*/}
+                        {/*        <img src={eye} alt="" />*/}
+                        {/*    </div>*/}
+                        {/*</div>*/}
                     </div>
                     <div className="w-40 mx-auto">
                         <Button type="submit" cssType="primary" label={'Зберігти зміни'} />

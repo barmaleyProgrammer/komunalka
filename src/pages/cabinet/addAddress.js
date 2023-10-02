@@ -104,7 +104,7 @@ const AddAddress = () => {
     return (
         <div className="p-5 space-y-3 mt-2 mx-auto w-1/4 rounded-lg shadow-lg">
             <h4 className="text-black_figma text-center">Додати адресу</h4>
-            <form onSubmit={() => addObj(flat, flatName)}>
+            {/*<form >*/}
                 <div>
                     <Select
                         options={regions}
@@ -173,9 +173,9 @@ const AddAddress = () => {
                 <div className="text-center">
                     <button
                         className="w-28 text-sm py-2 rounded text-white_figma bg-yellow_figma"
-                        type="submit">Зберегти</button>
+                        type="submit" onClick={() => addObj(flat, flatName)}>Зберегти</button>
                 </div>
-            </form>
+            {/*</form>*/}
         </div>
     );
 };
