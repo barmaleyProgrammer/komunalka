@@ -1,4 +1,4 @@
-import {useState, useContext, useEffect} from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import InputField from "../../components/inputField";
 import logo_lichylnyk from "../../img/logo_lichylnyk.svg";
@@ -7,12 +7,14 @@ import Button from "../../components/button";
 import api from "../../api";
 
 const NewPassword = () => {
+    const url = new URL(window.location);
     const navigate = useNavigate();
     const [type, setTape] = useState('password');
 
     const [form, setForm] = useState({
         email: (process.env.NODE_ENV === 'development') ? 'grebenyukvd@gmail.com' : '',
         password: (process.env.NODE_ENV === 'development') ? 'Test_Drive5' : '',
+        token: url.searchParams.get('code') || ''
     });
     const [formError, setFormError] = useState('');
     const handleInputChange = (event) => {
@@ -22,18 +24,10 @@ const NewPassword = () => {
             [event.target.name]: value
         }));
     };
-    const url = new URL(window.location);
-    const token = url.searchParams.get('code') || '';
-    const payload = {
-    email: form.email,
-    password: form.password,
-        token
-    }
+
     const Submit = async (event) => {
         event.preventDefault();
-        {
-            await api.newPassword(payload);
-        }
+        await api.newPassword(form);
         navigate('/cabinet');
     };
 
