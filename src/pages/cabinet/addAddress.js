@@ -4,25 +4,38 @@ import Select from "../../components/MySelect";
 import api from "../../api";
 import InputField from "../../components/inputField";
 import { useNavigate } from "react-router-dom";
-import Autosuggest from 'react-autosuggest';
+// import AutoSuggest from '../../components/AutoSuggest';
+import AutoSuggest from "react-tailwindcss-select";
 
+const AutoSuggestClassNames = {
+    menuButton: ({ isDisabled }) => (
+        `flex text-sm border border-borderColor rounded-lg shadow-sm transition-all duration-300 focus:ring-0 focus:outline-none focus:border-yellow_figma ${
+            isDisabled
+                ? "bg-gray-200"
+                : "bg-white_figma"
+        }`
+    ),
+    menu: "absolute z-10 w-full bg-white_figma rounded-lg shadow-lg text-sm",
+    searchBox: "w-full py-2 pl-2 text-sm border border-borderColor rounded focus:ring-0 focus:outline-none",
+    searchIcon: "hidden"
+};
 const AddAddress = () => {
     const [,dispatch] = useContext(Context);
     const navigate = useNavigate();
     const [regions, setRegions] = useState([]);
-    const [region, setRegion] = useState('');
+    const [region, setRegion] = useState(null);
 
     const [districts, setDistricts] = useState([]);
-    const [district, setDistrict] = useState('');
+    const [district, setDistrict] = useState(null);
 
     const [towns, setTowns] = useState([]);
-    const [town, setTown] = useState('');
+    const [town, setTown] = useState(null);
 
     const [streets, setStreets] = useState([]);
-    const [street, setStreet] = useState('');
+    const [street, setStreet] = useState(null);
 
     const [houses, setHouses] = useState([]);
-    const [house, setHouse] = useState('');
+    const [house, setHouse] = useState(null);
 
     const [flats, setFlats] = useState([]);
     const [flat, setFlat] = useState('');
@@ -37,160 +50,162 @@ const AddAddress = () => {
     }, []);
 
     useEffect( () => {
+        setDistricts([]);
+        setDistrict(null);
+        setTowns([]);
+        setTown(null);
+        setStreets([]);
+        setStreet(null);
+        setHouses([]);
+        setHouse(null);
+        setFlats([]);
+        setFlat(null);
         if (!region) {
-            setDistricts([]);
             return;
         }
+
         const fetchData = async () => {
-            const result = await api.getDistricts(region);
+            const result = await api.getDistricts(region.value);
             setDistricts(result);
         };
         fetchData();
     }, [region]);
 
     useEffect( () => {
+        setTowns([]);
+        setTown(null);
+        setStreets([]);
+        setStreet(null);
+        setHouses([]);
+        setHouse(null);
+        setFlats([]);
+        setFlat(null);
         if (!district) {
-            setTowns([]);
             return;
         }
         const fetchData = async () => {
-            const result = await api.getTowns(district);
+            const result = await api.getTowns(district.value);
             setTowns(result);
         };
         fetchData();
     }, [district]);
 
     useEffect( () => {
+        setStreets([]);
+        setStreet(null);
+        setHouses([]);
+        setHouse(null);
+        setFlats([]);
+        setFlat(null);
         if (!town) {
-            setStreets([]);
             return;
         }
         const fetchData = async () => {
-            const result = await api.getStreets(town);
+            const result = await api.getStreets(town.value);
             setStreets(result);
         };
         fetchData();
     }, [town]);
 
     useEffect( () => {
+        setHouses([]);
+        setHouse(null);
+        setFlats([]);
+        setFlat(null);
         if (!street) {
-            setHouses([]);
             return;
         }
         const fetchData = async () => {
-            const result = await api.getHouses(street);
+            const result = await api.getHouses(street.value);
             setHouses(result);
         };
         fetchData();
     }, [street]);
 
     useEffect( () => {
+        setFlats([]);
+        setFlat(null);
         if (!house) {
-            setFlats([]);
             return;
         }
         const fetchData = async () => {
-            const result = await api.getFlats(house);
+            const result = await api.getFlats(house.value);
             setFlats(result);
         };
         fetchData();
     }, [house]);
 
-    const addObj = async (flat, flatName) => {
-        await api.addObject(flat, flatName);
+    const addObj = async (e) => {
+        e.preventDefault();
+        await api.addObject(flat.value, flatName);
         await api.getAddress().then((data) => dispatch({ type: 'setAddresses', payload: data }));
         navigate('/cabinet');
     }
 
-    const onSuggestionsFetchRequested = () => {
-        return streets;
-    };
-    const onSuggestionsClearRequested = () => {
-        return streets;
-    };
-    const getSuggestionValue = suggestion => suggestion.label;
-
-    const renderSuggestion = suggestion => (
-        <div>
-            {suggestion.label}
-        </div>
-    );
-
-    const inputProps = {
-        placeholder: 'Type a programming language',
-        value: street,
-        onChange: (value) => setStreet(value)
-    };
-
     return (
         <div className="p-5 space-y-3 mt-2 mx-auto w-1/4 rounded-lg shadow-lg">
             <h4 className="text-black_figma text-center">Додати адресу</h4>
-            <form onSubmit={() => addObj(flat, flatName)}>
-                <div>
-                    <Select
-                        options={regions}
-                        defaultValue={'Область'}
-                        name={'regions'}
-                        onChange={value => setRegion(Number(value))}
+            <form action="#" onSubmit={addObj}>
+                <div className="py-2">
+                    <AutoSuggest
+                        classNames={AutoSuggestClassNames}
+                        placeholder={'Область'}
                         value={region}
+                        options={regions}
+                        onChange={(item) => setRegion(item)}
                     />
                 </div>
-                <div>
-                    <Select
-                        options={districts}
-                        defaultValue={'Район'}
-                        name={'districts'}
-                        onChange={value => setDistrict(Number(value))}
+                <div className="py-2">
+                    <AutoSuggest
+                        classNames={AutoSuggestClassNames}
+                        placeholder={'Район'}
                         value={district}
+                        options={districts}
+                        isSearchable
+                        onChange={(item) => setDistrict(item)}
                     />
                 </div>
-                <div>
-                    <Select
-                        options={towns}
-                        defaultValue={'Місто'}
-                        name={'towns'}
-                        onChange={value => setTown(Number(value))}
+                <div className="py-2">
+                    <AutoSuggest
+                        classNames={AutoSuggestClassNames}
+                        placeholder={'Місто'}
                         value={town}
+                        options={towns}
+                        isSearchable
+                        onChange={(item) => setTown(item)}
                     />
                 </div>
-                <div>
-                    <Select
-                        options={streets}
-                        defaultValue={'Вулиця'}
-                        name={'streets'}
-                        onChange={value => setStreet(Number(value))}
+                <div className="py-2">
+                    <AutoSuggest
+                        classNames={AutoSuggestClassNames}
+                        placeholder={'Вулиця'}
                         value={street}
+                        options={streets}
+                        isSearchable
+                        onChange={(item) => setStreet(item)}
                     />
-
-                    <Autosuggest
-                        suggestions={streets}
-                        onSuggestionsFetchRequested={onSuggestionsFetchRequested}
-                        onSuggestionsClearRequested={onSuggestionsClearRequested}
-                        getSuggestionValue={getSuggestionValue}
-                        renderSuggestion={renderSuggestion}
-                        inputProps={inputProps}
-                    />
-
                 </div>
-                <div>
-                    <Select
-                        options={houses}
-                        defaultValue={'Дім'}
-                        name={'houses'}
-                        onChange={value => setHouse(Number(value))}
+                <div className="py-2">
+                    <AutoSuggest
+                        classNames={AutoSuggestClassNames}
+                        placeholder={'Дім'}
                         value={house}
+                        options={houses}
+                        isSearchable
+                        onChange={(item) => setHouse(item)}
                     />
                 </div>
-                <div>
-                    <Select
-                        options={flats}
-                        defaultValue={'Квартира'}
-                        name={'flats'}
-                        onChange={value => setFlat(Number(value))}
+                <div className="py-2">
+                    <AutoSuggest
+                        classNames={AutoSuggestClassNames}
+                        placeholder={'Квартира'}
                         value={flat}
+                        options={flats}
+                        isSearchable
+                        onChange={(item) => setFlat(item)}
                     />
                 </div>
-                <div>
+                <div className="py-2">
                     <InputField
                         type={'text'}
                         placeholder={'Назва адреси'}
