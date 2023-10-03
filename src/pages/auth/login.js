@@ -57,6 +57,15 @@ const Login = () => {
             });
         }
     };
+    // const SocialNetworks = async (event) => {
+    //     const url = new URL(window.location);
+    //     event.preventDefault();
+    //         const result = await api.authSocialNetworks();;
+    //         if (result.status === 302) {
+    //             sessionStorage.setItem(url.searchParams.get('accessToken'));
+    //             navigate('/cabinet');
+    //         }
+    // };
 
     const togglePassInput = () => {
         if (type === 'password') {
@@ -124,13 +133,13 @@ const Login = () => {
                     <div className="basis-1/2 border border-[#E8E8E8;] rounded">
                         <div className="flex py-3 justify-center space-x-1">
                             <img src={google} alt="" />
-                            <p className="text-sm whitespace-nowrap">Войти с Google</p>
+                            <NavLink to="" className="text-sm whitespace-nowrap" >Войти с Google</NavLink>
                         </div>
                     </div>
                     <div className="basis-1/2 border border-[#E8E8E8;] rounded">
                         <div className="flex py-3 justify-center space-x-1">
                             <img src={facebook} alt="" />
-                            <p className="text-sm whitespace-nowrap">Войти с Facebook</p>
+                            <NavLink to="" className="text-sm whitespace-nowrap" >Войти с Facebook</NavLink>
                         </div>
                     </div>
                 </div>

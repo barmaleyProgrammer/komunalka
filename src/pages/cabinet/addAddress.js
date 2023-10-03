@@ -95,7 +95,8 @@ const AddAddress = () => {
         fetchData();
     }, [house]);
 
-    const addObj = async (flat, flatName) => {
+    const addObj = async (e, flat, flatName) => {
+        e.preventDefault();
         await api.addObject(flat, flatName);
         await api.getAddress().then((data) => dispatch({ type: 'setAddresses', payload: data }));
         navigate('/cabinet');
@@ -104,8 +105,8 @@ const AddAddress = () => {
     return (
         <div className="p-5 space-y-3 mt-2 mx-auto w-1/4 rounded-lg shadow-lg">
             <h4 className="text-black_figma text-center">Додати адресу</h4>
-            {/*<form >*/}
-                <div>
+            <form action="#" onSubmit={(e) => addObj(e, flat, flatName)}>
+                <div className="py-2">
                     <Select
                         options={regions}
                         defaultValue={'Область'}
@@ -114,7 +115,7 @@ const AddAddress = () => {
                         value={region}
                     />
                 </div>
-                <div>
+                <div className="py-2">
                     <Select
                         options={districts}
                         defaultValue={'Район'}
@@ -123,7 +124,7 @@ const AddAddress = () => {
                         value={district}
                     />
                 </div>
-                <div>
+                <div className="py-2">
                     <Select
                         options={towns}
                         defaultValue={'Місто'}
@@ -132,7 +133,7 @@ const AddAddress = () => {
                         value={town}
                     />
                 </div>
-                <div>
+                <div className="py-2">
                     <Select
                         options={streets}
                         defaultValue={'Вулиця'}
@@ -141,7 +142,7 @@ const AddAddress = () => {
                         value={street}
                     />
                 </div>
-                <div>
+                <div className="py-2">
                     <Select
                         options={houses}
                         defaultValue={'Дім'}
@@ -150,7 +151,7 @@ const AddAddress = () => {
                         value={house}
                     />
                 </div>
-                <div>
+                <div className="py-2">
                     <Select
                         options={flats}
                         defaultValue={'Квартира'}
@@ -159,7 +160,7 @@ const AddAddress = () => {
                         value={flat}
                     />
                 </div>
-                <div>
+                <div className="py-2">
                     <InputField
                         type={'text'}
                         placeholder={'Назва адреси'}
@@ -170,12 +171,12 @@ const AddAddress = () => {
                         onChange={event => setFlatName(event.target.value)}
                     />
                 </div>
-                <div className="text-center">
+                <div className="py-2 text-center">
                     <button
                         className="w-28 text-sm py-2 rounded text-white_figma bg-yellow_figma"
-                        type="submit" onClick={() => addObj(flat, flatName)}>Зберегти</button>
+                        type="submit">Зберегти</button>
                 </div>
-            {/*</form>*/}
+            </form>
         </div>
     );
 };
