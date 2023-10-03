@@ -13,7 +13,7 @@ const signUp = (data) => {
     const newConfig = {...config};
     delete newConfig.headers.apiauthorization;
     return axios.post('/account/signup', data, newConfig)
-        .then((res) => res.data)
+        .then((res) => res)
         .catch((error) => {
             throw error.response.data.error;
         });
@@ -63,6 +63,16 @@ const validation = (email, token) => {
 }
 const resetPasswordRequest = (email) => {
     return axios.get(`https://api-test.komunalka.ua/api/v2/account/reset/password?email=${encodeURIComponent(email)}&source=2`, config).then((res) => res);
+}
+const authSocialNetworks = () => {
+    const newConfig = {...config};
+    delete newConfig.headers.apiauthorization;
+    return axios.get(`https://api-test.komunalka.ua/api/user/oauth2?authTypeId=google&successUrl=http://localhost:3000/cabinet&errorUrl=http://localhost:3000/cabinet`, newConfig).then((res) => {
+        sessionStorage.setItem('accessToken', res.data.accessToken);
+        sessionStorage.setItem('refreshToken', res.data.refreshToken);
+        config.headers.apiauthorization = `Bearer ${res.data.accessToken}`;
+        return res;
+    });
 }
 const newPassword = (payload) => {
     return axios.post(`account/reset/password`,payload, config).then((response) => {
@@ -237,5 +247,6 @@ export default {
     updateUser,
     renameAddress,
     sendCounterData,
-    getCountersHistory
+    getCountersHistory,
+    authSocialNetworks
 };

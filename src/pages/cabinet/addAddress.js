@@ -1,10 +1,8 @@
 import { useEffect, useState, useContext } from 'react';
 import { Context } from "../../store";
-import Select from "../../components/MySelect";
 import api from "../../api";
 import InputField from "../../components/inputField";
 import { useNavigate } from "react-router-dom";
-// import AutoSuggest from '../../components/AutoSuggest';
 import AutoSuggest from "react-tailwindcss-select";
 
 const AutoSuggestClassNames = {
@@ -216,7 +214,7 @@ const AddAddress = () => {
                         onChange={event => setFlatName(event.target.value)}
                     />
                 </div>
-                <div className="text-center">
+                <div className="py-2 text-center">
                     <button
                         className="w-28 text-sm py-2 rounded text-white_figma bg-yellow_figma"
                         type="submit">Зберегти</button>

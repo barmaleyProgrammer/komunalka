@@ -12,8 +12,10 @@ const NewPassword = () => {
     const [type, setTape] = useState('password');
 
     const [form, setForm] = useState({
-        email: (process.env.NODE_ENV === 'development') ? 'grebenyukvd@gmail.com' : '',
+        // email: (process.env.NODE_ENV === 'development') ? 'grebenyukvd@gmail.com' : '',
+        email: url.searchParams.get('email') || '',
         password: (process.env.NODE_ENV === 'development') ? 'Test_Drive5' : '',
+        // password: '',
         token: url.searchParams.get('code') || ''
     });
     const [formError, setFormError] = useState('');
