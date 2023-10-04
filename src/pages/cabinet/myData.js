@@ -41,7 +41,7 @@ const MyData = () => {
         try {
             await api.updateUser(form);
             dispatch({ type: 'setAccount', payload: form })
-            navigate('/cabinet');
+            // navigate('/cabinet');
         } catch (e) {
             console.error(e.message);
             setFormError(e.message);
@@ -77,9 +77,10 @@ const MyData = () => {
                         <InputField
                             label={'Прізвище'}
                             type={'text'}
-                            name={'firstName'}
+                            name={'lastName'}
+                            placeholder={'Іванов'}
                             required={true}
-                            value={form.firstName}
+                            value={form.lastName}
                             autoComplete="off"
                             onChange={handleInputChange}
                         />
@@ -96,16 +97,17 @@ const MyData = () => {
                         <InputField
                             label={'Ім’я'}
                             type={'text'}
-                            name={'lastName'}
+                            name={'firstName'}
+                            placeholder={'Іван'}
                             required={true}
-                            value={form.lastName}
+                            value={form.firstName}
                             autoComplete="off"
                             onChange={handleInputChange}
                         />
                         <InputField
                             label={'Телефон'}
                             type={'phone'}
-                            placeholder={'+38(0_ _) _ _ _ - _ _ _ - _ _'}
+                            placeholder={'+38(0_ _) _ _ _ - _ _ - _ _'}
                             name={'phone'}
                             required={true}
                             value={form.phone}
@@ -116,6 +118,7 @@ const MyData = () => {
                             label={'По батькові'}
                             type={'text'}
                             name={'secondName'}
+                            placeholder={'Іванович'}
                             required={true}
                             value={form.secondName}
                             autoComplete="off"

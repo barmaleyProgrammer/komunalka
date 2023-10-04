@@ -13,8 +13,8 @@ const Register = () => {
     const [form, setForm] = useState({
         email: (process.env.NODE_ENV === 'development') ? 'grebenyukvd@gmail.com' : '',
         password: (process.env.NODE_ENV === 'development') ? 'Test_Drive5' : '',
-        firstName: (process.env.NODE_ENV === 'development') ? 'first_Прізвище' : '',
-        lastName: (process.env.NODE_ENV === 'development') ? 'last_Імʼя' : '',
+        firstName: (process.env.NODE_ENV === 'development') ? 'first_Імʼя' : '',
+        lastName: (process.env.NODE_ENV === 'development') ? 'last_Прізвище' : '',
         secondName: (process.env.NODE_ENV === 'development') ? 'second_По батькові' : '',
         phone: (process.env.NODE_ENV === 'development') ? '876454876' : '',
         source: (process.env.NODE_ENV === 'development') ? 'localhost_3000' : '2',
