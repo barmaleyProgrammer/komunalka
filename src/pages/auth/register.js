@@ -19,6 +19,7 @@ const Register = () => {
         phone: (process.env.NODE_ENV === 'development') ? '876454876' : '',
         source: (process.env.NODE_ENV === 'development') ? 'localhost_3000' : '2',
         // source: `${window.location.protocol}//${window.location.host}/auth/validate`,
+        rememberMe: false
     });
     const [formError, setFormError] = useState('');
     const [type, setTape] = useState('password');
@@ -30,10 +31,12 @@ const Register = () => {
     const navigate = useNavigate();
 
     const handleInputChange = (event) => {
-        const { name, value } = event.target;
+        const value = (event.target.type === 'checkbox') ? event.target.checked : event.target.value;
+        // const { name, value } = event.target;
         setForm((prevProps) => ({
             ...prevProps,
-            [name]: value
+            [event.target.name]: value
+            // [name]: value
         }));
     };
     const togglePassInput = () => {
@@ -189,6 +192,7 @@ const Register = () => {
                             </div>
                         </div>
                     </div>
+                    <hr className="border border-[#E2E8F0]"/>
                     <div className="text-black_figma text-sm font-light">
                         При вході через сайти партнерів є змога<br />автоматично додати адреси
                     </div>
@@ -205,8 +209,23 @@ const Register = () => {
                             </div>
                         </div>
                     </div>
-                    <Button type="submit" label={'Зареєструватися'} cssType={'primary'} />
                     <div className="py-2 font-light text-sm">
+                        Виниклики питання? <NavLink to="#" className="text-[#3E77AA]">Детальніше</NavLink>
+                    </div>
+                    <Button type="submit" label={'Зареєструватися'} cssType={'primary'} />
+                    <div className="flex mt-5">
+                            <input className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
+                                   id="rememberMe"
+                                   name={'rememberMe'}
+                                   type="checkbox"
+                                   checked={form.rememberMe}
+                                   onChange={handleInputChange}
+                            />
+                        <div className="px-2 font-light text-sm">
+                            Я згоден з <NavLink to="#" className="text-[#3E77AA]">умовами угоди користувача</NavLink>
+                        </div>
+                    </div>
+                    <div className="text-center py-2 font-light text-sm">
                         Вже є аккаунт? <NavLink to="/auth/login" className="text-[#3E77AA]">Вхід</NavLink>
                     </div>
                 </form>
