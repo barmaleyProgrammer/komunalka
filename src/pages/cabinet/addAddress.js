@@ -145,6 +145,17 @@ const AddAddress = () => {
             <h4 className="text-black_figma text-center">Додати адресу</h4>
             <form action="#" onSubmit={addObj}>
                 <div className="py-2">
+                    <InputField
+                        type={'text'}
+                        placeholder={'Назва адреси'}
+                        name={'name'}
+                        required={true}
+                        value={flatName}
+                        autoComplete="off"
+                        onChange={event => setFlatName(event.target.value)}
+                    />
+                </div>
+                <div className="py-2">
                     <AutoSuggest
                         classNames={AutoSuggestClassNames}
                         placeholder={'Область'}
@@ -201,17 +212,6 @@ const AddAddress = () => {
                         options={flats}
                         isSearchable
                         onChange={(item) => setFlat(item)}
-                    />
-                </div>
-                <div className="py-2">
-                    <InputField
-                        type={'text'}
-                        placeholder={'Назва адреси'}
-                        name={'name'}
-                        required={true}
-                        value={flatName}
-                        autoComplete="off"
-                        onChange={event => setFlatName(event.target.value)}
                     />
                 </div>
                 <div className="py-2 text-center">
