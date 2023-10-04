@@ -12,8 +12,7 @@ const ResetPasswordRequest = () => {
     const navigate = useNavigate();
     const [form, setForm] = useState({
         email: (process.env.NODE_ENV === 'development') ? 'grebenyukvd@gmail.com' : '',
-        rememberMe: false
-
+        source: (process.env.NODE_ENV === 'development') ? 'localhost_3000' : '2',
     });
     const [formError, setFormError] = useState('');
 
@@ -27,7 +26,7 @@ const ResetPasswordRequest = () => {
     const Submit = async (event) => {
         event.preventDefault();
         try {
-            const result = await api.resetPasswordRequest(form.email);
+            const result = await api.resetPasswordRequest(form.email, form.source);
             if (result.status === 200) {
                 setValidateFlag(true);
                 setModalActive(true);

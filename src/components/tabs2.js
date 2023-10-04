@@ -5,7 +5,6 @@ const Tabs2 = ({ objectId }) => {
             <li><NavLink to={`/counters/${objectId}`} className="text-sm p-0">Мої лічильники</NavLink></li>
             <li><NavLink to={`/counters/${objectId}/history`} className="text-sm p-0">Історія показань</NavLink></li>
             <li><NavLink to={`/counters/${objectId}/graphsTables`} className="text-sm p-0">Графіки споживань</NavLink></li>
-            <li><NavLink to="#" className="text-sm p-0">Історія фотографій</NavLink></li>
         </ul>
     );
 };

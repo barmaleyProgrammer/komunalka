@@ -5,7 +5,6 @@ import {NavLink} from "react-router-dom";
 import api from "../../api";
 import Breadcrumbs from "../../components/breadcrumbs";
 import ServiceTypes from "../../components/serviceTypes";
-import Button from "../../components/button";
 import Tabs2 from "../../components/tabs2";
 import Calendar from 'react-calendar';
 import  'react-calendar/dist/Calendar.css' ;
@@ -160,9 +159,6 @@ const History = () => {
                                 return <CounterBlock item={item} key={`CounterBlock_${key}`} />
                             }
                         })}
-                        <div className="mx-auto w-48">
-                            <Button type="button" label={'Переглянути ще'} cssType={'primary'} onClick={handleInputChange}/>
-                        </div>
                     </div>
             }
             </div>

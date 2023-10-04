@@ -17,7 +17,7 @@ const Register = () => {
         lastName: (process.env.NODE_ENV === 'development') ? 'last_Імʼя' : '',
         secondName: (process.env.NODE_ENV === 'development') ? 'second_По батькові' : '',
         phone: (process.env.NODE_ENV === 'development') ? '876454876' : '',
-        source: '2',
+        source: (process.env.NODE_ENV === 'development') ? 'localhost_3000' : '2',
         // source: `${window.location.protocol}//${window.location.host}/auth/validate`,
     });
     const [formError, setFormError] = useState('');
