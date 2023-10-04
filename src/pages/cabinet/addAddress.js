@@ -18,7 +18,10 @@ const AutoSuggestClassNames = {
     searchIcon: "hidden"
 };
 const AddAddress = () => {
-    const [,dispatch] = useContext(Context);
+    const [state, dispatch] = useContext(Context);
+
+    const objCount = state.addresses.length + 1;
+
     const navigate = useNavigate();
     const [regions, setRegions] = useState([]);
     const [region, setRegion] = useState(null);
@@ -38,7 +41,7 @@ const AddAddress = () => {
     const [flats, setFlats] = useState([]);
     const [flat, setFlat] = useState('');
 
-    const [flatName, setFlatName] = useState('');
+    const [flatName, setFlatName] = useState(`Квартіра ${objCount}`);
 
     useEffect( () => {
         const fetchData = async () => {
@@ -168,6 +171,7 @@ const AddAddress = () => {
                     <AutoSuggest
                         classNames={AutoSuggestClassNames}
                         placeholder={'Район'}
+                        searchInputPlaceholder={'Пошук'}
                         value={district}
                         options={districts}
                         isSearchable
@@ -178,6 +182,7 @@ const AddAddress = () => {
                     <AutoSuggest
                         classNames={AutoSuggestClassNames}
                         placeholder={'Місто'}
+                        searchInputPlaceholder={'Пошук'}
                         value={town}
                         options={towns}
                         isSearchable
@@ -188,6 +193,7 @@ const AddAddress = () => {
                     <AutoSuggest
                         classNames={AutoSuggestClassNames}
                         placeholder={'Вулиця'}
+                        searchInputPlaceholder={'Пошук'}
                         value={street}
                         options={streets}
                         isSearchable
@@ -198,6 +204,7 @@ const AddAddress = () => {
                     <AutoSuggest
                         classNames={AutoSuggestClassNames}
                         placeholder={'Дім'}
+                        searchInputPlaceholder={'Пошук'}
                         value={house}
                         options={houses}
                         isSearchable
@@ -208,6 +215,7 @@ const AddAddress = () => {
                     <AutoSuggest
                         classNames={AutoSuggestClassNames}
                         placeholder={'Квартира'}
+                        searchInputPlaceholder={'Пошук'}
                         value={flat}
                         options={flats}
                         isSearchable
