@@ -84,6 +84,15 @@ const Register = () => {
 
     }, [form.password]);
 
+    //  const phoneNumberFormatter = () => {
+    //     const inputField = document.getElementById('phone-number');
+    //     // const formattedInputValue = formatPhoneNumber(inputField.value);
+    //     const phoneNumber = inputField.value.replace(/[^\d]/g, '');
+    //     const formattedInputValue = `(+${phoneNumber.slice(0, 2)}) ${phoneNumber.slice(2, 5)
+    //     }-${phoneNumber.slice(5, 8)}-${phoneNumber.slice(8, 10)}-${phoneNumber.slice(10, 12)}`;
+    //     inputField.value = formattedInputValue;
+    // }
+
     return (
         <div className="mt-20 mb-20 p-10 mx-auto rounded-lg shadow-lg sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/4">
             <img src={logo_lichylnyk} className="h-16 mb-8 mx-auto" alt="Flowbite Logo" />
@@ -145,7 +154,7 @@ const Register = () => {
                     <InputField
                         label={'Телефон'}
                         type={'phone'}
-                        placeholder={'+38(0_ _) _ _ _ - _ _ _ - _ _'}
+                        placeholder={'+38(0_ _) _ _ _ - _ _ - _ _'}
                         name={'phone'}
                         required={true}
                         value={form.phone}
