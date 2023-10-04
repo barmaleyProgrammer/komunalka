@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 const Breadcrumbs = ({items}) => {
     const itemLink = (item) => {
         return (
-            <NavLink to={item.to} className="inline-flex items-center font-medium text-gray-700 hover:text-blue-600">
+            <NavLink to={item.to} className="inline-flex items-center text-gray-700">
                 {item.label}
                 <svg className="w-3 h-3 mx-1 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                     <path stroke="currentColor" d="m1 9 4-4-4-4"/>

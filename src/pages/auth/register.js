@@ -9,6 +9,7 @@ import Button from "../../components/button";
 import api from "../../api";
 import eye from "../../img/eye.svg";
 import Modal from "../../components/modal/modal";
+import UserAgreement from "../userAgreement";
 
 const Register = () => {
     const [form, setForm] = useState({
@@ -220,7 +221,7 @@ const Register = () => {
                         </div>
                     </div>
                     <div className="py-2 font-light text-sm">
-                        Виниклики питання? <NavLink to="#" className="text-[#3E77AA]">Детальніше</NavLink>
+                        Виникли питання? <NavLink to="#" className="text-[#3E77AA]">Детальніше</NavLink>
                     </div>
                     <Button type="submit" label={'Зареєструватися'} cssType={'primary'} />
                     <div className="flex mt-5">
@@ -232,7 +233,7 @@ const Register = () => {
                                    onChange={handleInputChange}
                             />
                         <div className="px-2 font-light text-sm">
-                            Я згоден з <NavLink to="#" className="text-[#3E77AA]">умовами угоди користувача</NavLink>
+                            Я згоден з <NavLink to="/userAgreement" className="text-[#3E77AA]">умовами угоди користувача</NavLink>
                         </div>
                     </div>
                     <div className="text-center py-2 font-light text-sm">

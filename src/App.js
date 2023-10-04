@@ -24,6 +24,7 @@ import CountersGraphsTables from "./pages/counters/graphsTables";
 import ResetPassword from "./pages/auth/resetPassword";
 import NotFound from "./pages/notFound";
 import NewPassword from "./pages/auth/newPassword";
+import UserAgreement from "./pages/userAgreement";
 
 const App = () => {
     return (
@@ -38,6 +39,7 @@ const App = () => {
                             <Route path="/faq" element={<Faq />} />
                             <Route path="/news" element={<News />} />
                             <Route path="/contacts" element={<Contacts />} />
+                            <Route path="/userAgreement" element={<UserAgreement />} />
 
                             <Route path="/auth">
                                 <Route path="login" element={<Login />} />
