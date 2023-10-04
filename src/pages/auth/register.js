@@ -3,7 +3,8 @@ import {NavLink, useNavigate} from "react-router-dom";
 import InputField from "../../components/inputField";
 import logo_lichylnyk from "../../img/logo_lichylnyk.svg";
 import logo_gerc from "../../img/logo_gerc.svg";
-import icon_komunalka from "../../img/icon_komunalka.svg";
+// import icon_komunalka from "../../img/icon_komunalka.svg";
+import logo_com_block from "../../img/logo_com_block.png";
 import Button from "../../components/button";
 import api from "../../api";
 import eye from "../../img/eye.svg";
@@ -208,8 +209,8 @@ const Register = () => {
                     <div className="flex flex-row space-x-2">
                         <div className="basis-1/2 border border-[#E8E8E8;] rounded">
                             <div className="flex p-2 justify-center space-x-1">
-                                <img src={icon_komunalka} alt=""/>
-                                <p className="text-sm pt-1">Комуналка</p>
+                                <img src={logo_com_block} alt=""/>
+                                {/*<p className="text-sm pt-1">Комуналка</p>*/}
                             </div>
                         </div>
                         <div className="basis-1/2 border border-[#E8E8E8;] rounded" title="">
