@@ -33,10 +33,6 @@ const Validate = () => {
         };
         fetchData();
     }, []);
-    return (
-        <div className="w-[50%] mx-auto">
-            <h2 className="py-1 text-[24px]">валідовано</h2>
-        </div>
-    );
+    return (<div></div>);
 };
 export default Validate;
