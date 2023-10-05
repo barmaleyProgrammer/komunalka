@@ -172,6 +172,8 @@ const AddAddress = ({ close }) => {
                     <AutoSuggest
                         classNames={AutoSuggestClassNames}
                         placeholder={'Область'}
+                        searchInputPlaceholder={'Пошук'}
+                        noOptionsMessage={'Варіантів не знайдено'}
                         value={region}
                         options={regions}
                         onChange={(item) => setRegion(item)}
