@@ -125,10 +125,10 @@ const Login = () => {
                     Ще немає аккаунту? <NavLink to="/auth/register" className="text-[#3E77AA]">Зареєструватися</NavLink>
                 </div>
 
-                <div className="flex gap-2">
-                    <hr className="w-1/3 text-borderColor mt-3"/>
+                <div className="flex gap-2 text-[#797878]">
+                    <hr className="w-1/3 mt-3"/>
                     <span className="w-1/3 whitespace-nowrap">чи за допомогою</span>
-                    <hr className="w-1/3 text-borderColor mt-3"/>
+                    <hr className="ml-4 w-1/3 mt-3"/>
                 </div>
                 <div className="flex flex-row space-x-2">
                     <div className="basis-1/2 border border-[#E8E8E8;] rounded">
