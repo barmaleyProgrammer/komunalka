@@ -238,18 +238,9 @@ const AddAddress = ({ close }) => {
                     />
                 </div>
                 <div className="py-2 text-center">
-                    {/*{  */}
-                    {/*    ?*/}
-                    {/*    <button disabled={true}*/}
-                    {/*            className=" w-60 h-12 text-base py-2 rounded text-white_figma bg-yellow_figma"*/}
-                    {/*            type="submit">Зберігти</button>*/}
-                    {/*    :*/}
-                    {/*    <button disabled={false}*/}
-                    {/*            className=" w-60 h-12 text-base py-2 rounded text-white_figma bg-yellow_figma"*/}
-                    {/*            type="submit">Зберігти</button>*/}
-                    {/*}*/}
                     <button
-                        className=" w-60 h-12 text-base py-2 rounded text-white_figma bg-yellow_figma"
+                        disabled={!flat}
+                        className="w-60 h-12 text-base py-2 rounded text-white_figma bg-yellow_figma disabled:opacity-70"
                         type="submit">Зберігти</button>
                 </div>
             </form>
