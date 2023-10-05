@@ -17,7 +17,7 @@ const Breadcrumbs = ({items}) => {
             <ol className="inline-flex items-center space-x-1 md:space-x-3">
                 {items.map((item, index) => {
                     return (
-                        <li className="inline-flex items-center text-xs" key={index}>
+                        <li className="inline-flex text-[#797878] items-center text-xs" key={index}>
                             {item.to ? itemLink(item) : item.label}
                     </li>)
                 })}

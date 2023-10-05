@@ -110,7 +110,7 @@ const Counters = () => {
     };
 
     return (
-        <div className="font-light mt-2 mx-auto w-[1152px]">
+        <div className="mt-2 mx-auto w-[1152px]">
             <div>
                 <Breadcrumbs items={breadCrumbs}/>
             </div>
