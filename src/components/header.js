@@ -25,7 +25,7 @@ const Header = () => {
                 <NavLink to="/">
                     <img src={logo_lichylnyk} className="mr-3" alt="" />
                 </NavLink>
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between underline underline-offset-4 decoration-0">
                     <ul className="flex flex-row p-0 mt-0 space-x-8 border-0">
                         <li>
                             <NavLink className="p-0 text-sm" to="/">Послуги</NavLink>
