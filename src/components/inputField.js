@@ -14,7 +14,7 @@ const InputField = ({
         <fieldset className={cssClass}>
             {label ? <label htmlFor={name} className="text-sm text-black_figma font-light">{label}</label> : ''}
             <input
-                className="text-sm outline-none rounded-lg border border-borderColor focus:border-yellow_figma w-full p-2"
+                className="text-sm outline-none rounded border border-borderColor focus:border-yellow_figma w-full p-4"
                 type={type}
                 name={name}
                 id={name}

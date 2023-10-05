@@ -1,10 +1,11 @@
 .agreement ol {
     counter-reset: item
 }
+
 .agreement li{
     display: block
 }
 .agreement li:before {
-    content: counters(item, ".") "."" "" "" "" "" ";
+    content: counters(item, ".") "."" ";
     counter-increment: item
 }

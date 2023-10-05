@@ -10,11 +10,13 @@ import DropDownMenu from "../../components/dropDownMenu";
 import Modal from '../../components/modal/modal'
 import InputField from "../../components/inputField";
 import Button from "../../components/button";
+import AddAddress from './addAddress';
 
 const Cabinet = () => {
     const [state, dispatch] = useContext(Context);
     const navigate = useNavigate();
     const [modalActive, setModalActive] = useState(false);
+    const [modalAddAddressActive, setModalAddAddressActive] = useState(false);
     const [currentAddress, setCurrentAddress] = useState('');
     const breadCrumbs = [
         {
@@ -52,6 +54,10 @@ const Cabinet = () => {
         const res =  state.addresses.find((item) => item.objectId === objectId);
         setCurrentAddress(res);
         setModalActive(true);
+    };
+    const openModalAddAddresses = (e) => {
+        e.stopPropagation();
+        setModalAddAddressActive(true);
     };
 
     const updateAddress = async () => {
@@ -95,7 +101,7 @@ const Cabinet = () => {
                         {state.addresses?.map((item, key) => {
                             return <AddressBlock item={item} key={key}/>
                         })}
-                        <div className="cursor-pointer flex justify-center items-center border rounded-lg border-[#E7E7E7] w-80 h-48" onClick={() => navigate("/cabinet/addAddress")}>
+                        <div className="cursor-pointer flex justify-center items-center border rounded-lg border-[#E7E7E7] w-80 h-48" onClick={(e) => openModalAddAddresses(e)}>
                             <AiOutlinePlus />
                             <div className="pl-2">Додати адресу</div>
                         </div>
@@ -116,6 +122,9 @@ const Cabinet = () => {
                 <div className="pt-2">
                     <Button type="button" onClick={updateAddress} label={'Оновити'} cssType={'primary'} />
                 </div>
+            </Modal>
+            <Modal active={modalAddAddressActive} setActive={setModalAddAddressActive}>
+               <AddAddress close={() => setModalAddAddressActive(false)} />
             </Modal>
         </>
     );
