@@ -8,7 +8,7 @@ import AutoSuggest from "react-tailwindcss-select";
 
 const AutoSuggestClassNames = {
     menuButton: ({ isDisabled }) => (
-        `p-2 flex text-sm border border-borderColor rounded shadow-sm transition-all duration-300 focus:ring-0 focus:outline-none focus:border-yellow_figma ${
+        `p-2 flex text-sm text-[#797878] border border-borderColor rounded shadow-sm transition-all duration-300 focus:ring-0 focus:outline-none focus:border-yellow_figma ${
             isDisabled
                 ? "bg-gray-200"
                 : "bg-white_figma"
@@ -41,7 +41,7 @@ const AddAddress = ({ close }) => {
     const [flats, setFlats] = useState([]);
     const [flat, setFlat] = useState('');
 
-    const [flatName, setFlatName] = useState(`Квартіра ${objCount}`);
+    const [flatName, setFlatName] = useState(`Квартира ${objCount}`);
 
     useEffect( () => {
         const fetchData = async () => {
@@ -155,7 +155,7 @@ const AddAddress = ({ close }) => {
 
     return (
         <div className="px-14 py-6 space-y-3 mt-2 mx-auto w-[464px] rounded-lg shadow-lg">
-            <h4 className="text-black_figma text-center">Додати адресу</h4>
+            <h4 className="text-black_figma font-medium text-center">Додати адресу</h4>
             <form action="#" onSubmit={addObj}>
                 <div className="py-2">
                     <InputField
@@ -218,7 +218,7 @@ const AddAddress = ({ close }) => {
                 <div className="py-2">
                     <AutoSuggest
                         classNames={AutoSuggestClassNames}
-                        placeholder={'Дім'}
+                        placeholder={'Будинок'}
                         searchInputPlaceholder={'Пошук'}
                         noOptionsMessage={'Варіантів не знайдено'}
                         value={house}

@@ -9,3 +9,7 @@
     content: counters(item, ".") "."" ";
     counter-increment: item
 }
+
+.agr_li {
+    list-style-type: disc;
+}
