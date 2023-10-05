@@ -7,6 +7,8 @@ import api from "../../api";
 import Button from "../../components/button";
 import { useNavigate } from "react-router-dom";
 import eye from "../../img/eye.svg";
+import my_data_changed from './../../img/modal_mydata_changed.png';
+import Modal from "../../components/modal/modal";
 
 const MyData = () => {
     const navigate = useNavigate();
@@ -35,13 +37,21 @@ const MyData = () => {
             "label": 'Мої дані'
         },
     ]
+    const [modalActive, setModalActive] = useState(false);
+    const [validateFlag, setValidateFlag] = useState(false);
+
 
     const Submit = async (event) => {
         event.preventDefault();
         try {
-            await api.updateUser(form);
+            const result = await api.updateUser(form);
+            console.log(result)
             dispatch({ type: 'setAccount', payload: form })
-            // navigate('/cabinet');
+
+            if (result.status === 200) {
+                setValidateFlag(true);
+                setModalActive(true);
+            }
         } catch (e) {
             console.error(e.message);
             setFormError(e.message);
@@ -73,6 +83,15 @@ const MyData = () => {
                 </div>
                 <div className="w-[1152px] mx-auto p-20 font-light space-y-2 rounded-lg shadow-lg ">
                     <h1 className="font-normal text-lg pb-2 py-4">Основна інформація</h1>
+                        <Modal active={modalActive} setActive={setModalActive}>
+                            <div className="flex flex-col justify-center p-10 items-center text-lg w-[464px]">
+                                <img src={ my_data_changed } alt=""/>
+                                <p className="mt-8">Зміни успішно збережені</p>
+                            </div>
+                            <div className="pt-2 w-44 mx-auto mb-8">
+                                <Button type="button" label={'Ok'} cssType={'primary'} onClick={() => setModalActive(false)} />
+                            </div>
+                        </Modal>
                     <form className="space-y-2" action="#" autoComplete="off" onSubmit={Submit}>
                         <div className="grid grid-flow-row grid-cols-2 gap-4 py-4">
                             <InputField

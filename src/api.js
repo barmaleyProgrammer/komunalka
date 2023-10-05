@@ -34,6 +34,7 @@ const signIn = (data) => {
 const updateUser = (data) => {
     return axios.put('/account', data, config).then((res) => {
         sessionStorage.setItem('user', JSON.stringify(data));
+        return res;
     }).catch((error) => {
         console.error(error);
     });
