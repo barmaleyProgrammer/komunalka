@@ -6,7 +6,15 @@ module.exports = {
     './node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}',
     './node_modules/react-tailwindcss-select/dist/index.esm.js'
   ],
+
+
+
   theme: {
+    extend: {
+      boxShadow: {
+        'myCustom': '0 0 10px 0 rgba(166, 170, 181, 0.25)',
+      }
+    },
     colors: {
       transparent: 'transparent',
       current: 'currentColor',

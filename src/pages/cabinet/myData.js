@@ -79,10 +79,10 @@ const MyData = () => {
                 <div>
                     <Breadcrumbs items={breadCrumbs}/>
                 </div>
-                <div className="my-4">
+                <div className="mt-6 mb-8">
                     <Tabs />
                 </div>
-                <div className="w-[1152px] mx-auto py-10 pl-20 font-light space-y-2 rounded-lg shadow-lg ">
+                <div className="w-[1152px] mx-auto py-10 pl-20 font-light space-y-2 rounded-lg shadow-myCustom">
                     <h1 className="font-normal text-lg pb-2 py-2">Основна інформація</h1>
                     <div className="text-xs text-red-900 text-center">{ formError }</div>
                         <Modal active={modalActive} setActive={setModalActive}>

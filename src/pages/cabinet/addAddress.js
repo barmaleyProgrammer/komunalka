@@ -14,7 +14,7 @@ const AutoSuggestClassNames = {
                 : "bg-white_figma"
         }`
     ),
-    menu: "absolute z-10 w-full bg-white_figma rounded-lg shadow-lg text-sm",
+    menu: "absolute z-10 w-full bg-white_figma rounded-lg shadow-myCustom text-sm",
     searchBox: "w-full py-2 pl-2 text-sm border border-borderColor rounded focus:ring-0 focus:outline-none",
     searchIcon: "hidden"
 };

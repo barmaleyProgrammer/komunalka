@@ -92,16 +92,16 @@ const Cabinet = () => {
                 <div>
                     <Breadcrumbs items={breadCrumbs}/>
                 </div>
-                <div className="my-4">
+                <div className="mt-6 mb-8">
                     <Tabs />
                 </div>
-                <div className="space-y-2 rounded-lg shadow-lg">
-                    <h3 className="text-center text-xl pb-6">Мої адреси</h3>
+                <div className="rounded-lg shadow-myCustom py-8">
+                    <h3 className="text-center text-xl">Мої адреси</h3>
                     <div className="flex justify-center gap-x-10 p-5">
                         {state.addresses?.map((item, key) => {
                             return <AddressBlock item={item} key={key}/>
                         })}
-                        <div className="cursor-pointer flex justify-center items-center border rounded-lg border-[#E7E7E7] w-80 h-48" onClick={(e) => openModalAddAddresses(e)}>
+                        <div className="cursor-pointer flex justify-center items-center border rounded border-[#E7E7E7] w-80 h-48" onClick={(e) => openModalAddAddresses(e)}>
                             <AiOutlinePlus />
                             <div className="pl-2">Додати адресу</div>
                         </div>
