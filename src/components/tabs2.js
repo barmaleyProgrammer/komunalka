@@ -24,7 +24,7 @@ const Tabs2 = ({ objectId }) => {
                 const active = (item.url === window.location.pathname);
                 return (
                     <li key={key}>
-                        <NavLink to={item.url} className={`py-2.5 px-5 text-sm font-medium rounded text-black_figma ${active ? 'bg-[#CEDDE9]' : ''}`}>
+                        <NavLink to={item.url} className={`py-2.5 px-5 text-base font-light rounded text-black_figma ${active ? 'bg-[#CEDDE9]' : ''}`}>
                             {item.name}
                         </NavLink>
                     </li>
