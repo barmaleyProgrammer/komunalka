@@ -12,7 +12,7 @@ import Modal from "../../components/modal/modal";
 import './myData.css';
 
 const MyData = () => {
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const [state, dispatch] = useContext(Context);
     const [form, setForm] = useState({
         firstName: state.user.firstName,
@@ -51,6 +51,19 @@ const MyData = () => {
 
             if (result.status === 200) {
                 setValidateFlag(true);
+                setModalActive(true);
+            }
+        } catch (e) {
+            console.error(e.message);
+            setFormError(e.message);
+        }
+    };
+    const ChangePassword = async (e) => {
+        e.preventDefault();
+        try {
+            const result = await api.changePassword(form.password);
+            if (result.status === 200) {
+                // setValidateFlag(true);
                 setModalActive(true);
             }
         } catch (e) {
@@ -160,16 +173,15 @@ const MyData = () => {
                                 <div onClick={togglePassInput} className="eye-ico cursor-pointer">
                                     <img src={eye} alt="" />
                                 </div>
-                                <button className="changePassword text-sm ml-6">Змінити</button>
+                                <button className="changePassword text-sm ml-6"onClick={(e) => ChangePassword(e)}>Змінити</button>
                             </div>
                         </div>
                         <div className="flex">
                             <div className="w-80 h-12">
-                                <Button type="submit" cssType="primary" label={'Зберігти зміни'} />
+                                <Button type="submit" cssType="primary" label={'Зберігти зміни'} onClick={(e) => Submit(e)}/>
                             </div>
                             <button className="text-base ml-6">Видалити профіль</button>
                         </div>
-
                     </form>
                 </div>
             </div>

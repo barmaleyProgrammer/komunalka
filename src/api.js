@@ -39,6 +39,13 @@ const updateUser = (data) => {
         console.error(error);
     });
 }
+const changePassword = (password) => {
+    return axios.put('/account/password',  { password }, config).then((res) => {
+        return res;
+    }).catch((error) => {
+        console.error(error);
+    });
+}
 const renameAddress = (objectId, name) => {
     return axios.put(`/account/address/${objectId}`, { name }, config).then((response) => {
         return response;
@@ -232,6 +239,7 @@ export default {
     validation,
     resetPasswordRequest,
     newPassword,
+    changePassword,
     getService,
     getRegions,
     getDistricts,
