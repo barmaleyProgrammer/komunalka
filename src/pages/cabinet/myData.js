@@ -83,6 +83,7 @@ const MyData = () => {
                 </div>
                 <div className="w-[1152px] mx-auto p-20 font-light space-y-2 rounded-lg shadow-lg ">
                     <h1 className="font-normal text-lg pb-2 py-4">Основна інформація</h1>
+                    <div className="text-xs text-red-900 text-center">{ formError }</div>
                         <Modal active={modalActive} setActive={setModalActive}>
                             <div className="flex flex-col justify-center p-10 items-center text-lg w-[464px]">
                                 <img src={ my_data_changed } alt=""/>

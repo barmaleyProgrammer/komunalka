@@ -11,7 +11,7 @@ import eye from "../../img/eye.svg";
 import Modal from "../../components/modal/modal";
 import UserAgreement from "../userAgreement";
 
-const Register = () => {
+const Register = ({ close }) => {
     const [form, setForm] = useState({
         email: (process.env.NODE_ENV === 'development') ? 'grebenyukvd@gmail.com' : '',
         password: (process.env.NODE_ENV === 'development') ? 'Test_Drive5' : '',
@@ -96,153 +96,155 @@ const Register = () => {
     // }
 
     return (
-        <div className="mt-20 mb-20 p-10 mx-auto rounded-lg shadow-lg sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/4">
-            <img src={logo_lichylnyk} className="h-16 mb-8 mx-auto" alt="Flowbite Logo" />
-            <h4 className="text-black_figma text-center text-lg">Реєстрація</h4>
-            <div className="text-xs text-red-900 text-center">{ formError }</div>
-            { validateFlag ?
-                <Modal active={modalActive} setActive={setModalActive}>
-                    <div className="text-xs text-black_figma p-5 text-center w-[572px] h-auto">
-                        <h1 className="mb-5 text-lg font-medium">Підтвердження акаунту</h1>
-                        <h3 className="mb-3 text-left text-base">Дякуємо за реєстрацію! </h3>
-                        <p className="text-left text-base">Будь ласка, перевірте свою електронну пошту та підтвердіть свою реєстрацію,
-                            щоб розпочати користуватися нашим сервісом. Не забудьте перевірити папку «Спам»,
-                            якщо лист не зʼявиться в основній скринці.<br/> З повагою, команда LYCHYLNYK.</p>
-                        {/*<p className="text-left text-base mt-4 underline underline-offset-4">Надіслати мені лист повторно</p>*/}
-                    </div>
-                    <div className="pt-2 w-44 mx-auto">
-                        <Button type="button" label={'Ok'} cssType={'primary'} onClick={() => setModalActive(false)} />
-                    </div>
-                </Modal> :
-                <form className="space-y-2" onSubmit={Submit}>
-                    <InputField
-                        label={'Email'}
-                        type={'email'}
-                        placeholder={'example@gmail.com'}
-                        name={'email'}
-                        required={true}
-                        cssClass="email-field"
-                        value={form.email}
-                        autoComplete="off"
-                        onChange={handleInputChange}
-                    />
-                    <InputField
-                        label={'Прізвище'}
-                        placeholder={'Іванов'}
-                        name={'lastName'}
-                        required={true}
-                        value={form.lastName}
-                        autoComplete="off"
-                        onChange={handleInputChange}
-                    />
-                    <InputField
-                        label={'Імʼя'}
-                        placeholder={'Іван'}
-                        name={'firstName'}
-                        required={true}
-                        value={form.firstName}
-                        autoComplete="off"
-                        onChange={handleInputChange}
-                    />
-                    <InputField
-                        label={'По батькові'}
-                        placeholder={'Іванович'}
-                        name={'secondName'}
-                        required={true}
-                        value={form.secondName}
-                        autoComplete="off"
-                        onChange={handleInputChange}
-                    />
-                    <InputField
-                        label={'Телефон'}
-                        type={'phone'}
-                        placeholder={'+38(0_ _) _ _ _ - _ _ - _ _'}
-                        name={'phone'}
-                        required={true}
-                        value={form.phone}
-                        autoComplete="off"
-                        onChange={handleInputChange}
-                    />
-                    <div className={'relative'}>
-                        <InputField
-                            label={'Пароль'}
-                            type={type}
-                            name={'password'}
-                            required={true}
-                            value={form.password}
-                            autoComplete="off"
-                            onChange={handleInputChange}
-                        />
-                        <div onClick={togglePassInput} className="eye-ico cursor-pointer">
-                            <img src={eye} alt="" />
-                        </div>
-                        <div className="pl-2 flex flex-col text-xs font-light">
-                            <div className="pt-1 flex">
-                            <span className="pointer">
-                                <svg width="6" height="7" viewBox="0 0 6 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <circle cx="3" cy="3.5" r="3" fill={smallChars ? '#1F9A14': '#E11A00'}/>
-                                </svg>
-                            </span>
-                                Малі літери
+        // <div className="mt-20 mb-20 p-10 mx-auto rounded-lg shadow-lg sm:w-3/4 md:w-2/3 lg:w-1/3 xl:w-3/4">
+            <div className="px-10 py-6 space-y-3 mt-2 mx-auto w-[464px] rounded-lg shadow-lg">
+                <img src={logo_lichylnyk} className="h-16 mb-8 mx-auto" alt="Flowbite Logo" />
+                <h4 className="text-black_figma text-center text-lg">Реєстрація</h4>
+                <div className="text-xs text-red-900 text-center">{ formError }</div>
+                {
+                    validateFlag ?
+                        <>
+                            <div className="text-xs text-black_figma p-5 text-center w-full h-auto">
+                                <h1 className="mb-5 text-lg font-medium">Підтвердження акаунту</h1>
+                                <h3 className="mb-3 text-left text-base">Дякуємо за реєстрацію! </h3>
+                                <p className="text-left text-base">Будь ласка, перевірте свою електронну пошту та підтвердіть свою реєстрацію,
+                                    щоб розпочати користуватися нашим сервісом. Не забудьте перевірити папку «Спам»,
+                                    якщо лист не зʼявиться в основній скринці.<br/> З повагою, команда LYCHYLNYK.</p>
+                                {/*<p className="text-left text-base mt-4 underline underline-offset-4">Надіслати мені лист повторно</p>*/}
                             </div>
-                            <div className="pt-1 flex">
-                            <span className="pointer">
-                                <svg width="6" height="7" viewBox="0 0 6 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <circle cx="3" cy="3.5" r="3" fill={bigChars ? '#1F9A14': '#E11A00'}/>
-                                </svg>
-                            </span>
-                                Великі літери
+                            <div className="pt-2 w-44 mx-auto">
+                                <Button type="button" label={'Ok'} cssType={'primary'} onClick={(e) => close(e)} />
                             </div>
-                            <div className="pt-1 flex">
-                            <span className="pointer">
-                                <svg width="6" height="7" viewBox="0 0 6 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <circle cx="3" cy="3.5" r="3" fill={digitChars ? '#1F9A14': '#E11A00'}/>
-                                </svg>
-                            </span>
-                                Цифри
-                            </div>
-                        </div>
-                    </div>
-                    <hr className="border border-[#E2E8F0]"/>
-                    <div className="text-black_figma text-sm font-light">
-                        При вході через сайти партнерів є змога<br />автоматично додати адреси
-                    </div>
-                    <div className="flex flex-row space-x-2">
-                        <div className="basis-1/2 border border-[#E8E8E8;] rounded">
-                            <div className="flex p-2 justify-center space-x-1">
-                                <img src={logo_com_block} alt=""/>
-                                {/*<p className="text-sm pt-1">Комуналка</p>*/}
-                            </div>
-                        </div>
-                        <div className="basis-1/2 border border-[#E8E8E8;] rounded" title="">
-                            <div className="flex p-2 justify-center space-x-1">
-                                <img src={logo_gerc} alt="" />
-                            </div>
-                        </div>
-                    </div>
-                    <div className="py-2 font-light text-sm">
-                        Виникли питання? <NavLink to="#" className="text-[#3E77AA]">Детальніше</NavLink>
-                    </div>
-                    <Button type="submit" label={'Зареєструватися'} cssType={'primary'} />
-                    <div className="flex mt-5">
-                            <input className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
-                                   id="rememberMe"
-                                   name={'rememberMe'}
-                                   type="checkbox"
-                                   checked={form.rememberMe}
-                                   onChange={handleInputChange}
+                        </> :
+                        <form className="space-y-2" onSubmit={Submit}>
+                            <InputField
+                                label={'Email'}
+                                type={'email'}
+                                placeholder={'example@gmail.com'}
+                                name={'email'}
+                                required={true}
+                                cssClass="email-field"
+                                value={form.email}
+                                autoComplete="off"
+                                onChange={handleInputChange}
                             />
-                        <div className="px-2 font-light text-sm">
-                            Я згоден з <NavLink to="/userAgreement" className="text-[#3E77AA]">умовами угоди користувача</NavLink>
-                        </div>
-                    </div>
-                    <div className="text-center py-2 font-light text-sm">
-                        Вже є аккаунт? <NavLink to="/auth/login" className="text-[#3E77AA]">Вхід</NavLink>
-                    </div>
-                </form>
-            }
+                            <InputField
+                                label={'Прізвище'}
+                                placeholder={'Іванов'}
+                                name={'lastName'}
+                                required={true}
+                                value={form.lastName}
+                                autoComplete="off"
+                                onChange={handleInputChange}
+                            />
+                            <InputField
+                                label={'Імʼя'}
+                                placeholder={'Іван'}
+                                name={'firstName'}
+                                required={true}
+                                value={form.firstName}
+                                autoComplete="off"
+                                onChange={handleInputChange}
+                            />
+                            <InputField
+                                label={'По батькові'}
+                                placeholder={'Іванович'}
+                                name={'secondName'}
+                                required={true}
+                                value={form.secondName}
+                                autoComplete="off"
+                                onChange={handleInputChange}
+                            />
+                            <InputField
+                                label={'Телефон'}
+                                type={'phone'}
+                                placeholder={'+38(0_ _) _ _ _ - _ _ - _ _'}
+                                name={'phone'}
+                                required={true}
+                                value={form.phone}
+                                autoComplete="off"
+                                onChange={handleInputChange}
+                            />
+                            <div className={'relative'}>
+                                <InputField
+                                    label={'Пароль'}
+                                    type={type}
+                                    name={'password'}
+                                    required={true}
+                                    value={form.password}
+                                    autoComplete="off"
+                                    onChange={handleInputChange}
+                                />
+                                <div onClick={togglePassInput} className="eye-ico cursor-pointer">
+                                    <img src={eye} alt="" />
+                                </div>
+                                {/*<div className="pl-2 flex flex-col text-xs font-light">*/}
+                                {/*    <div className="pt-1 flex">*/}
+                                {/*    <span className="pointer">*/}
+                                {/*        <svg width="6" height="7" viewBox="0 0 6 7" fill="none" xmlns="http://www.w3.org/2000/svg">*/}
+                                {/*            <circle cx="3" cy="3.5" r="3" fill={smallChars ? '#1F9A14': '#E11A00'}/>*/}
+                                {/*        </svg>*/}
+                                {/*    </span>*/}
+                                {/*        Малі літери*/}
+                                {/*    </div>*/}
+                                {/*    <div className="pt-1 flex">*/}
+                                {/*    <span className="pointer">*/}
+                                {/*        <svg width="6" height="7" viewBox="0 0 6 7" fill="none" xmlns="http://www.w3.org/2000/svg">*/}
+                                {/*            <circle cx="3" cy="3.5" r="3" fill={bigChars ? '#1F9A14': '#E11A00'}/>*/}
+                                {/*        </svg>*/}
+                                {/*    </span>*/}
+                                {/*        Великі літери*/}
+                                {/*    </div>*/}
+                                {/*    <div className="pt-1 flex">*/}
+                                {/*    <span className="pointer">*/}
+                                {/*        <svg width="6" height="7" viewBox="0 0 6 7" fill="none" xmlns="http://www.w3.org/2000/svg">*/}
+                                {/*            <circle cx="3" cy="3.5" r="3" fill={digitChars ? '#1F9A14': '#E11A00'}/>*/}
+                                {/*        </svg>*/}
+                                {/*    </span>*/}
+                                {/*        Цифри*/}
+                                {/*    </div>*/}
+                                {/*</div>*/}
+                            </div>
+                            <hr className="border border-[#E2E8F0]"/>
+                            <div className="text-black_figma text-sm font-light">
+                                При вході через сайти партнерів є змога<br />автоматично додати адреси
+                            </div>
+                            <div className="flex flex-row space-x-2">
+                                <div className="basis-1/2 border border-[#E8E8E8;] rounded">
+                                    <div className="flex p-2 justify-center space-x-1">
+                                        <img src={logo_com_block} alt=""/>
+                                        {/*<p className="text-sm pt-1">Комуналка</p>*/}
+                                    </div>
+                                </div>
+                                <div className="basis-1/2 border border-[#E8E8E8;] rounded" title="">
+                                    <div className="flex p-2 justify-center space-x-1">
+                                        <img src={logo_gerc} alt="" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="py-2 font-light text-sm">
+                                Виникли питання? <NavLink to="#" className="text-[#3E77AA]">Детальніше</NavLink>
+                            </div>
+                            <Button type="submit" label={'Зареєструватися'} cssType={'primary'} />
+                            <div className="flex mt-5">
+                                    <input className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
+                                           id="rememberMe"
+                                           name={'rememberMe'}
+                                           type="checkbox"
+                                           checked={form.rememberMe}
+                                           onChange={handleInputChange}
+                                    />
+                                <div className="px-2 font-light text-sm">
+                                    Я згоден з <NavLink to="/userAgreement" className="text-[#3E77AA]">умовами угоди користувача</NavLink>
+                                </div>
+                            </div>
+                            <div className="text-center py-2 font-light text-sm">
+                                Вже є аккаунт? <NavLink to="/auth/login" className="text-[#3E77AA]">Вхід</NavLink>
+                            </div>
+                        </form>
+                }
+            </div>
 
-        </div>
     );
 };
 

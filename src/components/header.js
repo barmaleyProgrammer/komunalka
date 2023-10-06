@@ -1,18 +1,33 @@
-import { useContext } from "react";
+import {useContext, useState} from "react";
 import { Context } from "../store";
 import logo_lichylnyk from "../img/logo_lichylnyk.svg";
 import { NavLink } from "react-router-dom";
 import Logout from "./Logout";
+// import AddAddress from "../pages/cabinet/addAddress";
+import Modal from "./modal/modal";
+import Register from "../pages/auth/register";
+import Login from "../pages/auth/login";
 
 const Header = () => {
     const [state] = useContext(Context);
+    const [modalRegistration, setModalRegistration] = useState(false);
+    const [modalAuthorization, setModalAuthorization] = useState(false);
+
+    const openModalRegistration = (e) => {
+        e.stopPropagation();
+        setModalRegistration(true);
+    };
+    const openModalAuthorization = (e) => {
+        e.stopPropagation();
+        setModalAuthorization(true);
+    };
     const NotLoggedIn = () => {
         return (
             <>
-                <NavLink to="/auth/login" className="py-2.5 px-5 mr-5 mb-2 text-sm rounded w-full text-black_figma bg-white_figma border border-yellow_figma">
+                <NavLink to="#" className="py-2.5 px-5 mr-5 mb-2 text-sm rounded w-full text-black_figma bg-white_figma border border-yellow_figma" onClick={(e) => openModalAuthorization(e)}>
                     Увійти
                 </NavLink>
-                <NavLink to="/auth/register" className="py-2.5 px-5 mr-2 mb-2 text-sm rounded w-full text-white_figma bg-yellow_figma">
+                <NavLink to="#" className="py-2.5 px-5 mr-2 mb-2 text-sm rounded w-full text-white_figma bg-yellow_figma" onClick={(e) => openModalRegistration(e)}>
                     Зареєструватися
                 </NavLink>
             </>
@@ -48,6 +63,12 @@ const Header = () => {
                     { state.isLoggedIn ? <Logout /> : <NotLoggedIn />}
                 </div>
             </div>
+            <Modal active={modalRegistration} setActive={setModalRegistration}>
+                <Register close={() => setModalRegistration(false)}/>
+            </Modal>
+            <Modal active={modalAuthorization} setActive={setModalAuthorization}>
+                <Login close={() => setModalAuthorization(false)}/>
+            </Modal>
         </header>
     );
 };

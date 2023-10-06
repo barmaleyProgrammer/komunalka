@@ -28,7 +28,7 @@ const NewPassword = () => {
     const Submit = async (event) => {
         event.preventDefault();
         await api.newPassword(form);
-        navigate('/cabinet');
+        navigate('/');
     };
 
     const togglePassInput = () => {

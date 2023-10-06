@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import InputField from "../../components/inputField";
 import logo_lichylnyk from "../../img/logo_lichylnyk.svg";
 import logo_gerc from "../../img/logo_gerc.svg";
-// import icon_komunalka from "../../img/icon_komunalka.svg";
 import logo_com_block from "../../img/logo_com_block.png";
 import google from "../../img/google.svg";
 import facebook from "../../img/facebook.svg";
@@ -13,7 +12,7 @@ import Button from "../../components/button";
 import api from "../../api";
 import { Context } from "../../store";
 
-const Login = () => {
+const Login = ({ close }) => {
     const [,dispatch] = useContext(Context);
     const navigate = useNavigate();
     const [type, setTape] = useState('password');
@@ -50,6 +49,7 @@ const Login = () => {
                 dispatch({ type: 'setAddresses', payload: data });
             })
             navigate('/cabinet');
+            close()
         } catch (e) {
             setFormError(e);
             setForm({
@@ -76,7 +76,8 @@ const Login = () => {
         }
     }
     return (
-        <div className="mt-20 mb-20 p-10 mx-auto rounded-lg shadow-lg sm:w-3/4 md:w-3/4 lg:w-3/4 xl:w-1/3 max-w-[450px]">
+        // <div className="mt-20 mb-20 p-10 mx-auto rounded-lg shadow-lg sm:w-3/4 md:w-3/4 lg:w-3/4 xl:w-1/3 max-w-[450px]">
+            <div className="px-10 py-6 space-y-3 mt-2 mx-auto w-[464px] rounded-lg shadow-lg">
             <img src={logo_lichylnyk} className="h-16 mb-8 mx-auto" alt="" />
             <h4 className="text-black_figma text-center">Вхід</h4>
             <div className="text-red-950 text-center">{ formError }</div>
@@ -118,7 +119,7 @@ const Login = () => {
                             Запам’ятати мене
                         </label>
                     </div>
-                    <NavLink to="/auth/reset" className="text-[#3E77AA] pt-1 basis-1/2 text-sm text-right">Забули пароль?</NavLink>
+                    <NavLink to="/auth/reset" className="text-[#3E77AA] pt-1 basis-1/2 text-sm text-right" onClick={(e) => close(e)}>Забули пароль?</NavLink>
                 </div>
                 <Button type="submit" label={'Увійти'} cssType={'primary'} />
                 <div className="py-2 font-light text-sm">
