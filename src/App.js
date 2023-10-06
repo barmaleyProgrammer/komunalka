@@ -25,6 +25,7 @@ import ResetPassword from "./pages/auth/resetPassword";
 import NotFound from "./pages/notFound";
 import NewPassword from "./pages/auth/newPassword";
 import UserAgreement from "./pages/userAgreement";
+import Notification from "./pages/cabinet/notification";
 
 const App = () => {
     return (
@@ -54,6 +55,7 @@ const App = () => {
                                 <Route index element={<Cabinet />} />
                                 <Route path="addAddress" element={<AddAddress />} />
                                 <Route path="myData" element={<MyData />} />
+                                <Route path="notification" element={<Notification />} />
                             </Route>
                             <Route path="/counters">
                                 <Route index path=":objectId" element={<Counters />} />
