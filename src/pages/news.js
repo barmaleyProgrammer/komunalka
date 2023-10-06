@@ -31,15 +31,17 @@ const News = () => {
     ]
     return (
         <>
-            <div className="ml-64 mb-4">
+            <div className="w-[1152px] pl-20 py-3 mx-auto">
+            <div>
                 <Breadcrumbs items={breadCrumbs}/>
             </div>
-            <div className="w-[70%] mx-auto grid grid-flow-row grid-cols-5 gap-10">
+            <div className="mt-4 grid grid-cols-3 gap-10">
                 {list_imgs.map((item, index) =>
                     <div key={index}>
                         <img className="h-auto w-60 rounded-lg" src= {item.image } alt=""/>
                     </div>
                 )}
+            </div>
             </div>
         </>
     )

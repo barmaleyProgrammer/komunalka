@@ -17,7 +17,7 @@ const ServiceTypes = ({types = []}) => {
     };
 
     return (
-        <div className="p-5 rounded-lg shadow-lg">
+        <div className="p-5 rounded-lg shadow-myCustom">
             <h3 className="py-4 text-lg text-center">Тип послуги</h3>
             <div className="flex space-x-32 text-sm justify-center">
                 {state?.serviceTypes?.filter((item) => types.includes(item.id)).map((item, key) => {

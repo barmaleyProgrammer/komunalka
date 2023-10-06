@@ -106,7 +106,7 @@ const History = () => {
     };
 
     return (
-        <div className="font-light mt-2 mb-4 mx-auto max-w-screen-xl">
+        <div className="w-[1152px] mx-auto px-20 font-light mt-2 mb-4 max-w-screen-xl">
             <div>
                 <Breadcrumbs items={breadCrumbs}/>
             </div>
@@ -125,7 +125,7 @@ const History = () => {
                     </li>
                 </ul>
             </div>
-            <div className="mt-5 py-4 px-10 h-auto rounded-lg shadow-lg">
+            <div className="mt-5 py-4 px-10 h-auto rounded-lg shadow-myCustom">
                 <h3 className="py-4 text-xl text-center">Лічильники</h3>
                 <Tabs2 objectId={objectId} />
                 <div className="mt-4 mb-4 items-center justify-between hidden w-full md:flex md:w-auto md:order-1">

@@ -1,16 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useParams } from "react-router-dom";
-import { NavLink } from "react-router-dom";
 import Breadcrumbs from "../../components/breadcrumbs";
 import ServiceTypes from "../../components/serviceTypes";
 import Tabs2 from "../../components/tabs2";
-import api from "../../api";
 import  'react-calendar/dist/Calendar.css' ;
 
 const GraphsTables = () => {
     const { objectId } = useParams();
     const [counters, setCounters] = useState([]);
-    const [address, setAddress] = useState({});
+    // const [address, setAddress] = useState({});
 
     const breadCrumbs = [
         {
@@ -35,21 +33,8 @@ const GraphsTables = () => {
         },
     ]
 
-    // useEffect( () => {
-    //
-    //     const fetchData = async () => {
-    //         const payload = {
-    //             // objectId: "870036",
-    //             dateStart: '2020-01-01',
-    //             dateEnd: '2023-08-01'
-    //         };
-    //         await api.getCountersHistory(objectId, payload).then((result) => setCounters(result));
-    //     };
-    //     fetchData();
-    // }, []);
-
     return (
-        <div className="font-light mt-2 mx-auto w-[1152px]">
+        <div className="font-light mt-2 mx-auto w-[1152px] px-20">
             <div>
                 <Breadcrumbs items={breadCrumbs}/>
             </div>
@@ -57,7 +42,7 @@ const GraphsTables = () => {
                 <p className="text-[16px]">Лічильники</p>
             </div>
             <ServiceTypes />
-            <div className="mt-[24px] py-4 px-[58px] h-auto rounded-lg shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] ">
+            <div className="mt-[24px] py-4 px-[58px] h-auto rounded-lg shadow-myCustom ">
                 <h3 className="py-4 text-sm text-center">Лічильники</h3>
                 <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
                     <Tabs2 objectId={objectId} />

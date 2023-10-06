@@ -88,14 +88,14 @@ const MyData = () => {
     }
     return (
         <>
-            <div className="mt-2 mx-auto w-[1152px]">
+            <div className="w-[1152px] mx-auto px-20 mt-2">
                 <div>
                     <Breadcrumbs items={breadCrumbs}/>
                 </div>
                 <div className="mt-6 mb-8">
                     <Tabs />
                 </div>
-                <div className="w-[1152px] mx-auto py-10 pl-20 font-light space-y-2 rounded-lg shadow-myCustom">
+                <div className="py-10 px-20 font-light space-y-2 rounded-lg shadow-myCustom">
                     <h1 className="font-normal text-lg pb-2 py-2">Основна інформація</h1>
                     <div className="text-xs text-red-900 text-center">{ formError }</div>
                         <Modal active={modalActive} setActive={setModalActive}>

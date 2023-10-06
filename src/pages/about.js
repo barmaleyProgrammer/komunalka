@@ -12,12 +12,12 @@ const About = () => {
         },
     ]
     return (
-        <div className="w-[1152px] text-sm py-6 mx-auto text-justify ">
+        <div className="w-[1152px] px-20 py-3 mx-auto">
             <div className="mb-4">
                 <Breadcrumbs items={breadCrumbs}/>
             </div>
-            <h2 className="text-base mb-4">Про нас</h2>
-            <div>
+            <h2 className="text-2xl mb-4">Про нас</h2>
+            <div className="text-sm">
                 <p>Основною метою діяльності Концерну – є відкриття та організація роботи сервісних центрів для обслуговування
                     споживачів з усіх питань надання житлово-комунальних послуг. Створення мережі сервісних центрів – це,
                     в першу чергу, необхідність стандартизувати роботу усіх точок прийому споживачів з питань ЖКГ,

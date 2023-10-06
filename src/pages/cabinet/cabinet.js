@@ -88,7 +88,7 @@ const Cabinet = () => {
 
     return (
         <>
-            <div className="mt-2 mx-auto w-[1152px]">
+            <div className="mt-2 mx-auto w-[1152px] px-20">
                 <div>
                     <Breadcrumbs items={breadCrumbs}/>
                 </div>

@@ -51,8 +51,8 @@ const Faq = () => {
 
     const AccordionItem = ({open, toggle, tittle, desc}) => {
         return (
-            <div className="">
-                <div className="bg-white  flex justify-between items-center cursor-pointer" onClick={toggle}>
+            <div>
+                <div className="bg-white flex justify-between items-center cursor-pointer" onClick={toggle}>
                     <p className="text-base font-normal py-3">{tittle}</p>
                     <div>
                         {open ? <AiOutlineMinus /> : <AiOutlinePlus /> }
