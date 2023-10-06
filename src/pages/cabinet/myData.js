@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import eye from "../../img/eye.svg";
 import my_data_changed from './../../img/modal_mydata_changed.png';
 import Modal from "../../components/modal/modal";
+import './myData.css';
 
 const MyData = () => {
     const navigate = useNavigate();
@@ -81,8 +82,8 @@ const MyData = () => {
                 <div className="my-4">
                     <Tabs />
                 </div>
-                <div className="w-[1152px] mx-auto p-20 font-light space-y-2 rounded-lg shadow-lg ">
-                    <h1 className="font-normal text-lg pb-2 py-4">Основна інформація</h1>
+                <div className="w-[1152px] mx-auto py-10 pl-20 font-light space-y-2 rounded-lg shadow-lg ">
+                    <h1 className="font-normal text-lg pb-2 py-2">Основна інформація</h1>
                     <div className="text-xs text-red-900 text-center">{ formError }</div>
                         <Modal active={modalActive} setActive={setModalActive}>
                             <div className="flex flex-col justify-center p-10 items-center text-lg w-[464px]">
@@ -94,7 +95,7 @@ const MyData = () => {
                             </div>
                         </Modal>
                     <form className="space-y-2" action="#" autoComplete="off" onSubmit={Submit}>
-                        <div className="grid grid-flow-row grid-cols-2 gap-4 py-4">
+                        <div className="grid grid-flow-row grid-cols-2 gap-x-5 py-4 pr-60">
                             <InputField
                                 label={'Прізвище'}
                                 type={'text'}
@@ -145,25 +146,30 @@ const MyData = () => {
                                 autoComplete="off"
                                 onChange={handleInputChange}
                             />
-                            {/*<div className={'relative'}>*/}
-                            {/*    <InputField*/}
-                            {/*        label={'Пароль'}*/}
-                            {/*        type={type}*/}
-                            {/*        name={'password'}*/}
-                            {/*        required={true}*/}
-                            {/*        value={form.password}*/}
-                            {/*        placeholder="Змінити"*/}
-                            {/*        autoComplete="off"*/}
-                            {/*        onChange={handleInputChange}*/}
-                            {/*    />*/}
-                            {/*    <div onClick={togglePassInput} className="eye-ico cursor-pointer">*/}
-                            {/*        <img src={eye} alt="" />*/}
-                            {/*    </div>*/}
-                            {/*</div>*/}
+                            <div className={'relative'}>
+                                <InputField
+                                    label={'Пароль'}
+                                    type={type}
+                                    name={'password'}
+                                    required={true}
+                                    value={form.password}
+                                    placeholder="Змінити"
+                                    autoComplete="off"
+                                    onChange={handleInputChange}
+                                />
+                                <div onClick={togglePassInput} className="eye-ico cursor-pointer">
+                                    <img src={eye} alt="" />
+                                </div>
+                                <button className="changePassword text-sm ml-6">Змінити</button>
+                            </div>
                         </div>
-                        <div className="w-40 mx-auto">
-                            <Button type="submit" cssType="primary" label={'Зберігти зміни'} />
+                        <div className="flex">
+                            <div className="w-80 h-12">
+                                <Button type="submit" cssType="primary" label={'Зберігти зміни'} />
+                            </div>
+                            <button className="text-base ml-6">Видалити профіль</button>
                         </div>
+
                     </form>
                 </div>
             </div>
