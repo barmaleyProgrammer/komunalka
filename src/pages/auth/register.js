@@ -223,7 +223,7 @@ const Register = ({ close }) => {
                                 </div>
                             </div>
                             <div className="py-2 font-light text-sm">
-                                Виникли питання? <NavLink to="#" className="text-[#3E77AA]">Детальніше</NavLink>
+                                Виникли питання? <NavLink to="/faq" className="text-[#3E77AA]" onClick={(e) => close(e)}>Детальніше</NavLink>
                             </div>
                             <Button type="submit" label={'Зареєструватися'} cssType={'primary'} />
                             <div className="flex mt-5">

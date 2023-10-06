@@ -43,7 +43,7 @@ const Faq = () => {
         },
         {
             id: 4,
-            title: "1Чи передадуться мої показники лічильників до обранної компанії?",
+            title: "Чи передадуться мої показники лічильників до обранної компанії?",
             section: 'cabinet',
             desc: "1Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
         },
@@ -51,15 +51,15 @@ const Faq = () => {
 
     const AccordionItem = ({open, toggle, tittle, desc}) => {
         return (
-            <div className="pt-[10px]">
-                <div className="bg-white py-[5px] px-[50px] flex justify-between items-center cursor-pointer" onClick={toggle}>
-                    <p className="text-[16px] font-normal">{tittle}</p>
-                    <div className="text-[24px]">
+            <div className="">
+                <div className="bg-white  flex justify-between items-center cursor-pointer" onClick={toggle}>
+                    <p className="text-base font-normal py-3">{tittle}</p>
+                    <div>
                         {open ? <AiOutlineMinus /> : <AiOutlinePlus /> }
                     </div>
                 </div>
                 <Collapse isOpened={open}>
-                    <div className="font-normal text-[14px] px-[50px] pb-[20px]">{desc}</div>
+                    <div className="font-normal text-sm ">{desc}</div>
                 </Collapse>
                 <hr className="w-full text-borderColor"/>
             </div>
@@ -67,11 +67,11 @@ const Faq = () => {
     };
 
     return (
-        <section className="w-[1152px] h-[317px] grid mx-auto">
+        <section className="w-[1152px] px-20 py-3 mx-auto">
             <Breadcrumbs items={breadCrumbs}/>
-            <h2 className="text-center text-[24px]">Часті питання</h2>
-            <h4 className="text-center text-[18px]">Про сервіс LYCHYLNYK</h4>
-            <div className="px-[40px] ">
+            <h2 className="text-center text-2xl mb-8">Часті питання</h2>
+            <h4 className="text-center text-lg mb-5">Про сервіс LYCHYLNYK</h4>
+            <div className="">
                 {AccordionData.filter((item) => item.section === 'about').map((data, index) => {
                     return <AccordionItem
                         key={data.id}
@@ -82,9 +82,21 @@ const Faq = () => {
                     />;
                 })}
             </div>
-            <h4 className="text-center text-[18px]">Про особистий кабінет</h4>
-            <div className="px-[40px] ">
+            <h4 className="text-center text-lg">Про особистий кабінет</h4>
+            <div className="">
                 {AccordionData.filter((item) => item.section === 'cabinet').map((data, index) => {
+                    return <AccordionItem
+                        key={data.id}
+                        open={data.id === open}
+                        tittle={data.title}
+                        desc={data.desc}
+                        toggle={() =>toggle(data.id)}
+                    />;
+                })}
+            </div>
+            <h4 className="text-center text-lg">Рахунки-повідомлення та квитанції</h4>
+            <div className="">
+                {AccordionData.filter((item) => item.section === 'about').map((data, index) => {
                     return <AccordionItem
                         key={data.id}
                         open={data.id === open}
