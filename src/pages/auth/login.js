@@ -42,7 +42,10 @@ const Login = ({ close }) => {
                 dispatch({ type: 'setAccount', payload: data.account });
                 // dispatch({ type: 'setAddresses', payload: data.addresses });
             });
-            await api.getService().then((data) => {
+            await api.getServices().then((data) => {
+                dispatch({ type: 'services', payload: data });
+            });
+            await api.getServiceTypes().then((data) => {
                 dispatch({ type: 'serviceTypes', payload: data });
             });
             await api.getAddress().then((data) => {

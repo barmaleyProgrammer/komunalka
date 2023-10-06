@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from 'react';
 import { useParams } from "react-router-dom";
 import { Context } from "../../store";
-import {NavLink} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import api from "../../api";
 import Breadcrumbs from "../../components/breadcrumbs";
 import ServiceTypes from "../../components/serviceTypes";
@@ -22,7 +22,8 @@ const History = () => {
     const address = state.addresses.find((item) => item.objectId == objectId);
     const [modalActive1, setModalActive1] = useState(false);
     const [modalActive2, setModalActive2] = useState(false);
-    const [startDate, setStartDate] = useState(moment().startOf('month'));
+    // const [startDate, setStartDate] = useState(moment().startOf('month'));
+    const [startDate, setStartDate] = useState(moment('2020-01-01 00:00:00'));
     const [endDate, setEndDate] = useState(moment().endOf('month'));
     const [serviceTypes, setServiceTypes] = useState([]);
     const [isPostLoading, setIsPostLoading] = useState(false);
@@ -107,12 +108,10 @@ const History = () => {
 
     return (
         <div className="w-[1152px] mx-auto px-20 font-light mt-2 mb-4 max-w-screen-xl">
-            <div>
-                <Breadcrumbs items={breadCrumbs}/>
-            </div>
+            <Breadcrumbs items={breadCrumbs} />
             <h2 className="mb-4 mt-3 text-2xl">{address.name}</h2>
             <ServiceTypes types={serviceTypes} />
-            <div className=" mt-4 mb-4 items-center justify-center hidden w-full md:flex md:w-auto md:order-1">
+            <div className="mt-4 mb-4 items-center justify-center hidden w-full md:flex md:w-auto md:order-1">
                 <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 ">
                     <li>
                         <NavLink to="#" onClick={() => setModalActive1(true)} className="w-auto h-[48px] py-2.5 px-5 mr-2 mb-2 text-sm font-medium rounded text-[#FD9800] bg-[#F7F9FE]">Обрати початкову дату</NavLink>
@@ -148,18 +147,19 @@ const History = () => {
                 {isPostLoading
                 ? <div className="flex p-10 justify-center"><Loader /></div>
                 : <div>
-                        {counters?.map((item, key) => {
-                            console.log('firm', firm);
+                    {
+                        counters?.map((item, key) => {
                             if (firm) {
                                 if (firm === item.idFirme) {
-                                    return <CounterBlock item={item} key={`CounterBlock_${key}`} />
+                                    return <CounterBlock item={item} key={key} />
                                 }
                             }
                             else {
-                                return <CounterBlock item={item} key={`CounterBlock_${key}`} />
+                                return <CounterBlock item={item} key={key} />
                             }
-                        })}
-                    </div>
+                        })
+                    }
+                </div>
             }
             </div>
             <Modal active={modalActive1} setActive={setModalActive1}>
