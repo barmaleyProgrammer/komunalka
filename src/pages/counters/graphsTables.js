@@ -60,6 +60,32 @@ const GraphsTables = () => {
         fetchData();
     }, []);
 
+    const TableView = ({ counters }) => {
+        return (
+            <table className="border-collapse border-black_figma">
+                <caption className="font-normal text-left mt-0 mb-4">Таблиця споживання</caption>
+                <thead>
+                <tr>
+                    <td className="border-[#E7E7E7] text-sm border-l-0 border-b border-r p-2">Період</td>
+                    <td className="border-[#E7E7E7] font-normal border-b text-sm p-2">{`${moment(startDate).format('DD.MM.YYYY')} - ${moment(endDate).format('DD.MM.YYYY')}`}</td>
+                </tr>
+                </thead>
+                {
+                    counters?.map((item, index) => {
+                        return (
+                            <tbody key={index}>
+                            <tr>
+                                <td className="border-[#E7E7E7] font-normal border-r p-2">{moment(item.newTransmissionTime).format('DD.MM.YYYY')}</td>
+                                <td className="border-[#E7E7E7] font-normal text-sm p-2">{(Number(item.newValue) - Number(item.oldValue)).toFixed(2) }</td>
+                            </tr>
+                            </tbody>
+                        );
+                    })
+                }
+            </table>
+        );
+    };
+
     return (
         <div className="font-light mt-2 mx-auto w-[1152px] px-20">
             <Breadcrumbs items={breadCrumbs}/>
@@ -70,36 +96,16 @@ const GraphsTables = () => {
                 <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
                     <Tabs2 objectId={objectId} />
                 </div>
-                {loading
-                    ? <div className="flex p-10 justify-center"><Loader /></div>
-                    : <>
+                {
+                    loading ? <Loader /> :
+                    <>
                         <div className="text-sm py-4 space-y-2">
                             <p>Підприємство: xxxx</p>
                             <p>Послуга: xxxx</p>
                             <p>Номер лічильників: xxxx</p>
                         </div>
                         <div className="border-collapse border rounded-xl py-10 px-10 border-[#E7E7E7]">
-                            <table className="border-collapse border-black_figma">
-                                <caption className="text-lg font-normal mt-0 mb-4">Таблиця споживання</caption>
-                                <thead>
-                                <tr>
-                                    <td className="border-[#E7E7E7] text-sm border-l-0 border-b border-r p-2">Період</td>
-                                    <td className="border-[#E7E7E7] font-normal border-b text-sm p-2">{`${moment(startDate).format('DD.MM.YYYY')} - ${moment(endDate).format('DD.MM.YYYY')}`}</td>
-                                </tr>
-                                </thead>
-                                {
-                                    counters?.map((item, index) => {
-                                        return (
-                                            <tbody key={index}>
-                                            <tr>
-                                                <td className="border-[#E7E7E7] font-normal border-r p-2">{moment(item.newTransmissionTime).format('DD.MM.YYYY')}</td>
-                                                <td className="border-[#E7E7E7] font-normal text-sm p-2">{(Number(item.newValue) - Number(item.oldValue)).toFixed(2) }</td>
-                                            </tr>
-                                            </tbody>
-                                        );
-                                    })
-                                }
-                            </table>
+                            <TableView counters={counters}/>
                         </div>
                     </>
                 }

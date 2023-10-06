@@ -117,7 +117,7 @@ const Counters = () => {
             <h2 className="mb-4 mt-3 text-2xl">{address.name}</h2>
             <ServiceTypes types={serviceTypes} />
             {isPostLoading
-                ? <div className="flex p-10 justify-center"><Loader /></div>
+                ? <Loader />
                 :
             <div className="mt-5 py-4 px-10 h-auto rounded-lg shadow-lg">
                 <h3 className="py-4 text-xl text-center">Лічильники</h3>

@@ -145,7 +145,7 @@ const History = () => {
                     </ul>
                 </div>
                 {isPostLoading
-                ? <div className="flex p-10 justify-center"><Loader /></div>
+                ? <Loader />
                 : <div>
                     {
                         counters?.map((item, key) => {

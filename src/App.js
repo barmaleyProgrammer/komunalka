@@ -33,7 +33,7 @@ const App = () => {
             <Context.Provider value={useReducer(reducer, initialSate)}>
                 <BrowserRouter>
                     <Header />
-                    <main>
+                    <main className="mb-10">
                         <Routes>
                             <Route path="/" element={<Home />} />
                             <Route path="/about" element={<About />} />
