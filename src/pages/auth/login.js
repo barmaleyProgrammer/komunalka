@@ -16,6 +16,7 @@ const Login = ({ close }) => {
     const [,dispatch] = useContext(Context);
     const navigate = useNavigate();
     const [type, setTape] = useState('password');
+    const [errorFlag, setErrorFlag] = useState(false);
 
     const [form, setForm] = useState({
         email: (process.env.NODE_ENV === 'development') ? 'grebenyukvd@gmail.com' : '',
@@ -51,6 +52,7 @@ const Login = ({ close }) => {
             navigate('/cabinet');
             close()
         } catch (e) {
+            setErrorFlag(true);
             setFormError(e);
             setForm({
                 email: '',
@@ -80,7 +82,15 @@ const Login = ({ close }) => {
             <div className="px-10 py-6 space-y-3 mt-2 mx-auto w-[464px] rounded-lg shadow-lg">
             <img src={logo_lichylnyk} className="h-16 mb-8 mx-auto" alt="" />
             <h4 className="text-black_figma text-center">Вхід</h4>
-            <div className="text-red-950 text-center">{ formError }</div>
+                {
+                    errorFlag ?
+                        <>
+                            <p className="text-black_figma text-center">Нажаль, сталася наступна помилка:</p>
+                            <div className="text-red-950 text-center">{ formError }</div>
+                            <div className="pt-2 w-44 mx-auto">
+                                <Button type="button" label={'Спробуйте ще раз'} cssType={'primary'} onClick={() => setErrorFlag(false)} />
+                            </div>
+                        </> :
             <form className="space-y-2" onSubmit={Submit}>
                 <InputField
                     label={'Email'}
@@ -159,6 +169,7 @@ const Login = ({ close }) => {
                     </div>
                 </div>
             </form>
+            }
         </div>
     );
 };

@@ -26,6 +26,7 @@ import NotFound from "./pages/notFound";
 import NewPassword from "./pages/auth/newPassword";
 import UserAgreement from "./pages/userAgreement";
 import Notification from "./pages/cabinet/notification";
+import Error from "./components/error";
 
 const App = () => {
     return (
@@ -63,6 +64,7 @@ const App = () => {
                                 <Route path=":objectId/graphsTables" element={<CountersGraphsTables />} />
                             </Route>
                             <Route path="*" element={<NotFound />} />
+                            <Route path="/error" element={<Error />} />
                         </Routes>
                     </main>
                     <Footer />

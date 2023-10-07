@@ -3,13 +3,10 @@ import {NavLink, useNavigate} from "react-router-dom";
 import InputField from "../../components/inputField";
 import logo_lichylnyk from "../../img/logo_lichylnyk.svg";
 import logo_gerc from "../../img/logo_gerc.svg";
-// import icon_komunalka from "../../img/icon_komunalka.svg";
 import logo_com_block from "../../img/logo_com_block.png";
 import Button from "../../components/button";
 import api from "../../api";
 import eye from "../../img/eye.svg";
-// import Modal from "../../components/modal/modal";
-// import UserAgreement from "../userAgreement";
 
 const Register = ({ close }) => {
     const [form, setForm] = useState({
@@ -29,8 +26,7 @@ const Register = ({ close }) => {
     const [bigChars, setBigChars] = useState(false);
     const [digitChars, setDigitChars] = useState(false);
     const [validateFlag, setValidateFlag] = useState(false);
-    const [modalActive, setModalActive] = useState(false);
-    const navigate = useNavigate();
+    const [errorFlag, setErrorFlag] = useState(false);
 
     const handleInputChange = (event) => {
         const value = (event.target.type === 'checkbox') ? event.target.checked : event.target.value;
@@ -54,9 +50,9 @@ const Register = ({ close }) => {
             const result = await api.signUp(form);
             if (result.status === 200) {
                 setValidateFlag(true);
-                setModalActive(true);
             }
         } catch (e) {
+            setErrorFlag(true);
             setFormError(e);
         }
     };
@@ -100,8 +96,15 @@ const Register = ({ close }) => {
             <div className="px-10 py-6 space-y-3 mt-2 mx-auto w-[464px] rounded-lg shadow-myCustom">
                 <img src={logo_lichylnyk} className="h-16 mb-8 mx-auto" alt="Flowbite Logo" />
                 <h4 className="text-black_figma text-center text-lg">Реєстрація</h4>
-                <div className="text-xs text-red-900 text-center">{ formError }</div>
                 {
+                    errorFlag ?
+                        <>
+                            <p className="text-black_figma text-center">Нажаль, сталася наступна помилка:</p>
+                            <div className="text-red-950 text-center">{ formError }</div>
+                            <div className="pt-2 w-44 mx-auto">
+                                <Button type="button" label={'Спробуйте ще раз'} cssType={'primary'} onClick={() => setErrorFlag(false)} />
+                            </div>
+                        </> :
                     validateFlag ?
                         <>
                             <div className="text-xs text-black_figma p-5 text-center w-full h-auto">
@@ -235,7 +238,7 @@ const Register = ({ close }) => {
                                            onChange={handleInputChange}
                                     />
                                 <div className="px-2 font-light text-sm">
-                                    Я згоден з <NavLink to="/userAgreement" className="text-[#3E77AA]">умовами угоди користувача</NavLink>
+                                    Я згоден з <NavLink to="/userAgreement" className="text-[#3E77AA]"onClick={(e) => close(e)}>умовами угоди користувача</NavLink>
                                 </div>
                             </div>
                             <div className="text-center py-2 font-light text-sm">

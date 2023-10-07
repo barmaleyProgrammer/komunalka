@@ -7,6 +7,7 @@ import Logout from "./Logout";
 import Modal from "./modal/modal";
 import Register from "../pages/auth/register";
 import Login from "../pages/auth/login";
+import login from "../pages/auth/login";
 
 const Header = () => {
     const [state] = useContext(Context);
