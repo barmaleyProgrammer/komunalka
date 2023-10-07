@@ -125,6 +125,7 @@ const MyData = () => {
                                 placeholder={'Введіть свій email'}
                                 name={'email'}
                                 readOnly={true}
+                                cssClass="email-field"
                                 value={form.email}
                                 autoComplete="off"
                                 onChange={handleInputChange}
