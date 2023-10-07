@@ -64,7 +64,6 @@ const App = () => {
                                 <Route path=":objectId/graphsTables" element={<CountersGraphsTables />} />
                             </Route>
                             <Route path="*" element={<NotFound />} />
-                            <Route path="/error" element={<Error />} />
                         </Routes>
                     </main>
                     <Footer />
