@@ -7,6 +7,7 @@ import logo_com_block from "../../img/logo_com_block.png";
 import Button from "../../components/button";
 import api from "../../api";
 import eye from "../../img/eye.svg";
+import icon_error from './../../img/icon_error.svg'
 
 const Register = ({ close }) => {
     const [form, setForm] = useState({
@@ -99,6 +100,7 @@ const Register = ({ close }) => {
                 {
                     errorFlag ?
                         <>
+                            <img className="mx-auto" src={ icon_error } alt=""/>
                             <p className="text-black_figma text-center">Нажаль, сталася наступна помилка:</p>
                             <div className="text-red-950 text-center">{ formError }</div>
                             <div className="pt-2 w-44 mx-auto">

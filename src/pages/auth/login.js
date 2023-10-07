@@ -11,6 +11,7 @@ import eye from "../../img/eye.svg";
 import Button from "../../components/button";
 import api from "../../api";
 import { Context } from "../../store";
+import icon_error from "../../img/icon_error.svg";
 
 const Login = ({ close }) => {
     const [,dispatch] = useContext(Context);
@@ -85,6 +86,7 @@ const Login = ({ close }) => {
                 {
                     errorFlag ?
                         <>
+                            <img className="mx-auto" src={ icon_error } alt=""/>
                             <p className="text-black_figma text-center">Нажаль, сталася наступна помилка:</p>
                             <div className="text-red-950 text-center">{ formError }</div>
                             <div className="pt-2 w-44 mx-auto">
