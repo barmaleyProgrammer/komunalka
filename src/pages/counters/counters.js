@@ -110,7 +110,7 @@ const Counters = () => {
     };
 
     return (
-        <div className="mt-2 mx-auto w-[1152px] px-20">
+        <div className="w-[1152px] mx-auto px-20 font-normal mt-2 mb-4 max-w-screen-xl">
             <div>
                 <Breadcrumbs items={breadCrumbs}/>
             </div>
@@ -119,7 +119,7 @@ const Counters = () => {
             {isPostLoading
                 ? <div className="flex p-10 justify-center"><Loader /></div>
                 :
-            <div className="mt-5 py-4 px-10 h-auto rounded-lg shadow-lg">
+            <div className="mt-5 py-4 px-10 h-auto rounded-lg shadow-myCustom">
                 <h3 className="py-4 text-xl text-center">Лічильники</h3>
                 <Tabs2 objectId={objectId} />
                 <div>

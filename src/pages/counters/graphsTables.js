@@ -1,12 +1,15 @@
-import { useState } from 'react';
+import {useContext, useState} from 'react';
 import { useParams } from "react-router-dom";
 import Breadcrumbs from "../../components/breadcrumbs";
 import ServiceTypes from "../../components/serviceTypes";
 import Tabs2 from "../../components/tabs2";
 import  'react-calendar/dist/Calendar.css' ;
+import {Context} from "../../store";
 
 const GraphsTables = () => {
     const { objectId } = useParams();
+    const [state] = useContext(Context);
+    const address = state.addresses.find((item) => item.objectId == objectId);
     const [counters, setCounters] = useState([]);
     // const [address, setAddress] = useState({});
 
@@ -34,16 +37,14 @@ const GraphsTables = () => {
     ]
 
     return (
-        <div className="font-light mt-2 mx-auto w-[1152px] px-20">
+        <div className="w-[1152px] mx-auto px-20 font-normal mt-2 mb-4 max-w-screen-xl">
             <div>
                 <Breadcrumbs items={breadCrumbs}/>
             </div>
-            <div className="mt-[34px]">
-                <p className="text-[16px]">Лічильники</p>
-            </div>
+            <h2 className="mb-4 mt-3 text-2xl">{address.name}</h2>
             <ServiceTypes />
-            <div className="mt-[24px] py-4 px-[58px] h-auto rounded-lg shadow-myCustom ">
-                <h3 className="py-4 text-sm text-center">Лічильники</h3>
+            <div className="mt-5 py-4 px-10 h-auto rounded-lg shadow-myCustom">
+                <h3 className="py-4 text-xl text-center">Лічильники</h3>
                 <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
                     <Tabs2 objectId={objectId} />
                 </div>
