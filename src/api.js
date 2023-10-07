@@ -36,7 +36,7 @@ const updateUser = (data) => {
         sessionStorage.setItem('user', JSON.stringify(data));
         return res;
     }).catch((error) => {
-        console.error(error);
+        console.error('акаунт', error);
     });
 }
 const changePassword = (password) => {

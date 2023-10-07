@@ -46,11 +46,11 @@ const MyData = () => {
         event.preventDefault();
         try {
             const result = await api.updateUser(form);
-            console.log(result)
+            // console.log(result)
             dispatch({ type: 'setAccount', payload: form })
 
             if (result.status === 200) {
-                setValidateFlag(true);
+                // setValidateFlag(true);
                 setModalActive(true);
             }
         } catch (e) {
