@@ -26,7 +26,6 @@ import NotFound from "./pages/notFound";
 import NewPassword from "./pages/auth/newPassword";
 import UserAgreement from "./pages/userAgreement";
 import Notification from "./pages/cabinet/notification";
-import Error from "./components/error";
 
 const App = () => {
     return (
