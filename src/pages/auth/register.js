@@ -9,7 +9,7 @@ import api from "../../api";
 import eye from "../../img/eye.svg";
 import icon_error from './../../img/icon_error.svg'
 
-const Register = ({ close }) => {
+const Register = ({ close, showLogin }) => {
     const [form, setForm] = useState({
         email: (process.env.NODE_ENV === 'development') ? 'grebenyukvd@gmail.com' : '',
         password: (process.env.NODE_ENV === 'development') ? 'Test_Drive5' : '',
@@ -22,12 +22,14 @@ const Register = ({ close }) => {
         rememberMe: false
     });
     const [formError, setFormError] = useState('');
-    const [type, setTape] = useState('password');
+    const [type, setType] = useState('password');
     const [smallChars, setSmallChars] = useState(false);
     const [bigChars, setBigChars] = useState(false);
     const [digitChars, setDigitChars] = useState(false);
+    const [numbers, setNumbers] = useState(false);
     const [validateFlag, setValidateFlag] = useState(false);
     const [errorFlag, setErrorFlag] = useState(false);
+    const [inputPassFlag, setInputPassFlag] = useState(false);
 
     const handleInputChange = (event) => {
         const value = (event.target.type === 'checkbox') ? event.target.checked : event.target.value;
@@ -40,9 +42,9 @@ const Register = ({ close }) => {
     };
     const togglePassInput = () => {
         if (type === 'password') {
-            setTape('text')
+            setType('text')
         } else {
-            setTape('password')
+            setType('password')
         }
     }
     const Submit = async (event) => {
@@ -62,26 +64,36 @@ const Register = ({ close }) => {
         const smallCheck = new RegExp('[a-z]');
         const bigCheck = new RegExp('[A-Z]');
         const digitCheck = new RegExp('[0-9]');
+        const numbersCheck = new RegExp('.{8}');
+
+        if (numbersCheck.test(form.password)) {
+            setNumbers(true);
+
+        } else {
+            setNumbers(false);
+        }
 
         if (smallCheck.test(form.password)) {
             setSmallChars(true);
+
         } else {
             setSmallChars(false);
         }
 
         if (bigCheck.test(form.password)) {
             setBigChars(true);
+
         } else {
             setBigChars(false);
         }
 
         if (digitCheck.test(form.password)) {
             setDigitChars(true);
+
         } else {
             setDigitChars(false);
         }
-
-    }, [form.password]);
+    },[form.password]);
 
     //  const phoneNumberFormatter = () => {
     //     const inputField = document.getElementById('phone-number');
@@ -118,7 +130,7 @@ const Register = ({ close }) => {
                                 {/*<p className="text-left text-base mt-4 underline underline-offset-4">Надіслати мені лист повторно</p>*/}
                             </div>
                             <div className="pt-2 w-44 mx-auto">
-                                <Button type="button" label={'Ok'} cssType={'primary'} onClick={(e) => close(e)} />
+                                <Button type="button" label={'Ok'} cssType={'primary'} onClick={close} />
                             </div>
                         </> :
                         <form className="space-y-2" onSubmit={Submit}>
@@ -178,37 +190,55 @@ const Register = ({ close }) => {
                                     required={true}
                                     value={form.password}
                                     autoComplete="off"
+                                    focus={'dfff'}
                                     onChange={handleInputChange}
+                                    onFocus={() => setInputPassFlag(true)}
+                                    onBlur={() => setInputPassFlag(false)}
                                 />
                                 <div onClick={togglePassInput} className="eye-ico cursor-pointer">
                                     <img src={eye} alt="" />
                                 </div>
-                                {/*<div className="pl-2 flex flex-col text-xs font-light">*/}
-                                {/*    <div className="pt-1 flex">*/}
-                                {/*    <span className="pointer">*/}
-                                {/*        <svg width="6" height="7" viewBox="0 0 6 7" fill="none" xmlns="http://www.w3.org/2000/svg">*/}
-                                {/*            <circle cx="3" cy="3.5" r="3" fill={smallChars ? '#1F9A14': '#E11A00'}/>*/}
-                                {/*        </svg>*/}
-                                {/*    </span>*/}
-                                {/*        Малі літери*/}
-                                {/*    </div>*/}
-                                {/*    <div className="pt-1 flex">*/}
-                                {/*    <span className="pointer">*/}
-                                {/*        <svg width="6" height="7" viewBox="0 0 6 7" fill="none" xmlns="http://www.w3.org/2000/svg">*/}
-                                {/*            <circle cx="3" cy="3.5" r="3" fill={bigChars ? '#1F9A14': '#E11A00'}/>*/}
-                                {/*        </svg>*/}
-                                {/*    </span>*/}
-                                {/*        Великі літери*/}
-                                {/*    </div>*/}
-                                {/*    <div className="pt-1 flex">*/}
-                                {/*    <span className="pointer">*/}
-                                {/*        <svg width="6" height="7" viewBox="0 0 6 7" fill="none" xmlns="http://www.w3.org/2000/svg">*/}
-                                {/*            <circle cx="3" cy="3.5" r="3" fill={digitChars ? '#1F9A14': '#E11A00'}/>*/}
-                                {/*        </svg>*/}
-                                {/*    </span>*/}
-                                {/*        Цифри*/}
-                                {/*    </div>*/}
-                                {/*</div>*/}
+                                { inputPassFlag ?
+                                <div className="checkPassword border border-[#E7E7E7] rounded-md pl-2 flex flex-col text-xs font-light w-72 h-52">
+                                    <p className="text-sm font-medium p-4">Для захисту даних необхідно придумати безпечний пароль.<br/> Він повинен містити:</p>
+                                    <div className="px-4 space-y-2">
+                                            <div className="pt-1 flex">
+                                        <span className="pointer">
+                                            <svg width="6" height="7" viewBox="0 0 6 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <circle cx="3" cy="3.5" r="3" fill={smallChars ? '#1F9A14': '#E11A00'}/>
+                                            </svg>
+                                        </span>
+                                                Малі літери
+                                            </div>
+                                            <div className="pt-1 flex">
+                                        <span className="pointer">
+                                            <svg width="6" height="7" viewBox="0 0 6 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <circle cx="3" cy="3.5" r="3" fill={bigChars ? '#1F9A14': '#E11A00'}/>
+                                            </svg>
+                                        </span>
+                                                Великі літери
+                                            </div>
+                                            <div className="pt-1 flex">
+                                        <span className="pointer">
+                                            <svg width="6" height="7" viewBox="0 0 6 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <circle cx="3" cy="3.5" r="3" fill={digitChars ? '#1F9A14': '#E11A00'}/>
+                                            </svg>
+                                        </span>
+                                                Цифри
+                                            </div>
+                                        <div className="pt-1 flex">
+                                        <span className="pointer">
+                                            <svg width="6" height="7" viewBox="0 0 6 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <circle cx="3" cy="3.5" r="3" fill={numbers ? '#1F9A14': '#E11A00'}/>
+                                            </svg>
+                                        </span>
+                                            8 і більше символів
+                                            </div>
+                                    </div>
+                                </div>
+                                    :
+                                    <div></div>
+                                }
                             </div>
                             <hr className="border border-[#E2E8F0]"/>
                             <div className="text-black_figma text-sm font-light">
@@ -228,7 +258,7 @@ const Register = ({ close }) => {
                                 </div>
                             </div>
                             <div className="py-2 font-light text-sm">
-                                Виникли питання? <NavLink to="/faq" className="text-[#3E77AA]" onClick={(e) => close(e)}>Детальніше</NavLink>
+                                Виникли питання? <NavLink to="/faq" className="text-[#3E77AA]" onClick={close}>Детальніше</NavLink>
                             </div>
                             <Button type="submit" label={'Зареєструватися'} cssType={'primary'} />
                             <div className="flex mt-5">
@@ -240,11 +270,11 @@ const Register = ({ close }) => {
                                            onChange={handleInputChange}
                                     />
                                 <div className="px-2 font-light text-sm">
-                                    Я згоден з <NavLink to="/userAgreement" className="text-[#3E77AA]"onClick={(e) => close(e)}>умовами угоди користувача</NavLink>
+                                    Я згоден з <NavLink to="/userAgreement" className="text-[#3E77AA]" onClick={close}>умовами угоди користувача</NavLink>
                                 </div>
                             </div>
                             <div className="text-center py-2 font-light text-sm">
-                                Вже є аккаунт? <NavLink to="/auth/login" className="text-[#3E77AA]">Вхід</NavLink>
+                                Вже є аккаунт? <NavLink to="#" className="text-[#3E77AA]" onClick={showLogin}>Вхід</NavLink>
                             </div>
                         </form>
                 }

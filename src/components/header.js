@@ -35,6 +35,15 @@ const Header = () => {
         );
     }
 
+    const showLogin = () => {
+        setModalRegistration(false);
+        setModalAuthorization(true);
+    }
+    const showRegister = () => {
+        setModalAuthorization(false);
+        setModalRegistration(true);
+    }
+
     return (
         <header>
             <div className="flex flex-wrap gap-24 items-center justify-center mx-auto p-4">
@@ -65,10 +74,13 @@ const Header = () => {
                 </div>
             </div>
             <Modal active={modalRegistration} setActive={setModalRegistration}>
-                <Register close={() => setModalRegistration(false)}/>
+                <Register close={() => setModalRegistration(false)} showLogin={showLogin}/>
             </Modal>
             <Modal active={modalAuthorization} setActive={setModalAuthorization}>
-                <Login close={() => setModalAuthorization(false)}/>
+                <Login close={() => setModalAuthorization(false)} showRegister={showRegister}/>
+            </Modal>
+            <Modal active={modalAuthorization} setActive={setModalAuthorization}>
+                <Login close={() => setModalAuthorization(false)} showRegister={showRegister}/>
             </Modal>
         </header>
     );

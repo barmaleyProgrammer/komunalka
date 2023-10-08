@@ -8,7 +8,9 @@ const InputField = ({
         onChange,
         readOnly = false,
         cssClass = '',
-        autoComplete = ''
+        autoComplete = '',
+        onFocus = undefined,
+        onBlur = undefined
     }) => {
     return (
         <fieldset className={cssClass}>
@@ -24,6 +26,8 @@ const InputField = ({
                 onChange={onChange}
                 readOnly={readOnly}
                 autoComplete={autoComplete}
+                onFocus={onFocus}
+                onBlur={onBlur}
             />
         </fieldset>
     );

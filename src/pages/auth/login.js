@@ -13,7 +13,7 @@ import api from "../../api";
 import { Context } from "../../store";
 import icon_error from "../../img/icon_error.svg";
 
-const Login = ({ close }) => {
+const Login = ({ close, showRegister }) => {
     const [,dispatch] = useContext(Context);
     const navigate = useNavigate();
     const [type, setTape] = useState('password');
@@ -131,11 +131,11 @@ const Login = ({ close }) => {
                             Запам’ятати мене
                         </label>
                     </div>
-                    <NavLink to="/auth/reset" className="text-[#3E77AA] pt-1 basis-1/2 text-sm text-right" onClick={(e) => close(e)}>Забули пароль?</NavLink>
+                    <NavLink to="#" className="text-[#3E77AA] pt-1 basis-1/2 text-sm text-right" onClick={close}>Забули пароль?</NavLink>
                 </div>
                 <Button type="submit" label={'Увійти'} cssType={'primary'} />
                 <div className="py-2 font-light text-sm">
-                    Ще немає аккаунту? <NavLink to="/auth/register" className="text-[#3E77AA]">Зареєструватися</NavLink>
+                    Ще немає аккаунту? <NavLink to="#" onClick={showRegister} className="text-[#3E77AA]">Зареєструватися</NavLink>
                 </div>
 
                 <div className="flex gap-2 text-[#797878]">

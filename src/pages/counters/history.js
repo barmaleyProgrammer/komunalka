@@ -19,7 +19,7 @@ const History = () => {
     const [counters, setCounters] = useState([]);
     const [firms, setFirms] = useState([]);
     const [firm, setFirm] = useState('');
-    const address = state.addresses.find((item) => item.objectId == objectId);
+    const address = state.addresses.find((item) => item.objectId === objectId);
     const [modalActive1, setModalActive1] = useState(false);
     const [modalActive2, setModalActive2] = useState(false);
     const [startDate, setStartDate] = useState(moment().startOf('month'));

@@ -70,3 +70,9 @@ fieldset {
     top: 3px;
     margin-right: 3px;
 }
+.checkPassword {
+    position: absolute;
+    left: 420px;
+    top: 10px;
+    background: white;
+}
