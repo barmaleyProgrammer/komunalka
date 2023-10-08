@@ -13,13 +13,13 @@ const Footer = () => {
                     <a href="https://komunalka.ua/">
                         <img src={logo_lichylnyk} className="h-[59px] w-[120px] mb-2" alt="kamunalka logo"/>
                     </a>
-                    <div className="text-gray-500 mb-1 mt-1 text-xs ">
+                    <div className="mb-1 mt-1 text-xs font-light">
                         <p className="mb-2 text-center">made by GERC</p>
                         <p>lichylnyk.com.ua © 2023</p>
                     </div>
                 </div>
                 <div>
-                    <ul className="text-gray-500 font-normal text-xs space-y-2">
+                    <ul className="text-gray-500 font-medium text-xs space-y-2">
                         <li>
                             <NavLink to="/">Послуги</NavLink>
                         </li>
