@@ -260,18 +260,18 @@ const Register = ({ close, showLogin }) => {
                             <div className="py-2 font-light text-sm">
                                 Виникли питання? <NavLink to="/faq" className="text-[#3E77AA]" onClick={close}>Детальніше</NavLink>
                             </div>
-                            <Button type="submit" label={'Зареєструватися'} cssType={'primary'} />
+                            <Button type="submit" label={'Зареєструватися'} cssType={'primary'} disabled={!form.rememberMe} />
                             <div className="flex mt-5">
-                                    <input className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
-                                           id="rememberMe"
-                                           name={'rememberMe'}
-                                           type="checkbox"
-                                           checked={form.rememberMe}
-                                           onChange={handleInputChange}
-                                    />
-                                <div className="px-2 font-light text-sm">
+                                <input className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
+                                   id="rememberMe"
+                                   name={'rememberMe'}
+                                   type="checkbox"
+                                   checked={form.rememberMe}
+                                   onChange={handleInputChange}
+                                />
+                                <label htmlFor="rememberMe" className="ml-2 text-sm font-light">
                                     Я згоден з <NavLink to="/userAgreement" className="text-[#3E77AA]" onClick={close}>умовами угоди користувача</NavLink>
-                                </div>
+                                </label>
                             </div>
                             <div className="text-center py-2 font-light text-sm">
                                 Вже є аккаунт? <NavLink to="#" className="text-[#3E77AA]" onClick={showLogin}>Вхід</NavLink>

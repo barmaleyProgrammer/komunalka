@@ -7,12 +7,13 @@ import Logout from "./Logout";
 import Modal from "./modal/modal";
 import Register from "../pages/auth/register";
 import Login from "../pages/auth/login";
-import login from "../pages/auth/login";
+import ResetPassword from "../pages/auth/resetPassword";
 
 const Header = () => {
     const [state] = useContext(Context);
     const [modalRegistration, setModalRegistration] = useState(false);
     const [modalAuthorization, setModalAuthorization] = useState(false);
+    const [modalResetPass, setModalResetPass] = useState(false);
 
     const openModalRegistration = (e) => {
         e.stopPropagation();
@@ -42,6 +43,10 @@ const Header = () => {
     const showRegister = () => {
         setModalAuthorization(false);
         setModalRegistration(true);
+    }
+    const showResetPass = () => {
+        setModalAuthorization(false);
+        setModalResetPass(true);
     }
 
     return (
@@ -77,10 +82,10 @@ const Header = () => {
                 <Register close={() => setModalRegistration(false)} showLogin={showLogin}/>
             </Modal>
             <Modal active={modalAuthorization} setActive={setModalAuthorization}>
-                <Login close={() => setModalAuthorization(false)} showRegister={showRegister}/>
+                <Login close={() => setModalAuthorization(false)} showRegister={showRegister} showResetPass={showResetPass}/>
             </Modal>
-            <Modal active={modalAuthorization} setActive={setModalAuthorization}>
-                <Login close={() => setModalAuthorization(false)} showRegister={showRegister}/>
+            <Modal active={modalResetPass} setActive={setModalResetPass}>
+                <ResetPassword close={() => setModalResetPass(false)} />
             </Modal>
         </header>
     );

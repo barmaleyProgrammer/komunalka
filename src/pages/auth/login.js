@@ -13,7 +13,7 @@ import api from "../../api";
 import { Context } from "../../store";
 import icon_error from "../../img/icon_error.svg";
 
-const Login = ({ close, showRegister }) => {
+const Login = ({ close, showRegister, showResetPass }) => {
     const [,dispatch] = useContext(Context);
     const navigate = useNavigate();
     const [type, setTape] = useState('password');
@@ -134,7 +134,7 @@ const Login = ({ close, showRegister }) => {
                             Запам’ятати мене
                         </label>
                     </div>
-                    <NavLink to="#" className="text-[#3E77AA] pt-1 basis-1/2 text-sm text-right" onClick={close}>Забули пароль?</NavLink>
+                    <NavLink to="#" className="text-[#3E77AA] pt-1 basis-1/2 text-sm text-right" onClick={showResetPass}>Забули пароль?</NavLink>
                 </div>
                 <Button type="submit" label={'Увійти'} cssType={'primary'} />
                 <div className="py-2 font-light text-sm">

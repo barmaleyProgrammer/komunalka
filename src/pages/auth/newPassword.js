@@ -49,7 +49,8 @@ const NewPassword = () => {
                     type={'email'}
                     placeholder={'Введіть свій email'}
                     name={'email'}
-                    required={true}
+                    // required={true}
+                    readOnly={true}
                     value={form.email}
                     autoComplete="off"
                     onChange={handleInputChange}

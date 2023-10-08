@@ -1,5 +1,5 @@
-const Button = ({ type = 'button', label = 'Save', cssType = 'primary', onClick}) => {
-    let className = ['py-2.5', 'px-5', 'mr-2', 'mb-2', 'text-sm', 'font-medium', 'rounded', 'w-full'];
+const Button = ({ type = 'button', label = 'Save', cssType = 'primary', onClick, disabled = false}) => {
+    let className = ['py-2.5', 'px-5', 'mr-2', 'mb-2', 'text-sm', 'font-medium', 'rounded', 'w-full', 'disabled:opacity-70'];
     switch (cssType) {
         case 'primary':
             className = className.concat(['text-white_figma', 'bg-yellow_figma']);
@@ -11,7 +11,7 @@ const Button = ({ type = 'button', label = 'Save', cssType = 'primary', onClick}
             className = [];
     }
     return (
-        <button type={type} className={className.join(' ')} onClick={onClick}>{label}</button>
+        <button type={type} className={className.join(' ')} onClick={onClick} disabled={disabled}>{label}</button>
     );
 };
 
