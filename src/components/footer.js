@@ -38,8 +38,8 @@ const Footer = () => {
                     </ul>
                 </div>
                 <div>
-                    <ul className="text-gray-500 font-medium text-xs space-y-2">
-                        <li className="mb-2 text-sm font-sans Goth">
+                    <ul className="text-gray-500 font-light text-xs space-y-2">
+                        <li className="mb-2 text-sm font-medium">
                             Контакти
                         </li>
                         <li>
