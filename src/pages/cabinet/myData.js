@@ -89,9 +89,7 @@ const MyData = () => {
     return (
         <>
             <div className="w-[1152px] mx-auto px-20 mt-2">
-                <div>
-                    <Breadcrumbs items={breadCrumbs}/>
-                </div>
+                <Breadcrumbs items={breadCrumbs} />
                 <div className="mt-6 mb-8">
                     <Tabs />
                 </div>

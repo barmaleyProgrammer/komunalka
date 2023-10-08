@@ -20,7 +20,10 @@ const Validate = () => {
                     await api.getObject().then((data) => {
                         dispatch({ type: 'setAccount', payload: data.account });
                     });
-                    await api.getService().then((data) => {
+                    await api.getServices().then((data) => {
+                        dispatch({ type: 'services', payload: data });
+                    });
+                    await api.getServiceTypes().then((data) => {
                         dispatch({ type: 'serviceTypes', payload: data });
                     });
                     await api.getAddress().then((data) => {

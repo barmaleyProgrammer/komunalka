@@ -116,19 +116,19 @@ const Counters = () => {
             </div>
             <h2 className="mb-4 mt-3 text-2xl">{address.name}</h2>
             <ServiceTypes types={serviceTypes} />
-            {isPostLoading
-                ? <div className="flex p-10 justify-center"><Loader /></div>
-                :
-            <div className="mt-5 py-4 px-10 h-auto rounded-lg shadow-myCustom">
-                <h3 className="py-4 text-xl text-center">Лічильники</h3>
-                <Tabs2 objectId={objectId} />
-                <div>
-                    {counters?.map((item, key) => <CounterBlock item={item} key={`CounterBlock_${item.id}`} index={key} />)}
-                </div>
-                <div className="mx-auto w-28">
-                    <Button type="button" label={'Зберегти'} onClick={Save} cssType={'primary'} />
-                </div>
-            </div>
+            {
+                isPostLoading ?
+                    <Loader /> :
+                    <div className="mt-5 py-4 px-10 h-auto rounded-lg shadow-myCustom">
+                        <h3 className="py-4 text-xl text-center">Лічильники</h3>
+                        <Tabs2 objectId={objectId} />
+                        <div>
+                            {counters?.map((item, key) => <CounterBlock item={item} key={`CounterBlock_${item.id}`} index={key} />)}
+                        </div>
+                        <div className="mx-auto w-28">
+                            <Button type="button" label={'Зберегти'} onClick={Save} cssType={'primary'} />
+                        </div>
+                    </div>
             }
         </div>
     );

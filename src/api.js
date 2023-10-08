@@ -164,7 +164,18 @@ const getCountersHistory = (objectId, dateStart, dateEnd) => {
             console.error(error);
         });
 }
-const getService = () => {
+
+const getServices = () => {
+    return axios.get(`/counter/service`, config)
+        .then((res) => {
+            sessionStorage.setItem('services', JSON.stringify(res.data.data));
+            return res.data.data;
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+}
+const getServiceTypes = () => {
     return axios.get(`/counter/service/type`, config)
         .then((res) => {
             sessionStorage.setItem('serviceTypes', JSON.stringify(res.data.data));
@@ -240,7 +251,8 @@ export default {
     resetPasswordRequest,
     newPassword,
     changePassword,
-    getService,
+    getServices,
+    getServiceTypes,
     getRegions,
     getDistricts,
     getTowns,
