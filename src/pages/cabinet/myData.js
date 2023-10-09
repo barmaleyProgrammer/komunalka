@@ -113,10 +113,10 @@ const MyData = () => {
                     </Modal>
                     <Modal active={showChangePasswordModal} setActive={setShowChangePasswordModal}>
                         <div className="flex flex-col justify-center p-10 items-center text-lg w-[464px]">
-                            <p className="mt-8">Зміни успішно збережені are you sure ?</p>
+                            <p className="mt-8">Ви впевнені, що бажаєте змінити пароль?</p>
                         </div>
                         <div className="pt-2 w-44 mx-auto mb-8">
-                            <Button type="button" label={'Ok'} cssType={'primary'} onClick={ChangePassword} />
+                            <Button type="button" label={'Так, впевнений!'} cssType={'primary'} onClick={ChangePassword} />
                         </div>
                     </Modal>
                     <form className="space-y-2" action="#" autoComplete="off" onSubmit={Submit}>
