@@ -1,7 +1,42 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 
+const smallCheck = new RegExp('[a-z]');
+const bigCheck = new RegExp('[A-Z]');
+const digitCheck = new RegExp('[0-9]');
+const numbersCheck = new RegExp('.{8}');
 
-const CheckPassword = ({smallChars, bigChars, digitChars, numbers}) => {
+const CheckPassword = ({ password }) => {
+    const [smallChars, setSmallChars] = useState(false);
+    const [bigChars, setBigChars] = useState(false);
+    const [digitChars, setDigitChars] = useState(false);
+    const [numbers, setNumbers] = useState(false);
+
+    useEffect( () => {
+        if (numbersCheck.test(password)) {
+            setNumbers(true);
+        } else {
+            setNumbers(false);
+        }
+
+        if (smallCheck.test(password)) {
+            setSmallChars(true);
+        } else {
+            setSmallChars(false);
+        }
+
+        if (bigCheck.test(password)) {
+            setBigChars(true);
+        } else {
+            setBigChars(false);
+        }
+
+        if (digitCheck.test(password)) {
+            setDigitChars(true);
+        } else {
+            setDigitChars(false);
+        }
+    },[password]);
+
     return (
         <div className="checkPassword border border-[#E7E7E7] rounded-md pl-2 flex flex-col text-xs font-light w-72 h-52">
             <p className="text-sm font-medium p-4">

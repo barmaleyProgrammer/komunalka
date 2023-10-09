@@ -11,6 +11,22 @@ import Modal from "../../components/modal/modal";
 import './myData.css';
 import CheckPassword from "../../components/checkPassword/checkPassword";
 
+const breadCrumbs = [
+    {
+        "to": '/',
+        "label": 'Головна'
+    },
+    {
+        "to": '/cabinet',
+        "label": 'Особистий кабінет'
+    },
+    {
+        "to": '',
+        "label": 'Мої дані'
+    },
+];
+
+
 const MyData = () => {
     const [state, dispatch] = useContext(Context);
     const [form, setForm] = useState({
@@ -19,33 +35,12 @@ const MyData = () => {
         lastName: state.user.lastName,
         secondName: state.user.secondName,
         phone: state.user.phone,
-        // password: state.user.password,
     });
+    const [password, setPassword] = useState('');
     const [formError, setFormError] = useState('');
     const [type, setTape] = useState('password');
-    const [, setSmallChars] = useState(false);
-    const [, setBigChars] = useState(false);
-    const [, setDigitChars] = useState(false);
-    const [, setNumbers] = useState(false);
-    const [inputPassFlag, setInputPassFlag] = useState(false);
-
-    const breadCrumbs = [
-        {
-            "to": '/',
-            "label": 'Головна'
-        },
-        {
-            "to": '/cabinet',
-            "label": 'Особистий кабінет'
-        },
-        {
-            "to": '',
-            "label": 'Мої дані'
-        },
-    ]
+    const [inputPassFlag, setInputPassFlag] = useState(true);
     const [modalActive, setModalActive] = useState(false);
-    const [validateFlag, setValidateFlag] = useState(false);
-
 
     const Submit = async (event) => {
         event.preventDefault();
@@ -64,44 +59,10 @@ const MyData = () => {
         }
     };
 
-    useEffect( () => {
-        const smallCheck = new RegExp('[a-z]');
-        const bigCheck = new RegExp('[A-Z]');
-        const digitCheck = new RegExp('[0-9]');
-        const numbersCheck = new RegExp('.{8}');
-
-        if (numbersCheck.test(form.password)) {
-            setNumbers(true);
-
-        } else {
-            setNumbers(false);
-        }
-
-        if (smallCheck.test(form.password)) {
-            setSmallChars(true);
-
-        } else {
-            setSmallChars(false);
-        }
-
-        if (bigCheck.test(form.password)) {
-            setBigChars(true);
-
-        } else {
-            setBigChars(false);
-        }
-
-        if (digitCheck.test(form.password)) {
-            setDigitChars(true);
-
-        } else {
-            setDigitChars(false);
-        }
-    },[form.password]);
     const ChangePassword = async (e) => {
         e.preventDefault();
         try {
-            const result = await api.changePassword(form.password);
+            const result = await api.changePassword(password);
             if (result.status === 200) {
                 // setValidateFlag(true);
                 setModalActive(true);
@@ -126,6 +87,9 @@ const MyData = () => {
             setTape('password')
         }
     }
+
+
+
     return (
         <>
             <div className="w-[1152px] mx-auto px-20 mt-2">
@@ -204,22 +168,19 @@ const MyData = () => {
                                     type={type}
                                     name={'password'}
                                     required={true}
-                                    value={form.password}
+                                    value={password}
                                     onFocus={() => setInputPassFlag(true)}
                                     onBlur={() => setInputPassFlag(false)}
                                     placeholder="Змінити"
                                     autoComplete="off"
-                                    onChange={handleInputChange}
+                                    onChange={(e) => setPassword(e.target.value)}
                                 />
+                                { inputPassFlag ? <CheckPassword password={password} /> : <></> }
                                 <div onClick={togglePassInput} className="eye-ico cursor-pointer">
                                     <img src={eye} alt="" />
                                 </div>
-                                { inputPassFlag ?
-                                    <CheckPassword />
-                                    :
-                                    <div></div>
-                                }
-                                <button className="changePassword text-sm ml-6"onClick={(e) => ChangePassword(e)}>Змінити</button>
+
+                                <button className="changePassword text-sm ml-6" onClick={(e) => ChangePassword(e)}>Змінити</button>
                             </div>
                         </div>
                         <div className="flex">

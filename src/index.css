@@ -72,7 +72,8 @@ fieldset {
 }
 .checkPassword {
     position: absolute;
-    left: 420px;
-    top: 10px;
+    left: calc(100% + 5px);
+    top: 24px;
     background: white;
+    z-index: 5;
 }
