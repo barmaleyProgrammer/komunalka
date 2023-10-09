@@ -26,7 +26,7 @@ const Register = ({ close, showLogin }) => {
     const [type, setType] = useState('password');
     const [validateFlag, setValidateFlag] = useState(false);
     const [inputPassFlag, setInputPassFlag] = useState(false);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
 
     const handleInputChange = (event) => {
         const value = (event.target.type === 'checkbox') ? event.target.checked : event.target.value;
