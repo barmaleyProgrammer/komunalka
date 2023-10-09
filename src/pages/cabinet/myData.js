@@ -1,18 +1,17 @@
-import { useContext, useState } from 'react';
+import {useContext, useEffect, useState} from 'react';
 import InputField from "../../components/inputField";
 import Tabs from "../../components/tabs";
 import { Context } from "../../store";
 import Breadcrumbs from "../../components/breadcrumbs";
 import api from "../../api";
 import Button from "../../components/button";
-import { useNavigate } from "react-router-dom";
 import eye from "../../img/eye.svg";
 import my_data_changed from './../../img/modal_mydata_changed.png';
 import Modal from "../../components/modal/modal";
 import './myData.css';
+import CheckPassword from "../../components/checkPassword/checkPassword";
 
 const MyData = () => {
-    // const navigate = useNavigate();
     const [state, dispatch] = useContext(Context);
     const [form, setForm] = useState({
         firstName: state.user.firstName,
@@ -24,6 +23,12 @@ const MyData = () => {
     });
     const [formError, setFormError] = useState('');
     const [type, setTape] = useState('password');
+    const [, setSmallChars] = useState(false);
+    const [, setBigChars] = useState(false);
+    const [, setDigitChars] = useState(false);
+    const [, setNumbers] = useState(false);
+    const [inputPassFlag, setInputPassFlag] = useState(false);
+
     const breadCrumbs = [
         {
             "to": '/',
@@ -58,6 +63,41 @@ const MyData = () => {
             setFormError(e.message);
         }
     };
+
+    useEffect( () => {
+        const smallCheck = new RegExp('[a-z]');
+        const bigCheck = new RegExp('[A-Z]');
+        const digitCheck = new RegExp('[0-9]');
+        const numbersCheck = new RegExp('.{8}');
+
+        if (numbersCheck.test(form.password)) {
+            setNumbers(true);
+
+        } else {
+            setNumbers(false);
+        }
+
+        if (smallCheck.test(form.password)) {
+            setSmallChars(true);
+
+        } else {
+            setSmallChars(false);
+        }
+
+        if (bigCheck.test(form.password)) {
+            setBigChars(true);
+
+        } else {
+            setBigChars(false);
+        }
+
+        if (digitCheck.test(form.password)) {
+            setDigitChars(true);
+
+        } else {
+            setDigitChars(false);
+        }
+    },[form.password]);
     const ChangePassword = async (e) => {
         e.preventDefault();
         try {
@@ -165,6 +205,8 @@ const MyData = () => {
                                     name={'password'}
                                     required={true}
                                     value={form.password}
+                                    onFocus={() => setInputPassFlag(true)}
+                                    onBlur={() => setInputPassFlag(false)}
                                     placeholder="Змінити"
                                     autoComplete="off"
                                     onChange={handleInputChange}
@@ -172,6 +214,11 @@ const MyData = () => {
                                 <div onClick={togglePassInput} className="eye-ico cursor-pointer">
                                     <img src={eye} alt="" />
                                 </div>
+                                { inputPassFlag ?
+                                    <CheckPassword />
+                                    :
+                                    <div></div>
+                                }
                                 <button className="changePassword text-sm ml-6"onClick={(e) => ChangePassword(e)}>Змінити</button>
                             </div>
                         </div>
