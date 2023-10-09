@@ -1,4 +1,5 @@
-import {useContext, useEffect, useState} from 'react';
+import {useContext, useState} from 'react';
+import { NavLink } from "react-router-dom";
 import InputField from "../../components/inputField";
 import Tabs from "../../components/tabs";
 import { Context } from "../../store";
@@ -39,8 +40,9 @@ const MyData = () => {
     const [password, setPassword] = useState('');
     const [formError, setFormError] = useState('');
     const [type, setTape] = useState('password');
-    const [inputPassFlag, setInputPassFlag] = useState(true);
+    const [inputPassFlag, setInputPassFlag] = useState(false);
     const [modalActive, setModalActive] = useState(false);
+    const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
 
     const Submit = async (event) => {
         event.preventDefault();
@@ -61,6 +63,7 @@ const MyData = () => {
 
     const ChangePassword = async (e) => {
         e.preventDefault();
+        setShowChangePasswordModal(false);
         try {
             const result = await api.changePassword(password);
             if (result.status === 200) {
@@ -89,7 +92,6 @@ const MyData = () => {
     }
 
 
-
     return (
         <>
             <div className="w-[1152px] mx-auto px-20 mt-2">
@@ -100,15 +102,23 @@ const MyData = () => {
                 <div className="py-10 px-20 font-light space-y-2 rounded-lg shadow-myCustom">
                     <h1 className="font-normal text-lg pb-2 py-2">Основна інформація</h1>
                     <div className="text-xs text-red-900 text-center">{ formError }</div>
-                        <Modal active={modalActive} setActive={setModalActive}>
-                            <div className="flex flex-col justify-center p-10 items-center text-lg w-[464px]">
-                                <img src={ my_data_changed } alt=""/>
-                                <p className="mt-8">Зміни успішно збережені</p>
-                            </div>
-                            <div className="pt-2 w-44 mx-auto mb-8">
-                                <Button type="button" label={'Ok'} cssType={'primary'} onClick={() => setModalActive(false)} />
-                            </div>
-                        </Modal>
+                    <Modal active={modalActive} setActive={setModalActive}>
+                        <div className="flex flex-col justify-center p-10 items-center text-lg w-[464px]">
+                            <img src={ my_data_changed } alt=""/>
+                            <p className="mt-8">Зміни успішно збережені</p>
+                        </div>
+                        <div className="pt-2 w-44 mx-auto mb-8">
+                            <Button type="button" label={'Ok'} cssType={'primary'} onClick={() => setModalActive(false)} />
+                        </div>
+                    </Modal>
+                    <Modal active={showChangePasswordModal} setActive={setShowChangePasswordModal}>
+                        <div className="flex flex-col justify-center p-10 items-center text-lg w-[464px]">
+                            <p className="mt-8">Зміни успішно збережені are you sure ?</p>
+                        </div>
+                        <div className="pt-2 w-44 mx-auto mb-8">
+                            <Button type="button" label={'Ok'} cssType={'primary'} onClick={ChangePassword} />
+                        </div>
+                    </Modal>
                     <form className="space-y-2" action="#" autoComplete="off" onSubmit={Submit}>
                         <div className="grid grid-flow-row grid-cols-2 gap-x-5 py-4 pr-60">
                             <InputField
@@ -175,19 +185,19 @@ const MyData = () => {
                                     autoComplete="off"
                                     onChange={(e) => setPassword(e.target.value)}
                                 />
-                                { inputPassFlag ? <CheckPassword password={password} /> : <></> }
                                 <div onClick={togglePassInput} className="eye-ico cursor-pointer">
                                     <img src={eye} alt="" />
                                 </div>
+                                { inputPassFlag ? <CheckPassword password={password} /> : <></> }
+                                <NavLink to="#" className="changePassword text-sm ml-6" onClick={() => setShowChangePasswordModal(true)}>Змінити</NavLink>
 
-                                <button className="changePassword text-sm ml-6" onClick={(e) => ChangePassword(e)}>Змінити</button>
                             </div>
                         </div>
                         <div className="flex">
                             <div className="w-80 h-12">
                                 <Button type="submit" cssType="primary" label={'Зберігти зміни'} onClick={(e) => Submit(e)}/>
                             </div>
-                            <button className="text-base ml-6">Видалити профіль</button>
+                            <NavLink to="#" className="text-base mt-2 ml-6">Видалити профіль</NavLink>
                         </div>
                     </form>
                 </div>
