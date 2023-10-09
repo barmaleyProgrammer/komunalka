@@ -78,15 +78,30 @@ const Header = () => {
                     { state.isLoggedIn ? <Logout /> : <NotLoggedIn />}
                 </div>
             </div>
-            <Modal active={modalRegistration} setActive={setModalRegistration}>
-                <Register close={() => setModalRegistration(false)} showLogin={showLogin}/>
-            </Modal>
-            <Modal active={modalAuthorization} setActive={setModalAuthorization}>
-                <Login close={() => setModalAuthorization(false)} showRegister={showRegister} showResetPass={showResetPass}/>
-            </Modal>
-            <Modal active={modalResetPass} setActive={setModalResetPass}>
-                <ResetPassword close={() => setModalResetPass(false)} />
-            </Modal>
+            {
+                modalRegistration && (
+                    <Modal close={() => setModalRegistration(false)}>
+                        <Register close={() => setModalRegistration(false)} showLogin={showLogin}/>
+                    </Modal>
+                )
+
+
+            }
+            {
+                modalAuthorization && (
+                    <Modal close={() => setModalAuthorization(false)}>
+                        <Login close={() => setModalAuthorization(false)} showRegister={showRegister} showResetPass={showResetPass}/>
+                    </Modal>
+                )
+            }
+            {
+                modalResetPass && (
+                    <Modal close={() => setModalResetPass(false)}>
+                        <ResetPassword close={() => setModalResetPass(false)} />
+                    </Modal>
+                )
+            }
+
         </header>
     );
 };

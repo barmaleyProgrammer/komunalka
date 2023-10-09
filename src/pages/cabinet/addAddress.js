@@ -140,16 +140,6 @@ const AddAddress = ({ close }) => {
         e.preventDefault();
         await api.addObject(flat.value, flatName);
         await api.getAddress().then((data) => dispatch({ type: 'setAddresses', payload: data }));
-        setDistricts([]);
-        setDistrict(null);
-        setTowns([]);
-        setTown(null);
-        setStreets([]);
-        setStreet(null);
-        setHouses([]);
-        setHouse(null);
-        setFlats([]);
-        setFlat(null);
         close();
     }
 

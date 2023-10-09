@@ -86,29 +86,23 @@ const Cabinet = () => {
         await api.getAddress().then((data) => dispatch({ type: 'setAddresses', payload: data }));
     }
 
-    const AddressBlock = (item) => {
+
+
+    const AddressBlock = ({ item }) => {
         return (
-            <div className="cursor-pointer p-4 relative border rounded-lg border-[#E7E7E7] w-80 h-48" onClick={() => navigate(`/counters/${item.item.objectId}`)}>
+            <div className="cursor-pointer p-4 relative border rounded-lg border-[#E7E7E7] w-80 h-48" onClick={() => navigate(`/counters/${item.objectId}`)}>
                 <div className="absolute top-1 right-1 z-10">
                     <DropDownMenu
                         // delete={(e) => deleteAddress(e, item.item.objectId)}
-                        popup={(e) => openModal(e, item.item.objectId)}
-                        popup2={(e) => showConfirmDelete(e, item.item.objectId)}
+                        rename={(e) => openModal(e, item.objectId)}
+                        delete={(e) => showConfirmDelete(e, item.objectId)}
                     />
                 </div>
                 <div className="flex">
                     <img src={icon_house} className="h-8" alt="kamunalka logo"/>
-                    <p className="pl-2 pt-1">{ item.item.name }</p>
+                    <p className="pl-2 pt-1">{ item.name }</p>
                 </div>
-                <div className="pt-2 text-sm">{ item.item.address }</div>
-                <Modal active={modalConfirmDelete} setActive={setModalConfirmDelete}>
-                    <div className="flex flex-col justify-center p-10 items-center text-lg w-[464px]">
-                        <p className="mt-8">Ви впевнені, що бажаєте видалити квартиру?</p>
-                    </div>
-                    <div className="pt-2 w-44 mx-auto mb-8">
-                        <Button type="button" label={'Так, впевнений!'} cssType={'primary'} onClick={(e) => deleteAddress(e, item.item.objectId)} />
-                    </div>
-                </Modal>
+                <div className="pt-2 text-sm">{ item.address }</div>
             </div>
         );
     };
@@ -125,9 +119,11 @@ const Cabinet = () => {
                 <div className="rounded-lg shadow-myCustom py-8">
                     <h3 className="text-center text-xl">Мої адреси</h3>
                     <div className="flex justify-center gap-x-10 p-5">
-                        {state.addresses?.map((item, key) => {
-                            return <AddressBlock item={item} key={key}/>
-                        })}
+                        {
+                            state.addresses?.map((item, key) => {
+                                return <AddressBlock item={item} key={key}/>
+                            })
+                        }
                         <div className="cursor-pointer flex justify-center items-center border rounded border-[#E7E7E7] w-80 h-48" onClick={(e) => openModalAddAddresses(e)}>
                             <AiOutlinePlus />
                             <div className="pl-2">Додати адресу</div>
@@ -135,24 +131,47 @@ const Cabinet = () => {
                     </div>
                 </div>
             </div>
-            <Modal active={modalActive} setActive={setModalActive}>
-                <InputField
-                    // label={'Перейменувати адресу'}
-                    type={'text'}
-                    placeholder={'Назва адреси'}
-                    name={'name'}
-                    required={true}
-                    value={currentAddress.name}
-                    autoComplete="off"
-                    onChange={handleInputChange}
-                />
-                <div className="pt-2">
-                    <Button type="button" onClick={updateAddress} label={'Оновити'} cssType={'primary'} />
-                </div>
-            </Modal>
-            <Modal active={modalAddAddressActive} setActive={setModalAddAddressActive}>
-               <AddAddress close={() => setModalAddAddressActive(false)} />
-            </Modal>
+            {
+                modalActive && (
+                    <Modal close={() => setModalActive(false)}>
+                        <InputField
+                            // label={'Перейменувати адресу'}
+                            type={'text'}
+                            placeholder={'Назва адреси'}
+                            name={'name'}
+                            required={true}
+                            value={currentAddress.name}
+                            autoComplete="off"
+                            onChange={handleInputChange}
+                        />
+                        <div className="pt-2">
+                            <Button type="button" onClick={updateAddress} label={'Оновити'} cssType={'primary'} />
+                        </div>
+                    </Modal>
+                )
+            }
+
+            {
+                modalConfirmDelete && (
+                    <Modal close={() => setModalConfirmDelete(false)}>
+                        <div className="flex flex-col justify-center p-10 items-center text-lg w-[464px]">
+                            <p className="mt-8">Ви впевнені, що бажаєте видалити {currentAddress.name}?</p>
+                        </div>
+                        <div className="pt-2 w-44 mx-auto mb-8">
+                            <Button type="button" label={'Так, впевнений!'} cssType={'primary'} onClick={(e) => deleteAddress(e, currentAddress.objectId)} />
+                        </div>
+                    </Modal>
+                )
+            }
+
+            {
+                modalAddAddressActive && (
+                    <Modal close={() => setModalAddAddressActive(false)}>
+                        <AddAddress close={() => setModalAddAddressActive(false)} />
+                    </Modal>
+                )
+            }
+
         </>
     );
 };

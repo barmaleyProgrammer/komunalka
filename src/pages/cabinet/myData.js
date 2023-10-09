@@ -102,23 +102,32 @@ const MyData = () => {
                 <div className="py-10 px-20 font-light space-y-2 rounded-lg shadow-myCustom">
                     <h1 className="font-normal text-lg pb-2 py-2">Основна інформація</h1>
                     <div className="text-xs text-red-900 text-center">{ formError }</div>
-                    <Modal active={modalActive} setActive={setModalActive}>
-                        <div className="flex flex-col justify-center p-10 items-center text-lg w-[464px]">
-                            <img src={ my_data_changed } alt=""/>
-                            <p className="mt-8">Зміни успішно збережені</p>
-                        </div>
-                        <div className="pt-2 w-44 mx-auto mb-8">
-                            <Button type="button" label={'Ok'} cssType={'primary'} onClick={() => setModalActive(false)} />
-                        </div>
-                    </Modal>
-                    <Modal active={showChangePasswordModal} setActive={setShowChangePasswordModal}>
-                        <div className="flex flex-col justify-center p-10 items-center text-lg w-[464px]">
-                            <p className="mt-8">Ви впевнені, що бажаєте змінити пароль?</p>
-                        </div>
-                        <div className="pt-2 w-44 mx-auto mb-8">
-                            <Button type="button" label={'Так, впевнений!'} cssType={'primary'} onClick={ChangePassword} />
-                        </div>
-                    </Modal>
+                    {
+                        modalActive && (
+                            <Modal close={() => setModalActive(false)}>
+                                <div className="flex flex-col justify-center p-10 items-center text-lg w-[464px]">
+                                    <img src={ my_data_changed } alt=""/>
+                                    <p className="mt-8">Зміни успішно збережені</p>
+                                </div>
+                                <div className="pt-2 w-44 mx-auto mb-8">
+                                    <Button type="button" label={'Ok'} cssType={'primary'} onClick={() => setModalActive(false)} />
+                                </div>
+                            </Modal>
+                        )
+                    }
+                    {
+                        showChangePasswordModal && (
+                            <Modal close={() => setShowChangePasswordModal(false)}>
+                                <div className="flex flex-col justify-center p-10 items-center text-lg w-[464px]">
+                                    <p className="mt-8">Ви впевнені, що бажаєте змінити пароль?</p>
+                                </div>
+                                <div className="pt-2 w-44 mx-auto mb-8">
+                                    <Button type="button" label={'Так, впевнений!'} cssType={'primary'} onClick={ChangePassword} />
+                                </div>
+                            </Modal>
+                        )
+                    }
+
                     <form className="space-y-2" action="#" autoComplete="off" onSubmit={Submit}>
                         <div className="grid grid-flow-row grid-cols-2 gap-x-5 py-4 pr-60">
                             <InputField

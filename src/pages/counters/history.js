@@ -163,12 +163,20 @@ const History = () => {
                     </div>
             }
             </div>
-            <Modal active={modalActive1} setActive={setModalActive1}>
-                <Calendar onChange={setDate1} value={startDate} />
-            </Modal>
-            <Modal active={modalActive2} setActive={setModalActive2}>
-                <Calendar onChange={setDate2} value={endDate} />
-            </Modal>
+            {
+                modalActive1 && (
+                    <Modal close={() => setModalActive1(false)}>
+                        <Calendar onChange={setDate1} value={startDate} />
+                    </Modal>
+                )
+            }
+            {
+                modalActive2 && (
+                    <Modal close={() => setModalActive2(false)}>
+                        <Calendar onChange={setDate2} value={endDate} />
+                    </Modal>
+                )
+            }
         </div>
     );
 };
