@@ -4,8 +4,6 @@ import { initialSate, Context, reducer } from "./store";
 import Footer from "./components/footer";
 import Header from "./components/header";
 
-import Register from "./pages/auth/register";
-import Login from "./pages/auth/login";
 import Validate from "./pages/auth/validate";
 
 import News from "./pages/news.js";
@@ -21,7 +19,7 @@ import MyData from "./pages/cabinet/myData";
 import Counters from "./pages/counters/counters";
 import CountersHistory from "./pages/counters/history";
 import CountersGraphsTables from "./pages/counters/graphsTables";
-import ResetPassword from "./pages/auth/resetPassword";
+
 import NotFound from "./pages/notFound";
 import NewPassword from "./pages/auth/newPassword";
 import UserAgreement from "./pages/userAgreement";
@@ -38,19 +36,13 @@ const App = () => {
                             <Route path="/" element={<Home />} />
                             <Route path="/about" element={<About />} />
                             <Route path="/faq" element={<Faq />} />
-                            <Route path="/news" element={<News />} />
+                            <Route path="/news/:id?" element={<News />} />
                             <Route path="/contacts" element={<Contacts />} />
                             <Route path="/userAgreement" element={<UserAgreement />} />
 
-                            <Route path="/auth">
-                                <Route path="login" element={<Login />} />
-                                <Route path="register" element={<Register />} />
-                                <Route path="validate" element={<Validate />} />
-                                <Route path="newPassword" element={<NewPassword />} />
-                                <Route path="reset" element={<ResetPassword />} />
-                            </Route>
                             <Route path="/validate/email" element={<Validate />} />
-                            <Route path="password/reset/link" element={<NewPassword />} />
+                            <Route path="/password/reset/link" element={<NewPassword />} />
+
                             <Route path="/cabinet">
                                 <Route index element={<Cabinet />} />
                                 <Route path="addAddress" element={<AddAddress />} />

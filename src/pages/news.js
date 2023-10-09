@@ -1,4 +1,6 @@
 import Breadcrumbs from "../components/breadcrumbs";
+import { NavLink } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const list_imgs = [
     { image: '/news/News1.png' },
@@ -30,15 +32,31 @@ const breadCrumbs = [
 ];
 
 const News = () => {
+    const { id } = useParams();
+
+    const NewsList = () => {
+        return list_imgs.map((item, key) => {
+            return (
+                <div key={key}>
+                    <NavLink to={`/news/${key}`}>
+                        <img className="h-auto w-60 rounded-lg" src={item.image} alt=""/>
+                    </NavLink>
+                </div>
+            );
+        });
+    };
+
+    const CurrentNews = () => {
+        return (
+            <div> NEWS # { id }</div>
+        )
+    }
+
     return (
         <div className="w-[1152px] pl-20 py-3 mx-auto">
-            <Breadcrumbs items={breadCrumbs}/>
+            <Breadcrumbs items={ breadCrumbs } />
             <div className="mt-4 grid grid-cols-3 gap-10">
-                {list_imgs.map((item, index) =>
-                    <div key={index}>
-                        <img className="h-auto w-60 rounded-lg" src= {item.image } alt=""/>
-                    </div>
-                )}
+                { id ? <CurrentNews /> : <NewsList /> }
             </div>
         </div>
     )
