@@ -24,7 +24,8 @@ const DropDownMenu = (props) => {
                 <ul className="py-2 text-sm text-gray-700">
                     <li><NavLink to="#" onClick={props.popup} className="block px-4 py-2 hover:bg-gray-100">Перейменувати адресу</NavLink></li>
                     <li><NavLink to="#" className="block px-4 py-2 hover:bg-gray-100">Налаштування сповішень</NavLink></li>
-                    <li><NavLink to="#" onClick={props.delete} className="block px-4 py-2 hover:bg-gray-100">Видалити</NavLink></li>
+                    {/*<li><NavLink to="#" onClick={props.delete} className="block px-4 py-2 hover:bg-gray-100">Видалити</NavLink></li>*/}
+                    <li><NavLink to="#" onClick={props.popup2} className="block px-4 py-2 hover:bg-gray-100">Видалити</NavLink></li>
                 </ul>
             </div>
         </div>

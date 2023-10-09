@@ -15,8 +15,10 @@ import AddAddress from './addAddress';
 const Cabinet = () => {
     const [state, dispatch] = useContext(Context);
     const navigate = useNavigate();
+    const [formError, setFormError] = useState('');
     const [modalActive, setModalActive] = useState(false);
     const [modalAddAddressActive, setModalAddAddressActive] = useState(false);
+    const [modalConfirmDelete, setModalConfirmDelete] = useState(false);
     const [currentAddress, setCurrentAddress] = useState('');
     const breadCrumbs = [
         {
@@ -35,10 +37,20 @@ const Cabinet = () => {
 
     const deleteAddress = async (e, objectId) => {
         e.stopPropagation();
-        await api.deleteObject(objectId);
-        const newObjects = state.addresses.filter((item) => item.objectId !== objectId);
-        dispatch({ type: 'setAddresses', payload: newObjects });
-        api.getAddress();
+        try {
+            const result = await api.deleteObject(objectId);
+            const newObjects = state.addresses.filter((item) => item.objectId !== objectId);
+            dispatch({ type: 'setAddresses', payload: newObjects });
+            api.getAddress();
+            if (result.status === 200) {
+                // setModalActive(true);
+            }
+            setModalConfirmDelete(false);
+        }
+        catch (e) {
+            console.error(e.message);
+            setFormError(e.message);
+        }
     };
 
     const handleInputChange = (event) => {
@@ -54,6 +66,12 @@ const Cabinet = () => {
         const res =  state.addresses.find((item) => item.objectId === objectId);
         setCurrentAddress(res);
         setModalActive(true);
+    };
+    const showConfirmDelete = (e, objectId) => {
+        e.stopPropagation();
+        const res =  state.addresses.find((item) => item.objectId === objectId);
+        setCurrentAddress(res);
+        setModalConfirmDelete(true);
     };
     const openModalAddAddresses = (e) => {
         e.stopPropagation();
@@ -73,8 +91,9 @@ const Cabinet = () => {
             <div className="cursor-pointer p-4 relative border rounded-lg border-[#E7E7E7] w-80 h-48" onClick={() => navigate(`/counters/${item.item.objectId}`)}>
                 <div className="absolute top-1 right-1 z-10">
                     <DropDownMenu
-                        delete={(e) => deleteAddress(e, item.item.objectId)}
+                        // delete={(e) => deleteAddress(e, item.item.objectId)}
                         popup={(e) => openModal(e, item.item.objectId)}
+                        popup2={(e) => showConfirmDelete(e, item.item.objectId)}
                     />
                 </div>
                 <div className="flex">
@@ -82,6 +101,14 @@ const Cabinet = () => {
                     <p className="pl-2 pt-1">{ item.item.name }</p>
                 </div>
                 <div className="pt-2 text-sm">{ item.item.address }</div>
+                <Modal active={modalConfirmDelete} setActive={setModalConfirmDelete}>
+                    <div className="flex flex-col justify-center p-10 items-center text-lg w-[464px]">
+                        <p className="mt-8">Ви впевнені, що бажаєте видалити квартиру?</p>
+                    </div>
+                    <div className="pt-2 w-44 mx-auto mb-8">
+                        <Button type="button" label={'Так, впевнений!'} cssType={'primary'} onClick={(e) => deleteAddress(e, item.item.objectId)} />
+                    </div>
+                </Modal>
             </div>
         );
     };
