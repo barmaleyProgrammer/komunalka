@@ -26,7 +26,7 @@ const Header = () => {
     const NotLoggedIn = () => {
         return (
             <>
-                <NavLink to="#" className="py-2.5 px-5 mr-5 mb-2 text-sm rounded w-full text-black_figma bg-white_figma border border-yellow_figma" onClick={(e) => openModalAuthorization(e)}>
+                <NavLink to="#" className="py-2.5 px-5 mr-5 mb-2 text-sm font-medium rounded w-full text-black_figma bg-white_figma border border-yellow_figma" onClick={(e) => openModalAuthorization(e)}>
                     Увійти
                 </NavLink>
                 <NavLink to="#" className="py-2.5 px-5 mr-2 mb-2 text-sm rounded w-full text-white_figma bg-yellow_figma" onClick={(e) => openModalRegistration(e)}>

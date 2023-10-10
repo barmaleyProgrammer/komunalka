@@ -77,3 +77,13 @@ fieldset {
     background: white;
     z-index: 5;
 }
+.arrow_right {
+    position: absolute;
+    left: calc(18% + 0px);
+    bottom: -20%;
+}
+.arrow_left {
+    position: absolute;
+    left: calc(76% + 0px);
+    bottom: -20%;
+}

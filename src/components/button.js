@@ -1,5 +1,5 @@
 const Button = ({ type = 'button', label = 'Save', cssType = 'primary', onClick, disabled = false, loading = false}) => {
-    let className = ['py-2.5', 'px-5', 'mr-2', 'mb-2', 'text-sm', 'font-medium', 'rounded', 'w-full', 'disabled:opacity-70'];
+    let className = ['py-2.5', 'px-5', 'mr-2', 'mb-2', 'text-sm', 'rounded', 'w-full', 'disabled:opacity-70'];
     let myDisabled;
     if (disabled || loading) {
         myDisabled = true;
