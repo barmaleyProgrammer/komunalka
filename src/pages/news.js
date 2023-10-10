@@ -48,7 +48,11 @@ const News = () => {
 
     const CurrentNews = () => {
         return (
-            <div> NEWS # { id }</div>
+            <div>
+                <div> NEWS # { id }</div>
+                питстт
+            </div>
+
         )
     }
 

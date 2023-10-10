@@ -64,7 +64,7 @@ const Home = () => {
             <section>
                 <div className="w-[1152px] px-20 py-3 mx-auto shadow-myCustom mb-10">
                     <p className="text-2xl font-normal text-center mt-4">Навіщо реєструватись на Лічильник?</p>
-                    <div className="grid grid-cols-3 mt-6 space-x-10 gap-x-4">
+                    <div className="relative grid grid-cols-3 mt-6 gap-x-8">
                         <div className="text-center">
                             <img className="mx-auto" src={icon_effective} alt=""/>
                             <p className="text-base font-medium p-4">Зручність та ефективність</p>
@@ -86,6 +86,7 @@ const Home = () => {
                         <img className="arrow_right" src={arrow_right} alt=""/>
                         <img className="arrow_left" src={arrow_left} alt=""/>
                     </div>
+
                     <div className="w-44 mx-auto mt-5 mb-5">
                         <NavLink to="#" className="py-3.5 px-5 mr-2 mb-2 text-sm rounded w-full text-white_figma bg-yellow_figma" >
                             Зареєструватися

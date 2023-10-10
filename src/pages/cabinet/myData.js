@@ -9,7 +9,6 @@ import Button from "../../components/button";
 import eye from "../../img/eye.svg";
 import my_data_changed from './../../img/modal_mydata_changed.png';
 import Modal from "../../components/modal/modal";
-import './myData.css';
 import CheckPassword from "../../components/checkPassword/checkPassword";
 
 const breadCrumbs = [

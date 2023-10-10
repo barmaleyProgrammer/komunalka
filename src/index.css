@@ -79,11 +79,11 @@ fieldset {
 }
 .arrow_right {
     position: absolute;
-    left: calc(18% + 0px);
-    bottom: -20%;
+    left: calc(-6% + 0px);
+    top: 37%;
 }
 .arrow_left {
     position: absolute;
-    left: calc(76% + 0px);
-    bottom: -20%;
+    left: calc(104% + 0px);
+    top: 37%;
 }
