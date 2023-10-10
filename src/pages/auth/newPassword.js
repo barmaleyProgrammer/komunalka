@@ -6,12 +6,14 @@ import eye from "../../img/eye.svg";
 import Button from "../../components/button";
 import api from "../../api";
 import Modal from "../../components/modal/modal";
+import CheckPassword from "../../components/checkPassword/checkPassword";
 
 const NewPassword = ({ close }) => {
     const url = new URL(window.location);
     const navigate = useNavigate();
     const [type, setTape] = useState('password');
     const [modalActive, setModalActive] = useState(true);
+    const [inputPassFlag, setInputPassFlag] = useState(false);
 
     const [form, setForm] = useState({
         email: url.searchParams.get('email') || '',
@@ -73,8 +75,11 @@ const NewPassword = ({ close }) => {
                                     required={true}
                                     value={form.password}
                                     autoComplete="off"
+                                    onFocus={() => setInputPassFlag(true)}
+                                    onBlur={() => setInputPassFlag(false)}
                                     onChange={handleInputChange}
                                 />
+                                { inputPassFlag ? <CheckPassword password={form.password} /> : <></> }
                                 <div onClick={togglePassInput} className="eye-ico cursor-pointer">
                                     <img src={eye} alt="" />
                                 </div>
