@@ -33,6 +33,10 @@ const NewPassword = ({ close }) => {
         navigate('/');
     };
 
+    const closeModal = () => {
+        setModalActive(false)
+        navigate('/');
+    }
     const togglePassInput = () => {
         if (type === 'password') {
             setTape('text')
@@ -43,7 +47,7 @@ const NewPassword = ({ close }) => {
     return (
         <div>
             {   modalActive && (
-                <Modal close={() => setModalActive(false)}>
+                <Modal close={() => closeModal()}>
                     {/*<div className="mt-20 mb-20 p-10 mx-auto rounded-lg shadow-myCustom sm:w-3/4 md:w-3/4 lg:w-3/4 xl:w-1/3 max-w-[450px]">*/}
                     <div className="mx-auto rounded-lg shadow-myCustom p-10 w-full">
                         <img src={logo_lichylnyk} className="h-16 mb-8 mx-auto" alt="" />
@@ -79,7 +83,7 @@ const NewPassword = ({ close }) => {
                         </form>
                     </div>
                 </Modal>
-            )
+                )
             }
         </div>
     );
