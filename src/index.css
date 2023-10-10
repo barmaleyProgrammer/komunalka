@@ -39,12 +39,12 @@
     position: relative;
     z-index: 1;
     top: 30px;
-    right: 0px;
+    right: 0;
 }
 .logo_counter {
     position: relative;
     top: -30px;
-    right: 0px;
+    right: 0;
 }
 fieldset {
     position: relative;
@@ -79,12 +79,12 @@ fieldset {
 }
 .arrow_right {
     position: absolute;
-    left: calc(-6% + 0px);
+    left: -6%;
     top: 37%;
 }
 .arrow_left {
     position: absolute;
-    left: calc(104% + 0px);
+    left: 104%;
     top: 37%;
 }
 a.active2 {
