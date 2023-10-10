@@ -36,15 +36,21 @@ const News = () => {
     const { id } = useParams();
 
     const NewsList = () => {
-        return list_imgs.map((item, key) => {
-            return (
-                <div key={key}>
-                    <NavLink to={`/news/${key}`}>
-                        <img className="h-auto rounded-lg mx-auto" src={item.image} alt=""/>
-                    </NavLink>
-                </div>
-            );
-        });
+        return (
+            <div className="grid grid-cols-3">
+                {
+                    list_imgs.map((item, key) => {
+                        return (
+                            <div key={key}>
+                                <NavLink to={`/news/${key}`}>
+                                    <img className="rounded-lg mt-4" src={item.image} alt=""/>
+                                </NavLink>
+                            </div>
+                        );
+                    })
+                }
+            </div>
+        );
     };
 
     const CurrentNews = () => {
@@ -52,27 +58,42 @@ const News = () => {
         return (
             <>
                 <h1 className="mt-5 text-2xl">Інструкції зі зняття показників для новачків</h1>
-                <p className="text-sm font-extralight">14.08.2023</p>
-                <img className="" src={rectangle} alt=""/>
-                <div className="w-[956px]">
+                <p className="text-sm font-extralight mt-4">14.08.2023</p>
+                <img className="mt-4" src={rectangle} alt=""/>
+                <div className="w-[956px] mx-auto">
                     <p className="mt-4">Лічильники – це незамінна частина нашого повсякденного життя, забезпечуючи облік
                         та контроль витрат ресурсів, таких як електроенергія, вода, газ та тепло.
                         Правильне занесення та передача показань лічильника мають важливе значення
                         для точного обліку та оптимізації витрат. У цій статті ми розглянемо деякі практичні
                         поради про те, як правильно записати та передати показання лічильника.
                     </p>
+                    <p className="mt-4">Лічильники – це незамінна частина нашого повсякденного життя, забезпечуючи облік
+                        та контроль витрат ресурсів, таких як електроенергія, вода, газ та тепло.
+                        Правильне занесення та передача показань лічильника мають важливе значення
+                        для точного обліку та оптимізації витрат. У цій статті ми розглянемо деякі практичні
+                        поради про те, як правильно записати та передати показання лічильника.
+                    </p>
+                    <p className="mt-4">Лічильники – це незамінна частина нашого повсякденного життя, забезпечуючи облік
+                        та контроль витрат ресурсів, таких як електроенергія, вода, газ та тепло.
+                        Правильне занесення та передача показань лічильника мають важливе значення
+                        для точного обліку та оптимізації витрат. У цій статті ми розглянемо деякі практичні
+                        поради про те, як правильно записати та передати показання лічильника.
+                    </p>
+                   <ul className="list-disc">
+                       <li>1</li>
+                       <li>1</li>
+                       <li>1</li>
+                   </ul>
+
                 </div>
             </>
-
         )
     }
 
     return (
         <div>
             <Breadcrumbs items={ breadCrumbs } />
-            <div className="mt-4 grid grid-cols-3 gap-10">
-                { id ? <CurrentNews /> : <NewsList /> }
-            </div>
+            { id ? <CurrentNews /> : <NewsList /> }
         </div>
     )
 };

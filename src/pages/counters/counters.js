@@ -16,6 +16,7 @@ const Counters = () => {
     const [state] = useContext(Context);
     const [counters, setCounters] = useState([]);
     const [serviceTypes, setServiceTypes] = useState([]);
+    const [serviceType, setServiceType] = useState(null);
     const address = state.addresses.find((item) => item.objectId == objectId);
     const [isPostLoading, setIsPostLoading] = useState(false);
     const breadCrumbs = [
@@ -115,7 +116,7 @@ const Counters = () => {
                 <Breadcrumbs items={breadCrumbs}/>
             </div>
             <h2 className="mb-4 mt-3 text-2xl">{address.name}</h2>
-            <ServiceTypes types={serviceTypes} />
+            <ServiceTypes types={serviceTypes} setServiceType={setServiceType} serviceType={serviceType} />
             {
                 isPostLoading ?
                     <Loader /> :
@@ -123,7 +124,16 @@ const Counters = () => {
                         <h3 className="py-4 text-xl text-center">Лічильники</h3>
                         <Tabs2 objectId={objectId} />
                         <div>
-                            {counters?.map((item, key) => <CounterBlock item={item} key={`CounterBlock_${item.id}`} index={key} />)}
+                            {
+                                counters?.filter((item) => {
+                                        if (!serviceType) {
+                                            return true;
+                                        } else {
+                                            return (item.serviceType == serviceType)
+                                        }
+                                    })
+                                    .map((item, key) => <CounterBlock item={item} key={`CounterBlock_${item.id}`} index={key} />)
+                            }
                         </div>
                         <div className="mx-auto w-28">
                             <Button type="button" label={'Зберегти'} onClick={Save} cssType={'primary'} />

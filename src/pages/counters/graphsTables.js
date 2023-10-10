@@ -15,10 +15,11 @@ const GraphsTables = () => {
     const [state] = useContext(Context);
     const [counters, setCounters] = useState([]);
     const address = state.addresses.find((item) => item.objectId == objectId);
-    const [startDate, setStartDate] = useState(moment('2020-01-01 00:00:00'));
+    const [startDate, setStartDate] = useState(moment('2023-01-01 00:00:00'));
     const [endDate, setEndDate] = useState(moment().endOf('month'));
     const [loading, setLoading] = useState(true);
     const [serviceTypes, setServiceTypes] = useState([]);
+    const [serviceType, setServiceType] = useState(null);
 
     const breadCrumbs = [
         {
@@ -64,7 +65,7 @@ const GraphsTables = () => {
         <div className="font-light">
             <Breadcrumbs items={breadCrumbs}/>
             <h2 className="mb-4 mt-3 text-2xl">{address.name}</h2>
-            <ServiceTypes types={serviceTypes} />
+            <ServiceTypes types={serviceTypes} setServiceType={setServiceType} serviceType={serviceType} />
             <div className="mt-[24px] py-4 px-[58px] h-auto rounded-lg shadow-myCustom ">
                 <h3 className="py-4 text-sm text-center">Лічильники</h3>
                 <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
@@ -88,7 +89,13 @@ const GraphsTables = () => {
                                 </tr>
                                 </thead>
                                 {
-                                    counters?.map((item, index) => {
+                                    counters?.filter((item) => {
+                                        if (!serviceType) {
+                                            return true;
+                                        } else {
+                                            return (item.serviceType == serviceType)
+                                        }
+                                    }).map((item, index) => {
                                         return (
                                             <tbody key={index}>
                                             <tr>

@@ -13,7 +13,7 @@ const serviceIcons = {
     4: water
 };
 
-const ServiceTypes = ({types = []}) => {
+const ServiceTypes = ({types = [], serviceType = null, setServiceType = undefined}) => {
     const [state] = useContext(Context);
 
     return (
@@ -23,9 +23,19 @@ const ServiceTypes = ({types = []}) => {
                 {
                     state?.serviceTypes?.filter((item) => types.includes(item.id)).map((item, key) => {
                         return (
-                            <NavLink to="#" key={key} className="flex flex-col items-center w-[72px]">
-                                <img src={serviceIcons[item.id]} className="h-[72px] w-[72px]" alt={item.name} />
-                                <p className="pt-4 text-xs text-center">{item.name}</p>
+                            <NavLink
+                                to="#"
+                                key={key}
+                                className={`flex flex-col items-center w-[72px] ${serviceType === item.id ? 'active2':''}`}
+                                onClick={() => {
+                                    if (serviceType === item.id) {
+                                        setServiceType(null)
+                                    } else {
+                                        setServiceType(item.id)
+                                    }
+                                }}>
+                                    <img src={serviceIcons[item.id]} className="h-[72px] w-[72px]" alt={item.name} />
+                                    <p className="pt-4 text-xs text-center">{item.name}</p>
                             </NavLink>
                         );
                     })

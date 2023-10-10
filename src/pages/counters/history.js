@@ -23,10 +23,11 @@ const History = () => {
     const [modalActive1, setModalActive1] = useState(false);
     const [modalActive2, setModalActive2] = useState(false);
     // const [startDate, setStartDate] = useState(moment().startOf('month'));
-    const [startDate, setStartDate] = useState(moment('2020-01-01 00:00:00'));
+    const [startDate, setStartDate] = useState(moment('2023-01-01 00:00:00'));
     const [endDate, setEndDate] = useState(moment().endOf('month'));
     const [serviceTypes, setServiceTypes] = useState([]);
     const [isPostLoading, setIsPostLoading] = useState(false);
+    const [serviceType, setServiceType] = useState(null);
 
     const breadCrumbs = [
         {
@@ -106,11 +107,8 @@ const History = () => {
         );
     };
 
-    return (
-        <div className="font-normal mb-4 max-w-screen-xl">
-            <Breadcrumbs items={breadCrumbs}/>
-            <h2 className="mb-4 mt-3 text-2xl">{address.name}</h2>
-            <ServiceTypes types={serviceTypes} />
+    const Calendars = () => {
+        return (
             <div className="mt-4 mb-4 items-center justify-center hidden w-full md:flex md:w-auto md:order-1">
                 <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 ">
                     <li>
@@ -124,6 +122,15 @@ const History = () => {
                     </li>
                 </ul>
             </div>
+        );
+    };
+
+    return (
+        <div className="font-normal mb-4 max-w-screen-xl">
+            <Breadcrumbs items={breadCrumbs}/>
+            <h2 className="mb-4 mt-3 text-2xl">{address.name}</h2>
+            <ServiceTypes types={serviceTypes} setServiceType={setServiceType} serviceType={serviceType} />
+            {/*<Calendars />*/}
             <div className="mt-5 py-4 px-10 h-auto rounded-lg shadow-myCustom">
                 <h3 className="py-4 text-xl text-center">Лічильники</h3>
                 <Tabs2 objectId={objectId} />
@@ -148,17 +155,13 @@ const History = () => {
                 ? <Loader />
                 : <div>
                         {
-                            counters?.map((item, key) => {
-                                console.log('firm', firm);
-                                if (firm) {
-                                    if (firm === item.idFirme) {
-                                        return <CounterBlock item={item} key={`CounterBlock_${key}`} />
-                                    }
+                            counters?.filter((item) => {
+                                if (!serviceType) {
+                                    return true;
+                                } else {
+                                    return (item.serviceType == serviceType)
                                 }
-                                else {
-                                    return <CounterBlock item={item} key={`CounterBlock_${key}`} />
-                                }
-                            })
+                            }).map((item, key) => <CounterBlock item={item} key={`CounterBlock_${key}`} />)
                         }
                     </div>
             }
