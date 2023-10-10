@@ -87,114 +87,114 @@ const Register = ({ close, showLogin }) => {
         );
     };
 
-    const Form = () => {
-        return (
-            <form className="space-y-2" onSubmit={Submit}>
-                <InputField
-                    label={'Email'}
-                    type={'email'}
-                    placeholder={'example@gmail.com'}
-                    name={'email'}
-                    required={true}
-                    cssClass="email-field"
-                    value={form.email}
-                    autoComplete="off"
-                    onChange={handleInputChange}
-                />
-                <InputField
-                    label={'Прізвище'}
-                    placeholder={'Іванов'}
-                    name={'lastName'}
-                    required={true}
-                    value={form.lastName}
-                    autoComplete="off"
-                    onChange={handleInputChange}
-                />
-                <InputField
-                    label={'Імʼя'}
-                    placeholder={'Іван'}
-                    name={'firstName'}
-                    required={true}
-                    value={form.firstName}
-                    autoComplete="off"
-                    onChange={handleInputChange}
-                />
-                <InputField
-                    label={'По батькові'}
-                    placeholder={'Іванович'}
-                    name={'secondName'}
-                    required={true}
-                    value={form.secondName}
-                    autoComplete="off"
-                    onChange={handleInputChange}
-                />
-                <InputField
-                    label={'Телефон'}
-                    type={'phone'}
-                    placeholder={'+38(0_ _) _ _ _ - _ _ - _ _'}
-                    name={'phone'}
-                    required={true}
-                    value={form.phone}
-                    autoComplete="off"
-                    onChange={handleInputChange}
-                />
-                <div className={'relative'}>
-                    <InputField
-                        label={'Пароль'}
-                        type={type}
-                        name={'password'}
-                        required={true}
-                        value={form.password}
-                        autoComplete="off"
-                        onChange={handleInputChange}
-                        onFocus={() => setInputPassFlag(true)}
-                        onBlur={() => setInputPassFlag(false)}
-                    />
-                    { inputPassFlag ? <CheckPassword password={form.password} /> : <></> }
-                    <div onClick={togglePassInput} className="eye-ico cursor-pointer">
-                        <img src={eye} alt="" />
-                    </div>
-
-                </div>
-                <hr className="border border-[#E2E8F0]"/>
-                <div className="text-black_figma text-sm font-light">
-                    При вході через сайти партнерів є змога<br />автоматично додати адреси
-                </div>
-                <div className="flex flex-row space-x-2">
-                    <div className="basis-1/2 border border-[#E8E8E8;] rounded">
-                        <div className="flex p-2 justify-center space-x-1">
-                            <img src={logo_com_block} alt=""/>
-                            {/*<p className="text-sm pt-1">Комуналка</p>*/}
-                        </div>
-                    </div>
-                    <div className="basis-1/2 border border-[#E8E8E8;] rounded" title="">
-                        <div className="flex p-2 justify-center space-x-1">
-                            <img src={logo_gerc} alt="" />
-                        </div>
-                    </div>
-                </div>
-                <div className="py-2 font-light text-sm">
-                    Виникли питання? <NavLink to="/faq" className="text-[#3E77AA]" onClick={close}>Детальніше</NavLink>
-                </div>
-                <Button type="submit" label={'Зареєструватися'} loading={loading} cssType={'primary'} disabled={!form.rememberMe} />
-                <div className="flex mt-5">
-                    <input className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
-                           id="rememberMe"
-                           name={'rememberMe'}
-                           type="checkbox"
-                           checked={form.rememberMe}
-                           onChange={handleInputChange}
-                    />
-                    <label htmlFor="rememberMe" className="ml-2 text-sm font-light">
-                        Я згоден з <NavLink to="/userAgreement" className="text-[#3E77AA]" onClick={close}>умовами угоди користувача</NavLink>
-                    </label>
-                </div>
-                <div className="text-center py-2 font-light text-sm">
-                    Вже є аккаунт? <NavLink to="#" className="text-[#3E77AA]" onClick={showLogin}>Вхід</NavLink>
-                </div>
-            </form>
-        );
-    };
+    // const Form = () => {
+    //     return (
+    //         <form className="space-y-2" onSubmit={Submit}>
+    //             <InputField
+    //                 label={'Email'}
+    //                 type={'email'}
+    //                 placeholder={'example@gmail.com'}
+    //                 name={'email'}
+    //                 required={true}
+    //                 cssClass="email-field"
+    //                 value={form.email}
+    //                 autoComplete="off"
+    //                 onChange={handleInputChange}
+    //             />
+    //             <InputField
+    //                 label={'Прізвище'}
+    //                 placeholder={'Іванов'}
+    //                 name={'lastName'}
+    //                 required={true}
+    //                 value={form.lastName}
+    //                 autoComplete="off"
+    //                 onChange={handleInputChange}
+    //             />
+    //             <InputField
+    //                 label={'Імʼя'}
+    //                 placeholder={'Іван'}
+    //                 name={'firstName'}
+    //                 required={true}
+    //                 value={form.firstName}
+    //                 autoComplete="off"
+    //                 onChange={handleInputChange}
+    //             />
+    //             <InputField
+    //                 label={'По батькові'}
+    //                 placeholder={'Іванович'}
+    //                 name={'secondName'}
+    //                 required={true}
+    //                 value={form.secondName}
+    //                 autoComplete="off"
+    //                 onChange={handleInputChange}
+    //             />
+    //             <InputField
+    //                 label={'Телефон'}
+    //                 type={'phone'}
+    //                 placeholder={'+38(0_ _) _ _ _ - _ _ - _ _'}
+    //                 name={'phone'}
+    //                 required={true}
+    //                 value={form.phone}
+    //                 autoComplete="off"
+    //                 onChange={handleInputChange}
+    //             />
+    //             <div className={'relative'}>
+    //                 <InputField
+    //                     label={'Пароль'}
+    //                     type={type}
+    //                     name={'password'}
+    //                     required={true}
+    //                     value={form.password}
+    //                     autoComplete="off"
+    //                     onChange={handleInputChange}
+    //                     onFocus={() => setInputPassFlag(true)}
+    //                     onBlur={() => setInputPassFlag(false)}
+    //                 />
+    //                 { inputPassFlag ? <CheckPassword password={form.password} /> : <></> }
+    //                 <div onClick={togglePassInput} className="eye-ico cursor-pointer">
+    //                     <img src={eye} alt="" />
+    //                 </div>
+    //
+    //             </div>
+    //             <hr className="border border-[#E2E8F0]"/>
+    //             <div className="text-black_figma text-sm font-light">
+    //                 При вході через сайти партнерів є змога<br />автоматично додати адреси
+    //             </div>
+    //             <div className="flex flex-row space-x-2">
+    //                 <div className="basis-1/2 border border-[#E8E8E8;] rounded">
+    //                     <div className="flex p-2 justify-center space-x-1">
+    //                         <img src={logo_com_block} alt=""/>
+    //                         {/*<p className="text-sm pt-1">Комуналка</p>*/}
+    //                     </div>
+    //                 </div>
+    //                 <div className="basis-1/2 border border-[#E8E8E8;] rounded" title="">
+    //                     <div className="flex p-2 justify-center space-x-1">
+    //                         <img src={logo_gerc} alt="" />
+    //                     </div>
+    //                 </div>
+    //             </div>
+    //             <div className="py-2 font-light text-sm">
+    //                 Виникли питання? <NavLink to="/faq" className="text-[#3E77AA]" onClick={close}>Детальніше</NavLink>
+    //             </div>
+    //             <Button type="submit" label={'Зареєструватися'} loading={loading} cssType={'primary'} disabled={!form.rememberMe} />
+    //             <div className="flex mt-5">
+    //                 <input className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
+    //                        id="rememberMe"
+    //                        name={'rememberMe'}
+    //                        type="checkbox"
+    //                        checked={form.rememberMe}
+    //                        onChange={handleInputChange}
+    //                 />
+    //                 <label htmlFor="rememberMe" className="ml-2 text-sm font-light">
+    //                     Я згоден з <NavLink to="/userAgreement" className="text-[#3E77AA]" onClick={close}>умовами угоди користувача</NavLink>
+    //                 </label>
+    //             </div>
+    //             <div className="text-center py-2 font-light text-sm">
+    //                 Вже є аккаунт? <NavLink to="#" className="text-[#3E77AA]" onClick={showLogin}>Вхід</NavLink>
+    //             </div>
+    //         </form>
+    //     );
+    // };
 
     //  const phoneNumberFormatter = () => {
     //     const inputField = document.getElementById('phone-number');
@@ -210,7 +210,117 @@ const Register = ({ close, showLogin }) => {
             <div className="px-10 py-6 space-y-3 mt-2 mx-auto w-[464px] rounded-lg shadow-myCustom">
                 <img src={logo_lichylnyk} className="h-16 mb-8 mx-auto" alt="Flowbite Logo" />
                 <h4 className="text-black_figma text-center text-lg">Реєстрація</h4>
-                { formError ? <Error /> : validateFlag ? <Valid /> : <Form /> }
+                {/*{ formError ? <Error /> : validateFlag ? <Valid /> : <Form /> }*/}
+                { formError ?
+                    <Error />
+                    : validateFlag ?
+                        <Valid />
+                        :
+                        <form className="space-y-2" onSubmit={Submit}>
+                            <InputField
+                                label={'Email'}
+                                type={'email'}
+                                placeholder={'example@gmail.com'}
+                                name={'email'}
+                                required={true}
+                                cssClass="email-field"
+                                value={form.email}
+                                autoComplete="off"
+                                onChange={handleInputChange}
+                            />
+                            <InputField
+                                label={'Прізвище'}
+                                placeholder={'Іванов'}
+                                name={'lastName'}
+                                required={true}
+                                value={form.lastName}
+                                autoComplete="off"
+                                onChange={handleInputChange}
+                            />
+                            <InputField
+                                label={'Імʼя'}
+                                placeholder={'Іван'}
+                                name={'firstName'}
+                                required={true}
+                                value={form.firstName}
+                                autoComplete="off"
+                                onChange={handleInputChange}
+                            />
+                            <InputField
+                                label={'По батькові'}
+                                placeholder={'Іванович'}
+                                name={'secondName'}
+                                required={true}
+                                value={form.secondName}
+                                autoComplete="off"
+                                onChange={handleInputChange}
+                            />
+                            <InputField
+                                label={'Телефон'}
+                                type={'phone'}
+                                placeholder={'+38(0_ _) _ _ _ - _ _ - _ _'}
+                                name={'phone'}
+                                required={true}
+                                value={form.phone}
+                                autoComplete="off"
+                                onChange={handleInputChange}
+                            />
+                            <div className={'relative'}>
+                                <InputField
+                                    label={'Пароль'}
+                                    type={type}
+                                    name={'password'}
+                                    required={true}
+                                    value={form.password}
+                                    autoComplete="off"
+                                    onChange={handleInputChange}
+                                    onFocus={() => setInputPassFlag(true)}
+                                    onBlur={() => setInputPassFlag(false)}
+                                />
+                                { inputPassFlag ? <CheckPassword password={form.password} /> : <></> }
+                                <div onClick={togglePassInput} className="eye-ico cursor-pointer">
+                                    <img src={eye} alt="" />
+                                </div>
+
+                            </div>
+                            <hr className="border border-[#E2E8F0]"/>
+                            <div className="text-black_figma text-sm font-light">
+                                При вході через сайти партнерів є змога<br />автоматично додати адреси
+                            </div>
+                            <div className="flex flex-row space-x-2">
+                                <div className="basis-1/2 border border-[#E8E8E8;] rounded">
+                                    <div className="flex p-2 justify-center space-x-1">
+                                        <img src={logo_com_block} alt=""/>
+                                        {/*<p className="text-sm pt-1">Комуналка</p>*/}
+                                    </div>
+                                </div>
+                                <div className="basis-1/2 border border-[#E8E8E8;] rounded" title="">
+                                    <div className="flex p-2 justify-center space-x-1">
+                                        <img src={logo_gerc} alt="" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="py-2 font-light text-sm">
+                                Виникли питання? <NavLink to="/faq" className="text-[#3E77AA]" onClick={close}>Детальніше</NavLink>
+                            </div>
+                            <Button type="submit" label={'Зареєструватися'} loading={loading} cssType={'primary'} disabled={!form.rememberMe} />
+                            <div className="flex mt-5">
+                                <input className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
+                                       id="rememberMe"
+                                       name={'rememberMe'}
+                                       type="checkbox"
+                                       checked={form.rememberMe}
+                                       onChange={handleInputChange}
+                                />
+                                <label htmlFor="rememberMe" className="ml-2 text-sm font-light">
+                                    Я згоден з <NavLink to="/userAgreement" className="text-[#3E77AA]" onClick={close}>умовами угоди користувача</NavLink>
+                                </label>
+                            </div>
+                            <div className="text-center py-2 font-light text-sm">
+                                Вже є аккаунт? <NavLink to="#" className="text-[#3E77AA]" onClick={showLogin}>Вхід</NavLink>
+                            </div>
+                        </form>
+                }
             </div>
 
     );
