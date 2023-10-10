@@ -109,7 +109,6 @@ const Cabinet = () => {
 
     return (
         <>
-            <div className="mt-2 mx-auto w-[1152px] px-20">
                 <div>
                     <Breadcrumbs items={breadCrumbs}/>
                 </div>
@@ -130,8 +129,7 @@ const Cabinet = () => {
                         </div>
                     </div>
                 </div>
-            </div>
-            {
+                {
                 modalActive && (
                     <Modal close={() => setModalActive(false)}>
                         <InputField

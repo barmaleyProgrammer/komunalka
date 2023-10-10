@@ -13,7 +13,7 @@ const breadCrumbs = [
 ]
 const UserAgreement = () => {
     return (
-        <div className="mx-auto w-[1152px]">
+        <>
             <Breadcrumbs items={breadCrumbs} />
             <h1 className="mt-5 mb-5 text-2xl font-normal not-italic">Угода користувача</h1>
             <p className="text-base mb-8 font-light">Ця Угода Користувача (далі - «Угода») укладається між Користувачем (будь-якою дієздатною фізичною особою або юридичною особою)
@@ -48,7 +48,7 @@ const UserAgreement = () => {
                     </li>
                 </ol>
             </div>
-        </div>
+        </>
     );
 };
 

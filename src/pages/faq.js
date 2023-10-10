@@ -67,7 +67,7 @@ const Faq = () => {
     };
 
     return (
-        <section className="w-[1152px] px-20 py-3 mx-auto">
+        <section>
             <Breadcrumbs items={breadCrumbs}/>
             <h2 className="text-center text-2xl mb-8">Часті питання</h2>
             <h4 className="text-center text-lg mb-5">Про сервіс LYCHYLNYK</h4>

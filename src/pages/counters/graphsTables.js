@@ -61,7 +61,7 @@ const GraphsTables = () => {
     }, []);
 
     return (
-        <div className="font-light mt-2 mx-auto w-[1152px] px-20">
+        <div className="font-light">
             <Breadcrumbs items={breadCrumbs}/>
             <h2 className="mb-4 mt-3 text-2xl">{address.name}</h2>
             <ServiceTypes types={serviceTypes} />

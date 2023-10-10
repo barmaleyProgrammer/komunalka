@@ -51,7 +51,7 @@ const Header = () => {
 
     return (
         <header>
-            <div className="flex flex-wrap gap-24 items-center justify-center mx-auto p-4">
+            <div className="w-[1152px] mx-auto py-4 flex flex-wrap gap-24 items-center justify-between">
                 <NavLink to="/">
                     <img src={logo_lichylnyk} className="mr-3" alt="" />
                 </NavLink>
@@ -84,8 +84,6 @@ const Header = () => {
                         <Register close={() => setModalRegistration(false)} showLogin={showLogin}/>
                     </Modal>
                 )
-
-
             }
             {
                 modalAuthorization && (
@@ -101,7 +99,6 @@ const Header = () => {
                     </Modal>
                 )
             }
-
         </header>
     );
 };

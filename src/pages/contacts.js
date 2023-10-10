@@ -16,7 +16,7 @@ const Contacts = () => {
         },
     ]
     return (
-        <div className="w-[1152px] px-20 py-3 mx-auto">
+        <>
             <div>
                 <Breadcrumbs items={breadCrumbs}/>
             </div>
@@ -55,7 +55,7 @@ const Contacts = () => {
 
                 </div>
             </div>
-        </div>
+        </>
     );
 };
 

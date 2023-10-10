@@ -34,7 +34,7 @@ const Home = () => {
                         <circle cx="6" cy="6" r="6" fill="#E7E7E7"/>
                     </svg>
                 </div>
-                <div className="grid grid-cols-3 gap-x-8 w-[1152px] mx-auto mt-28 mb-28">
+                <div className="grid grid-cols-3 gap-x-8 mt-28 mb-28">
                     <div className="rounded-lg shadow-myCustom w-[361px] h-52">
                         <p className="py-6 text-xl text-center">Актуальні показання</p>
                         <p className="text-sm font-light px-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit.

@@ -12,7 +12,7 @@ const About = () => {
         },
     ]
     return (
-        <div className="w-[1152px] px-20 py-3 mx-auto">
+        <>
             <div className="mb-4">
                 <Breadcrumbs items={breadCrumbs}/>
             </div>
@@ -40,7 +40,7 @@ const About = () => {
                     <li>отримання інформації «не виходячи з дому» (по телефону, електронною поштою тощо)</li>
                 </ul>
             </div>
-        </div>
+        </>
     );
 };
 

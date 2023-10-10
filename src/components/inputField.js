@@ -10,7 +10,8 @@ const InputField = ({
         cssClass = '',
         autoComplete = '',
         onFocus = undefined,
-        onBlur = undefined
+        onBlur = undefined,
+        pattern = undefined,
     }) => {
     return (
         <fieldset className={cssClass}>
@@ -28,6 +29,7 @@ const InputField = ({
                 autoComplete={autoComplete}
                 onFocus={onFocus}
                 onBlur={onBlur}
+                pattern={pattern}
             />
         </fieldset>
     );

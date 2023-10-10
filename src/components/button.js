@@ -1,4 +1,12 @@
-const Button = ({ type = 'button', label = 'Save', cssType = 'primary', onClick, disabled = false, loading = false}) => {
+const Button = ({
+        type = 'button',
+        label = 'Save',
+        cssType = 'primary',
+        onClick = undefined,
+        disabled = false,
+        loading = false,
+        form = undefined
+    }) => {
     let className = ['py-2.5', 'px-5', 'mr-2', 'mb-2', 'text-sm', 'rounded', 'w-full', 'disabled:opacity-70'];
     let myDisabled;
     if (disabled || loading) {
@@ -16,7 +24,7 @@ const Button = ({ type = 'button', label = 'Save', cssType = 'primary', onClick,
             className = [];
     }
     return (
-        <button type={type} className={className.join(' ')} onClick={onClick} disabled={myDisabled}>
+        <button type={type} className={className.join(' ')} form={form} onClick={onClick} disabled={myDisabled}>
             {
                 loading && (
                     <svg className="inline mr-2 w-4 h-4 text-gray-200 animate-spin dark:text-gray-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">

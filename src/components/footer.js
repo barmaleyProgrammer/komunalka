@@ -7,8 +7,8 @@ import viber_icon from './../img/viber_icon.svg';
 
 const Footer = () => {
     return (
-        <footer className="w-full py-6">
-            <div className="grid grid-cols-4 gap-36 mx-auto">
+        <footer>
+            <div className="w-[1152px] mx-auto py-6 flex flex-wrap gap-36 items-top justify-between">
                 <div className="flex flex-col items-center">
                     <a href="https://komunalka.ua/">
                         <img src={logo_lichylnyk} className="h-[59px] w-[120px] mb-2" alt="kamunalka logo"/>

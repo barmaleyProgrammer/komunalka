@@ -107,7 +107,7 @@ const History = () => {
     };
 
     return (
-        <div className="w-[1152px] mx-auto px-20 font-normal mt-2 mb-4 max-w-screen-xl">
+        <div className="font-normal mb-4 max-w-screen-xl">
             <Breadcrumbs items={breadCrumbs}/>
             <h2 className="mb-4 mt-3 text-2xl">{address.name}</h2>
             <ServiceTypes types={serviceTypes} />
