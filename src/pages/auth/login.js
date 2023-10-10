@@ -130,14 +130,14 @@ const Login = ({ close, showRegister, showResetPass }) => {
                            checked={form.rememberMe}
                            onChange={handleInputChange}
                         />
-                        <label htmlFor="rememberMe" className="ml-2 text-sm text-gray-400">
+                        <label htmlFor="rememberMe" className="ml-2 text-sm font-light">
                             Запам’ятати мене
                         </label>
                     </div>
-                    <NavLink to="#" className="text-[#3E77AA] pt-1 basis-1/2 text-sm text-right" onClick={showResetPass}>Забули пароль?</NavLink>
+                    <NavLink to="#" className="pt-1 basis-1/2 text-base font-light text-right" onClick={showResetPass}>Забули пароль?</NavLink>
                 </div>
                 <Button type="submit" label={'Увійти'} cssType={'primary'} />
-                <div className="py-2 font-light text-sm">
+                <div className="py-2 font-light text-base">
                     Ще немає аккаунту? <NavLink to="#" onClick={showRegister} className="text-[#3E77AA]">Зареєструватися</NavLink>
                 </div>
 
