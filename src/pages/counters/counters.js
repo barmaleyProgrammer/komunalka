@@ -43,6 +43,7 @@ const Counters = () => {
             setIsPostLoading(true);
             await api.getCounterValue(objectId).then((result) => {
                 setCounters(result);
+                console.log('test', setCounters);
                 const types = result
                     .map((item) => Number(item.serviceType))
                     .filter((item, i, ar) => ar.indexOf(item) === i);

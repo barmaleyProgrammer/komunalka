@@ -19,7 +19,7 @@
 }
 .app > main {
     grid-area: main;
-    padding: 20px 0;
+    /*padding: 20px 0;*/
 }
 .app > footer {
     grid-area: footer;
@@ -79,12 +79,12 @@ fieldset {
 }
 .arrow_right {
     position: absolute;
-    left: -6%;
+    left: 1%;
     top: 37%;
 }
 .arrow_left {
     position: absolute;
-    left: 104%;
+    left: 97%;
     top: 37%;
 }
 a.active2 {

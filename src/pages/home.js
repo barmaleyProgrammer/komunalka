@@ -8,6 +8,7 @@ import arrow_left from '../img/arrow_left.svg';
 
 import Button from "../components/button";
 import {NavLink} from "react-router-dom";
+import News from "./news";
 const Home = () => {
     return (
         <>
@@ -62,22 +63,22 @@ const Home = () => {
                 </div>
             </section>
             <section>
-                <div className="w-[1152px] px-20 py-3 mx-auto shadow-myCustom mb-10">
+                <div className="py-3 shadow-myCustom">
                     <p className="text-2xl font-normal text-center mt-4">Навіщо реєструватись на Лічильник?</p>
-                    <div className="relative grid grid-cols-3 mt-6 gap-x-8">
-                        <div className="text-center">
+                    <div className="relative grid grid-cols-3 mt-6">
+                        <div className="text-center w-72 mx-auto">
                             <img className="mx-auto" src={icon_effective} alt=""/>
                             <p className="text-base font-medium p-4">Зручність та ефективність</p>
                             <p className="text-sm font-light">Сайт надає мешканцям Києва зручний та швидкий спосіб передавати показання лічильників,
                                 не вимагаючи додаткових поїздок чи дзвінків. Це дозволяє заощадити час та зусилля.</p>
                         </div>
-                        <div className="text-center">
+                        <div className="text-center w-72 mx-auto">
                             <img className="mx-auto" src={icon_eco_world} alt=""/>
                             <p className="text-base font-medium p-4">Екологічна відповідальність</p>
                             <p className="text-sm font-light">Використання онлайн-платформи для передачі показань лічильників сприяє
                                 зниженню паперового споживання та, отже, захисту навколишнього середовища.</p>
                         </div>
-                        <div className="text-center">
+                        <div className="text-center w-72 mx-auto">
                             <img className="mx-auto" src={group} alt=""/>
                             <p className="text-base font-medium p-4">Точність та надійність</p>
                             <p className="text-sm font-light">Можливість зробити показання самостійно зменшує ризик помилок,
@@ -93,6 +94,36 @@ const Home = () => {
                         </NavLink>
                     </div>
                 </div>
+            </section>
+            <section className="bg-[#F0F5FA]">
+                <div className="p-4">
+                    <h2 className="text-2xl text-center font-normal mt-4 mb-5">Нейронна мережа</h2>
+                    <div className="w-[945px] mx-auto text-sm font-light">
+                        <div className="space-y-4">
+                            <p>Наша інноваційна система використовує потужну нейронну мережу для автоматичного визначення адреси, повʼязаної
+                                з<br/> обраними користувачем параметрами:
+                                <q lang="fr">вода</q>, <q lang="fr">газ</q>, <q lang="fr">електрика</q> або <q lang="fr">тепло</q>.</p>
+                            <p>Просто оберіть необхідний блок та завантажте відповідне фото, і наша система автоматично розпізнає зображення
+                                та визначає відповідну адресу. Наш розроблений алгоритм забезпечує швидку та точну ідентифікацію,
+                                допомагаючи ефективно знаходити необхідну інформацію без зайвих зусиль.</p>
+                        </div>
+                        <div className="w-[760px] mx-auto border-dashed border rounded border-[#797878] mt-8 mb-5">
+                            <p className="text-center mt-5">Перетягніть фото сюди</p>
+                            <p className="text-center mt-5">або</p>
+                            <div className="w-44 mx-auto mt-5 mb-5 px-7">
+                                <NavLink to="#" className="py-3 px-5 text-sm rounded text-white_figma bg-yellow_figma" >
+                                    Завантажте
+                                </NavLink>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <div>
+                    <h1 className="text-center text-2xl mt-14"></h1>
+                </div>
+
             </section>
         </>
 
