@@ -132,17 +132,20 @@ const Cabinet = () => {
                 {
                 modalActive && (
                     <Modal close={() => setModalActive(false)}>
-                        <InputField
-                            // label={'Перейменувати адресу'}
-                            type={'text'}
-                            placeholder={'Назва адреси'}
-                            name={'name'}
-                            required={true}
-                            value={currentAddress.name}
-                            autoComplete="off"
-                            onChange={handleInputChange}
-                        />
-                        <div className="pt-2">
+                        <div className="p-2">
+                            <InputField
+                                // label={'Перейменувати адресу'}
+                                type={'text'}
+                                placeholder={'Назва адреси'}
+                                name={'name'}
+                                required={true}
+                                value={currentAddress.name}
+                                autoComplete="off"
+                                onChange={handleInputChange}
+                            />
+                        </div>
+
+                        <div className="pt-2 w-32 mx-auto mb-2">
                             <Button type="button" onClick={updateAddress} label={'Оновити'} cssType={'primary'} />
                         </div>
                     </Modal>
