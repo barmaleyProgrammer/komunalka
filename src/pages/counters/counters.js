@@ -41,14 +41,14 @@ const Counters = () => {
     useEffect( () => {
         const fetchData = async () => {
             setIsPostLoading(true);
-            await api.getCounterValue(objectId).then((result) => {
-                setCounters(result);
-                console.log('test', setCounters);
-                const types = result
-                    .map((item) => Number(item.serviceType))
-                    .filter((item, i, ar) => ar.indexOf(item) === i);
-                setServiceTypes(types);
+            await api.getCounterValue(objectId).then((counters) => {
+                setCounters(counters);
+                // debugger;
+                const allServiceTypes = counters.map((counter) => Number(counter.serviceType))
+                const uniqueServiceTypes = allServiceTypes.filter((allServiceType, index, allServiceTypes) => allServiceTypes.indexOf(allServiceType) === index);
+                setServiceTypes(uniqueServiceTypes);
                 setIsPostLoading(false);
+                console.log(uniqueServiceTypes)
             });
         };
         fetchData();
@@ -117,7 +117,7 @@ const Counters = () => {
                 <Breadcrumbs items={breadCrumbs}/>
             </div>
             <h2 className="mb-4 mt-3 text-2xl">{address.name}</h2>
-            <ServiceTypes types={serviceTypes} setServiceType={setServiceType} serviceType={serviceType} />
+            <ServiceTypes types={serviceTypes} setServiceType={setServiceType} selectedServiceType={serviceType} />
             {
                 isPostLoading ?
                     <Loader /> :

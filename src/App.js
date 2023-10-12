@@ -24,6 +24,7 @@ import NotFound from "./pages/notFound";
 import NewPassword from "./pages/auth/newPassword";
 import UserAgreement from "./pages/userAgreement";
 import Notification from "./pages/cabinet/notification";
+import ValidateNewEmail from "./pages/cabinet/validateNewEmail";
 
 const App = () => {
     return (
@@ -40,6 +41,7 @@ const App = () => {
                             <Route path="/contacts" element={<Contacts />} />
                             <Route path="/userAgreement" element={<UserAgreement />} />
 
+                            <Route path="/change/email" element={<ValidateNewEmail />} />
                             <Route path="/validate/email" element={<Validate />} />
                             <Route path="/password/reset/link" element={<NewPassword />} />
 

@@ -36,6 +36,8 @@ const MyData = () => {
         lastName: state.user.lastName,
         secondName: state.user.secondName,
         phone: state.user.phone,
+        source: (process.env.NODE_ENV === 'development') ? 'localhost_3000' : '2',
+
     });
     const [password, setPassword] = useState('');
     const [formError, setFormError] = useState('');
@@ -43,6 +45,8 @@ const MyData = () => {
     const [inputPassFlag, setInputPassFlag] = useState(false);
     const [modalActive, setModalActive] = useState(false);
     const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
+    const [modalChangeEmail, setModalChangeEmail] = useState(false);
+    const [modalCheckEmail, setModalCheckEmail] = useState(false);
 
     const Submit = async (event) => {
         event.preventDefault();
@@ -69,6 +73,19 @@ const MyData = () => {
             if (result.status === 200) {
                 // setValidateFlag(true);
                 setModalActive(true);
+            }
+        } catch (e) {
+            console.error(e.message);
+            setFormError(e.message);
+        }
+    };
+    const ChangeEmailRequest = async (e) => {
+        e.preventDefault();
+        setModalChangeEmail(false);
+        try {
+            const result = await api.changeEmailRequest(form.email, form.source);
+            if (result.status === 200) {
+                setModalCheckEmail(true);
             }
         } catch (e) {
             console.error(e.message);
@@ -115,6 +132,32 @@ const MyData = () => {
                     )
                 }
                 {
+                    modalChangeEmail && (
+                        <Modal close={() => setModalChangeEmail(false)}>
+                            <div className="flex flex-col justify-center p-10 items-center text-lg w-[464px]">
+                                <p className="mt-8">Ви впевнені, що бажаєте змінити email?</p>
+                            </div>
+                            <div className="pt-2 w-44 mx-auto mb-8">
+                                <Button type="button" label={'Так, впевнений!'} cssType={'primary'} onClick={ChangeEmailRequest} />
+                            </div>
+                        </Modal>
+                    )
+                }
+                {
+                    modalCheckEmail && (
+                        <Modal close={() => setModalCheckEmail(false)}>
+                            <div className="text-xs text-black_figma p-5 text-center w-full">
+                                <p className="text-left text-base">Будь ласка, перевірте свою електронну пошту, та натисніть на посилання.
+                                    Не забудьте перевірити папку «Спам», якщо лист не зʼявиться в основній скринці.
+                                    <br/> З повагою, команда LYCHYLNYK.</p>
+                            </div>
+                            <div className="pt-2 w-44 mx-auto">
+                                <Button type="button" label={'Ok'} cssType={'primary'} onClick={() => setModalCheckEmail(false)} />
+                            </div>
+                        </Modal>
+                    )
+                }
+                {
                     showChangePasswordModal && (
                         <Modal close={() => setShowChangePasswordModal(false)}>
                             <div className="flex flex-col justify-center p-10 items-center text-lg w-[464px]">
@@ -144,7 +187,7 @@ const MyData = () => {
                             type={'email'}
                             placeholder={'Введіть свій email'}
                             name={'email'}
-                            readOnly={true}
+                            readOnly={false}
                             cssClass="email-field"
                             value={form.email}
                             autoComplete="off"
@@ -196,7 +239,8 @@ const MyData = () => {
                                 <img src={eye} alt="" />
                             </div>
                             { inputPassFlag ? <CheckPassword password={password} /> : <></> }
-                            <NavLink to="#" className="changePassword text-sm ml-6" onClick={() => setShowChangePasswordModal(true)}>Змінити</NavLink>
+                            <NavLink to="#" className="changeEmail text-sm ml-6" onClick={() => setModalChangeEmail(true)}>Змінити Email</NavLink>
+                            <NavLink to="#" className="changePassword text-sm ml-6" onClick={() => setShowChangePasswordModal(true)}>Змінити пароль</NavLink>
                         </div>
                     </div>
                     <div className="flex">

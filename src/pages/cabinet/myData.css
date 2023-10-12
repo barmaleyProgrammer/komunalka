@@ -1,5 +1,11 @@
 .changePassword  {
     position: relative;
-    left: 350px;
+    left: 230px;
     top: -33px;
+}
+
+.changeEmail  {
+    position: relative;
+    left: 350px;
+    top: -170px;
 }

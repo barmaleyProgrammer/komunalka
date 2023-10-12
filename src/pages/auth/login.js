@@ -98,13 +98,14 @@ const Login = ({ close, showRegister, showResetPass }) => {
                         </> :
             <form className="space-y-2" onSubmit={Submit}>
                 <InputField
-                    label={'Email'}
-                    type={'email'}
+                    label={'Email or Phone number'}
+                    type={'text'}
                     placeholder={'Введіть свій email'}
                     name={'email'}
                     required={true}
                     value={form.email}
                     autoComplete="off"
+                    pattern="^([a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3})|(\d{12})$"
                     onChange={handleInputChange}
                 />
                 <div className={'relative'}>

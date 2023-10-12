@@ -46,6 +46,20 @@ const changePassword = (password) => {
         console.error(error);
     });
 }
+const changeEmailRequest = (email, source) => {
+    return axios.get(`https://api-test.komunalka.ua/api/v2/account/email/code?email=${encodeURIComponent(email)}&source=${source}`,  config).then((res) => {
+        return res;
+    }).catch((error) => {
+        console.error(error);
+    });
+}
+const validationNewEmail = (form) => {
+    return axios.put('https://api-test.komunalka.ua/api/v2/account/email', form , config).then((res) => {
+        return res;
+    }).catch((error) => {
+        console.error(error);
+    });
+}
 const renameAddress = (objectId, name) => {
     return axios.put(`/account/address/${objectId}`, { name }, config).then((response) => {
         return response;
@@ -251,6 +265,8 @@ export default {
     resetPasswordRequest,
     newPassword,
     changePassword,
+    changeEmailRequest,
+    validationNewEmail,
     getServices,
     getServiceTypes,
     getRegions,
