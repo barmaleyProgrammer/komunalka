@@ -242,6 +242,13 @@ const deleteObject = (objectId) => {
         console.error(error);
     });
 }
+const deleteAccount = () => {
+    return axios.delete('/account', config).then((response) => {
+        return response;
+    }).catch((error) => {
+        console.error(error);
+    });
+}
 
 const getDebt = (objectId) => {
     return axios.get(`/accrual/debt/${objectId}`, config)
@@ -285,5 +292,6 @@ export default {
     renameAddress,
     sendCounterData,
     getCountersHistory,
-    authSocialNetworks
+    authSocialNetworks,
+    deleteAccount
 };

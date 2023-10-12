@@ -10,6 +10,7 @@ import eye from "../../img/eye.svg";
 import my_data_changed from './../../img/modal_mydata_changed.png';
 import Modal from "../../components/modal/modal";
 import './myData.css';
+import { useNavigate } from "react-router-dom";
 import CheckPassword from "../../components/checkPassword/checkPassword";
 
 const breadCrumbs = [
@@ -47,6 +48,8 @@ const MyData = () => {
     const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
     const [modalChangeEmail, setModalChangeEmail] = useState(false);
     const [modalCheckEmail, setModalCheckEmail] = useState(false);
+    const [modalRequestDelAccount, setModalRequestDelAccount] = useState(false);
+    const navigate = useNavigate();
 
     const Submit = async (event) => {
         event.preventDefault();
@@ -92,6 +95,21 @@ const MyData = () => {
             setFormError(e.message);
         }
     };
+    const DeleteAccount = async (e) => {
+        e.preventDefault();
+        try {
+            const result = await api.deleteAccount();
+            if (result.status === 200) {
+                setModalRequestDelAccount(false);
+                localStorage.clear();
+                navigate('/');
+            }
+        } catch (e) {
+            console.error(e.message);
+            setFormError(e.message);
+        }
+    };
+
     const handleInputChange = (event) => {
         const { name, value } = event.target;
         setForm((prevProps) => ({
@@ -118,6 +136,18 @@ const MyData = () => {
             <div className="py-10 px-20 font-light space-y-2 rounded-lg shadow-myCustom">
                 <h1 className="font-normal text-lg pb-2 py-2">Основна інформація</h1>
                 <div className="text-xs text-red-900 text-center">{ formError }</div>
+                {
+                    modalRequestDelAccount && (
+                        <Modal close={() => setModalRequestDelAccount(false)}>
+                            <div className="flex flex-col justify-center p-10 items-center text-lg w-[464px]">
+                                <p className="mt-8">Ви впевнені, що бажаєте видалити профіль?</p>
+                            </div>
+                            <div className="pt-2 w-44 mx-auto mb-8">
+                                <Button type="button" label={'Так, впевнений!'} cssType={'primary'} onClick={DeleteAccount} />
+                            </div>
+                        </Modal>
+                    )
+                }
                 {
                     modalActive && (
                         <Modal close={() => setModalActive(false)}>
@@ -249,7 +279,7 @@ const MyData = () => {
                         <div className="w-80 h-12">
                             <Button type="submit" cssType="primary" label={'Зберігти зміни'} />
                         </div>
-                        <NavLink to="#" className="text-base mt-2 ml-6">Видалити профіль</NavLink>
+                        <NavLink to="#" className="text-base mt-2 ml-6" onClick={(e) => setModalRequestDelAccount(e, true)}>Видалити профіль</NavLink>
                     </div>
                 </form>
             </div>
