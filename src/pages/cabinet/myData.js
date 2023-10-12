@@ -146,13 +146,15 @@ const MyData = () => {
                 {
                     modalCheckEmail && (
                         <Modal close={() => setModalCheckEmail(false)}>
-                            <div className="text-xs text-black_figma p-5 text-center w-full">
-                                <p className="text-left text-base">Будь ласка, перевірте свою електронну пошту, та натисніть на посилання.
-                                    Не забудьте перевірити папку «Спам», якщо лист не зʼявиться в основній скринці.
-                                    <br/> З повагою, команда LYCHYLNYK.</p>
-                            </div>
-                            <div className="pt-2 w-44 mx-auto">
-                                <Button type="button" label={'Ok'} cssType={'primary'} onClick={() => setModalCheckEmail(false)} />
+                            <div className="w-96 p-6">
+                                <div className="text-xs text-black_figma p-5 text-center w-full">
+                                    <p className="text-left text-base">Будь ласка, перевірте свою електронну пошту, та натисніть на посилання.
+                                        Не забудьте перевірити папку «Спам», якщо лист не зʼявиться в основній скринці.
+                                        <br/> З повагою, команда LYCHYLNYK.</p>
+                                </div>
+                                <div className="pt-2 w-44 mx-auto">
+                                    <Button type="button" label={'Ok'} cssType={'primary'} onClick={() => setModalCheckEmail(false)} />
+                                </div>
                             </div>
                         </Modal>
                     )
