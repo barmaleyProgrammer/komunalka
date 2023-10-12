@@ -5,7 +5,7 @@ const config = {
     headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Basic YWRtaW46Y29tbXVuYWw=',
-        'apiauthorization': `Bearer ${sessionStorage.getItem('accessToken') || ''}`
+        'apiauthorization': `Bearer ${localStorage.getItem('accessToken') || ''}`
     }
 };
 
@@ -23,8 +23,8 @@ const signIn = (data) => {
     const newConfig = {...config};
     delete newConfig.headers.apiauthorization;
     return axios.post('/account/signin', data, newConfig).then((res) => {
-        sessionStorage.setItem('accessToken', res.data.accessToken);
-        sessionStorage.setItem('refreshToken', res.data.refreshToken);
+        localStorage.setItem('accessToken', res.data.accessToken);
+        localStorage.setItem('refreshToken', res.data.refreshToken);
         config.headers.apiauthorization = `Bearer ${res.data.accessToken}`;
         return res.data;
     }).catch((error) => {
@@ -33,7 +33,7 @@ const signIn = (data) => {
 }
 const updateUser = (data) => {
     return axios.put('/account', data, config).then((res) => {
-        sessionStorage.setItem('user', JSON.stringify(data));
+        localStorage.setItem('user', JSON.stringify(data));
         return res;
     }).catch((error) => {
         console.error('акаунт', error);
@@ -69,7 +69,7 @@ const renameAddress = (objectId, name) => {
 }
 
 const signOut = () => {
-    sessionStorage.clear();
+    localStorage.clear();
     config.headers.apiauthorization = '';
 }
 
@@ -77,8 +77,8 @@ const validation = (email, token) => {
     const newConfig = {...config};
     delete newConfig.headers.apiauthorization;
     return axios.get(`account/validate/email?email=${encodeURIComponent(email)}&token=${token}`, newConfig).then((res) => {
-        sessionStorage.setItem('accessToken', res.data.accessToken);
-        sessionStorage.setItem('refreshToken', res.data.refreshToken);
+        localStorage.setItem('accessToken', res.data.accessToken);
+        localStorage.setItem('refreshToken', res.data.refreshToken);
         config.headers.apiauthorization = `Bearer ${res.data.accessToken}`;
         return res;
     });
@@ -90,8 +90,8 @@ const authSocialNetworks = () => {
     const newConfig = {...config};
     delete newConfig.headers.apiauthorization;
     return axios.get(`https://api-test.komunalka.ua/api/user/oauth2?authTypeId=google&successUrl=http://localhost:3000/cabinet&errorUrl=http://localhost:3000/cabinet`, newConfig).then((res) => {
-        sessionStorage.setItem('accessToken', res.data.accessToken);
-        sessionStorage.setItem('refreshToken', res.data.refreshToken);
+        localStorage.setItem('accessToken', res.data.accessToken);
+        localStorage.setItem('refreshToken', res.data.refreshToken);
         config.headers.apiauthorization = `Bearer ${res.data.accessToken}`;
         return res;
     });
@@ -105,7 +105,7 @@ const newPassword = (payload) => {
 }
 
 const getRegions = () => {
-    if (!sessionStorage.getItem('accessToken')) {
+    if (!localStorage.getItem('accessToken')) {
         return [];
     }
     const newConfig = {...config};
@@ -182,7 +182,7 @@ const getCountersHistory = (objectId, dateStart, dateEnd) => {
 const getServices = () => {
     return axios.get(`/counter/service`, config)
         .then((res) => {
-            sessionStorage.setItem('services', JSON.stringify(res.data.data));
+            localStorage.setItem('services', JSON.stringify(res.data.data));
             return res.data.data;
         })
         .catch((error) => {
@@ -192,7 +192,7 @@ const getServices = () => {
 const getServiceTypes = () => {
     return axios.get(`/counter/service/type`, config)
         .then((res) => {
-            sessionStorage.setItem('serviceTypes', JSON.stringify(res.data.data));
+            localStorage.setItem('serviceTypes', JSON.stringify(res.data.data));
             return res.data.data;
         })
         .catch((error) => {
@@ -202,7 +202,7 @@ const getServiceTypes = () => {
 const getAddress = () => {
     return axios.get(`/account/address`, config)
         .then((res) => {
-            sessionStorage.setItem('addresses', JSON.stringify(res.data));
+            localStorage.setItem('addresses', JSON.stringify(res.data));
             return res.data;
         })
         .catch((error) => {
@@ -213,8 +213,8 @@ const getAddress = () => {
 const getObject = () => {
     return axios.get('/account', config)
         .then((response) => {
-            sessionStorage.setItem('user', JSON.stringify(response.data.account));
-            // sessionStorage.setItem('addresses', JSON.stringify(response.data.addresses));
+            localStorage.setItem('user', JSON.stringify(response.data.account));
+            // localStorage.setItem('addresses', JSON.stringify(response.data.addresses));
             return response.data;
         })
         .catch((error) => {

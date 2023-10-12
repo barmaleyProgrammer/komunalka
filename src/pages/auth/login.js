@@ -69,7 +69,7 @@ const Login = ({ close, showRegister, showResetPass }) => {
     //     event.preventDefault();
     //         const result = await api.authSocialNetworks();;
     //         if (result.status === 302) {
-    //             sessionStorage.setItem(url.searchParams.get('accessToken'));
+    //             localStorage.setItem(url.searchParams.get('accessToken'));
     //             navigate('/cabinet');
     //         }
     // };

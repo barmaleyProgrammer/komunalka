@@ -1,12 +1,12 @@
 import { createContext } from "react";
 
 const checkToken = () => {
-    const token = sessionStorage.getItem('accessToken');
+    const token = localStorage.getItem('accessToken');
     return token ? true : false;
 };
 
 const checkUser = () => {
-    const user = sessionStorage.getItem('user');
+    const user = localStorage.getItem('user');
     return user ? JSON.parse(user) : {
         email: '',
         accountId: '',
@@ -20,17 +20,17 @@ const checkUser = () => {
 };
 
 const checkAddresses = () => {
-    const addresses = sessionStorage.getItem('addresses');
+    const addresses = localStorage.getItem('addresses');
     return addresses ? JSON.parse(addresses) : [];
 };
 
 const checkServiceTypes = () => {
-    const data = sessionStorage.getItem('serviceTypes');
+    const data = localStorage.getItem('serviceTypes');
     return data ? JSON.parse(data) : [];
 };
 
 const checkServices = () => {
-    const data = sessionStorage.getItem('services');
+    const data = localStorage.getItem('services');
     return data ? JSON.parse(data) : [];
 };
 
