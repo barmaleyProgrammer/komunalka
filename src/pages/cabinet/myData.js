@@ -96,12 +96,13 @@ const MyData = () => {
         }
     };
     const DeleteAccount = async (e) => {
+        dispatch({ type: 'logOut' });
         e.preventDefault();
         try {
             const result = await api.deleteAccount();
             if (result.status === 200) {
                 setModalRequestDelAccount(false);
-                localStorage.clear();
+                dispatch({ type: 'logOut' });
                 navigate('/');
             }
         } catch (e) {
