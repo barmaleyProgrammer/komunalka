@@ -31,7 +31,7 @@
 .eye-ico {
     position: absolute;
     /*z-index: 20;*/
-    top: 36px;
+    top: 38px;
     right: 14px;
 }
 
@@ -57,7 +57,7 @@ fieldset {
     box-sizing: border-box;
     z-index: 2;
     position: absolute;
-    bottom: 8px;
+    bottom: 12px;
     right: 10px;
 }
 .pointer {
