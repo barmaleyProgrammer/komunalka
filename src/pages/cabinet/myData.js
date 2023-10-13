@@ -33,7 +33,7 @@ const MyData = () => {
     const [state, dispatch] = useContext(Context);
     const [form, setForm] = useState({
         firstName: state.user.firstName,
-        email: state.user.email,
+        // email: state.user.email,
         lastName: state.user.lastName,
         secondName: state.user.secondName,
         phone: state.user.phone,
@@ -41,6 +41,7 @@ const MyData = () => {
 
     });
     const [password, setPassword] = useState('');
+    const [email, setEmail] = useState(state.user.email);
     const [formError, setFormError] = useState('');
     const [type, setTape] = useState('password');
     const [inputPassFlag, setInputPassFlag] = useState(false);
@@ -86,7 +87,7 @@ const MyData = () => {
         e.preventDefault();
         setModalChangeEmail(false);
         try {
-            const result = await api.changeEmailRequest(form.email, form.source);
+            const result = await api.changeEmailRequest(email, form.source);
             if (result.status === 200) {
                 setModalCheckEmail(true);
             }
@@ -222,9 +223,9 @@ const MyData = () => {
                             name={'email'}
                             readOnly={false}
                             cssClass="email-field"
-                            value={form.email}
+                            value={email}
                             autoComplete="off"
-                            onChange={handleInputChange}
+                            onChange={(e) => setEmail(e.target.value)}
                         />
                         <InputField
                             label={'Ім’я'}
@@ -239,9 +240,11 @@ const MyData = () => {
                         <InputField
                             label={'Телефон'}
                             type={'phone'}
-                            placeholder={'+38(0_ _) _ _ _ - _ _ - _ _'}
+                            placeholder={'введіть номер з 12 цифр'}
                             name={'phone'}
+                            cssClass="email-field"
                             required={true}
+                            pattern="(\d{12})"
                             value={form.phone}
                             autoComplete="off"
                             onChange={handleInputChange}
