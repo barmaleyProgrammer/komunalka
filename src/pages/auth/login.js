@@ -106,7 +106,8 @@ const Login = ({ close, showRegister, showResetPass }) => {
                     required={true}
                     value={form.email}
                     autoComplete="off"
-                    pattern="^([\w\.-]+@[\w\.-]+\.[a-z]{2,3})|(\d{12})$"
+                    // pattern="^([a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3})|(\d{12})$"
+                    pattern="^[a-z0-9\-.]+@[a-z0-9]+\.[a-z]{2,3}|(\d{12})"
                     onChange={handleInputChange}
                 />
                 <div className={'relative'}>
