@@ -98,9 +98,9 @@ const Login = ({ close, showRegister, showResetPass }) => {
                         </> :
             <form className="space-y-2" onSubmit={Submit}>
                 <InputField
-                    label={'Email or Phone number'}
+                    label={'Телефон або Email'}
                     type={'email'}
-                    placeholder={'Введіть свій email'}
+                    placeholder={'Введіть свій телефон або Email'}
                     name={'email'}
                     cssClass="email-field"
                     required={true}
