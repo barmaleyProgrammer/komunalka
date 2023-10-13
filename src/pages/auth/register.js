@@ -256,9 +256,9 @@ const Register = ({ close, showLogin }) => {
                                 onChange={handleInputChange}
                             />
                             <InputField
-                                label={'Телефон'}
+                                label={'Телефон(12цифр)'}
                                 type={'phone'}
-                                placeholder={'+38(0_ _) _ _ _ - _ _ - _ _'}
+                                placeholder={'388888888888'}
                                 name={'phone'}
                                 required={true}
                                 value={form.phone}
