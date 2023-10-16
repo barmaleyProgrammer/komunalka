@@ -107,48 +107,29 @@ const History = () => {
         );
     };
 
-    const Calendars = () => {
-        return (
-            <div className="mt-4 mb-4 items-center justify-center hidden w-full md:flex md:w-auto md:order-1">
-                <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 ">
-                    <li>
-                        <NavLink to="#" onClick={() => setModalActive1(true)} className="w-auto h-[48px] py-2.5 px-5 mr-2 mb-2 text-sm font-medium rounded text-[#FD9800] bg-[#F7F9FE]">Обрати початкову дату</NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="#" onClick={() => setModalActive2(true)} className="w-auto h-[48px] py-2.5 px-5 mr-2 mb-2 text-sm font-medium rounded text-[#FD9800] bg-[#F7F9FE]">Обрати кінцеву дату</NavLink>
-                    </li>
-                    <li>
-                        <MySelect options={firms} defaultValue={"Оберіть постачальника"} value={firm} onChange={setFirm}/>
-                    </li>
-                </ul>
-            </div>
-        );
-    };
-
     return (
         <div className="font-normal mb-4 max-w-screen-xl">
             <Breadcrumbs items={breadCrumbs}/>
             <h2 className="mb-4 mt-3 text-2xl">{address.name}</h2>
             <ServiceTypes types={serviceTypes} setServiceType={setServiceType} serviceType={serviceType} />
-            {/*<Calendars />*/}
             <div className="mt-5 py-4 px-10 h-auto rounded-lg shadow-myCustom">
                 <h3 className="py-4 text-xl text-center">Лічильники</h3>
                 <Tabs2 objectId={objectId} />
-                <div className="mt-4 mb-4 items-center justify-between hidden w-full md:flex md:w-auto md:order-1">
-                    <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 ">
+                <div className="mt-4 mb-4">
+                    <ul className="flex flex-row m-0 p-0 font-medium space-x-8">
                         <li>
-                            <div className="w-auto p-2 mr-2 mb-2 text-sm font-medium rounded text-[#FD9800] bg-[#F7F9FE]">
-                                <p>обрана початкова дата<br/>{moment(startDate).format('DD.MM.YYYY')}</p>
+                            <div className="p-2 text-sm rounded text-[#FD9800] bg-[#F7F9FE] cursor-pointer" onClick={() => setModalActive1(true)}>
+                                <p>обрана початкова дата {moment(startDate).format('DD.MM.YYYY')}</p>
                             </div>
                         </li>
                         <li>
-                            <div className="w-auto p-2  mr-2 mb-2 text-sm font-medium rounded text-[#FD9800] bg-[#F7F9FE]">
-                                <p>обрана кінцева дата<br/>{moment(endDate).format('DD.MM.YYYY')}</p>
+                            <div className="p-2 text-sm rounded text-[#FD9800] bg-[#F7F9FE] cursor-pointer" onClick={() => setModalActive2(true)}>
+                                <p>обрана кінцева дата {moment(endDate).format('DD.MM.YYYY')}</p>
                             </div>
                         </li>
-                        {/*<li>*/}
-                        {/*    <MySelect options={firms} defaultValue={"Оберіть постачальника"} value={firm} onChange={setFirm}/>*/}
-                        {/*</li>*/}
+                        <li>
+                            <MySelect options={firms} defaultValue={"Оберіть постачальника"} value={firm} onChange={setFirm}/>
+                        </li>
                     </ul>
                 </div>
                 {isPostLoading
@@ -169,14 +150,18 @@ const History = () => {
             {
                 modalActive1 && (
                     <Modal close={() => setModalActive1(false)}>
-                        <Calendar onChange={setDate1} value={startDate} />
+                        <div className="pt-12 px-6 pb-6">
+                            <Calendar onChange={setDate1} value={startDate} />
+                        </div>
                     </Modal>
                 )
             }
             {
                 modalActive2 && (
                     <Modal close={() => setModalActive2(false)}>
-                        <Calendar onChange={setDate2} value={endDate} />
+                        <div className="pt-12 px-6 pb-6">
+                            <Calendar onChange={setDate2} value={endDate} />
+                        </div>
                     </Modal>
                 )
             }

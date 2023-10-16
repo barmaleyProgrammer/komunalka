@@ -1,7 +1,7 @@
 const Select = ({options, defaultValue = '', value = '', onChange = null, name = ''}) => {
     return (
         <select
-            className="text-sm outline-none rounded-lg border border-borderColor focus:border-yellow_figma w-full p-2"
+            className="text-sm outline-none rounded text-[#FD9800] bg-[#F7F9FE] w-full h-full p-2"
             value={value}
             name={name}
             onChange = {event => onChange(event.target.value)}
