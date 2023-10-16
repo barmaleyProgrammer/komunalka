@@ -41,7 +41,7 @@ const ResetPasswordRequest = ( {close} ) => {
     };
 
     return (
-        <div className="mt-10 p-10 mx-auto rounded-lg shadow-myCustom w-[464px]">
+        <div className="mt-10 p-10 w-[464px]">
             <img src={logo_lichylnyk} className="h-16 mb-8 mx-auto" alt="Flowbite Logo" />
             <h4 className="text-black_figma text-center">Відновлення пароля</h4>
             <div className="text-xs text-red-900 text-center">{formError}</div>
