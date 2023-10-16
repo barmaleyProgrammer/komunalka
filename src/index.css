@@ -90,3 +90,10 @@ fieldset {
 a.active2 {
     border: 1px solid red;
 }
+.AutoSuggestClassNames div p {
+    /*display: block;*/
+    white-space: unset;
+    /*overflow: hidden;*/
+    /*text-overflow: ellipsis;*/
+    /*white-space: nowrap;*/
+}

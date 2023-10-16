@@ -8,12 +8,13 @@ import AutoSuggest from "react-tailwindcss-select";
 
 const AutoSuggestClassNames = {
     menuButton: ({ isDisabled }) => (
-        `p-2 flex text-sm text-[#797878] border border-borderColor rounded shadow-sm transition-all duration-300 focus:ring-0 focus:outline-none focus:border-yellow_figma ${
+        `AutoSuggestClassNames p-2 flex text-sm text-[#797878] border border-borderColor rounded shadow-sm transition-all duration-300 focus:ring-0 focus:outline-none focus:border-yellow_figma ${
             isDisabled
                 ? "bg-gray-200"
                 : "bg-white_figma"
         }`
     ),
+    tagItemText: 'aaa',
     menu: "absolute z-10 w-full bg-white_figma rounded-lg shadow-myCustom text-sm",
     searchBox: "w-full py-2 pl-2 text-sm border border-borderColor rounded focus:ring-0 focus:outline-none",
     searchIcon: "hidden"
