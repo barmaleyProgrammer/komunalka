@@ -2,6 +2,7 @@ import axios from "axios";
 
 const config = {
     baseURL: 'https://api-test.komunalka.ua/api/v2',
+    withCredentials: true,
     headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Basic YWRtaW46Y29tbXVuYWw=',
@@ -24,7 +25,16 @@ const signIn = (data) => {
     delete newConfig.headers.apiauthorization;
     return axios.post('/account/signin', data, newConfig).then((res) => {
         localStorage.setItem('accessToken', res.data.accessToken);
-        localStorage.setItem('refreshToken', res.data.refreshToken);
+        const cookieName = 'refreshToken';
+        console.log(res.headers);
+        console.log(res.headers['set-cookie']);
+        console.log(res.headers.get('set-cookie'));
+        // debugger;
+        // const cookie = (res.headers['set-cookie'])
+        //     .find((cookie) => cookie.includes(cookieName))
+        //     ?.match(new RegExp(`^${cookieName}=(.+?);`))
+        //     ?.[1];
+        // localStorage.setItem('refreshToken', cookie);
         config.headers.apiauthorization = `Bearer ${res.data.accessToken}`;
         return res.data;
     }).catch((error) => {

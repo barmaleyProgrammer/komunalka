@@ -43,17 +43,17 @@ const Login = ({ close, showRegister, showResetPass }) => {
         try {
             await api.signIn(form);
             dispatch({ type: 'logIn' });
-            await api.getObject().then((data) => {
+            api.getObject().then((data) => {
                 dispatch({ type: 'setAccount', payload: data.account });
                 // dispatch({ type: 'setAddresses', payload: data.addresses });
             });
-            await api.getServices().then((data) => {
+            api.getServices().then((data) => {
                 dispatch({ type: 'services', payload: data });
             });
-            await api.getServiceTypes().then((data) => {
+            api.getServiceTypes().then((data) => {
                 dispatch({ type: 'serviceTypes', payload: data });
             });
-            await api.getAddress().then((data) => {
+            api.getAddress().then((data) => {
                 dispatch({ type: 'setAddresses', payload: data });
             })
             navigate('/cabinet');
