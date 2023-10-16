@@ -80,6 +80,7 @@ const renameAddress = (objectId, name) => {
 
 const signOut = () => {
     localStorage.clear();
+    sessionStorage.clear();
     config.headers.apiauthorization = '';
 }
 
@@ -182,8 +183,20 @@ const getCounterValue = (objectId) => {
 }
 
 const getCountersHistory = (objectId, dateStart, dateEnd) => {
+    const key = `${objectId}-${dateStart}-${dateEnd}`;
+    const storedData = sessionStorage.getItem(key);
+
+    if (storedData) {
+        return new Promise((resolve) => {
+            resolve(JSON.parse(storedData));
+        });
+    }
+
     return axios.get(`/counter/meters/history/data?objectId=${objectId}&dateStart=${dateStart}&dateEnd=${dateEnd}`, config)
-        .then((res) => res.data.data)
+        .then((res) => {
+            sessionStorage.setItem(key, JSON.stringify(res.data.data));
+            return res.data.data;
+        })
         .catch((error) => {
             console.error(error);
         });
