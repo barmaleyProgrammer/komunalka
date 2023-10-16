@@ -1,13 +1,12 @@
 import { useEffect, useState, useContext } from 'react';
 import { useParams } from "react-router-dom";
 import { Context } from "../../store";
-import {NavLink} from "react-router-dom";
 import api from "../../api";
 import Breadcrumbs from "../../components/breadcrumbs";
 import ServiceTypes from "../../components/serviceTypes";
 import Tabs2 from "../../components/tabs2";
 import Calendar from 'react-calendar';
-import  'react-calendar/dist/Calendar.css' ;
+import 'react-calendar/dist/Calendar.css' ;
 import Modal from '../../components/modal/modal';
 import moment from 'moment';
 import MySelect from "../../components/MySelect";
@@ -22,8 +21,7 @@ const History = () => {
     const address = state.addresses.find((item) => item.objectId === objectId);
     const [modalActive1, setModalActive1] = useState(false);
     const [modalActive2, setModalActive2] = useState(false);
-    // const [startDate, setStartDate] = useState(moment().startOf('month'));
-    const [startDate, setStartDate] = useState(moment('2023-01-01 00:00:00'));
+    const [startDate, setStartDate] = useState(moment().startOf('year'));
     const [endDate, setEndDate] = useState(moment().endOf('month'));
     const [serviceTypes, setServiceTypes] = useState([]);
     const [isPostLoading, setIsPostLoading] = useState(false);
@@ -88,12 +86,6 @@ const History = () => {
         setModalActive2(false);
     };
 
-    const handleInputChange = (event) => {
-        setFirm(event.target.value);
-        // const { value } = event.target;
-        // setFirm(value);
-    };
-
     const CounterBlock = ({item}) => {
         return (
             <div className="my-4 p-4 flex items-stretch gap-x-4 rounded-lg border border-borderColor">
@@ -132,20 +124,20 @@ const History = () => {
                         </li>
                     </ul>
                 </div>
-                {isPostLoading
-                ? <Loader />
-                : <div>
-                        {
-                            counters?.filter((item) => {
-                                if (!serviceType) {
-                                    return true;
-                                } else {
-                                    return (item.serviceType == serviceType)
-                                }
-                            }).map((item, key) => <CounterBlock item={item} key={`CounterBlock_${key}`} />)
-                        }
-                    </div>
-            }
+                {
+                    isPostLoading ? <Loader />
+                    : <div>
+                            {
+                                counters?.filter((item) => {
+                                    if (!serviceType) {
+                                        return true;
+                                    } else {
+                                        return (item.serviceType == serviceType)
+                                    }
+                                }).map((item, key) => <CounterBlock item={item} key={`CounterBlock_${key}`} />)
+                            }
+                        </div>
+                }
             </div>
             {
                 modalActive1 && (
