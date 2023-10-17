@@ -11,22 +11,19 @@ import Modal from '../../components/modal/modal';
 import moment from 'moment';
 import MySelect from "../../components/MySelect";
 import Loader from "../../components/Loader/loader";
+import { UniqueServiceTypes, UniqueProviders } from "./utils";
 
 const History = () => {
     const { objectId } = useParams();
-    const [state] = useContext(Context);
-    const [counters, setCounters] = useState([]);
-    const [firms, setFirms] = useState([]);
-    const [firm, setFirm] = useState('');
-    const address = state.addresses.find((item) => item.objectId === objectId);
-    const [modalActive1, setModalActive1] = useState(false);
-    const [modalActive2, setModalActive2] = useState(false);
-    const [startDate, setStartDate] = useState(moment().startOf('year'));
-    const [endDate, setEndDate] = useState(moment().endOf('month'));
-    const [serviceTypes, setServiceTypes] = useState([]);
-    const [isPostLoading, setIsPostLoading] = useState(false);
-    const [serviceType, setServiceType] = useState(null);
+    const [state, dispatch] = useContext(Context);
 
+    const [counters, setCounters] = useState([]);
+    const [serviceTypes, setServiceTypes] = useState([]);
+    const [providers, setProviders] = useState([]);
+    const address = state.addresses.find((item) => item.objectId === objectId);
+    const [showCalendar1, setShowCalendar1] = useState(false);
+    const [showCalendar2, setShowCalendar2] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const breadCrumbs = [
         {
             "to": '/',
@@ -51,40 +48,26 @@ const History = () => {
     ]
 
     useEffect( () => {
-        const fetchData = async () => {
-            const dateStart = moment(startDate).format('YYYY-MM-DD');
-            const dateEnd = moment(endDate).format('YYYY-MM-DD');
-            setIsPostLoading(true);
+        const fetchData = () => {
+            const dateStart = moment(state.startDate).format('YYYY-MM-DD');
+            const dateEnd = moment(state.endDate).format('YYYY-MM-DD');
+            setIsLoading(true);
             api.getCountersHistory(objectId, dateStart, dateEnd).then((result) => {
                 setCounters(result);
-                const types = result
-                    .map((item) => Number(item.serviceType))
-                    .filter((item, i, ar) => ar.indexOf(item) === i);
-                setServiceTypes(types);
-                let firms = result
-                    .filter((item) => item.idFirme !== null)
-                    .map((item) => {
-                        return {
-                            label: item.nameFirme,
-                            value: item.idFirme
-                        }
-                    });
-                firms = Array.from(new Set(firms.map(JSON.stringify))).map(JSON.parse);
-                setFirms(firms);
-                setIsPostLoading(false);
-            });
+                const serviceTypes = UniqueServiceTypes(result);
+                setServiceTypes(serviceTypes);
+                const providers = UniqueProviders(result);
+                setProviders(providers);
+            }).finally(() => setIsLoading(false));
         };
         fetchData();
-    }, [objectId, startDate, endDate]);
+    }, [objectId, state.startDate, state.endDate]);
 
-    const setDate1 = (e) => {
-        setStartDate(e);
-        setModalActive1(false);
-    };
-    const setDate2 = (e) => {
-        setEndDate(e);
-        setModalActive2(false);
-    };
+    useEffect(() => {
+        const providers = UniqueProviders(counters, state.serviceType);
+        setProviders(providers);
+    }, [state.serviceType]);
+
 
     const CounterBlock = ({item}) => {
         return (
@@ -100,59 +83,73 @@ const History = () => {
     };
 
     return (
-        <div className="font-normal mb-4 max-w-screen-xl">
+        <div className="font-normal mb-4">
             <Breadcrumbs items={breadCrumbs}/>
             <h2 className="mb-4 mt-3 text-2xl">{address.name}</h2>
-            <ServiceTypes types={serviceTypes} setServiceType={setServiceType} serviceType={serviceType} />
+            <ServiceTypes types={serviceTypes} />
             <div className="mt-5 py-4 px-10 h-auto rounded-lg shadow-myCustom">
                 <h3 className="py-4 text-xl text-center">Лічильники</h3>
                 <Tabs2 objectId={objectId} />
                 <div className="mt-4 mb-4">
                     <ul className="flex flex-row m-0 p-0 font-medium space-x-8">
                         <li>
-                            <div className="p-2 text-sm rounded text-[#FD9800] bg-[#F7F9FE] cursor-pointer" onClick={() => setModalActive1(true)}>
-                                <p>обрана початкова дата {moment(startDate).format('DD.MM.YYYY')}</p>
+                            <div className="p-2 text-sm rounded text-[#FD9800] bg-[#F7F9FE] cursor-pointer" onClick={() => setShowCalendar1(true)}>
+                                <p>обрана початкова дата {moment(state.startDate).format('DD.MM.YYYY')}</p>
                             </div>
                         </li>
                         <li>
-                            <div className="p-2 text-sm rounded text-[#FD9800] bg-[#F7F9FE] cursor-pointer" onClick={() => setModalActive2(true)}>
-                                <p>обрана кінцева дата {moment(endDate).format('DD.MM.YYYY')}</p>
+                            <div className="p-2 text-sm rounded text-[#FD9800] bg-[#F7F9FE] cursor-pointer" onClick={() => setShowCalendar2(true)}>
+                                <p>обрана кінцева дата {moment(state.endDate).format('DD.MM.YYYY')}</p>
                             </div>
                         </li>
                         <li>
-                            <MySelect options={firms} defaultValue={"Оберіть постачальника"} value={firm} onChange={setFirm}/>
+                            <MySelect options={providers} defaultValue={"Оберіть постачальника"} />
                         </li>
                     </ul>
                 </div>
                 {
-                    isPostLoading ? <Loader />
+                    isLoading ? <Loader />
                     : <div>
                             {
                                 counters?.filter((item) => {
-                                    if (!serviceType) {
+                                    if (!state.serviceType) {
                                         return true;
                                     } else {
-                                        return (item.serviceType == serviceType)
+                                        return (item.serviceType == state.serviceType)
                                     }
-                                }).map((item, key) => <CounterBlock item={item} key={`CounterBlock_${key}`} />)
+                                })
+                                .filter((item) => {
+                                    if (!state.provider) {
+                                        return true;
+                                    } else {
+                                        return (item.idFirme == state.provider)
+                                    }
+                                })
+                                .map((item, key) => <CounterBlock item={item} key={`CounterBlock_${key}`} />)
                             }
                         </div>
                 }
             </div>
             {
-                modalActive1 && (
-                    <Modal close={() => setModalActive1(false)}>
+                showCalendar1 && (
+                    <Modal close={() => setShowCalendar1(false)}>
                         <div className="pt-12 px-6 pb-6">
-                            <Calendar onChange={setDate1} value={startDate} />
+                            <Calendar onChange={(e) => {
+                                dispatch({ type: 'startDate', payload: e });
+                                setShowCalendar1(false);
+                            }} value={state.startDate} />
                         </div>
                     </Modal>
                 )
             }
             {
-                modalActive2 && (
-                    <Modal close={() => setModalActive2(false)}>
+                showCalendar2 && (
+                    <Modal close={() => setShowCalendar2(false)}>
                         <div className="pt-12 px-6 pb-6">
-                            <Calendar onChange={setDate2} value={endDate} />
+                            <Calendar onChange={(e) => {
+                                dispatch({ type: 'endDate', payload: e });
+                                setShowCalendar2(false);
+                            }} value={state.endDate} />
                         </div>
                     </Modal>
                 )

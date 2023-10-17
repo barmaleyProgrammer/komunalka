@@ -1,4 +1,5 @@
 import axios from "axios";
+import mock from './mock.js';
 
 const config = {
     baseURL: 'https://api-test.komunalka.ua/api/v2',
@@ -183,6 +184,12 @@ const getCounterValue = (objectId) => {
 }
 
 const getCountersHistory = (objectId, dateStart, dateEnd) => {
+    if (process.env.NODE_ENV === 'development') {
+        return new Promise((resolve) => {
+            resolve(mock);
+        });
+    }
+
     const key = `${objectId}-${dateStart}-${dateEnd}`;
     const storedData = sessionStorage.getItem(key);
 

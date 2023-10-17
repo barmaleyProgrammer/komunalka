@@ -1,4 +1,5 @@
 import { createContext } from "react";
+import moment from 'moment';
 
 const checkToken = () => {
     const token = localStorage.getItem('accessToken');
@@ -42,6 +43,11 @@ const initialSate = {
     addresses: checkAddresses(),
     services: checkServices(),
     serviceTypes: checkServiceTypes(),
+    serviceType: '',
+    provider: '',
+    startDate: moment().startOf('year'),
+    endDate: moment().endOf('month'),
+
 };
 
 const reducer = (state, action) => {
@@ -75,6 +81,27 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 serviceTypes: action.payload
+            };
+        case 'serviceType':
+            return {
+                ...state,
+                provider: '',
+                serviceType: action.payload
+            };
+        case 'provider':
+            return {
+                ...state,
+                provider: action.payload
+            };
+        case 'startDate':
+            return {
+                ...state,
+                startDate: action.payload
+            };
+        case 'endDate':
+            return {
+                ...state,
+                endDate: action.payload
             };
         default:
             return state;

@@ -13,33 +13,27 @@ const serviceIcons = {
     4: water
 };
 
-const ServiceTypes = ({types = [1,4], selectedServiceType = null, setServiceType = undefined}) => {
-    const [state] = useContext(Context);
+const ServiceTypes = ({types}) => {
+    const [state, dispatch] = useContext(Context);
 
-    const Filerd = ({types, selectedServiceType, setServiceType}) => {
+    const Filerd = ({types}) => {
         if (!types.length) {
             return (<></>);
         }
-        // const x = [];
-        // for (let i = 0; i < state?.serviceTypes?.length; i++) {
-        //     if (types.includes(state.serviceTypes[i].id)) {
-        //         x.push(state.serviceTypes[i]);
-        //     }
-        // }
 
-        const x = state?.serviceTypes?.filter((serviceType) => types.includes(serviceType.id));
-
-        return x.map((serviceType, key) => {
+        return state?.serviceTypes?.filter((serviceType) => types.includes(serviceType.id)).map((serviceType, key) => {
             return (
                 <NavLink
                     to="#"
                     key={key}
-                    className={`flex flex-col items-center w-[72px] ${selectedServiceType === serviceType.id ? 'active2':''}`}
+                    className={`flex flex-col items-center w-[72px] ${state.serviceType == serviceType.id ? 'active2':''}`}
                     onClick={() => {
-                        if (selectedServiceType === serviceType.id) {
-                            setServiceType(null);
+                        if (state.serviceType === serviceType.id) {
+                            // setServiceType('');
+                            dispatch({ type: 'serviceType', payload: '' });
                         } else {
-                            setServiceType(serviceType.id);
+                            // setServiceType(serviceType.id);
+                            dispatch({ type: 'serviceType', payload: serviceType.id });
                         }
                     }}>
                     <img src={serviceIcons[serviceType.id]} className="h-[72px] w-[72px]" alt={serviceType.name} />
@@ -54,7 +48,7 @@ const ServiceTypes = ({types = [1,4], selectedServiceType = null, setServiceType
         <div className="p-5 rounded-lg shadow-myCustom h-56">
             <h3 className="py-4 text-lg text-center">Тип послуги</h3>
             <div className="flex space-x-32 text-sm justify-center">
-                <Filerd types={types} selectedServiceType={selectedServiceType} setServiceType={setServiceType}/>
+                <Filerd types={types} />
             </div>
         </div>
     );
