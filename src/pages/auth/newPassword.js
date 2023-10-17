@@ -84,7 +84,7 @@ const NewPassword = ({ close }) => {
                                     <img src={eye} alt="" />
                                 </div>
                             </div>
-                            <Button type="submit" label={'Увійти'} cssType={'primary'} />
+                            <Button type="submit" label={'Зберегти'} cssType={'primary'} />
                         </form>
                     </div>
                 </Modal>
