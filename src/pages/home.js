@@ -8,6 +8,7 @@ import arrow_left from '../img/arrow_left.svg';
 
 import Button from "../components/button";
 import { NavLink } from "react-router-dom";
+import logo_lichylnyk from "../img/logo_lichylnyk.svg";
 const list_imgs = [
     { image: '/news/News1.png' },
     { image: '/news/News2.png' },
@@ -140,6 +141,15 @@ const Home = (NewsList) => {
                                 })
                             }
                         </div>
+                <NavLink to="/news">
+                    <h1 className="text-center text-[#2A3744] text-base mt-6 mb-24 underline underline-offset-4 decoration-0">Переглянути всі новини</h1>
+                </NavLink>
+            </section>
+            <section className="bg-[#F0F5FA]">
+                <div className="p-4">
+                    <h2 className="text-2xl text-center font-normal mt-4 mb-5">Популярні питання</h2>
+
+                </div>
             </section>
         </>
 
