@@ -7,9 +7,15 @@ import arrow_right from '../img/arrow_right.svg';
 import arrow_left from '../img/arrow_left.svg';
 
 import Button from "../components/button";
-import {NavLink} from "react-router-dom";
-import News from "./news";
-const Home = () => {
+import { NavLink } from "react-router-dom";
+const list_imgs = [
+    { image: '/news/News1.png' },
+    { image: '/news/News2.png' },
+    { image: '/news/News3.png' },
+
+];
+
+const Home = (NewsList) => {
     return (
         <>
             <section className="bg-[#F0F9FF] h-[406px]">
@@ -120,10 +126,20 @@ const Home = () => {
                 </div>
             </section>
             <section>
-                <div>
-                    <h1 className="text-center text-2xl mt-14"></h1>
-                </div>
-
+                    <h1 className="text-center text-2xl mt-14">Новини</h1>
+                        <div className="grid grid-cols-3">
+                            {
+                                list_imgs.map((item, key) => {
+                                    return (
+                                        <div key={key}>
+                                            <NavLink to={`/news/${key}`}>
+                                                <img className="rounded-lg mt-4" src={item.image} alt=""/>
+                                            </NavLink>
+                                        </div>
+                                    );
+                                })
+                            }
+                        </div>
             </section>
         </>
 
