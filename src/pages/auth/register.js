@@ -207,7 +207,7 @@ const Register = ({ close, showLogin }) => {
 
     return (
         // <div className="mt-20 mb-20 p-10 mx-auto rounded-lg shadow-lg sm:w-3/4 md:w-2/3 lg:w-1/3 xl:w-3/4">
-            <div className="px-10 py-6 space-y-3 mt-2 mx-auto w-[464px] rounded-lg shadow-myCustom">
+            <div className="px-10 py-6 space-y-3 mt-2 mx-auto w-[464px] rounded-lg">
                 <img src={logo_lichylnyk} className="h-16 mb-8 mx-auto" alt="Flowbite Logo" />
                 <h4 className="text-black_figma text-center text-lg">Реєстрація</h4>
                 {/*{ formError ? <Error /> : validateFlag ? <Valid /> : <Form /> }*/}

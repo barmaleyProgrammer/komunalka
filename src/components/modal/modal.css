@@ -19,7 +19,7 @@
     border-radius: 12px;
     background-color: white;
     transition: 0.4s all;
-    transform: scale(0.9);
+    transform: scale(1);
 }
 .icon_close {
     position: absolute;
