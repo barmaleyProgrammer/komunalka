@@ -199,6 +199,7 @@ const getCountersHistory = (objectId, dateStart, dateEnd) => {
         })
         .catch((error) => {
             console.error(error);
+            return [];
         });
 }
 
