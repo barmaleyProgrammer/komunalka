@@ -90,25 +90,20 @@ const History = () => {
             <div className="mt-5 py-4 px-10 h-auto rounded-lg shadow-myCustom">
                 <h3 className="py-4 text-xl text-center">Лічильники</h3>
                 <Tabs2 objectId={objectId} />
-                <div className="mt-4 mb-4">
-                    <ul className="flex flex-row m-0 p-0 font-medium space-x-8">
-                        <li>
-                            <div className="p-2 text-sm rounded text-[#FD9800] bg-[#F7F9FE] cursor-pointer" onClick={() => setShowCalendar1(true)}>
-                                <p>обрана початкова дата {moment(state.startDate).format('DD.MM.YYYY')}</p>
-                            </div>
-                        </li>
-                        <li>
-                            <div className="p-2 text-sm rounded text-[#FD9800] bg-[#F7F9FE] cursor-pointer" onClick={() => setShowCalendar2(true)}>
-                                <p>обрана кінцева дата {moment(state.endDate).format('DD.MM.YYYY')}</p>
-                            </div>
-                        </li>
-                        <li>
-                            <MySelect options={providers} defaultValue={"Оберіть постачальника"} />
-                        </li>
-                    </ul>
+                <div className="my-4 flex flex-row font-medium space-x-8">
+                    <div className="p-2 text-sm rounded text-[#FD9800] bg-[#F7F9FE] cursor-pointer" onClick={() => setShowCalendar1(true)}>
+                        обрана початкова дата {moment(state.startDate).format('DD.MM.YYYY')}
+                    </div>
+                    <div className="p-2 text-sm rounded text-[#FD9800] bg-[#F7F9FE] cursor-pointer" onClick={() => setShowCalendar2(true)}>
+                        обрана кінцева дата {moment(state.endDate).format('DD.MM.YYYY')}
+                    </div>
+                    <div>
+                        <MySelect options={providers} defaultValue={"Оберіть постачальника"} />
+                    </div>
                 </div>
                 {
-                    isLoading ? <Loader />
+                    isLoading
+                    ? <Loader />
                     : <div>
                             {
                                 counters?.filter((item) => {

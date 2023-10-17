@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from 'react';
-import { useParams } from "react-router-dom";
+import { useParams, NavLink } from "react-router-dom";
 import { Context } from "../../store";
 import api from "../../api";
 import Breadcrumbs from "../../components/breadcrumbs";
@@ -12,12 +12,37 @@ import moment from 'moment';
 import MySelect from "../../components/MySelect";
 import Loader from "../../components/Loader/loader";
 import { UniqueServiceTypes, UniqueProviders } from "./utils";
+import {
+    Chart as ChartJS,
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend,
+} from 'chart.js';
+
+import { Line } from 'react-chartjs-2';
+
+
+ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend
+);
+
 
 const GraphsTables = () => {
     const { objectId } = useParams();
     const [state, dispatch] = useContext(Context);
 
     const [counters, setCounters] = useState([]);
+    const [filteredData, setFilteredData] = useState([]);
     const [serviceTypes, setServiceTypes] = useState([]);
     const [providers, setProviders] = useState([]);
 
@@ -25,6 +50,7 @@ const GraphsTables = () => {
     const [showCalendar1, setShowCalendar1] = useState(false);
     const [showCalendar2, setShowCalendar2] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const [view, setView] = useState('table');
 
     const breadCrumbs = [
         {
@@ -70,6 +96,78 @@ const GraphsTables = () => {
         setProviders(providers);
     }, [state.serviceType]);
 
+    useEffect(() => {
+        const filteredData = counters?.filter((item) => {
+            if (!state.serviceType) {
+                return true;
+            } else {
+                return (item.serviceType == state.serviceType)
+            }
+        }).filter((item) => {
+            if (!state.provider) {
+                return true;
+            } else {
+                return (item.idFirme == state.provider)
+            }
+        });
+        setFilteredData(filteredData);
+    }, [counters, state.serviceType, state.provider]);
+
+    const TableView = ({items}) => {
+        return (
+            <table className="border-collapse border-black_figma">
+                <caption className="text-lg font-normal mt-0 mb-4">Таблиця споживання</caption>
+                <thead>
+                <tr>
+                    <td className="border-[#E7E7E7] text-sm border-l-0 border-b border-r p-2">Період</td>
+                    <td className="border-[#E7E7E7] font-normal border-b text-sm p-2">{`${moment(state.startDate).format('DD.MM.YYYY')} - ${moment(state.endDate).format('DD.MM.YYYY')}`}</td>
+                </tr>
+                </thead>
+                <tbody>
+                {
+                    items.map((item, index) => {
+                        return (
+                            <tr key={index}>
+                                <td className="border-[#E7E7E7] font-normal border-r p-2">{moment(item.newTransmissionTime).format('DD.MM.YYYY')}</td>
+                                <td className="border-[#E7E7E7] font-normal text-sm p-2">{(Number(item.newValue) - Number(item.oldValue)).toFixed(2) }</td>
+                            </tr>
+                        );
+                    })
+                }
+                </tbody>
+            </table>
+        );
+    }
+
+    const ChartView = ({items}) => {
+        const options = {
+            responsive: true,
+            plugins: {
+                legend: false,
+                title: {
+                    display: true,
+                    text: 'Графік споживання',
+                },
+            },
+        };
+        const data = {
+            labels: items.map((item) => moment(item.newTransmissionTime).format('DD.MM.YYYY')),
+            fill: true,
+            tension: 1,
+            datasets: [
+                {
+                    data: items.map((item) => (Number(item.newValue) - Number(item.oldValue)).toFixed(2)),
+                    borderColor: '#FD9800',
+                }
+            ],
+        };
+
+        return (
+            <Line options={options} data={data} />
+        );
+    }
+
+
     return (
         <div className="font-normal mb-4">
             <Breadcrumbs items={breadCrumbs}/>
@@ -78,67 +176,40 @@ const GraphsTables = () => {
             <div className="mt-5 py-4 px-10 h-auto rounded-lg shadow-myCustom">
                 <h3 className="py-4 text-xl text-center">Лічильники</h3>
                 <Tabs2 objectId={objectId} />
-                <div className="mt-4 mb-4">
-                    <ul className="flex flex-row m-0 p-0 font-medium space-x-8">
-                        <li>
-                            <div className="p-2 text-sm rounded text-[#FD9800] bg-[#F7F9FE] cursor-pointer" onClick={() => setShowCalendar1(true)}>
-                                <p>обрана початкова дата {moment(state.startDate).format('DD.MM.YYYY')}</p>
-                            </div>
-                        </li>
-                        <li>
-                            <div className="p-2 text-sm rounded text-[#FD9800] bg-[#F7F9FE] cursor-pointer" onClick={() => setShowCalendar2(true)}>
-                                <p>обрана кінцева дата {moment(state.endDate).format('DD.MM.YYYY')}</p>
-                            </div>
-                        </li>
-                        <li>
-                            <MySelect options={providers} defaultValue={"Оберіть постачальника"} />
-                        </li>
-                    </ul>
+                <div className="my-4 flex flex-row font-medium space-x-8">
+                    <div className="p-2 text-sm rounded text-[#FD9800] bg-[#F7F9FE] cursor-pointer" onClick={() => setShowCalendar1(true)}>
+                        обрана початкова дата {moment(state.startDate).format('DD.MM.YYYY')}
+                    </div>
+                    <div className="p-2 text-sm rounded text-[#FD9800] bg-[#F7F9FE] cursor-pointer" onClick={() => setShowCalendar2(true)}>
+                        обрана кінцева дата {moment(state.endDate).format('DD.MM.YYYY')}
+                    </div>
+                    <div>
+                        <MySelect options={providers} defaultValue={"Оберіть постачальника"} />
+                    </div>
                 </div>
-                {isLoading
-                    ? <Loader />
-                    : <>
-                        <div className="text-sm py-4 space-y-2">
-                            <p>Підприємство: xxxx</p>
-                            <p>Послуга: xxxx</p>
-                            <p>Номер лічильників: xxxx</p>
-                        </div>
-                        <div className="border-collapse border rounded-xl py-10 px-10 border-[#E7E7E7]">
-                            <table className="border-collapse border-black_figma">
-                                <caption className="text-lg font-normal mt-0 mb-4">Таблиця споживання</caption>
-                                <thead>
-                                <tr>
-                                    <td className="border-[#E7E7E7] text-sm border-l-0 border-b border-r p-2">Період</td>
-                                    <td className="border-[#E7E7E7] font-normal border-b text-sm p-2">{`${moment(state.startDate).format('DD.MM.YYYY')} - ${moment(state.endDate).format('DD.MM.YYYY')}`}</td>
-                                </tr>
-                                </thead>
+                {
+                    isLoading
+                        ? <Loader />
+                        : <>
+                            <div className="text-sm my-4 flex flex-row justify-between">
+                                <div className="space-y-2">
+                                    <p>Підприємство: xxxx</p>
+                                    <p>Послуга: xxxx</p>
+                                    <p>Номер лічильників: xxxx</p>
+                                </div>
+                                <div>
+                                    <NavLink to="#" className="text-xs font-light" onClick={() => setView('chart')}>Графік</NavLink>
+                                    <NavLink to="#" className="ml-2 text-xs font-light" onClick={() => setView('table')}>Таблиця</NavLink>
+                                </div>
+                            </div>
+                            <div className="border-collapse border rounded-xl py-10 px-10 border-[#E7E7E7]">
                                 {
-                                    counters?.filter((item) => {
-                                        if (!state.serviceType) {
-                                            return true;
-                                        } else {
-                                            return (item.serviceType == state.serviceType)
-                                        }
-                                    }).filter((item) => {
-                                        if (!state.provider) {
-                                            return true;
-                                        } else {
-                                            return (item.idFirme == state.provider)
-                                        }
-                                    }).map((item, index) => {
-                                        return (
-                                            <tbody key={index}>
-                                            <tr>
-                                                <td className="border-[#E7E7E7] font-normal border-r p-2">{moment(item.newTransmissionTime).format('DD.MM.YYYY')}</td>
-                                                <td className="border-[#E7E7E7] font-normal text-sm p-2">{(Number(item.newValue) - Number(item.oldValue)).toFixed(2) }</td>
-                                            </tr>
-                                            </tbody>
-                                        );
-                                    })
+                                    view === 'table'
+                                    ? <TableView items={filteredData} />
+                                    : <ChartView items={filteredData} />
                                 }
-                            </table>
-                        </div>
-                    </>
+                            </div>
+                        </>
                 }
             </div>
             {
