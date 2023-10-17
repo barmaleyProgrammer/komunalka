@@ -8,7 +8,6 @@ import arrow_left from '../img/arrow_left.svg';
 
 import Button from "../components/button";
 import { NavLink } from "react-router-dom";
-import logo_lichylnyk from "../img/logo_lichylnyk.svg";
 const list_imgs = [
     { image: '/news/News1.png' },
     { image: '/news/News2.png' },
