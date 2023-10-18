@@ -8,6 +8,9 @@ import arrow_left from '../img/arrow_left.svg';
 
 import Button from "../components/button";
 import { NavLink } from "react-router-dom";
+import {AiOutlineMinus, AiOutlinePlus} from "react-icons/ai";
+import {Collapse} from "react-collapse";
+import {useState} from "react";
 const list_imgs = [
     { image: '/news/News1.png' },
     { image: '/news/News2.png' },
@@ -16,6 +19,56 @@ const list_imgs = [
 ];
 
 const Home = (NewsList) => {
+    const AccordionData = [
+        {
+            id: 1,
+            title: "Чому саме Лічильники?",
+            section: 'about',
+            desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+        },
+        {
+            id: 2,
+            title: "Які послуги є на сайті?",
+            section: 'about',
+            desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+        },
+        {
+            id: 3,
+            title: "Чи передадуться мої показники лічильників до обранної компанії?",
+            section: 'about',
+            desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+        },
+        {
+            id: 4,
+            title: "Чи передадуться мої показники лічильників до обранної компанії?",
+            section: 'cabinet',
+            desc: "1Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+        },
+    ];
+    const [open, setOpen] = useState(0);
+    const toggle = (index) => {
+        if (open === index) {
+            setOpen(0);
+        } else {
+            setOpen(index);
+        }
+    }
+    const AccordionItem = ({open, toggle, tittle, desc}) => {
+        return (
+            <div>
+                <div className="bg-white flex justify-between items-center cursor-pointer" onClick={toggle}>
+                    <p className="text-base font-normal py-3">{tittle}</p>
+                    <div>
+                        {open ? <AiOutlineMinus /> : <AiOutlinePlus /> }
+                    </div>
+                </div>
+                <Collapse isOpened={open}>
+                    <div className="font-normal text-sm ">{desc}</div>
+                </Collapse>
+                <hr className="w-full text-borderColor"/>
+            </div>
+        );
+    };
     return (
         <>
             <section className="bg-[#F0F9FF] h-[406px]">
@@ -147,6 +200,26 @@ const Home = (NewsList) => {
             <section className="bg-[#F0F5FA]">
                 <div className="p-4">
                     <h2 className="text-2xl text-center font-normal mt-4 mb-5">Популярні питання</h2>
+                    <div>
+                        {AccordionData.filter((item) => item.section === 'about').map((data, index) => {
+                            return <AccordionItem
+                                key={data.id}
+                                open={data.id === open}
+                                tittle={data.title}
+                                desc={data.desc}
+                                toggle={() =>toggle(data.id)}
+                            />;
+                        })}
+                    </div>
+                </div>
+                <div className="py-10">
+                    <NavLink to="/faq">
+                        <h1 className="text-center text-[#2A3744] text-base underline underline-offset-4 decoration-0">Переглянути всі питання</h1>
+                    </NavLink>
+                </div>
+            </section>
+            <section>
+                <div className="border border-[#E7E7E7] mt-32 mb-32 h-[141px]">
 
                 </div>
             </section>
