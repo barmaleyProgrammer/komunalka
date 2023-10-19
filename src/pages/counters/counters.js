@@ -50,6 +50,7 @@ const Counters = () => {
                 setIsPostLoading(false);
                 console.log(uniqueServiceTypes)
             });
+            // debugger
         };
         fetchData();
     }, [objectId]);
