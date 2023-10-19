@@ -5,8 +5,10 @@ import icon_eco_world from '../img/icon_eco_world.svg';
 import group from '../img/group.svg';
 import arrow_right from '../img/arrow_right.svg';
 import arrow_left from '../img/arrow_left.svg';
-import kiyvOblEnergo from './../img/kiyvOblEnergo.png';
-import kiyvOblGaz from './../img/kiyvOblGaz.png'
+import komunalka_home from '../img/partners_home/komunalka_home.png';
+import gerc_home from '../img/partners_home/gerc_home.png';
+import kiyvOblEnergo_home from '../img/partners_home/kiyvOblEnergo_home.png';
+import kiyvOblGaz_home from '../img/partners_home/kiyvOblGaz_home.png';
 
 import Button from "../components/button";
 import { NavLink } from "react-router-dom";
@@ -148,7 +150,6 @@ const Home = (NewsList) => {
                         <img className="arrow_right" src={arrow_right} alt=""/>
                         <img className="arrow_left" src={arrow_left} alt=""/>
                     </div>
-
                     <div className="w-44 mx-auto mt-5 mb-5">
                         <NavLink to="#" className="py-3.5 px-5 mr-2 mb-2 text-sm rounded w-full text-white_figma bg-yellow_figma" >
                             Зареєструватися
@@ -221,14 +222,20 @@ const Home = (NewsList) => {
                 </div>
             </section>
             <section>
-                <div className="border border-[#E7E7E7] mt-32 mb-32 h-[141px]">
-                    <img src={ kiyvOblEnergo } alt=""/>
-                    <img src={ kiyvOblGaz } alt=""/>
-
+                <div className="relative border border-[#E7E7E7] mt-32 mb-32 h-[141px]">
+                    <div className="flex w-[893px] gap-x-12 mt-8 h-20 justify-between mx-auto">
+                        <img src={ kiyvOblEnergo_home } alt=""/>
+                        <img src={ kiyvOblGaz_home } alt=""/>
+                        <img src={ komunalka_home } alt=""/>
+                        <img src={ gerc_home } alt=""/>
+                        <img src={ kiyvOblEnergo_home } alt=""/>
+                        <img src={ kiyvOblGaz_home } alt=""/>
+                    </div>
+                    <img className="arrow_right_partners" src={arrow_right} alt=""/>
+                    <img className="arrow_left_partners" src={arrow_left} alt=""/>
                 </div>
             </section>
         </>
-
     );
 };
 export default Home;

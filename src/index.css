@@ -87,6 +87,16 @@ fieldset {
     left: 97%;
     top: 37%;
 }
+.arrow_right_partners {
+    position: absolute;
+    left: 1%;
+    bottom: 37%;
+}
+.arrow_left_partners {
+    position: absolute;
+    left: 97%;
+    bottom: 37%;
+}
 a.active2 {
     border: 1px solid red;
 }
