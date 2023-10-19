@@ -102,7 +102,7 @@ const Login = ({ close, showRegister, showResetPass }) => {
                         </> :
                     <form className="space-y-2" onSubmit={Submit}>
                         <InputField
-                            label={'Телефон(12цифр) або Email'}
+                            label={'Телефон(не менше 12цифр) або Email'}
                             type={'text'}
                             placeholder={'Введіть свій телефон або Email'}
                             name={'email'}
@@ -111,7 +111,7 @@ const Login = ({ close, showRegister, showResetPass }) => {
                             value={form.email}
                             autoComplete="off"
                             // pattern="^([a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3})|(\d{12})$"
-                            pattern="^[a-zA-Z0-9\-.]+@[a-z0-9]+\.[a-z]{2,3}|(\d{12})"
+                            pattern="^[a-zA-Z0-9\-.]+@[a-z0-9]+\.[a-z]{2,3}|(\d{12,14})"
                             onChange={handleInputChange}
                         />
                         <div className={'relative'}>
