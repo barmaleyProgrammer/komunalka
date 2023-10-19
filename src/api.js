@@ -288,8 +288,8 @@ const getDebt = (objectId) => {
             console.error(error);
         });
 }
-const sendCounterData = (deviceId, payload) => {
-    return axios.post(`/counter/meter/device/${deviceId}`, payload, config).then((response) => {
+const sendCounterData = (payload) => {
+    return axios.post(`/counter/meters/data`, payload, config).then((response) => {
         return response;
     }).catch((error) => {
         console.error(error);

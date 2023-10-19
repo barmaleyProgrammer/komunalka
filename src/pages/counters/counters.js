@@ -55,20 +55,25 @@ const Counters = () => {
     }, [objectId]);
 
     const Save = async () => {
-        const currentDate = moment().format('YYYY-MM-D');
-        const promises = [];
-        counters
-            .filter((item) => (item.currentReadings > 0))
-            .forEach((item, key) => {
-                const payload = {
-                    customerId: "string",
-                    currentDate,
-                    currentReadings: item.currentReadings
-                };
-                const res = api.sendCounterData(item.objectId, payload);
-                promises.push(res);
+        const payload = [];
+        counters.filter((item) => (item.currentReadings > 0)).forEach((item, key) => {
+            payload.push({
+                abcount: item.abcount || '',
+                fio: item.fio || '',
+                objectId: item.objectId || '',
+                idFirme: item.idFirme || '',
+                idPlat: item.idPlat || '',
+                abccnt: item.abccnt || '',
+                isseveralTarif: item.isseveralTarif || '',
+                abcounter: item.abcounter || '',
+                uniqId: item.uniqId || '',
+                counterNo: item.counterNo || '',
+                currentReadings: item.currentReadings || '',
+                preValue: item.preValue || '',
+                oldValue: item.oldValue || ''
             });
-        await Promise.all(promises);
+        });
+        await api.sendCounterData(payload);
         await api.getCounterValue(objectId).then((result) => setCounters(result));
     };
     const handleInputChange = (event, index) => {

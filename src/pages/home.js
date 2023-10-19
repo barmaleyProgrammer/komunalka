@@ -5,6 +5,8 @@ import icon_eco_world from '../img/icon_eco_world.svg';
 import group from '../img/group.svg';
 import arrow_right from '../img/arrow_right.svg';
 import arrow_left from '../img/arrow_left.svg';
+import kiyvOblEnergo from './../img/kiyvOblEnergo.png';
+import kiyvOblGaz from './../img/kiyvOblGaz.png'
 
 import Button from "../components/button";
 import { NavLink } from "react-router-dom";
@@ -220,6 +222,8 @@ const Home = (NewsList) => {
             </section>
             <section>
                 <div className="border border-[#E7E7E7] mt-32 mb-32 h-[141px]">
+                    <img src={ kiyvOblEnergo } alt=""/>
+                    <img src={ kiyvOblGaz } alt=""/>
 
                 </div>
             </section>
