@@ -184,11 +184,11 @@ const getCounterValue = (objectId) => {
 }
 
 const getCountersHistory = (objectId, dateStart, dateEnd) => {
-    if (process.env.NODE_ENV === 'development') {
-        return new Promise((resolve) => {
-            resolve(mock);
-        });
-    }
+    // if (process.env.NODE_ENV === 'development') {
+    //     return new Promise((resolve) => {
+    //         resolve(mock);
+    //     });
+    // }
 
     const key = `${objectId}-${dateStart}-${dateEnd}`;
     const storedData = sessionStorage.getItem(key);

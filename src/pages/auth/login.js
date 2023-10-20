@@ -45,7 +45,6 @@ const Login = ({ close, showRegister, showResetPass }) => {
             dispatch({ type: 'logIn' });
             api.getObject().then((data) => {
                 dispatch({ type: 'setAccount', payload: data.account });
-                // dispatch({ type: 'setAddresses', payload: data.addresses });
             });
             api.getServices().then((data) => {
                 dispatch({ type: 'services', payload: data });

@@ -1,24 +1,21 @@
-import { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useParams } from "react-router-dom";
 import { Context } from "../../store";
-
 import api from "../../api";
 import Breadcrumbs from "../../components/breadcrumbs";
 import ServiceTypes from "../../components/serviceTypes";
 import Tabs2 from "../../components/tabs2";
-import InputField from "../../components/inputField";
-import Button from "../../components/button";
-import moment from "moment";
 import Loader from "../../components/Loader/loader";
+import CounterForms from "../../components/counterForms";
+import { UniqueServiceTypes } from "./utils";
 
 const Counters = () => {
     const { objectId } = useParams();
     const [state] = useContext(Context);
     const [counters, setCounters] = useState([]);
     const [serviceTypes, setServiceTypes] = useState([]);
-    const [serviceType, setServiceType] = useState(null);
     const address = state.addresses.find((item) => item.objectId == objectId);
-    const [isPostLoading, setIsPostLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const breadCrumbs = [
         {
             "to": '/',
@@ -40,22 +37,20 @@ const Counters = () => {
 
     useEffect( () => {
         const fetchData = async () => {
-            setIsPostLoading(true);
-            await api.getCounterValue(objectId).then((counters) => {
-                setCounters(counters);
-                // debugger;
-                const allServiceTypes = counters.map((counter) => Number(counter.serviceType))
-                const uniqueServiceTypes = allServiceTypes.filter((allServiceType, index, allServiceTypes) => allServiceTypes.indexOf(allServiceType) === index);
-                setServiceTypes(uniqueServiceTypes);
-                setIsPostLoading(false);
-                console.log(uniqueServiceTypes)
+            setIsLoading(true);
+            await api.getCounterValue(objectId).then((result) => {
+                setCounters(result);
+                const serviceTypes = UniqueServiceTypes(result);
+                setServiceTypes(serviceTypes);
             });
-            // debugger
+            setIsLoading(false);
         };
         fetchData();
     }, [objectId]);
 
-    const Save = async () => {
+    const Save = async (event) => {
+        event.preventDefault();
+        setIsLoading(true);
         const payload = [];
         counters.filter((item) => (item.currentReadings > 0)).forEach((item, key) => {
             payload.push({
@@ -76,77 +71,23 @@ const Counters = () => {
         });
         await api.sendCounterData(payload);
         await api.getCounterValue(objectId).then((result) => setCounters(result));
-    };
-    const handleInputChange = (event, index) => {
-        setCounters((prevData) => {
-            const clone = [...prevData];
-            clone[index].currentReadings = event.target.value;
-            return clone;
-        });
-    };
-
-    const CounterBlock = ({item, index}) => {
-        return (
-            <div className="my-4 p-4 flex gap-x-4 rounded-lg border border-borderColor w-full">
-                <div className="w-2/3">
-                    <ul>
-                        <li className="text-xs">Лічильник №{item.counterNo}</li>
-                        <li className="text-sm">{item.abcounter}</li>
-                        <li className="text-sm">{item.nameFirme}<br/>{item.namePlat}</li>
-                    </ul>
-                </div>
-                <div className="w-44">
-                    <InputField
-                        label={'Попередні показники'}
-                        name={'name'}
-                        readOnly={true}
-                        autoComplete="off"
-                        value={item.oldValue}
-                    />
-                </div>
-                <div className="w-44">
-                    <InputField
-                        label={'Актуальні показники'}
-                        name={'currentReadings'}
-                        value={item.currentReadings}
-                        autoComplete="off"
-                        onChange={(e) => handleInputChange(e, index)}
-                    />
-                </div>
-            </div>
-        );
+        setIsLoading(false);
     };
 
     return (
-        <div className="font-normal mb-4 max-w-screen-xl">
-            <div>
-                <Breadcrumbs items={breadCrumbs}/>
-            </div>
+        <div className="font-normal mb-4">
+            <Breadcrumbs items={breadCrumbs}/>
             <h2 className="mb-4 mt-3 text-2xl">{address.name}</h2>
-            <ServiceTypes types={serviceTypes} setServiceType={setServiceType} selectedServiceType={serviceType} />
-            {
-                isPostLoading ?
-                    <Loader /> :
-                    <div className="mt-5 py-4 px-10 h-auto rounded-lg shadow-myCustom">
-                        <h3 className="py-4 text-xl text-center">Лічильники</h3>
-                        <Tabs2 objectId={objectId} />
-                        <div>
-                            {
-                                counters?.filter((item) => {
-                                        if (!serviceType) {
-                                            return true;
-                                        } else {
-                                            return (item.serviceType == serviceType)
-                                        }
-                                    })
-                                    .map((item, key) => <CounterBlock item={item} key={`CounterBlock_${item.id}`} index={key} />)
-                            }
-                        </div>
-                        <div className="mx-auto w-28">
-                            <Button type="button" label={'Зберегти'} onClick={Save} cssType={'primary'} />
-                        </div>
-                    </div>
-            }
+            <ServiceTypes types={serviceTypes} />
+            <div className="mt-5 py-4 px-10 h-auto rounded-lg shadow-myCustom">
+                <h3 className="py-4 text-xl text-center">Лічильники</h3>
+                <Tabs2 objectId={objectId} />
+                {
+                    isLoading
+                    ? <Loader />
+                    : <CounterForms counters={counters} setCounters={setCounters} Save={Save} />
+                }
+            </div>
         </div>
     );
 };
