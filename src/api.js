@@ -26,22 +26,23 @@ const signIn = (data) => {
     delete newConfig.headers.apiauthorization;
     return axios.post('/account/signin', data, newConfig).then((res) => {
         localStorage.setItem('accessToken', res.data.accessToken);
-        const cookieName = 'refreshToken';
-        console.log(res.headers);
-        console.log(res.headers['set-cookie']);
-        console.log(res.headers.get('set-cookie'));
-        // debugger;
-        // const cookie = (res.headers['set-cookie'])
-        //     .find((cookie) => cookie.includes(cookieName))
-        //     ?.match(new RegExp(`^${cookieName}=(.+?);`))
-        //     ?.[1];
-        // localStorage.setItem('refreshToken', cookie);
         config.headers.apiauthorization = `Bearer ${res.data.accessToken}`;
         return res.data;
     }).catch((error) => {
         throw error.response.data.error;
     });
 }
+
+const refreshToken = () => {
+    return axios.get('/account/refresh/token',  config).then((res) => {
+        localStorage.setItem('accessToken', res.data.accessToken);
+        config.headers.apiauthorization = `Bearer ${res.data.accessToken}`;
+        return res.data;
+    }).catch((error) => {
+        console.error(error);
+    });
+}
+
 const updateUser = (data) => {
     return axios.put('/account', data, config).then((res) => {
         localStorage.setItem('user', JSON.stringify(data));
@@ -58,14 +59,14 @@ const changePassword = (password) => {
     });
 }
 const changeEmailRequest = (email, source) => {
-    return axios.get(`https://api-test.komunalka.ua/api/v2/account/email/code?email=${encodeURIComponent(email)}&source=${source}`,  config).then((res) => {
+    return axios.get(`/account/email/code?email=${encodeURIComponent(email)}&source=${source}`,  config).then((res) => {
         return res;
     }).catch((error) => {
         console.error(error);
     });
 }
 const validationNewEmail = (form) => {
-    return axios.put('https://api-test.komunalka.ua/api/v2/account/email', form , config).then((res) => {
+    return axios.put('/v2/account/email', form , config).then((res) => {
         return res;
     }).catch((error) => {
         console.error(error);
@@ -298,6 +299,7 @@ const sendCounterData = (payload) => {
 export default {
     signUp,
     signIn,
+    refreshToken,
     signOut,
     validation,
     resetPasswordRequest,
