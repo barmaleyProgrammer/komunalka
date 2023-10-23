@@ -1,20 +1,39 @@
 import axios from "axios";
-import mock from './mock.js';
 
-const config = {
+const connect = axios.create({
     baseURL: 'https://api-test.komunalka.ua/api/v2',
     withCredentials: true,
-    headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Basic YWRtaW46Y29tbXVuYWw=',
-        'apiauthorization': `Bearer ${localStorage.getItem('accessToken') || ''}`
+    responseType: 'json',
+    auth: {
+        username: 'admin',
+        password: 'communal'
+    },
+    headers: {'Content-Type': 'application/json'}
+});
+
+connect.interceptors.request.use((config) => {
+    const token = localStorage.getItem('accessToken') || '';
+    if (token) {
+        config.headers.apiauthorization = `Bearer ${token}`;
     }
-};
+    return config;
+}, (error) => Promise.reject(error));
+connect.interceptors.response.use(
+    (res) => res,
+    async (error) => {
+        const prevRequest = error?.config;
+        if (error?.response?.status === 401 && !prevRequest?.sent) {
+            localStorage.removeItem('accessToken');
+            prevRequest.sent = true;
+            await refreshToken();
+            return connect(prevRequest);
+        }
+        return Promise.reject(error);
+    }
+);
 
 const signUp = (data) => {
-    const newConfig = {...config};
-    delete newConfig.headers.apiauthorization;
-    return axios.post('/account/signup', data, newConfig)
+    return connect.post('/account/signup', data)
         .then((res) => res)
         .catch((error) => {
             throw error.response.data.error;
@@ -22,11 +41,8 @@ const signUp = (data) => {
 }
 
 const signIn = (data) => {
-    const newConfig = {...config};
-    delete newConfig.headers.apiauthorization;
-    return axios.post('/account/signin', data, newConfig).then((res) => {
+    return connect.post('/account/signin', data).then((res) => {
         localStorage.setItem('accessToken', res.data.accessToken);
-        config.headers.apiauthorization = `Bearer ${res.data.accessToken}`;
         return res.data;
     }).catch((error) => {
         throw error.response.data.error;
@@ -34,96 +50,69 @@ const signIn = (data) => {
 }
 
 const refreshToken = () => {
-    return axios.get('/account/refresh/token',  config).then((res) => {
+    return connect.get('/account/refresh/token').then((res) => {
         localStorage.setItem('accessToken', res.data.accessToken);
-        config.headers.apiauthorization = `Bearer ${res.data.accessToken}`;
-        return res.data;
-    }).catch((error) => {
-        console.error(error);
-    });
+        return res.data.accessToken;
+    }).catch((error) => console.error(error));
 }
 
 const updateUser = (data) => {
-    return axios.put('/account', data, config).then((res) => {
+    return connect.put('/account', data).then((res) => {
         localStorage.setItem('user', JSON.stringify(data));
         return res;
-    }).catch((error) => {
-        console.error('акаунт', error);
-    });
+    }).catch((error) => console.error('акаунт', error));
 }
 const changePassword = (password) => {
-    return axios.put('/account/password',  { password }, config).then((res) => {
-        return res;
-    }).catch((error) => {
-        console.error(error);
-    });
+    return connect.put('/account/password', { password })
+        .then((res) => res)
+        .catch((error) => console.error(error));
 }
 const changeEmailRequest = (email, source) => {
-    return axios.get(`/account/email/code?email=${encodeURIComponent(email)}&source=${source}`,  config).then((res) => {
-        return res;
-    }).catch((error) => {
-        console.error(error);
-    });
+    return connect.get(`/account/email/code?email=${encodeURIComponent(email)}&source=${source}`)
+        .then((res) => res)
+        .catch((error) => console.error(error));
 }
 const validationNewEmail = (form) => {
-    return axios.put('/v2/account/email', form , config).then((res) => {
-        return res;
-    }).catch((error) => {
-        console.error(error);
-    });
+    return connect.put('/v2/account/email', form)
+        .then((res) => res)
+        .catch((error) => console.error(error));
 }
 const renameAddress = (objectId, name) => {
-    return axios.put(`/account/address/${objectId}`, { name }, config).then((response) => {
-        return response;
-    }).catch((error) => {
-        console.error(error);
-    });
+    return connect.put(`/account/address/${objectId}`, { name })
+        .then((res) => res)
+        .catch((error) => console.error(error));
 }
 
 const signOut = () => {
     localStorage.clear();
     sessionStorage.clear();
-    config.headers.apiauthorization = '';
 }
 
 const validation = (email, token) => {
-    const newConfig = {...config};
-    delete newConfig.headers.apiauthorization;
-    return axios.get(`account/validate/email?email=${encodeURIComponent(email)}&token=${token}`, newConfig).then((res) => {
+    return connect.get(`account/validate/email?email=${encodeURIComponent(email)}&token=${token}`).then((res) => {
         localStorage.setItem('accessToken', res.data.accessToken);
-        localStorage.setItem('refreshToken', res.data.refreshToken);
-        config.headers.apiauthorization = `Bearer ${res.data.accessToken}`;
         return res;
     });
 }
 const resetPasswordRequest = (email, source) => {
-    return axios.get(`https://api-test.komunalka.ua/api/v2/account/reset/password?email=${encodeURIComponent(email)}&source=${source}`, config).then((res) => res);
+    return connect.get(`/account/reset/password?email=${encodeURIComponent(email)}&source=${source}`)
+        .then((res) => res);
 }
 const authSocialNetworks = () => {
-    const newConfig = {...config};
-    delete newConfig.headers.apiauthorization;
-    return axios.get(`https://api-test.komunalka.ua/api/user/oauth2?authTypeId=google&successUrl=http://localhost:3000/cabinet&errorUrl=http://localhost:3000/cabinet`, newConfig).then((res) => {
-        localStorage.setItem('accessToken', res.data.accessToken);
-        localStorage.setItem('refreshToken', res.data.refreshToken);
-        config.headers.apiauthorization = `Bearer ${res.data.accessToken}`;
-        return res;
-    });
+    return axios.get(`https://api-test.komunalka.ua/api/user/oauth2?authTypeId=google&successUrl=http://localhost:3000/cabinet&errorUrl=http://localhost:3000/cabinet`)
+        .then((res) => {
+            localStorage.setItem('accessToken', res.data.accessToken);
+            return res;
+        });
 }
 const newPassword = (payload) => {
-    return axios.post(`account/reset/password`,payload, config).then((response) => {
-        return response;
-    }).catch((error) => {
-        console.error(error);
-    });
+    return connect.post('/account/reset/password', payload)
+        .then((res) => res)
+        .catch((error) => console.error(error));
 }
 
 const getRegions = () => {
-    if (!localStorage.getItem('accessToken')) {
-        return [];
-    }
-    const newConfig = {...config};
-    delete newConfig.apiauthorization;
-    return axios.get('/address/regions?country=1', newConfig).then((res) => {
+    return connect.get('/address/regions?country=1').then((res) => {
         return res.data.map((item) => ({
             value: Number(item.region_id),
             label: item.name.trim()
@@ -133,7 +122,7 @@ const getRegions = () => {
 
 
 const getDistricts = (region_id) => {
-    return axios.get(`/address/districts?region=${region_id}`, config).then((res) => {
+    return connect.get(`/address/districts?region=${region_id}`).then((res) => {
         return res.data.map((item) => ({
             value: Number(item.district_id),
             label: item.name.trim()
@@ -142,7 +131,7 @@ const getDistricts = (region_id) => {
 }
 
 const getTowns = (district_id) => {
-    return axios.get(`/address/towns?district=${district_id}`, config).then((res) => {
+    return connect.get(`/address/towns?district=${district_id}`).then((res) => {
         return res.data.map((item) => ({
             value: Number(item.town_id),
             label: item.name.trim()
@@ -151,7 +140,7 @@ const getTowns = (district_id) => {
 }
 
 const getStreets = (town_id) => {
-    return axios.get(`/address/streets?town=${town_id}`, config).then((res) => {
+    return connect.get(`/address/streets?town=${town_id}`).then((res) => {
         return res.data.map((item) => ({
             value: Number(item.street_id),
             label: item.name.trim()
@@ -160,7 +149,7 @@ const getStreets = (town_id) => {
 }
 
 const getHouses = (street_id) => {
-    return axios.get(`/address/houses?street=${street_id}`, config).then((res) => {
+    return connect.get(`/address/houses?street=${street_id}`).then((res) => {
         return res.data.map((item) => ({
             value: Number(item.house_id),
             label: item.name.trim()
@@ -169,7 +158,7 @@ const getHouses = (street_id) => {
 }
 
 const getFlats = (house_id) => {
-    return axios.get(`/address/flats?house=${house_id}`, config).then((res) => {
+    return connect.get(`/address/flats?house=${house_id}`).then((res) => {
         return res.data.map((item) => ({
             value: Number(item.object_id),
             label: item.name.trim()
@@ -177,30 +166,20 @@ const getFlats = (house_id) => {
     });
 }
 const getCounterValue = (objectId) => {
-    return axios.get(`/counter/meters/data?objectId=${objectId}`, config)
+    return connect.get(`/counter/meters/data?objectId=${objectId}`)
         .then((res) => res.data.data)
-        .catch((error) => {
-            console.error(error);
-        });
+        .catch((error) => console.error(error));
 }
 
 const getCountersHistory = (objectId, dateStart, dateEnd) => {
-    // if (process.env.NODE_ENV === 'development') {
-    //     return new Promise((resolve) => {
-    //         resolve(mock);
-    //     });
-    // }
-
     const key = `${objectId}-${dateStart}-${dateEnd}`;
     const storedData = sessionStorage.getItem(key);
 
     if (storedData) {
-        return new Promise((resolve) => {
-            resolve(JSON.parse(storedData));
-        });
+        return Promise.resolve(JSON.parse(storedData));
     }
 
-    return axios.get(`/counter/meters/history/data?objectId=${objectId}&dateStart=${dateStart}&dateEnd=${dateEnd}`, config)
+    return connect.get(`/counter/meters/history/data?objectId=${objectId}&dateStart=${dateStart}&dateEnd=${dateEnd}`)
         .then((res) => {
             sessionStorage.setItem(key, JSON.stringify(res.data.data));
             return res.data.data;
@@ -212,94 +191,72 @@ const getCountersHistory = (objectId, dateStart, dateEnd) => {
 }
 
 const getServices = () => {
-    return axios.get(`/counter/service`, config)
+    return connect.get('/counter/service')
         .then((res) => {
             localStorage.setItem('services', JSON.stringify(res.data.data));
             return res.data.data;
         })
-        .catch((error) => {
-            console.error(error);
-        });
+        .catch((error) => console.error(error));
 }
 const getServiceTypes = () => {
-    return axios.get(`/counter/service/type`, config)
+    return connect.get('/counter/service/type')
         .then((res) => {
             localStorage.setItem('serviceTypes', JSON.stringify(res.data.data));
             return res.data.data;
         })
-        .catch((error) => {
-            console.error(error);
-        });
+        .catch((error) => console.error(error));
 }
 const getAddress = () => {
-    return axios.get(`/account/address`, config)
+    return connect.get('/account/address')
         .then((res) => {
             localStorage.setItem('addresses', JSON.stringify(res.data));
             return res.data;
         })
-        .catch((error) => {
-            console.error(error);
-        });
+        .catch((error) => console.error(error));
 }
 
 const getObject = () => {
-    return axios.get('/account', config)
-        .then((response) => {
-            localStorage.setItem('user', JSON.stringify(response.data.account));
-            // localStorage.setItem('addresses', JSON.stringify(response.data.addresses));
-            return response.data;
+    return connect.get('/account')
+        .then((res) => {
+            localStorage.setItem('user', JSON.stringify(res.data.account));
+            return res.data;
         })
-        .catch((error) => {
-            console.error(error);
-        });
+        .catch((error) => console.error(error));
 }
 
 const addObject = (objectId, name = '') => {
-    return axios.post('/account/address', { objectId, name }, config).then((response) => {
-        return response;
-    }).catch((error) => {
-        console.error(error);
-    });
+    return connect.post('/account/address', { objectId, name })
+        .then((res) => res)
+        .catch((error) => console.error(error));
 }
 
 const deleteObject = (objectId) => {
     const payload = {
-        data: { objectId },
-        headers: config.headers,
-        baseURL: config.baseURL
+        data: { objectId }
     };
-    return axios.delete('/account/address', payload).then((response) => {
-        return response;
-    }).catch((error) => {
-        console.error(error);
-    });
+    return connect.delete('/account/address', payload)
+        .then((res) => res)
+        .catch((error) => console.error(error));
 }
 const deleteAccount = () => {
-    return axios.delete('/account', config).then((response) => {
-        return response;
-    }).catch((error) => {
-        console.error(error);
-    });
+    return connect.delete('/account')
+        .then((res) => res)
+        .catch((error) => console.error(error));
 }
 
 const getDebt = (objectId) => {
-    return axios.get(`/accrual/debt/${objectId}`, config)
-        .then((response) => response.data.debts)
-        .catch((error) => {
-            console.error(error);
-        });
+    return connect.get(`/accrual/debt/${objectId}`)
+        .then((res) => res.data.debts)
+        .catch((error) => console.error(error));
 }
 const sendCounterData = (payload) => {
-    return axios.post(`/counter/meters/data`, payload, config).then((response) => {
-        return response;
-    }).catch((error) => {
-        console.error(error);
-    });
+    return connect.post('/counter/meters/data', payload)
+        .then((res) => res)
+        .catch((error) => console.error(error));
 }
 export default {
     signUp,
     signIn,
-    refreshToken,
     signOut,
     validation,
     resetPasswordRequest,
