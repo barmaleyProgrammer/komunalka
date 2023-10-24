@@ -2,7 +2,7 @@ import axios from "axios";
 
 const connect = axios.create({
     baseURL: 'https://api-test.komunalka.ua/api/v2',
-    withCredentials: true,
+    withCredentials: false,
     responseType: 'json',
     auth: {
         username: 'admin',
@@ -16,6 +16,7 @@ connect.interceptors.request.use((config) => {
     if (token) {
         config.headers.apiauthorization = `Bearer ${token}`;
     }
+    connect.defaults.withCredentials = false;
     return config;
 }, (error) => Promise.reject(error));
 connect.interceptors.response.use(
@@ -50,6 +51,7 @@ const signIn = (data) => {
 }
 
 const refreshToken = () => {
+    connect.defaults.withCredentials = true;
     return connect.get('/account/refresh/token').then((res) => {
         localStorage.setItem('accessToken', res.data.accessToken);
         return res.data.accessToken;
