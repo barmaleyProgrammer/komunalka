@@ -67,15 +67,16 @@ const Login = ({ close, showRegister, showResetPass }) => {
         }
         setIsPostLoading(false);
     };
-    // const SocialNetworks = async (event) => {
-    //     const url = new URL(window.location);
-    //     event.preventDefault();
-    //         const result = await api.authSocialNetworks();;
-    //         if (result.status === 302) {
-    //             sessionStorage.setItem(url.searchParams.get('accessToken'));
-    //             navigate('/cabinet');
-    //         }
-    // };
+    const SocialNetworks = async (event, type) => {
+        event.preventDefault();
+        // const url = new URL(window.location);
+        const result = await api.authSocialNetworks(type);
+        console.log(result);
+        // if (result.status === 302) {
+        //     sessionStorage.setItem(url.searchParams.get('accessToken'));
+        //     navigate('/cabinet');
+        // }
+    };
 
     const togglePassInput = () => {
         if (type === 'password') {
@@ -156,7 +157,12 @@ const Login = ({ close, showRegister, showResetPass }) => {
                             <div className="basis-1/2 border border-[#E8E8E8;] rounded">
                                 <div className="flex py-3 justify-center space-x-1">
                                     <img src={google} alt="" />
-                                    <NavLink to="" className="text-sm whitespace-nowrap" >Ввійти з Google</NavLink>
+                                    <NavLink
+                                        to="#"
+                                        onClick={(event) => SocialNetworks(event, 'google')}
+                                        className="text-sm whitespace-nowrap">
+                                            Ввійти з Google
+                                    </NavLink>
                                 </div>
                             </div>
                             <div className="basis-1/2 border border-[#E8E8E8;] rounded">
