@@ -105,7 +105,8 @@ const authSocialNetworks = (type = 'google') => {
     const errorUrl = 'http://localhost:3000/cabinet';
     return connect.get(`/user/oauth2?authTypeId=${type}&successUrl=${successUrl}&errorUrl=${errorUrl}`)
         .then((res) => {
-            localStorage.setItem('accessToken', res.data.accessToken);
+            console.log('res', res);
+            // localStorage.setItem('accessToken', res.data.accessToken);
             return res;
         });
 }

@@ -71,11 +71,11 @@ const Login = ({ close, showRegister, showResetPass }) => {
         event.preventDefault();
         // const url = new URL(window.location);
         const result = await api.authSocialNetworks(type);
-        console.log(result);
-        // if (result.status === 302) {
-        //     sessionStorage.setItem(url.searchParams.get('accessToken'));
-        //     navigate('/cabinet');
-        // }
+        console.log('result', result);
+        if (result.status === 302) {
+            // sessionStorage.setItem(url.searchParams.get('accessToken'));
+            // navigate('/cabinet');
+        }
     };
 
     const togglePassInput = () => {
@@ -168,7 +168,10 @@ const Login = ({ close, showRegister, showResetPass }) => {
                             <div className="basis-1/2 border border-[#E8E8E8;] rounded">
                                 <div className="flex py-3 justify-center space-x-1">
                                     <img src={facebook} alt="" />
-                                    <NavLink to="" className="text-sm whitespace-nowrap" >Ввійти з Facebook</NavLink>
+                                    <NavLink to="#"
+                                        onClick={(event) => SocialNetworks(event, 'facebook')}
+                                        className="text-sm whitespace-nowrap" >
+                                        Ввійти з Facebook</NavLink>
                                 </div>
                             </div>
                         </div>
