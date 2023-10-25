@@ -99,9 +99,8 @@ const resetPasswordRequest = (email, source) => {
 }
 const authSocialNetworks = (type = 'google') => {
     const successUrl = `${window.location.protocol}//${window.location.host}/validateToken`;
-    const errorUrl = `${window.location.protocol}//${window.location.host}/cabinet`;
-    const url = `${connect.defaults.baseURL}/user/oauth2?authTypeId=${type}&successUrl=${successUrl}&errorUrl=${errorUrl}`;
-    window.location = url;
+    const errorUrl = `${window.location.protocol}//${window.location.host}/notValid`;
+    window.location = `${connect.defaults.baseURL}/user/oauth2?authTypeId=${type}&successUrl=${successUrl}&errorUrl=${errorUrl}`;
 }
 const newPassword = (payload) => {
     return connect.post('/v2/account/reset/password', payload)

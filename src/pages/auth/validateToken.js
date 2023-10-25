@@ -1,9 +1,9 @@
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useContext } from 'react';
 import { useNavigate } from "react-router-dom";
 import { Context } from "../../store";
 import api from "../../api";
 
-const Validate = () => {
+const ValidateToken = () => {
     const [,dispatch] = useContext(Context);
     const navigate = useNavigate();
     useEffect(() => {
@@ -29,4 +29,4 @@ const Validate = () => {
     }, []);
     return (<></>);
 };
-export default Validate;
+export default ValidateToken;
