@@ -7,7 +7,7 @@ const Button = ({
         loading = false,
         form = undefined
     }) => {
-    let className = ['py-2.5', 'px-5', 'mr-2', 'mb-2', 'text-sm', 'rounded', 'w-full', 'disabled:opacity-70'];
+    let className = ['py-2.5', 'px-4', 'mr-2', 'mb-2', 'text-sm', 'rounded', 'w-full', 'disabled:opacity-70'];
     let myDisabled;
     if (disabled || loading) {
         myDisabled = true;
