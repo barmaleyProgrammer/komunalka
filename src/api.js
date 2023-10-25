@@ -101,14 +101,10 @@ const resetPasswordRequest = (email, source) => {
         .then((res) => res);
 }
 const authSocialNetworks = (type = 'google') => {
-    const successUrl = 'http://localhost:3000/cabinet';
-    const errorUrl = 'http://localhost:3000/cabinet';
-    return connect.get(`/user/oauth2?authTypeId=${type}&successUrl=${successUrl}&errorUrl=${errorUrl}`)
-        .then((res) => {
-            console.log('res', res);
-            // localStorage.setItem('accessToken', res.data.accessToken);
-            return res;
-        });
+    const successUrl = `${window.location.protocol}//${window.location.host}/validateToken`;
+    const errorUrl = `${window.location.protocol}//${window.location.host}/cabinet`;
+    const url = `${connect.defaults.baseURL}/user/oauth2?authTypeId=${type}&successUrl=${successUrl}&errorUrl=${errorUrl}`;
+    window.location = url;
 }
 const newPassword = (payload) => {
     return connect.post('/v2/account/reset/password', payload)
