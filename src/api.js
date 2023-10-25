@@ -4,6 +4,7 @@ const connect = axios.create({
     baseURL: 'https://api-test.komunalka.ua/api',
     withCredentials: false,
     responseType: 'json',
+    maxRedirects: 0,
     auth: {
         username: 'admin',
         password: 'communal'
@@ -23,7 +24,8 @@ connect.interceptors.response.use(
     (res) => res,
     async (error) => {
         const prevRequest = error?.config;
-        if (error?.response?.status === 401 && !prevRequest?.sent) {
+        const token = localStorage.getItem('accessToken') || '';
+        if (error?.response?.status === 401 && token && !prevRequest?.sent) {
             localStorage.removeItem('accessToken');
             prevRequest.sent = true;
             await refreshToken();
@@ -40,7 +42,6 @@ const signUp = (data) => {
             throw error.response.data.error;
         });
 }
-
 const signIn = (data) => {
     return connect.post('/v2/account/signin', data).then((res) => {
         localStorage.setItem('accessToken', res.data.accessToken);
@@ -49,7 +50,6 @@ const signIn = (data) => {
         throw error.response.data.error;
     });
 }
-
 const refreshToken = () => {
     connect.defaults.withCredentials = true;
     return connect.get('/v2/account/refresh/token').then((res) => {
@@ -57,7 +57,6 @@ const refreshToken = () => {
         return res.data.accessToken;
     }).catch((error) => console.error(error));
 }
-
 const updateUser = (data) => {
     return connect.put('/v2/account', data).then((res) => {
         localStorage.setItem('user', JSON.stringify(data));
@@ -84,12 +83,10 @@ const renameAddress = (objectId, name) => {
         .then((res) => res)
         .catch((error) => console.error(error));
 }
-
 const signOut = () => {
     localStorage.clear();
     sessionStorage.clear();
 }
-
 const validation = (email, token) => {
     return connect.get(`/v2/account/validate/email?email=${encodeURIComponent(email)}&token=${token}`).then((res) => {
         localStorage.setItem('accessToken', res.data.accessToken);
