@@ -55,7 +55,7 @@ const CounterForms = ({counters, setCounters, Save}) => {
                 })
             }
             <div className="mx-auto w-28">
-                <Button type="submit" label={'Відправити'} cssType={'primary'} />
+                <Button type="submit" label={'Надіслати'} cssType={'primary'} />
             </div>
         </form>
     );
