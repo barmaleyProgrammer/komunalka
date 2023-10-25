@@ -8,6 +8,9 @@ import Tabs2 from "../../components/tabs2";
 import Loader from "../../components/Loader/loader";
 import CounterForms from "../../components/counterForms";
 import { UniqueServiceTypes } from "./utils";
+import Modal from "../../components/modal/modal";
+import ResetPassword from "../auth/resetPassword";
+import Button from "../../components/button";
 
 const Counters = () => {
     const { objectId } = useParams();
@@ -16,6 +19,7 @@ const Counters = () => {
     const [serviceTypes, setServiceTypes] = useState([]);
     const address = state.addresses.find((item) => item.objectId == objectId);
     const [isLoading, setIsLoading] = useState(false);
+    const [saved, setSaved] = useState(false);
     const breadCrumbs = [
         {
             "to": '/',
@@ -69,9 +73,14 @@ const Counters = () => {
                 oldValue: item.oldValue || ''
             });
         });
-        await api.sendCounterData(payload);
+        const result = await api.sendCounterData(payload);
+        if (result.status === 200) {
+            setSaved(true);
+            // console.log('saved', setSaved);
+        }
         await api.getCounterValue(objectId).then((result) => setCounters(result));
         setIsLoading(false);
+
     };
 
     return (
@@ -88,6 +97,21 @@ const Counters = () => {
                     : <CounterForms counters={counters} setCounters={setCounters} Save={Save} />
                 }
             </div>
+            {
+                saved && (
+                    <Modal close={() => setSaved(false)}>
+                        <div>
+                            <div className="text-xs text-black_figma p-10 text-center w-full">
+                                <p className="text-left text-base mb-4">Показання успішно передані в обробку.</p>
+                                    <p className="text-base">З повагою, команда LYCHYLNYK.</p>
+                            </div>
+                            <div className="pt-2 w-44 mx-auto">
+                                <Button type="button" label={'Закрити'} cssType={'primary'} onClick={() => setSaved(false)} />
+                            </div>
+                        </div>
+                    </Modal>
+                )
+            }
         </div>
     );
 };
