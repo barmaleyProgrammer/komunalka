@@ -69,13 +69,11 @@ const Login = ({ close, showRegister, showResetPass }) => {
     };
     const SocialNetworks = async (event, type) => {
         event.preventDefault();
-        // const url = new URL(window.location);
-        const result = await api.authSocialNetworks(type);
-        console.log('result', result);
-        if (result.status === 302) {
-            // sessionStorage.setItem(url.searchParams.get('accessToken'));
-            // navigate('/cabinet');
-        }
+        const successUrl = `${window.location.protocol}//${window.location.host}/validateToken`;
+        const errorUrl = `${window.location.protocol}//${window.location.host}/cabinet`;
+        const endPoint = 'https://api-test.komunalka.ua/api';
+        const url = `${endPoint}/user/oauth2?authTypeId=${type}&successUrl=${successUrl}&errorUrl=${errorUrl}`;
+        window.location = url;
     };
 
     const togglePassInput = () => {

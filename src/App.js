@@ -5,6 +5,7 @@ import Footer from "./components/footer";
 import Header from "./components/header";
 
 import Validate from "./pages/auth/validate";
+import ValidateToken from "./pages/auth/validateToken";
 
 import News from "./pages/news.js";
 import About from "./pages/about.js";
@@ -44,6 +45,7 @@ const App = () => {
                             <Route path="/change/email" element={<ValidateNewEmail />} />
                             <Route path="/validate/email" element={<Validate />} />
                             <Route path="/password/reset/link" element={<NewPassword />} />
+                            <Route path="/validateToken" element={<ValidateToken />} />
 
                             <Route path="/cabinet">
                                 <Route index element={<Cabinet />} />
