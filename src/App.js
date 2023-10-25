@@ -28,6 +28,8 @@ import UserAgreement from "./pages/userAgreement";
 import Notification from "./pages/cabinet/notification";
 import ValidateNewEmail from "./pages/cabinet/validateNewEmail";
 
+import RequireAuth from './components/hook/requireAuth';
+
 const App = () => {
     return (
         <div className="app">
@@ -40,7 +42,11 @@ const App = () => {
                             <Route path="/about" element={<About />} />
                             <Route path="/faq" element={<Faq />} />
                             <Route path="/news/:id?" element={<News />} />
-                            <Route path="/contacts" element={<Contacts />} />
+                            <Route path="/contacts" element={
+                                <RequireAuth>
+                                <Contacts />
+                                </RequireAuth>
+                            } />
                             <Route path="/userAgreement" element={<UserAgreement />} />
 
                             <Route path="/change/email" element={<ValidateNewEmail />} />
@@ -50,10 +56,26 @@ const App = () => {
                             <Route path="/notValid" element={<NotValid />} />
 
                             <Route path="/cabinet">
-                                <Route index element={<Cabinet />} />
-                                <Route path="addAddress" element={<AddAddress />} />
-                                <Route path="myData" element={<MyData />} />
-                                <Route path="notification" element={<Notification />} />
+                                <Route index element={
+                                    <RequireAuth>
+                                        <Cabinet />
+                                    </RequireAuth>
+                                } />
+                                <Route path="addAddress" element={
+                                    <RequireAuth>
+                                        <AddAddress />
+                                    </RequireAuth>
+                                } />
+                                <Route path="myData" element={
+                                    <RequireAuth>
+                                        <MyData />
+                                    </RequireAuth>
+                                } />
+                                <Route path="notification" element={
+                                    <RequireAuth>
+                                        <Notification />
+                                    </RequireAuth>
+                                } />
                             </Route>
                             <Route path="/counters">
                                 <Route index path=":objectId" element={<Counters />} />
