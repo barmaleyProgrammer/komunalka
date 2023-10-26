@@ -42,11 +42,7 @@ const App = () => {
                             <Route path="/about" element={<About />} />
                             <Route path="/faq" element={<Faq />} />
                             <Route path="/news/:id?" element={<News />} />
-                            <Route path="/contacts" element={
-                                <RequireAuth>
-                                <Contacts />
-                                </RequireAuth>
-                            } />
+                            <Route path="/contacts" element={<Contacts />} />
                             <Route path="/userAgreement" element={<UserAgreement />} />
 
                             <Route path="/change/email" element={<ValidateNewEmail />} />
