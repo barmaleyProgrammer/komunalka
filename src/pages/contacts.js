@@ -21,7 +21,7 @@ const Contacts = () => {
                 <Breadcrumbs items={breadCrumbs}/>
             </div>
             <h2 className="text-2xl mt-4">Контакти</h2>
-            <div className="flex gap-80">
+            <div className="flex justify-between">
                 <div className=" mt-4">
                     <p className="text-lg mb-4">Телефон</p>
                     <div className="text-sm font-light gap-y-3">
@@ -38,7 +38,7 @@ const Contacts = () => {
                 </div>
                 <div className=" mt-4">
                     <p className="text-lg mb-4 whitespace-nowrap">Соціальні мережі</p>
-                    <div className="flex space-x-4">
+                    <div className="flex space-x-4 justify-between">
                         <a href="https://www.facebook.com/">
                             <img src={ FB_icon } alt=""/>
                         </a>

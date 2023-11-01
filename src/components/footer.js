@@ -53,7 +53,7 @@ const Footer = () => {
                         </li>
                     </ul>
                 </div>
-                <div className="flex mt-4 space-x-4">
+                <div className="w-40 flex mt-4 justify-between">
                     <a href="https://www.facebook.com/">
                         <img src={ FB_icon } alt=""/>
                     </a>
