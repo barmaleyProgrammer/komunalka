@@ -21,7 +21,7 @@ const Contacts = () => {
                 <Breadcrumbs items={breadCrumbs}/>
             </div>
             <h2 className="text-2xl mt-4">Контакти</h2>
-            <div className="flex gap-64">
+            <div className="flex gap-80">
                 <div className=" mt-4">
                     <p className="text-lg mb-4">Телефон</p>
                     <div className="text-sm font-light gap-y-3">
