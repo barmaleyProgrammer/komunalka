@@ -53,7 +53,7 @@ const Header = () => {
         <header>
             <div className="w-[1152px] mx-auto py-4 flex flex-wrap gap-24 items-center justify-between">
                 <NavLink to="/">
-                    <img src={logo_lichylnyk} className="mr-3" alt="" />
+                    <img src={logo_lichylnyk} alt="" />
                 </NavLink>
                 <div className="flex items-center justify-between underline underline-offset-4 decoration-0">
                     <ul className="flex flex-row p-0 mt-0 space-x-8 border-0">
