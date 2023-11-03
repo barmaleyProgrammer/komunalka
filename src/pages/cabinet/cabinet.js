@@ -139,6 +139,7 @@ const Cabinet = () => {
                                 placeholder={'Назва адреси'}
                                 name={'name'}
                                 required={true}
+                                maxLength={'10'}
                                 value={currentAddress.name}
                                 autoComplete="off"
                                 onChange={handleInputChange}
