@@ -225,7 +225,7 @@ const Register = ({ close, showLogin }) => {
                                 required={true}
                                 cssClass="email-field"
                                 value={form.email}
-                                autoComplete="email"
+                                autocomplete="on"
                                 onChange={handleInputChange}
                             />
                             <InputField
@@ -234,7 +234,7 @@ const Register = ({ close, showLogin }) => {
                                 name={'lastName'}
                                 required={true}
                                 value={form.lastName}
-                                autoComplete="family-name"
+                                autocomplete="on"
                                 onChange={handleInputChange}
                             />
                             <InputField
@@ -243,7 +243,7 @@ const Register = ({ close, showLogin }) => {
                                 name={'firstName'}
                                 required={true}
                                 value={form.firstName}
-                                autoComplete="given-name"
+                                autocomplete="off"
                                 onChange={handleInputChange}
                             />
                             <InputField
@@ -252,7 +252,7 @@ const Register = ({ close, showLogin }) => {
                                 name={'secondName'}
                                 required={true}
                                 value={form.secondName}
-                                autoComplete="additional-name"
+                                autocomplete="on"
                                 onChange={handleInputChange}
                             />
                             <InputField
@@ -264,7 +264,7 @@ const Register = ({ close, showLogin }) => {
                                 value={form.phone}
                                 pattern="^d{12,14}"
                                 cssClass="email-field"
-                                autoComplete="tel"
+                                autocomplete="on"
                                 onChange={handleInputChange}
                             />
                             <div className={'relative'}>
@@ -274,7 +274,7 @@ const Register = ({ close, showLogin }) => {
                                     name={'password'}
                                     required={true}
                                     value={form.password}
-                                    autoComplete="new-password"
+                                    autocomplete="off"
                                     onChange={handleInputChange}
                                     onFocus={() => setInputPassFlag(true)}
                                     onBlur={() => setInputPassFlag(false)}

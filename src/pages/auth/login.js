@@ -107,7 +107,7 @@ const Login = ({ close, showRegister, showResetPass }) => {
                             cssClass="email-field"
                             required={true}
                             value={form.email}
-                            autoComplete="email"
+                            autocomplete="on"
                             // pattern="^([a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3})|(\d{12})$"
                             pattern="^[a-zA-Z0-9\-.]+@[a-z0-9]+\.[a-z]{2,3}|(\d{12,14})"
                             onChange={handleInputChange}
@@ -119,7 +119,7 @@ const Login = ({ close, showRegister, showResetPass }) => {
                                 name={'password'}
                                 required={true}
                                 value={form.password}
-                                autoComplete="current-password"
+                                autoComplete="off"
                                 onChange={handleInputChange}
                             />
                             <div onClick={togglePassInput} className="eye-ico cursor-pointer">
