@@ -256,7 +256,7 @@ const Register = ({ close, showLogin }) => {
                                 onChange={handleInputChange}
                             />
                             <InputField
-                                label={'Телефон(не менше 12цифр) або Email'}
+                                label={'Телефон(не менше 12цифр)'}
                                 type={'phone'}
                                 placeholder={'388888888888'}
                                 name={'phone'}
