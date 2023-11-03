@@ -21,11 +21,15 @@ const Login = ({ close, showRegister, showResetPass }) => {
     const [errorFlag, setErrorFlag] = useState(false);
     const [isPostLoading, setIsPostLoading] = useState(false);
 
+    // const [form, setForm] = useState({
+    //     email: (process.env.NODE_ENV === 'development') ? 'grebenyukvd@gmail.com' : '',
+    //     password: (process.env.NODE_ENV === 'development') ? 'Test_Drive5' : '',
+    //     rememberMe: false
+    // });
     const [form, setForm] = useState({
-        email: (process.env.NODE_ENV === 'development') ? 'grebenyukvd@gmail.com' : '',
-        password: (process.env.NODE_ENV === 'development') ? 'Test_Drive5' : '',
+        email: '',
+        password: '',
         rememberMe: false
-
     });
     const [formError, setFormError] = useState('');
 
@@ -103,7 +107,7 @@ const Login = ({ close, showRegister, showResetPass }) => {
                             cssClass="email-field"
                             required={true}
                             value={form.email}
-                            autoComplete="off"
+                            autoComplete="email"
                             // pattern="^([a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3})|(\d{12})$"
                             pattern="^[a-zA-Z0-9\-.]+@[a-z0-9]+\.[a-z]{2,3}|(\d{12,14})"
                             onChange={handleInputChange}
@@ -115,7 +119,7 @@ const Login = ({ close, showRegister, showResetPass }) => {
                                 name={'password'}
                                 required={true}
                                 value={form.password}
-                                autoComplete="off"
+                                autoComplete="current-password"
                                 onChange={handleInputChange}
                             />
                             <div onClick={togglePassInput} className="eye-ico cursor-pointer">

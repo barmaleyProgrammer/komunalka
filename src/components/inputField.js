@@ -8,6 +8,7 @@ const InputField = ({
         onChange,
         readOnly = false,
         cssClass = '',
+        maxLength = '',
         autoComplete = '',
         onFocus = undefined,
         onBlur = undefined,
@@ -26,6 +27,7 @@ const InputField = ({
                 required={required}
                 onChange={onChange}
                 readOnly={readOnly}
+                maxLength={maxLength}
                 autoComplete={autoComplete}
                 onFocus={onFocus}
                 onBlur={onBlur}

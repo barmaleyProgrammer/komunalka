@@ -154,6 +154,7 @@ const AddAddress = ({ close }) => {
                         placeholder={'Назва адреси'}
                         name={'name'}
                         required={true}
+                        maxLength={'20'}
                         value={flatName}
                         autoComplete="off"
                         onChange={event => setFlatName(event.target.value)}
