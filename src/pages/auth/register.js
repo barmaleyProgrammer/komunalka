@@ -262,7 +262,7 @@ const Register = ({ close, showLogin }) => {
                                 name={'phone'}
                                 required={true}
                                 value={form.phone}
-                                pattern="^d{12,14}"
+                                pattern="^(\d{12,14})"
                                 cssClass="email-field"
                                 autocomplete="on"
                                 onChange={handleInputChange}
