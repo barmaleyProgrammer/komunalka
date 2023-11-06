@@ -240,11 +240,11 @@ const MyData = () => {
                         <InputField
                             label={'Телефон'}
                             type={'phone'}
-                            placeholder={'введіть номер з 12 цифр'}
+                            placeholder={'+388888888888'}
                             name={'phone'}
                             cssClass="email-field"
                             required={true}
-                            pattern="(\d{12})"
+                            pattern="^\+\d{12,15}$"
                             value={form.phone}
                             autoComplete="off"
                             onChange={handleInputChange}
