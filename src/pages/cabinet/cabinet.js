@@ -90,7 +90,7 @@ const Cabinet = () => {
 
     const AddressBlock = ({ item }) => {
         return (
-            <div className="cursor-pointer p-4 relative border rounded-lg border-[#E7E7E7] w-80 h-48" onClick={() => navigate(`/counters/${item.objectId}`)}>
+            <div className="cursor-pointer p-4 relative border rounded-lg border-[#E7E7E7] m-w-[50%] h-48" onClick={() => navigate(`/counters/${item.objectId}`)}>
                 <div className="absolute top-1 right-1 z-10">
                     <DropDownMenu
                         // delete={(e) => deleteAddress(e, item.item.objectId)}
@@ -117,13 +117,13 @@ const Cabinet = () => {
                 </div>
                 <div className="rounded-lg shadow-myCustom py-8">
                     <h3 className="text-center text-xl">Мої адреси</h3>
-                    <div className="flex justify-center gap-x-10 p-5">
+                    <div className="flex justify-center flex-wrap gap-10 p-5">
                         {
                             state.addresses?.map((item, key) => {
                                 return <AddressBlock item={item} key={key}/>
                             })
                         }
-                        <div className="cursor-pointer flex justify-center items-center border rounded border-[#E7E7E7] w-80 h-48" onClick={(e) => openModalAddAddresses(e)}>
+                        <div className="cursor-pointer flex justify-center items-center border rounded border-[#E7E7E7] w-[50%] h-48" onClick={(e) => openModalAddAddresses(e)}>
                             <AiOutlinePlus />
                             <div className="pl-2">Додати адресу</div>
                         </div>
