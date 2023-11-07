@@ -20,8 +20,6 @@ const Button = ({
         case 'secondary':
             className = className.concat(['text-black_figma', 'bg-white_figma', 'border', 'border-yellow_figma']);
             break;
-        default:
-            className = [];
     }
     return (
         <button type={type} className={className.join(' ')} form={form} onClick={onClick} disabled={myDisabled}>

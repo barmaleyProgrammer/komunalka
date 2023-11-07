@@ -146,7 +146,7 @@ const Cabinet = () => {
                 {
                 modalActive && (
                     <Modal close={() => setModalActive(false)}>
-                        <div className="p-2">
+                        <div className="p-10">
                             <InputField
                                 // label={'Перейменувати адресу'}
                                 type={'text'}
@@ -176,10 +176,10 @@ const Cabinet = () => {
                             <p className="text-left px-8 font-medium">“Назва адреси” {currentAddress.name}?</p>
                         </div>
                         <div className="flex justify-center mb-6 gap-x-4">
-                            <div className="w-[154px] h-12 text-center py-2 font-medium">
+                            <div className="w-[154px] h-12 font-medium">
                                 <Button type="button" label={'Так'} cssType={''} onClick={(e) => deleteAddress(e, currentAddress.objectId)} />
                             </div>
-                            <div className="w-[154px] h-[48px]">
+                            <div className="w-[154px] h-12">
                                 <Button type="button" label={'Ні'} cssType={'primary'} onClick={() => setModalConfirmDelete(false)} />
                             </div>
                         </div>
