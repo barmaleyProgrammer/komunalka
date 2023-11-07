@@ -152,24 +152,20 @@ const Login = ({ close, showRegister, showResetPass }) => {
                             <hr className="ml-4 w-1/3 mt-3"/>
                         </div>
                         <div className="flex flex-row space-x-2">
-                            <div className="basis-1/2 border border-[#E8E8E8;] rounded">
-                                <div className="flex py-3 justify-center space-x-1">
+                            <div className="cursor-pointer basis-1/2 border border-[#E8E8E8;] rounded"
+                                 onClick={(event) => SocialNetworks(event, 'google')}
+                            >
+                                <div className="flex py-3 justify-center space-x-2">
                                     <img src={google} alt="" />
-                                    <NavLink
-                                        to="#"
-                                        onClick={(event) => SocialNetworks(event, 'google')}
-                                        className="text-sm whitespace-nowrap">
-                                            Ввійти з Google
-                                    </NavLink>
+                                    <p className="text-sm whitespace-nowrap">Ввійти з Google</p>
                                 </div>
                             </div>
-                            <div className="basis-1/2 border border-[#E8E8E8;] rounded">
-                                <div className="flex py-3 justify-center space-x-1">
+                            <div className="cursor-pointer basis-1/2 border border-[#E8E8E8;] rounded"
+                                onClick={(event) => SocialNetworks(event, 'facebook')}
+                                >
+                                <div className="flex py-3 justify-center space-x-2">
                                     <img src={facebook} alt="" />
-                                    <NavLink to="#"
-                                        onClick={(event) => SocialNetworks(event, 'facebook')}
-                                        className="text-sm whitespace-nowrap" >
-                                        Ввійти з Facebook</NavLink>
+                                    <p className="text-sm whitespace-nowrap">Ввійти з Facebook</p>
                                 </div>
                             </div>
                         </div>

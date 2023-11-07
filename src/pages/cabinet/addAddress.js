@@ -201,7 +201,7 @@ const AddAddress = ({ close }) => {
                     <AutoSuggest
                         classNames={AutoSuggestClassNames}
                         placeholder={'Вулиця'}
-                        searchInputPlaceholder={'Пошук'}
+                        searchInputPlaceholder={'Введіть перші літери вулиці та обов’язково виберіть її зі списку'}
                         noOptionsMessage={'Варіантів не знайдено'}
                         value={street}
                         options={streets}
