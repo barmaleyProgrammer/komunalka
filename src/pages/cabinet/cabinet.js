@@ -170,11 +170,17 @@ const Cabinet = () => {
             {
                 modalConfirmDelete && (
                     <Modal close={() => setModalConfirmDelete(false)}>
-                        <div className="flex flex-col justify-center p-10 items-center text-lg w-[464px]">
-                            <p className="mt-8">Ви впевнені, що бажаєте видалити {currentAddress.name}?</p>
+                        <div className="relative flex flex-col justify-center p-10 items-center text-lg w-[464px]">
+                            <p className="mt-4 text-lg">Видалення об’єкту</p>
+                            <p className="mt-8">Ви дійсно бажаєте видалити адресу “Назва адреси” {currentAddress.name}?</p>
                         </div>
-                        <div className="pt-2 w-44 mx-auto mb-8">
-                            <Button type="button" label={'Так, впевнений!'} cssType={'primary'} onClick={(e) => deleteAddress(e, currentAddress.objectId)} />
+                        <div className="flex justify-center mb-6 gap-x-4">
+                            <div className="w-[154px] h-12 text-center py-2">
+                                <Button type="button" label={'Так'} cssType={''} onClick={(e) => deleteAddress(e, currentAddress.objectId)} />
+                            </div>
+                            <div className="w-[154px] h-[48px]">
+                                <Button type="button" label={'Ні'} cssType={'primary'} onClick={() => setModalConfirmDelete(false)} />
+                            </div>
                         </div>
                     </Modal>
                 )
