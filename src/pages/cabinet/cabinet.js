@@ -90,7 +90,7 @@ const Cabinet = () => {
 
     const AddressBlock = ({ item }) => {
         return (
-            <div className="cursor-pointer p-4 relative border rounded-lg border-[#E7E7E7] w-[368px]" onClick={() => navigate(`/counters/${item.objectId}`)}>
+            <div className="cursor-pointer p-4 relative border rounded-lg border-[#E7E7E7] w-[368px] h-64" onClick={() => navigate(`/counters/${item.objectId}`)}>
                 <div className="absolute top-1 right-1 z-10">
                     <DropDownMenu
                         rename={(e) => openModal(e, item.objectId)}
@@ -108,7 +108,7 @@ const Cabinet = () => {
                     <p>Проживаючих x</p>
                     <p>Кількість лічильників x</p>
                 </div>
-                <div className="text-base font-medium w-40 h-10 mx-auto mt-4">
+                <div className="absolute bottom-6 left-[100px] text-base font-medium w-40 h-10 mt-4">
                     <Button type="submit" cssType="secondary" label={'Перейти'} />
                 </div>
             </div>
@@ -134,7 +134,7 @@ const Cabinet = () => {
                         {
                             (state.addresses.length < 4)
                             ?
-                            <div className="cursor-pointer flex justify-center items-center border rounded border-[#E7E7E7] w-[368px] h-48" onClick={(e) => openModalAddAddresses(e)}>
+                            <div className="cursor-pointer flex justify-center items-center border rounded border-[#E7E7E7] w-[368px]" onClick={(e) => openModalAddAddresses(e)}>
                                 <AiOutlinePlus />
                                 <div className="pl-2">Додати адресу</div>
                             </div>
