@@ -9,6 +9,8 @@ import komunalka_home from '../img/partners_home/komunalka_home.png';
 import gerc_home from '../img/partners_home/gerc_home.png';
 import kiyvOblEnergo_home from '../img/partners_home/kiyvOblEnergo_home.png';
 import kiyvOblGaz_home from '../img/partners_home/kiyvOblGaz_home.png';
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from 'react-responsive-carousel';
 
 import Button from "../components/button";
 import { NavLink } from "react-router-dom";
@@ -19,7 +21,6 @@ const list_imgs = [
     { image: '/news/News1.png' },
     { image: '/news/News2.png' },
     { image: '/news/News3.png' },
-
 ];
 
 const Home = (NewsList) => {
@@ -75,30 +76,43 @@ const Home = (NewsList) => {
     };
     return (
         <>
-            <section className="bg-[#F0F9FF] h-[406px]">
-                <div>
-                    <div className="logo_minion">
-                        <img className="mx-auto" src={logo_minion} alt=""/>
+            <Carousel className="crsl">
+                <section className="bg-[#F0F9FF] h-[406px]">
+                    <div>
+                        <div className="logo_minion">
+                            <img className="" src={logo_minion} alt=""/>
+                        </div>
+                        <div className="logo_counter">
+                            <img className="" src={logo_counter} alt=""/>
+                        </div>
                     </div>
-                    <div className="logo_counter">
-                        <img className="mx-auto" src={logo_counter} alt=""/>
+                    <h1 className="text-center text-3xl select-none">Передати покази лічильника – легко та швидко!</h1>
+                </section>
+                <section className="bg-[#F0F9FF] h-[406px]">
+                    <div>
+                        <div className="logo_minion">
+                            <img className="mx-auto" src={logo_minion} alt=""/>
+                        </div>
+                        <div className="logo_counter">
+                            <img className="mx-auto" src={logo_counter} alt=""/>
+                        </div>
                     </div>
-                </div>
-            <h1 className="text-center text-3xl">Передати покази лічильника – легко та швидко!</h1>
-            </section>
+                    <h1 className="text-center text-3xl select-none">Передати покази лічильника – легко та швидко! 2</h1>
+                </section>
+            </Carousel>
             <section>
-                <div className="flex justify-center space-x-2 mt-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
-                        <circle cx="6" cy="6" r="6" fill="#CEDDE9"/>
-                    </svg>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
-                        <circle cx="6" cy="6" r="6" fill="#E7E7E7"/>
-                    </svg>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
-                        <circle cx="6" cy="6" r="6" fill="#E7E7E7"/>
-                    </svg>
-                </div>
-                <div className="grid grid-cols-3 gap-x-8 mt-28 mb-28">
+                {/*<div className="flex justify-center space-x-2 mt-2">*/}
+                {/*    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">*/}
+                {/*        <circle cx="6" cy="6" r="6" fill="#CEDDE9"/>*/}
+                {/*    </svg>*/}
+                {/*    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">*/}
+                {/*        <circle cx="6" cy="6" r="6" fill="#E7E7E7"/>*/}
+                {/*    </svg>*/}
+                {/*    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">*/}
+                {/*        <circle cx="6" cy="6" r="6" fill="#E7E7E7"/>*/}
+                {/*    </svg>*/}
+                {/*</div>*/}
+                <div className="grid grid-cols-3 gap-x-8 mt-24 mb-28">
                     <div className="rounded-lg shadow-myCustom w-[361px] h-52">
                         <p className="py-6 text-xl text-center">Актуальні показання</p>
                         <p className="text-sm font-light px-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit.

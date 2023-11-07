@@ -43,6 +43,12 @@ const Faq = () => {
         },
         {
             id: 4,
+            title: "Чому саме Лічильники?",
+            section: 'about',
+            desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+        },
+        {
+            id: 5,
             title: "Чи передадуться мої показники лічильників до обранної компанії?",
             section: 'cabinet',
             desc: "1Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
@@ -82,9 +88,9 @@ const Faq = () => {
                     />;
                 })}
             </div>
-            <h4 className="text-center text-lg">Про особистий кабінет</h4>
+            <h4 className="text-center text-lg mt-6">Про особистий кабінет</h4>
             <div className="">
-                {AccordionData.filter((item) => item.section === 'cabinet').map((data, index) => {
+                {AccordionData.filter((item) => item.section === 'about').map((data, index) => {
                     return <AccordionItem
                         key={data.id}
                         open={data.id === open}
@@ -94,7 +100,7 @@ const Faq = () => {
                     />;
                 })}
             </div>
-            <h4 className="text-center text-lg">Рахунки-повідомлення та квитанції</h4>
+            <h4 className="text-center text-lg mt-6">Рахунки-повідомлення та квитанції</h4>
             <div className="">
                 {AccordionData.filter((item) => item.section === 'about').map((data, index) => {
                     return <AccordionItem

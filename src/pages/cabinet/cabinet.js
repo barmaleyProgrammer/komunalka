@@ -134,7 +134,7 @@ const Cabinet = () => {
                         {
                             (state.addresses.length < 4)
                             ?
-                            <div className="cursor-pointer flex justify-center items-center border rounded border-[#E7E7E7] w-[368px]" onClick={(e) => openModalAddAddresses(e)}>
+                            <div className="cursor-pointer flex justify-center items-center border rounded border-[#E7E7E7] w-[368px] h-64" onClick={(e) => openModalAddAddresses(e)}>
                                 <AiOutlinePlus />
                                 <div className="pl-2">Додати адресу</div>
                             </div>
