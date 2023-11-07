@@ -18,7 +18,7 @@ const Cabinet = () => {
     const [formError, setFormError] = useState('');
     const [modalActive, setModalActive] = useState(false);
     const [modalAddAddressActive, setModalAddAddressActive] = useState(false);
-    const [modalConfirmDelete, setModalConfirmDelete] = useState(false);
+    const [modalConfirmDelete, setModalConfirmDelete] = useState(true);
     const [currentAddress, setCurrentAddress] = useState('');
     const breadCrumbs = [
         {
@@ -90,7 +90,7 @@ const Cabinet = () => {
 
     const AddressBlock = ({ item }) => {
         return (
-            <div className="cursor-pointer p-4 relative border rounded-lg border-[#E7E7E7] w-[368px] h-48" onClick={() => navigate(`/counters/${item.objectId}`)}>
+            <div className="cursor-pointer p-4 relative border rounded-lg border-[#E7E7E7] w-[368px]" onClick={() => navigate(`/counters/${item.objectId}`)}>
                 <div className="absolute top-1 right-1 z-10">
                     <DropDownMenu
                         rename={(e) => openModal(e, item.objectId)}
@@ -99,9 +99,18 @@ const Cabinet = () => {
                 </div>
                 <div className="flex">
                     <img src={icon_house} className="h-8" alt="kamunalka logo"/>
-                    <p className="pl-2 pt-1">{ item.name }</p>
+                    <p className="font-medium pl-2 pt-1">{ item.name }</p>
                 </div>
-                <div className="pt-2 text-sm">{ item.address }</div>
+                <div className="pt-2 text-sm mb-4">{ item.address }</div>
+                <div className="text-xs space-y-1">
+                    <p>Загальна площа xx м2</p>
+                    <p>Опалювальна площа xx м2</p>
+                    <p>Проживаючих x</p>
+                    <p>Кількість лічильників x</p>
+                </div>
+                <div className="text-base font-medium w-40 h-10 mx-auto mt-4">
+                    <Button type="submit" cssType="secondary" label={'Перейти'} />
+                </div>
             </div>
         );
     };
