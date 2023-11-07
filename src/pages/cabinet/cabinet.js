@@ -18,7 +18,7 @@ const Cabinet = () => {
     const [formError, setFormError] = useState('');
     const [modalActive, setModalActive] = useState(false);
     const [modalAddAddressActive, setModalAddAddressActive] = useState(false);
-    const [modalConfirmDelete, setModalConfirmDelete] = useState(true);
+    const [modalConfirmDelete, setModalConfirmDelete] = useState(false);
     const [currentAddress, setCurrentAddress] = useState('');
     const breadCrumbs = [
         {
