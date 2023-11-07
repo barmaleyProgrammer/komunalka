@@ -22,6 +22,7 @@
     /*padding: 20px 0;*/
 }
 .app > footer {
+    margin-top: 100px;
     grid-area: footer;
     background: #F1F5F9;
     display: flex;

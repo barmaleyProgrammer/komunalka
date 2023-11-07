@@ -9,7 +9,6 @@ import Loader from "../../components/Loader/loader";
 import CounterForms from "../../components/counterForms";
 import { UniqueServiceTypes } from "./utils";
 import Modal from "../../components/modal/modal";
-import ResetPassword from "../auth/resetPassword";
 import Button from "../../components/button";
 
 const Counters = () => {

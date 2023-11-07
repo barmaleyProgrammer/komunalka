@@ -181,6 +181,7 @@ const AddAddress = ({ close }) => {
                         options={districts}
                         isSearchable
                         onChange={(item) => setDistrict(item)}
+                        isDisabled={!districts.length}
                     />
                 </div>
                 <div className="py-2">
@@ -193,6 +194,7 @@ const AddAddress = ({ close }) => {
                         options={towns}
                         isSearchable
                         onChange={(item) => setTown(item)}
+                        isDisabled={!towns.length}
                     />
                 </div>
                 <div className="py-2">
@@ -205,6 +207,7 @@ const AddAddress = ({ close }) => {
                         options={streets}
                         isSearchable
                         onChange={(item) => setStreet(item)}
+                        isDisabled={!streets.length}
                     />
                 </div>
                 <div className="py-2">
@@ -217,6 +220,7 @@ const AddAddress = ({ close }) => {
                         options={houses}
                         isSearchable
                         onChange={(item) => setHouse(item)}
+                        isDisabled={!houses.length}
                     />
                 </div>
                 <div className="py-2">
@@ -229,6 +233,7 @@ const AddAddress = ({ close }) => {
                         options={flats}
                         isSearchable
                         onChange={(item) => setFlat(item)}
+                        isDisabled={!flats.length}
                     />
                 </div>
                 <div className="py-2 text-center">

@@ -93,7 +93,6 @@ const Cabinet = () => {
             <div className="cursor-pointer p-4 relative border rounded-lg border-[#E7E7E7] w-[368px] h-48" onClick={() => navigate(`/counters/${item.objectId}`)}>
                 <div className="absolute top-1 right-1 z-10">
                     <DropDownMenu
-                        // delete={(e) => deleteAddress(e, item.item.objectId)}
                         rename={(e) => openModal(e, item.objectId)}
                         delete={(e) => showConfirmDelete(e, item.objectId)}
                     />

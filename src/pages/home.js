@@ -222,7 +222,7 @@ const Home = (NewsList) => {
                 </div>
             </section>
             <section>
-                <div className="relative border border-[#E7E7E7] mt-32 mb-32 h-[141px]">
+                <div className="relative border border-[#E7E7E7] mt-32 h-[141px]">
                     <div className="flex w-[893px] gap-x-12 mt-8 h-20 justify-between mx-auto">
                         <img src={ kiyvOblEnergo_home } alt=""/>
                         <img src={ kiyvOblGaz_home } alt=""/>

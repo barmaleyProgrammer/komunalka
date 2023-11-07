@@ -29,7 +29,8 @@
     "react-scripts": "5.0.1",
     "react-tailwindcss-select": "^1.8.5",
     "tailwindcss": "^3.3.3",
-    "tw-elements-react": "^1.0.0-alpha1"
+    "tw-elements-react": "^1.0.0-alpha1",
+    "uuid": "^9.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
