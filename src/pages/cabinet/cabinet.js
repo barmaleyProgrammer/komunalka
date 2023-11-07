@@ -1,6 +1,6 @@
 import { useState, useContext } from 'react';
 import { Context } from "../../store";
-import { useNavigate } from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 import { AiOutlinePlus } from "react-icons/ai";
 import Breadcrumbs from "../../components/breadcrumbs";
 import Tabs from "../../components/tabs";
@@ -143,6 +143,44 @@ const Cabinet = () => {
 
                     </div>
                 </div>
+            <div className="rounded-lg shadow-myCustom py-8 mt-28">
+                    <h3 className="text-center text-xl">Нейронна мережа</h3>
+                <div className="w-[945px] mx-auto text-sm font-light">
+                    <div className="w-[760px] bg-[#F7F9FE] mx-auto border-dashed border rounded border-[#797878] mt-8 mb-5">
+                        <p className="text-center mt-5">Перетягніть фото сюди</p>
+                        <p className="text-center mt-5">або</p>
+                        <div className="w-44 mx-auto mt-5 mb-8 px-7">
+                            <NavLink to="#" className="py-3 px-5 text-sm rounded text-white_figma bg-yellow_figma" >
+                                Завантажте
+                            </NavLink>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="rounded-lg bg-[#F1F5F9] font-light text-sm py-8 px-8 mt-20 space-y-4">
+                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                   labore.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+                   ea commodo con. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+                   eu fugiat nulla pariatu
+                 </p>
+                <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id es
+                    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, t
+                    o Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit,
+                </p>
+                <p>Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut
+                    al Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed qu
+                </p>
+                <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id es
+                </p>
+                <p>Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatu
+                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatu
+                    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium
+                </p>
+                <p>Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatu
+                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatu
+                    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium
+                </p>
+            </div>
                 {
                 modalActive && (
                     <Modal close={() => setModalActive(false)}>
