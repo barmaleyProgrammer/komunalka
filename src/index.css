@@ -116,3 +116,12 @@ a.active2 {
     /*text-overflow: ellipsis;*/
     /*white-space: nowrap;*/
 }
+.carousel.carousel-slider {
+    overflow: unset !important;
+}
+.control-dots {
+    bottom: -40px !important;
+}
+.carousel .control-dots .dot {
+    background-color: #CEDDE9 !important;
+}

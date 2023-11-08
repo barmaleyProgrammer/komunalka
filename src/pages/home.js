@@ -76,10 +76,10 @@ const Home = (NewsList) => {
     };
     return (
         <>
-            <Carousel className="crsl">
+            <Carousel >
                 {/*https://www.youtube.com/watch?v=VFHWuy2olto*/}
                 {/*https://www.youtube.com/watch?v=C5NjxM1dyxY*/}
-                <section className="bg-[#F0F9FF] h-[406px]">
+                <section className="bg-[#F0F9FF] h-[406px] relative">
                     <div>
                         <div className="logo_minion">
                             <img className="" src={logo_minion} alt=""/>
