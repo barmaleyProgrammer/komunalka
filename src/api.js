@@ -81,7 +81,11 @@ const validationNewEmail = (form) => {
 const renameAddress = (objectId, name) => {
     return connect.put(`/v2/account/address/${objectId}`, { name })
         .then((res) => res)
-        .catch((error) => console.error(error));
+        .catch((error) => {
+            console.error(error);
+            // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/message
+            throw new Error(`${error.response.status}: ${error.response.data.error}`);
+        });
 }
 const signOut = () => {
     localStorage.clear();
@@ -209,7 +213,11 @@ const getAddress = () => {
             localStorage.setItem('addresses', JSON.stringify(res.data));
             return res.data;
         })
-        .catch((error) => console.error(error));
+        .catch((error) => {
+            // debugger;
+            console.error(error);
+            throw new Error(`${error.response.status}: ${error.response.data.error}`);
+        });
 }
 
 const getObject = () => {

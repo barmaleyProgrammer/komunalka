@@ -7,10 +7,11 @@ import Tabs from "../../components/tabs";
 import icon_house from "../../img/icon_house.svg";
 import api from "../../api";
 import DropDownMenu from "../../components/dropDownMenu";
-import Modal from '../../components/modal/modal'
+import Modal from '../../components/modal/modal';
 import InputField from "../../components/inputField";
 import Button from "../../components/button";
 import AddAddress from './addAddress';
+import ErrorModal from '../../components/errorModal';
 
 const Cabinet = () => {
     const [state, dispatch] = useContext(Context);
@@ -38,14 +39,17 @@ const Cabinet = () => {
     const deleteAddress = async (e, objectId) => {
         e.stopPropagation();
         try {
-            const result = await api.deleteObject(objectId);
+            setModalConfirmDelete(false);
+            await api.deleteObject(objectId);
             const newObjects = state.addresses.filter((item) => item.objectId !== objectId);
             dispatch({ type: 'setAddresses', payload: newObjects });
+        }
+        catch (e) {
+            console.error(e.message);
+            setFormError(e.message);
+        }
+        try {
             api.getAddress();
-            if (result.status === 200) {
-                // setModalActive(true);
-            }
-            setModalConfirmDelete(false);
         }
         catch (e) {
             console.error(e.message);
@@ -80,13 +84,20 @@ const Cabinet = () => {
 
     const updateAddress = async () => {
         const {objectId, name} = currentAddress;
-        await api.renameAddress(objectId, name);
+        try{
+            await api.renameAddress(objectId, name);
+        } catch (error) {
+            setFormError(error.message);
+        }
+
         setCurrentAddress('');
         setModalActive(false);
-        await api.getAddress().then((data) => dispatch({ type: 'setAddresses', payload: data }));
+        try{
+            await api.getAddress().then((data) => dispatch({ type: 'setAddresses', payload: data }));
+        } catch (error) {
+            setFormError(error.message);
+        }
     }
-
-
 
     const AddressBlock = ({ item }) => {
         return (
@@ -143,20 +154,20 @@ const Cabinet = () => {
 
                     </div>
                 </div>
-            <div className="rounded-lg shadow-myCustom py-8 mt-28">
-                    <h3 className="text-center text-xl">Нейронна мережа</h3>
-                <div className="w-[945px] mx-auto text-sm font-light">
-                    <div className="w-[760px] bg-[#F7F9FE] mx-auto border-dashed border rounded border-[#797878] mt-8 mb-5">
-                        <p className="text-center mt-5">Перетягніть фото сюди</p>
-                        <p className="text-center mt-5">або</p>
-                        <div className="w-44 mx-auto mt-5 mb-8 px-7">
-                            <NavLink to="#" className="py-3 px-5 text-sm rounded text-white_figma bg-yellow_figma" >
-                                Завантажте
-                            </NavLink>
+                <div className="rounded-lg shadow-myCustom py-8 mt-28">
+                        <h3 className="text-center text-xl">Нейронна мережа</h3>
+                    <div className="w-[945px] mx-auto text-sm font-light">
+                        <div className="w-[760px] bg-[#F7F9FE] mx-auto border-dashed border rounded border-[#797878] mt-8 mb-5">
+                            <p className="text-center mt-5">Перетягніть фото сюди</p>
+                            <p className="text-center mt-5">або</p>
+                            <div className="w-44 mx-auto mt-5 mb-8 px-7">
+                                <NavLink to="#" className="py-3 px-5 text-sm rounded text-white_figma bg-yellow_figma" >
+                                    Завантажте
+                                </NavLink>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
             <div className="rounded-lg bg-[#F1F5F9] font-light text-sm py-8 px-8 mt-20 space-y-4">
                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
                    labore.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
@@ -232,6 +243,7 @@ const Cabinet = () => {
                     </Modal>
                 )
             }
+            { formError && <ErrorModal close={() => setFormError('')} error={formError} /> }
 
         </>
     );
