@@ -47,8 +47,14 @@ const AddAddress = ({ close }) => {
     useEffect( () => {
         const fetchData = async () => {
             await api.getRegions().then((data) => setRegions(data));
+            setRegion({
+                disabled: false,
+                label: "Київська область",
+                value: 11
+            });
         };
         fetchData();
+
     }, []);
 
     useEffect( () => {
@@ -169,6 +175,7 @@ const AddAddress = ({ close }) => {
                         value={region}
                         options={regions}
                         onChange={(item) => setRegion(item)}
+                        isDisabled={true}
                     />
                 </div>
                 <div className="py-2">
