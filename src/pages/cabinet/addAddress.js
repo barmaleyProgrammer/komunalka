@@ -160,7 +160,7 @@ const AddAddress = ({ close }) => {
                         placeholder={'Назва адреси'}
                         name={'name'}
                         required={true}
-                        maxLength={'10'}
+                        // maxLength={'10'}
                         value={flatName}
                         autoComplete="off"
                         onChange={event => setFlatName(event.target.value)}
@@ -208,9 +208,10 @@ const AddAddress = ({ close }) => {
                     <AutoSuggest
                         classNames={AutoSuggestClassNames}
                         placeholder={'Вулиця'}
-                        searchInputPlaceholder={'Введіть перші літери вулиці та обов’язково виберіть її зі списку'}
+                        searchInputPlaceholder={'Пошук'}
                         noOptionsMessage={'Варіантів не знайдено'}
                         value={street}
+                        label={'rrrr'}
                         options={streets}
                         isSearchable
                         onChange={(item) => setStreet(item)}
