@@ -1,10 +1,19 @@
 import axios from "axios";
 
+// const backEndErrors = {
+//     500: 'сервіс тимчасово недоступний',
+//
+//     503: 'таймаут'
+// };
+
+
+
 const connect = axios.create({
     baseURL: 'https://api-test.komunalka.ua/api',
     withCredentials: false,
     responseType: 'json',
     maxRedirects: 0,
+    // timeout: 1000,
     auth: {
         username: 'admin',
         password: 'communal'

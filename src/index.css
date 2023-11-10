@@ -106,8 +106,13 @@ fieldset {
     left: 97%;
     bottom: 37%;
 }
-a.active2 {
-    border: 1px solid red;
+img.iconActive {
+    border-radius: 6px;
+    border: 1px solid #FDC500;
+}
+img.iconPassive {
+    border-radius: 6px;
+    border: 1px solid #E7E7E7;
 }
 .AutoSuggestClassNames div p {
     /*display: block;*/

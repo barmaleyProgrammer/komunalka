@@ -26,7 +26,7 @@ const ServiceTypes = ({types}) => {
                 <NavLink
                     to="#"
                     key={key}
-                    className={`flex flex-col items-center w-[72px] ${state.serviceType == serviceType.id ? 'active2':''}`}
+                    className="flex flex-col items-center w-[72px]"
                     onClick={() => {
                         if (state.serviceType === serviceType.id) {
                             // setServiceType('');
@@ -36,7 +36,7 @@ const ServiceTypes = ({types}) => {
                             dispatch({ type: 'serviceType', payload: serviceType.id });
                         }
                     }}>
-                    <img src={serviceIcons[serviceType.id]} className="h-[72px] w-[72px]" alt={serviceType.name} />
+                    <img src={serviceIcons[serviceType.id]} className={`h-[72px] w-[72px] ${state.serviceType == serviceType.id ? 'iconActive':'iconPassive'}`} alt={serviceType.name} />
                     <p className="pt-4 text-xs text-center">{serviceType.name}</p>
                 </NavLink>
             );

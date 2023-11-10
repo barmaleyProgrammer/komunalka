@@ -6,6 +6,7 @@ const InputField = ({
         placeholder = '',
         required = false,
         onChange,
+        onPaste,
         readOnly = false,
         cssClass = '',
         maxLength = '',
@@ -26,6 +27,7 @@ const InputField = ({
                 placeholder={placeholder}
                 required={required}
                 onChange={onChange}
+                onPaste={onPaste}
                 readOnly={readOnly}
                 maxLength={maxLength}
                 autoComplete={autocomplete}
