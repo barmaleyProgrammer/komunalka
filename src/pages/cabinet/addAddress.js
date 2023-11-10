@@ -164,9 +164,10 @@ const AddAddress = ({ close }) => {
                         value={flatName}
                         autoComplete="off"
                         onChange={event => setFlatName(event.target.value)}
+                        // onPaste={(e)=> { e.preventDefault(); return false; }}
                     />
                 </div>
-                <div className="py-2">
+                <div className="mt-2">
                     <AutoSuggest
                         classNames={AutoSuggestClassNames}
                         placeholder={'Область'}
@@ -178,7 +179,8 @@ const AddAddress = ({ close }) => {
                         isDisabled={true}
                     />
                 </div>
-                <div className="py-2">
+                <div className="">
+                    <label className="text-xs text-black_figma font-light text-center px-4">Введіть перші літери району</label>
                     <AutoSuggest
                         classNames={AutoSuggestClassNames}
                         placeholder={'Район'}
@@ -191,7 +193,8 @@ const AddAddress = ({ close }) => {
                         isDisabled={!districts.length}
                     />
                 </div>
-                <div className="py-2">
+                <div className="py-0">
+                    <label className="text-xs text-black_figma font-light text-center px-4">Введіть перші літери міста</label>
                     <AutoSuggest
                         classNames={AutoSuggestClassNames}
                         placeholder={'Місто'}
@@ -204,18 +207,25 @@ const AddAddress = ({ close }) => {
                         isDisabled={!towns.length}
                     />
                 </div>
-                <div className="py-2">
+                <div className="mb-2">
+                    <label className="text-xs text-black_figma font-light text-center px-4">Введіть перші літери вулиці та виберіть її зі списку</label>
                     <AutoSuggest
                         classNames={AutoSuggestClassNames}
                         placeholder={'Вулиця'}
                         searchInputPlaceholder={'Пошук'}
                         noOptionsMessage={'Варіантів не знайдено'}
                         value={street}
-                        label={'rrrr'}
                         options={streets}
                         isSearchable
                         onChange={(item) => setStreet(item)}
                         isDisabled={!streets.length}
+                        onSearchInputChange={(e) => {
+                            if (e.nativeEvent.inputType === 'insertFromPaste') {
+                                e.preventDefault();
+                                e.target.value = '';
+                                return;
+                            }
+                        }}
                     />
                 </div>
                 <div className="py-2">
