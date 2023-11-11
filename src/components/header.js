@@ -8,9 +8,11 @@ import Modal from "./modal/modal";
 import Register from "../pages/auth/register";
 import Login from "../pages/auth/login";
 import ResetPassword from "../pages/auth/resetPassword";
+// import { useLocation } from "react-router-dom";
 
 const Header = () => {
     const [state] = useContext(Context);
+    // const location = useLocation();
     const [modalRegistration, setModalRegistration] = useState(false);
     const [modalAuthorization, setModalAuthorization] = useState(false);
     const [modalResetPass, setModalResetPass] = useState(false);

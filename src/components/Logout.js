@@ -22,6 +22,9 @@ const Logout = () => {
         api.signOut();
         dispatch({ type: 'logOut' });
         navigate('/');
+        // navigate('/', {
+        //     showLogin: true
+        // });
     };
 
     const toggle = (e) => {

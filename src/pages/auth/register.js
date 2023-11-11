@@ -9,17 +9,28 @@ import api from "../../api";
 import eye from "../../img/eye.svg";
 import icon_error from './../../img/icon_error.svg'
 import CheckPassword from "../../components/checkPassword/checkPassword";
+import PhoneField from "../../components/phoneField";
 
 const Register = ({ close, showLogin }) => {
+    // const [form, setForm] = useState({
+    //     email: (process.env.NODE_ENV === 'development') ? 'grebenyukvd@gmail.com' : '',
+    //     password: (process.env.NODE_ENV === 'development') ? 'Test_Drive5' : '',
+    //     firstName: (process.env.NODE_ENV === 'development') ? 'first_Імʼя' : '',
+    //     lastName: (process.env.NODE_ENV === 'development') ? 'last_Прізвище' : '',
+    //     secondName: (process.env.NODE_ENV === 'development') ? 'second_По батькові' : '',
+    //     phone: (process.env.NODE_ENV === 'development') ? '876454876' : '',
+    //     source: (process.env.NODE_ENV === 'development') ? 'localhost_3000' : '2',
+    //     // source: `${window.location.protocol}//${window.location.host}/auth/validate`,
+    //     rememberMe: false
+    // });
     const [form, setForm] = useState({
-        email: (process.env.NODE_ENV === 'development') ? 'grebenyukvd@gmail.com' : '',
-        password: (process.env.NODE_ENV === 'development') ? 'Test_Drive5' : '',
-        firstName: (process.env.NODE_ENV === 'development') ? 'first_Імʼя' : '',
-        lastName: (process.env.NODE_ENV === 'development') ? 'last_Прізвище' : '',
-        secondName: (process.env.NODE_ENV === 'development') ? 'second_По батькові' : '',
-        phone: (process.env.NODE_ENV === 'development') ? '876454876' : '',
-        source: (process.env.NODE_ENV === 'development') ? 'localhost_3000' : '2',
-        // source: `${window.location.protocol}//${window.location.host}/auth/validate`,
+        email: '',
+        password: '',
+        firstName: '',
+        lastName: '',
+        secondName: '',
+        phone: '',
+        source: '2',
         rememberMe: false
     });
     const [formError, setFormError] = useState('');
@@ -255,18 +266,13 @@ const Register = ({ close, showLogin }) => {
                                 autocomplete="on"
                                 onChange={handleInputChange}
                             />
-                            <InputField
+                            <PhoneField
                                 label={'Телефон(не менше 12цифр)'}
-                                type={'phone'}
                                 placeholder={'+388888888888'}
                                 name={'phone'}
                                 required={true}
-                                value={form.phone}
-                                pattern="^\+\d{12,15}$"
-                                maxLength={'16'}
-                                cssClass="email-field"
-                                autocomplete="on"
                                 onChange={handleInputChange}
+                                value={form.phone}
                             />
                             <div className={'relative'}>
                                 <InputField
