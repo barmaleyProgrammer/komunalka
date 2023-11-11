@@ -12,6 +12,7 @@ import Modal from "../../components/modal/modal";
 import './myData.css';
 import { useNavigate } from "react-router-dom";
 import CheckPassword from "../../components/checkPassword/checkPassword";
+import PhoneField from "../../components/phoneField";
 
 const breadCrumbs = [
     {
@@ -237,17 +238,28 @@ const MyData = () => {
                             autoComplete="off"
                             onChange={handleInputChange}
                         />
-                        <InputField
-                            label={'Телефон'}
-                            type={'phone'}
-                            placeholder={'+388888888888'}
+                        {/*<InputField*/}
+                        {/*    label={'Телефон'}*/}
+                        {/*    type={'phone'}*/}
+                        {/*    placeholder={'+388888888888'}*/}
+                        {/*    name={'phone'}*/}
+                        {/*    cssClass="email-field"*/}
+                        {/*    required={true}*/}
+                        {/*    pattern="^\+\d{12,15}$"*/}
+                        {/*    value={form.phone}*/}
+                        {/*    autoComplete="off"*/}
+                        {/*    onChange={handleInputChange}*/}
+                        {/*/>*/}
+                        <PhoneField
+                            label={'Телефон(не менше 12цифр)'}
+                            placeholder="+388888888888"
+                            maskPlaceholder={null}
                             name={'phone'}
                             cssClass="email-field"
-                            required={true}
                             pattern="^\+\d{12,15}$"
-                            value={form.phone}
-                            autoComplete="off"
+                            required={true}
                             onChange={handleInputChange}
+                            value={form.phone}
                         />
                         <InputField
                             label={'По батькові'}
