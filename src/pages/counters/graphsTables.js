@@ -120,6 +120,8 @@ const GraphsTables = () => {
                 <thead>
                 <tr>
                     <td className="border-[#E7E7E7] text-sm border-l-0 border-b border-r p-2">Період</td>
+                    <td className="border-[#E7E7E7] text-sm border-l-0 border-b border-r p-2">oldValue</td>
+                    <td className="border-[#E7E7E7] text-sm border-l-0 border-b border-r p-2">newValue</td>
                     <td className="border-[#E7E7E7] font-normal border-b text-sm p-2">{`${moment(state.startDate).format('DD.MM.YYYY')} - ${moment(state.endDate).format('DD.MM.YYYY')}`}</td>
                 </tr>
                 </thead>
@@ -129,6 +131,8 @@ const GraphsTables = () => {
                         return (
                             <tr key={index}>
                                 <td className="border-[#E7E7E7] font-normal border-r p-2">{moment(item.newTransmissionTime).format('DD.MM.YYYY')}</td>
+                                <td className="border-[#E7E7E7] font-normal border-r p-2">{(item.oldValue)}</td>
+                                <td className="border-[#E7E7E7] font-normal border-r p-2">{(item.newValue)}</td>
                                 <td className="border-[#E7E7E7] font-normal text-sm p-2">{(Number(item.newValue) - Number(item.oldValue)).toFixed(2) }</td>
                             </tr>
                         );
