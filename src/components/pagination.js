@@ -1,5 +1,6 @@
 import arrow_right from "../img/arrow_right.svg";
 import arrow_left from "../img/arrow_left.svg";
+// https://www.youtube.com/watch?v=s59kRbD4Sw8&t=934s
 
 const Pagination = ({ newsPerPage, totalNews, paginate, currentPage }) => {
     const newsNumber = []
@@ -27,8 +28,8 @@ const Pagination = ({ newsPerPage, totalNews, paginate, currentPage }) => {
                 {
                     newsNumber.map(number =>
                         (
-                            <li className="px-4" key={number}>
-                                <a style={(number === currentPage) ? {color: 'blue'} : {}} href="#" onClick={() => paginate(number)}>
+                            <li className="px-4 text-sm font-medium" key={number}>
+                                <a style={(number === currentPage) ? {color: '#2A3744'} : {color: '#ABABAB'}} href="#" onClick={() => paginate(number)}>
                                     {
                                         number
                                     }
