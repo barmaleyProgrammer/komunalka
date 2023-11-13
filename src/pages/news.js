@@ -38,7 +38,7 @@ const breadCrumbs = [
 const News = () => {
     const { id } = useParams();
     const [currentPage, setCurrentPage] = useState(1);
-    const [newsPerPage] = useState(5);
+    const [newsPerPage] = useState(6);
 
     const lastNewsIndex = currentPage * newsPerPage;
     const firstNewsIndex = lastNewsIndex - newsPerPage;
