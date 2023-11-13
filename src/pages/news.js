@@ -5,8 +5,6 @@ import rectangle from './../img/rectangle.png';
 import rectangle_ from './../img/Rectangle_.png';
 import {useState} from "react";
 import Pagination from "../components/pagination";
-import arrow_right from "../img/arrow_right.svg";
-import arrow_left from "../img/arrow_left.svg";
 
 const list_imgs = [
     { image: '/news/News1.png' },
@@ -40,15 +38,13 @@ const breadCrumbs = [
 const News = () => {
     const { id } = useParams();
     const [currentPage, setCurrentPage] = useState(1);
-    const [newsPerPage] = useState(3);
+    const [newsPerPage] = useState(5);
 
     const lastNewsIndex = currentPage * newsPerPage;
     const firstNewsIndex = lastNewsIndex - newsPerPage;
     const newsOnPage = list_imgs.slice(firstNewsIndex, lastNewsIndex);
-    console.log(newsOnPage);
+    // console.log(newsOnPage);
     const paginate = newsNumber => setCurrentPage(newsNumber)
-    const nextPage = () => setCurrentPage( prev => prev + 1)
-    const prevPage = () => setCurrentPage( prev => prev - 1)
 
     const NewsList = () => {
         return (
@@ -69,7 +65,6 @@ const News = () => {
     };
 
     const CurrentNews = () => {
-
         return (
             <>
                 <h1 className="mt-5 text-2xl">Інструкції зі зняття показників для новачків</h1>
@@ -145,12 +140,8 @@ const News = () => {
             { id ? <CurrentNews />
                 :
                 <div>
-                <NewsList />
-                    <div className="relative">
-                        <Pagination newsPerPage={newsPerPage} totalNews={list_imgs.length} paginate={paginate}/>
-                        <img className="arrow_next_news" src={arrow_left} alt="" onClick={nextPage}/>
-                        <img className="arrow_prev_news" src={arrow_right} alt="" onClick={prevPage}/>
-                    </div>
+                    <NewsList />
+                    <Pagination newsPerPage={newsPerPage} totalNews={list_imgs.length} paginate={paginate} currentPage={currentPage} />
                 </div>
             }
         </div>
