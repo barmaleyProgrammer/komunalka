@@ -3,6 +3,10 @@ import { NavLink } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import rectangle from './../img/rectangle.png';
 import rectangle_ from './../img/Rectangle_.png';
+import {useState} from "react";
+import Pagination from "../components/pagination";
+import arrow_right from "../img/arrow_right.svg";
+import arrow_left from "../img/arrow_left.svg";
 
 const list_imgs = [
     { image: '/news/News1.png' },
@@ -35,12 +39,22 @@ const breadCrumbs = [
 
 const News = () => {
     const { id } = useParams();
+    const [currentPage, setCurrentPage] = useState(1);
+    const [newsPerPage] = useState(3);
+
+    const lastNewsIndex = currentPage * newsPerPage;
+    const firstNewsIndex = lastNewsIndex - newsPerPage;
+    const newsOnPage = list_imgs.slice(firstNewsIndex, lastNewsIndex);
+    console.log(newsOnPage);
+    const paginate = newsNumber => setCurrentPage(newsNumber)
+    const nextPage = () => setCurrentPage( prev => prev + 1)
+    const prevPage = () => setCurrentPage( prev => prev - 1)
 
     const NewsList = () => {
         return (
-            <div className="grid grid-cols-3">
+            <div className="grid grid-cols-3 mb-8">
                 {
-                    list_imgs.map((item, key) => {
+                    newsOnPage.map((item, key) => {
                         return (
                             <div key={key}>
                                 <NavLink to={`/news/${key}`}>
@@ -128,7 +142,17 @@ const News = () => {
     return (
         <div>
             <Breadcrumbs items={ breadCrumbs } />
-            { id ? <CurrentNews /> : <NewsList /> }
+            { id ? <CurrentNews />
+                :
+                <div>
+                <NewsList />
+                    <div className="relative">
+                        <Pagination newsPerPage={newsPerPage} totalNews={list_imgs.length} paginate={paginate}/>
+                        <img className="arrow_next_news" src={arrow_left} alt="" onClick={nextPage}/>
+                        <img className="arrow_prev_news" src={arrow_right} alt="" onClick={prevPage}/>
+                    </div>
+                </div>
+            }
         </div>
     )
 };

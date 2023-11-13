@@ -130,3 +130,13 @@ img.iconPassive {
 .carousel .control-dots .dot {
     background-color: #CEDDE9 !important;
 }
+.arrow_prev_news {
+    position: absolute;
+    left: 33%;
+    top: 0;
+}
+.arrow_next_news {
+    position: absolute;
+    left: 63%;
+    top: 0;
+}
