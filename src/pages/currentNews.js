@@ -57,7 +57,7 @@ const CurrentNews = () => {
             return (
                 <div className="relative">
                     <img className="arrowRightCurrentNews cursor-pointer" src={arrowRightCurrentNews} alt="" onClick={nextPage}/>
-                    <img className="arrowLeftCurrentNews cursor-pointer" src={arrowLeftCurrentNews} alt="" onClick={prevPage}/>
+                    <img className={` ${ currentPage === 1 ? 'hidden' : 'arrowLeftCurrentNews cursor-pointer'}`} src={arrowLeftCurrentNews} alt="" onClick={prevPage}/>
                 </div>
             );
 
