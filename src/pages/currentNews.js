@@ -168,7 +168,7 @@ const CurrentNews = () => {
                         Щоб скористатися послугою, слід пройти просту процедуру реєстрації на сайті Лічильник.</p>
                 </div>
                 <div className="w-[305px] h-12 mx-auto mt-5 mb-5">
-                    <NavLink to="#" className="py-3.5 px-5 mr-2 mb-2 text-sm rounded text-white_figma bg-yellow_figma">
+                    <NavLink to="/cabinet" className="py-3.5 px-5 mr-2 mb-2 text-sm rounded text-white_figma bg-yellow_figma">
                         Передати показання лічильників
                     </NavLink>
                 </div>
