@@ -150,3 +150,8 @@ img.iconPassive {
     left: 90%;
     top: -43px;
 }
+.icon_question {
+    position: absolute;
+    left: 96%;
+    top: 26px;
+}
