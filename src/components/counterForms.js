@@ -58,6 +58,7 @@ const CounterForms = ({counters, setCounters, Save}) => {
                                 <img className="icon_question w-[24px] h-[24px]" src={icon_question} alt=""/>
                             </p>
                             <ReactTooltip id="my-tooltip"/>
+                            {/*https://www.youtube.com/shorts/jMBs98TJ7Pk*/}
                         </div>
                     );
                 })
