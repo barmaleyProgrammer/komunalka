@@ -140,3 +140,13 @@ img.iconPassive {
     left: 63%;
     top: 0;
 }
+.arrowRightCurrentNews {
+    position: absolute;
+    left: 95%;
+    top: -43px;
+}
+.arrowLeftCurrentNews {
+    position: absolute;
+    left: 90%;
+    top: -43px;
+}
