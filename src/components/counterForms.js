@@ -58,8 +58,14 @@ const CounterForms = ({counters, setCounters, Save}) => {
                     );
                 })
             }
-            <div className="mx-auto w-28">
-                <Button type="submit" label={'Надіслати'} cssType={'primary'} />
+            <div className="flex mx-auto justify-between">
+                <p className="py-3 font-light">Невірний номер лічильника або показники?&nbsp;
+                    <a style={{color: '#3E77AA'}} href="#">Надішліть запит фахівцям
+                    </a>
+                </p>
+                <div className="h-12 w-52">
+                    <Button type="submit" label={'Передати показники'} cssType={'primary'} />
+                </div>
             </div>
         </form>
     );
