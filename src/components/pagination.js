@@ -38,8 +38,8 @@ const Pagination = ({ newsPerPage, totalNews, paginate, currentPage }) => {
                     ))
                 }
             </ul>
-            <img className="arrow_next_news" src={arrow_left} alt="" onClick={nextPage}/>
-            <img className="arrow_prev_news" src={arrow_right} alt="" onClick={prevPage}/>
+            <img className="arrow_next_news cursor-pointer" src={arrow_left} alt="" onClick={nextPage}/>
+            <img className="arrow_prev_news cursor-pointer" src={arrow_right} alt="" onClick={prevPage}/>
         </div>
     );
 };
