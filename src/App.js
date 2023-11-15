@@ -29,12 +29,14 @@ import Notification from "./pages/cabinet/notification";
 import ValidateNewEmail from "./pages/cabinet/validateNewEmail";
 
 import RequireAuth from './components/hook/requireAuth';
+import ScrollToTop from './components/scrollToTop';
 
 const App = () => {
     return (
         <div className="app">
             <Context.Provider value={useReducer(reducer, initialSate)}>
                 <BrowserRouter>
+                    <ScrollToTop />
                     <Header />
                     <main className="w-[1152px] mx-auto mt-5">
                         <Routes>

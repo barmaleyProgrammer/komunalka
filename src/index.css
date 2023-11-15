@@ -150,8 +150,19 @@ img.iconPassive {
     left: 90%;
     top: -43px;
 }
-.icon_question {
-    position: absolute;
-    left: 95%;
-    top: 26px;
+/*.icon_question {*/
+/*    position: absolute;*/
+/*    left: 97%;*/
+/*    top: 7px;*/
+/*}*/
+div#my-tooltip {
+    white-space: pre;
+    color: #2A3744;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%; /* 21px */
+    border-radius: 6px;
+    border: 1px solid #E7E7E7;
+    background: #FFF
 }

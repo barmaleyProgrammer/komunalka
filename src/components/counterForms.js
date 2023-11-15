@@ -2,9 +2,9 @@ import { useContext } from 'react';
 import { Context } from "../store";
 import InputField from "./inputField";
 import Button from "./button";
-import Neiron from "./../img/neiron.png";
-import icon_question from "./../img/icon_question.png";
-import { Tooltip as ReactTooltip } from 'react-tooltip'
+import 'react-tooltip/dist/react-tooltip.css';
+import Neironka from "./neironka";
+
 
 const CounterForms = ({counters, setCounters, Save}) => {
     const [state] = useContext(Context);
@@ -53,12 +53,7 @@ const CounterForms = ({counters, setCounters, Save}) => {
                                     onChange={(e) => handleInputChange(e, item)}
                                 />
                             </div>
-                            <img className="w-[32px] h-[31px] my-auto mr-5" src={Neiron} alt=""/>
-                            <p data-tooltip-id="my-tooltip" data-tooltip-content="тут буде коментар">
-                                <img className="icon_question w-[24px] h-[24px]" src={icon_question} alt=""/>
-                            </p>
-                            <ReactTooltip id="my-tooltip"/>
-                            {/*https://www.youtube.com/shorts/jMBs98TJ7Pk*/}
+                            <Neironka />
                         </div>
                     );
                 })
