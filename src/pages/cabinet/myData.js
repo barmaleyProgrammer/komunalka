@@ -53,64 +53,49 @@ const MyData = () => {
     const [modalRequestDelAccount, setModalRequestDelAccount] = useState(false);
     const navigate = useNavigate();
 
-    const Submit = async (event) => {
+    const Submit = (event) => {
         event.preventDefault();
-        try {
-            const result = await api.updateUser(form);
-            // console.log(result)
+        api.updateUser(form).then(() => {
             dispatch({ type: 'setAccount', payload: form })
-
-            if (result.status === 200) {
-                // setValidateFlag(true);
-                setModalActive(true);
-            }
-        } catch (e) {
-            console.error(e.message);
-            setFormError(e.message);
-        }
+            setModalActive(true);
+        }).catch((error) => {
+            console.error(error.message);
+            setFormError(error.message);
+        });
     };
 
-    const ChangePassword = async (e) => {
-        e.preventDefault();
+    const ChangePassword = (event) => {
+        event.preventDefault();
         setShowChangePasswordModal(false);
-        try {
-            const result = await api.changePassword(password);
-            if (result.status === 200) {
-                // setValidateFlag(true);
-                setModalActive(true);
-            }
-        } catch (e) {
-            console.error(e.message);
-            setFormError(e.message);
-        }
+        api.changePassword(password).then(() => {
+            setModalActive(true);
+        }).catch((error) => {
+            console.error(error.message);
+            setFormError(error.message);
+        });
     };
-    const ChangeEmailRequest = async (e) => {
-        e.preventDefault();
+
+    const ChangeEmailRequest = (event) => {
+        event.preventDefault();
         setModalChangeEmail(false);
-        try {
-            const result = await api.changeEmailRequest(email, form.source);
-            if (result.status === 200) {
-                setModalCheckEmail(true);
-            }
-        } catch (e) {
-            console.error(e.message);
-            setFormError(e.message);
-        }
+        api.changeEmailRequest(email, form.source).then(() => {
+            setModalCheckEmail(true);
+        }).catch((error) => {
+            console.error(error.message);
+            setFormError(error.message);
+        });
     };
-    const DeleteAccount = async (e) => {
-        dispatch({ type: 'logOut' });
-        e.preventDefault();
-        try {
-            const result = await api.deleteAccount();
-            if (result.status === 200) {
-                setModalRequestDelAccount(false);
-                dispatch({ type: 'logOut' });
-                navigate('/');
-            }
-        } catch (e) {
-            console.error(e.message);
-            setFormError(e.message);
-        }
+
+    const DeleteAccount = (event) => {
+        event.preventDefault();
+        api.deleteAccount().then(() => {
+            setModalRequestDelAccount(false);
+            dispatch({ type: 'logOut' });
+            navigate('/');
+        }).catch((error) => {
+            console.error(error.message);
+            setFormError(error.message);
+        });
     };
 
     const handleInputChange = (event) => {

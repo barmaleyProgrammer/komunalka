@@ -70,7 +70,7 @@ const updateUser = (data) => {
     return connect.put('/v2/account', data).then((res) => {
         localStorage.setItem('user', JSON.stringify(data));
         return res;
-    }).catch((error) => console.error('акаунт', error));
+    });
 }
 const changePassword = (password) => {
     return connect.put('/v2/account/password', { password })
