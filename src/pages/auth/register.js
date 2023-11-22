@@ -263,7 +263,7 @@ const Register = ({ close, showLogin }) => {
                                 label={'По батькові'}
                                 placeholder={'Іванович'}
                                 name={'secondName'}
-                                required={true}
+                                required={false}
                                 value={form.secondName}
                                 autocomplete="on"
                                 onChange={handleInputChange}
