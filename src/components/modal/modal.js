@@ -6,6 +6,11 @@ import icon_close from '../../img/icon_close.svg';
 const Modal = ({close, children}) => {
     useEffect( () => {
         document.body.style.overflow = 'hidden';
+        window.addEventListener('keyup', (event) => {
+            if (event.key === 'Escape') {
+                close();
+            }
+        });
         return () => {
             document.body.style.overflow = 'auto';
         }
