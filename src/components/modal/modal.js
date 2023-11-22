@@ -12,7 +12,7 @@ const Modal = ({close, children}) => {
     }, []);
 
     return (
-        <div className="modal" onClick={close}>
+        // <div className="modal" onClick={close}>
             <div className="modal">
                 <div className="modal__content" onClick={e => e.stopPropagation()}>
                     <div className="icon_close" onClick={close}>
@@ -21,7 +21,7 @@ const Modal = ({close, children}) => {
                     {children}
                 </div>
             </div>
-        </div>
+        // </div>
     );
 };
 
