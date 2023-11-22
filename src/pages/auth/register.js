@@ -59,7 +59,9 @@ const Register = ({ close, showLogin }) => {
         e.preventDefault();
         setFormError('');
         setLoading(true);
-        api.signUp(form).then((result) => {
+        const payload = {...form};
+        payload.phone = payload.phone.replace(/\D/g, '');
+        api.signUp(payload).then((result) => {
             if (result.status === 200) {
                 setValidateFlag(true);
             }
