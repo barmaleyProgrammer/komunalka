@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import InputField from "../../components/inputField";
 import logo_lichylnyk from "../../img/logo_lichylnyk.svg";
