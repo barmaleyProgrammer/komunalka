@@ -166,3 +166,10 @@ div#my-tooltip {
     border: 1px solid #E7E7E7;
     background: #FFF
 }
+
+.object-name {
+    max-width: 310px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

@@ -112,7 +112,7 @@ const Cabinet = () => {
                     <img src={icon_house} className="h-8" alt="kamunalka logo"/>
                     <p className="font-medium pl-2 pt-1">{ item.name }</p>
                 </div>
-                <div className="pt-2 text-sm mb-4">{ item.address }</div>
+                <div className="pt-2 text-sm mb-4 object-name" title={item.address}>{ item.address }</div>
                 <div className="text-xs space-y-1">
                     <p>Загальна площа xx м2</p>
                     <p>Опалювальна площа xx м2</p>
