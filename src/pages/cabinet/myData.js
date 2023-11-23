@@ -223,18 +223,6 @@ const MyData = () => {
                             autoComplete="off"
                             onChange={handleInputChange}
                         />
-                        {/*<InputField*/}
-                        {/*    label={'Телефон'}*/}
-                        {/*    type={'phone'}*/}
-                        {/*    placeholder={'+388888888888'}*/}
-                        {/*    name={'phone'}*/}
-                        {/*    cssClass="email-field"*/}
-                        {/*    required={true}*/}
-                        {/*    pattern="^\+\d{12,15}$"*/}
-                        {/*    value={form.phone}*/}
-                        {/*    autoComplete="off"*/}
-                        {/*    onChange={handleInputChange}*/}
-                        {/*/>*/}
                         <PhoneField
                             label={'Телефон(не менше 12цифр)'}
                             placeholder="+388888888888"
@@ -251,7 +239,7 @@ const MyData = () => {
                             type={'text'}
                             name={'secondName'}
                             placeholder={'Іванович'}
-                            required={true}
+                            required={false}
                             value={form.secondName}
                             autoComplete="off"
                             onChange={handleInputChange}
