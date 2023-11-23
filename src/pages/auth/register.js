@@ -150,22 +150,9 @@ const Register = ({ close, showLogin }) => {
                                 autocomplete="on"
                                 onChange={handleInputChange}
                             />
-                            {/*<InputField*/}
-                            {/*    label={'Телефон(не менше 12цифр)'}*/}
-                            {/*    type={'phone'}*/}
-                            {/*    placeholder={'+388888888888'}*/}
-                            {/*    name={'phone'}*/}
-                            {/*    required={true}*/}
-                            {/*    value={form.phone}*/}
-                            {/*    pattern="^\+\d{12,15}$"*/}
-                            {/*    maxLength={'16'}*/}
-                            {/*    cssClass="email-field"*/}
-                            {/*    autocomplete="on"*/}
-                            {/*    onChange={handleInputChange}*/}
-                            {/*/>*/}
                             <PhoneField
                                 label={'Телефон(не менше 12цифр)'}
-                                placeholder="+388888888888"
+                                placeholder="+380ХХ ХХХ ХХ ХХ"
                                 maskPlaceholder={null}
                                 name={'phone'}
                                 cssClass="email-field"
