@@ -99,9 +99,9 @@ const Cabinet = () => {
         }
     }
 
-    const AddressBlock = ({ item }) => {
+    const AddressBlock = ({ item, key }) => {
         return (
-            <div className="cursor-pointer p-4 relative border rounded-lg border-[#E7E7E7] w-[368px] h-64" onClick={() => navigate(`/counters/${item.objectId}`)}>
+            <div key={key} className="cursor-pointer p-4 relative border rounded-lg border-[#E7E7E7] w-[368px] h-64" onClick={() => navigate(`/counters/${item.objectId}`)}>
                 <div className="absolute top-1 right-1 z-10">
                     <DropDownMenu
                         rename={(e) => openModalRenameObj(e, item.objectId)}

@@ -1,48 +1,56 @@
 import Tabs from "../../components/tabs";
 import Breadcrumbs from "../../components/breadcrumbs";
 import Button from "../../components/button";
-import {useState} from "react";
+import {useContext, useState} from "react";
 import {NavLink} from "react-router-dom";
+import api from "../../api";
+import {Context} from "../../store";
+
+const breadCrumbs = [
+    {
+        "to": '/',
+        "label": 'Головна'
+    },
+    {
+        "to": '/cabinet',
+        "label": 'Особистий кабінет'
+    },
+    {
+        "to": '/cabinet/myData',
+        "label": 'Мої дані'
+    },
+    {
+        "to": '',
+        "label": 'Оповіщення'
+    },
+];
 
 const Notification = () => {
-    const [formError, setFormError] = useState('');
+    const [state, dispatch] = useContext(Context);
+    const [form, setForm] = useState({
+        firstName: state.user.firstName,
+        lastName: state.user.lastName,
+        secondName: state.user.secondName,
+        phone: state.user.phone,
+        receiveNewsletter: false,
+        reminderTransferOfCounters: false
+    });
 
-    const breadCrumbs = [
-        {
-            "to": '/',
-            "label": 'Головна'
-        },
-        {
-            "to": '/cabinet',
-            "label": 'Особистий кабінет'
-        },
-        {
-            "to": '/cabinet/myData',
-            "label": 'Мої дані'
-        },
-        {
-            "to": '',
-            "label": 'Оповіщення'
-        },
-    ]
 
-    // const Submit = async (event) => {
-    //     event.preventDefault();
-    //     try {
-    //         const result = await api.updateUser(form);
-    //         console.log(result)
-    //         dispatch({ type: 'setAccount', payload: form })
-    //
-    //         if (result.status === 200) {
-    //             setValidateFlag(true);
-    //             setModalActive(true);
-    //         }
-    //     } catch (e) {
-    //         console.error(e.message);
-    //         setFormError(e.message);
-    //     }
-    // };
 
+    const Submit = (event) => {
+        event.preventDefault();
+        api.updateUser(form).catch((error) => {
+            console.error(error.message);
+        });
+    };
+    const handleInputChange = (event) => {
+        const value = (event.target.type === 'checkbox') ? event.target.checked : event.target.value;
+        setForm((prevProps) => ({
+            ...prevProps,
+            [event.target.name]: value
+        }));
+    };
 
 
     return (
@@ -56,25 +64,32 @@ const Notification = () => {
             <div className="py-10 px-20 font-light rounded-lg shadow-myCustom">
                 <h1 className="font-normal text-xl mb-4">Email розсилка</h1>
                 <div className="mb-4">
-                    <div className="flex mb-2">
-                        <input className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
-                               id="rememberMe"
-                               name={'rememberMe'}
-                               type="checkbox"
-                            // checked={form.rememberMe}
-                            // onChange={handleInputChange}
-                        />
-                        <div className="px-2 font-light text-sm">
-                            Нагадувати про передачу лічильників
-                        </div>
-                    </div>
+                    <h2>Нагадувати про передачу лічильників</h2>
+                    {
+                        state.addresses?.map((item, key) => {
+                            return (
+                                <div key={key} className="flex mb-2">
+                                    <input className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
+                                           id="reminderTransferOfCounters"
+                                           name={'reminderTransferOfCounters'}
+                                           type="checkbox"
+                                           checked={form.reminderTransferOfCounters}
+                                           onChange={handleInputChange}
+                                    />
+                                    <div className="px-2 font-light text-sm">
+                                        { item.name }
+                                    </div>
+                                </div>
+                            );
+                        })
+                    }
                     <div className="flex">
                         <input className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
-                               id="rememberMe"
-                               name={'rememberMe'}
-                               type="checkbox"
-                            // checked={form.rememberMe}
-                            // onChange={handleInputChange}
+                            id="receiveNewsletter"
+                            name={'receiveNewsletter'}
+                            type="checkbox"
+                            checked={form.receiveNewsletter}
+                            onChange={handleInputChange}
                         />
                         <div className="px-2 font-light text-sm">
                             Отримувати листи с новинами
@@ -84,7 +99,7 @@ const Notification = () => {
 
                 {/*<div className="text-xs text-red-900 text-center">{ formError }</div>*/}
                 <div className="w-[368px]">
-                <Button type="button" label={'Зберігти зміни'} cssType={'primary'} />
+                    <Button type="button" label={'Зберігти зміни'} cssType={'primary'} onClick={Submit}/>
                 </div>
             </div>
         </>
