@@ -17,7 +17,7 @@ const Cabinet = () => {
     const [state, dispatch] = useContext(Context);
     const navigate = useNavigate();
     const [formError, setFormError] = useState('');
-    const [modalActive, setModalActive] = useState(false);
+    const [modalRenameObj, setModalRenameObj] = useState(false);
     const [modalAddAddressActive, setModalAddAddressActive] = useState(false);
     const [modalConfirmDelete, setModalConfirmDelete] = useState(false);
     const [currentAddress, setCurrentAddress] = useState('');
@@ -65,11 +65,11 @@ const Cabinet = () => {
         }));
     };
 
-    const openModal = (e, objectId) => {
+    const openModalRenameObj = (e, objectId) => {
         e.stopPropagation();
         const res =  state.addresses.find((item) => item.objectId === objectId);
         setCurrentAddress(res);
-        setModalActive(true);
+        setModalRenameObj(true);
     };
     const showConfirmDelete = (e, objectId) => {
         e.stopPropagation();
@@ -91,7 +91,7 @@ const Cabinet = () => {
         }
 
         setCurrentAddress('');
-        setModalActive(false);
+        setModalRenameObj(false);
         try{
             await api.getAddress().then((data) => dispatch({ type: 'setAddresses', payload: data }));
         } catch (error) {
@@ -104,7 +104,7 @@ const Cabinet = () => {
             <div className="cursor-pointer p-4 relative border rounded-lg border-[#E7E7E7] w-[368px] h-64" onClick={() => navigate(`/counters/${item.objectId}`)}>
                 <div className="absolute top-1 right-1 z-10">
                     <DropDownMenu
-                        rename={(e) => openModal(e, item.objectId)}
+                        rename={(e) => openModalRenameObj(e, item.objectId)}
                         delete={(e) => showConfirmDelete(e, item.objectId)}
                     />
                 </div>
@@ -193,8 +193,8 @@ const Cabinet = () => {
                 </p>
             </div>
                 {
-                modalActive && (
-                    <Modal close={() => setModalActive(false)}>
+                modalRenameObj && (
+                    <Modal close={() => setModalRenameObj(false)}>
                         <div className="p-10">
                             <h2 className="text-center mb-4">Нова назва обʼєкта</h2>
                             <InputField

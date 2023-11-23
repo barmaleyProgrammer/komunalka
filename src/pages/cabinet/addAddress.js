@@ -4,6 +4,8 @@ import api from "../../api";
 import InputField from "../../components/inputField";
 
 import AutoSuggest from "react-tailwindcss-select";
+import PinInput from "react-pin-input";
+import Button from "../../components/button";
 // https://www.npmjs.com/package/react-tailwindcss-select
 
 const AutoSuggestClassNames = {
@@ -20,6 +22,7 @@ const AutoSuggestClassNames = {
     searchIcon: "hidden"
 };
 const AddAddress = ({ close }) => {
+    const [modalPinCode, setModalPinCode] = useState(false);
     const [state, dispatch] = useContext(Context);
 
     const objCount = state.addresses.length + 1;
@@ -160,118 +163,153 @@ const AddAddress = ({ close }) => {
         close();
     }
 
+    const openModalPinCode = (e) => {
+        e.stopPropagation();
+        setModalPinCode(true);
+    };
+
     return (
-        <div className="px-14 py-6 space-y-3 mt-2 mx-auto w-[464px] rounded-lg shadow-lg">
-            <h4 className="text-black_figma font-medium text-center">Додати адресу</h4>
-            <form action="#" onSubmit={addObj}>
-                <div className="py-2">
-                    <InputField
-                        type={'text'}
-                        placeholder={'Назва адреси'}
-                        name={'name'}
-                        required={true}
-                        // maxLength={'10'}
-                        value={flatName}
-                        autoComplete="off"
-                        onChange={event => setFlatName(event.target.value)}
-                        // onPaste={(e)=> { e.preventDefault(); return false; }}
-                    />
+        <>
+            { !modalPinCode ?
+            <div className="px-14 py-6 space-y-3 mt-2 mx-auto w-[464px] rounded-lg shadow-lg">
+                <h4 className="text-black_figma font-medium text-center">Додати адресу</h4>
+                <form action="#">
+                    <div className="py-2">
+                        <InputField
+                            type={'text'}
+                            placeholder={'Назва адреси'}
+                            name={'name'}
+                            required={true}
+                            // maxLength={'10'}
+                            value={flatName}
+                            autoComplete="off"
+                            onChange={event => setFlatName(event.target.value)}
+                            // onPaste={(e)=> { e.preventDefault(); return false; }}
+                        />
+                    </div>
+                    <div className="mt-2">
+                        <AutoSuggest
+                            classNames={AutoSuggestClassNames}
+                            placeholder={'Область'}
+                            searchInputPlaceholder={'Пошук'}
+                            noOptionsMessage={'Варіантів не знайдено'}
+                            value={region}
+                            options={regions}
+                            onChange={(item) => setRegion(item)}
+                            isDisabled={true}
+                        />
+                    </div>
+                    <div className="">
+                        <label className="text-xs text-black_figma font-light text-center px-4">Введіть перші літери району</label>
+                        <AutoSuggest
+                            classNames={AutoSuggestClassNames}
+                            placeholder={'Район'}
+                            searchInputPlaceholder={'Пошук'}
+                            noOptionsMessage={'Варіантів не знайдено'}
+                            value={district}
+                            options={districts}
+                            isSearchable
+                            onChange={(item) => setDistrict(item)}
+                            isDisabled={!districts.length}
+                        />
+                    </div>
+                    <div className="py-0">
+                        <label className="text-xs text-black_figma font-light text-center px-4">Введіть перші літери міста</label>
+                        <AutoSuggest
+                            classNames={AutoSuggestClassNames}
+                            placeholder={'Місто'}
+                            searchInputPlaceholder={'Пошук'}
+                            noOptionsMessage={'Варіантів не знайдено'}
+                            value={town}
+                            options={towns}
+                            isSearchable
+                            onChange={(item) => setTown(item)}
+                            isDisabled={!towns.length}
+                        />
+                    </div>
+                    <div className="mb-2">
+                        <label className="text-xs text-black_figma font-light text-center px-4">Введіть перші літери вулиці та виберіть її зі списку</label>
+                        <AutoSuggest
+                            classNames={AutoSuggestClassNames}
+                            placeholder={'Вулиця'}
+                            searchInputPlaceholder={'Пошук'}
+                            noOptionsMessage={'Варіантів не знайдено'}
+                            value={street}
+                            options={streets}
+                            isSearchable
+                            onChange={(item) => setStreet(item)}
+                            isDisabled={!streets.length}
+                            onSearchInputChange={(e) => {
+                                if (e.nativeEvent.inputType === 'insertFromPaste') {
+                                    e.preventDefault();
+                                    e.target.value = '';
+                                    return;
+                                }
+                            }}
+                        />
+                    </div>
+                    <div className="py-2">
+                        <AutoSuggest
+                            classNames={AutoSuggestClassNames}
+                            placeholder={'Будинок'}
+                            searchInputPlaceholder={'Пошук'}
+                            noOptionsMessage={'Варіантів не знайдено'}
+                            value={house}
+                            options={houses}
+                            isSearchable
+                            onChange={(item) => setHouse(item)}
+                            isDisabled={!houses.length}
+                        />
+                    </div>
+                    <div className="py-2">
+                        <AutoSuggest
+                            classNames={AutoSuggestClassNames}
+                            placeholder={'Квартира'}
+                            searchInputPlaceholder={'Пошук'}
+                            noOptionsMessage={'Варіантів не знайдено'}
+                            value={flat}
+                            options={flats}
+                            isSearchable
+                            onChange={(item) => setFlat(item)}
+                            isDisabled={!flats.length}
+                        />
+                    </div>
+                    <div className="py-2 text-center">
+                        <button
+                            disabled={!flat}
+                            className="w-60 h-12 text-base py-2 rounded text-white_figma bg-yellow_figma disabled:opacity-70"
+                            type="submit" onClick={(e) => openModalPinCode(e)}>Зберігти</button>
+                    </div>
+                </form>
                 </div>
-                <div className="mt-2">
-                    <AutoSuggest
-                        classNames={AutoSuggestClassNames}
-                        placeholder={'Область'}
-                        searchInputPlaceholder={'Пошук'}
-                        noOptionsMessage={'Варіантів не знайдено'}
-                        value={region}
-                        options={regions}
-                        onChange={(item) => setRegion(item)}
-                        isDisabled={true}
-                    />
+            :
+                <div className="p-8 w-[464px] h-[355px]">
+                    <h1 className="text-lg text-center mb-8 font-medium">PIN-код</h1>
+                    <p>Для підтвердження введіть 4-х значний <br/> PIN-код відправлений Вам на електронну пошту</p>
+                    <div className="text-center mb-2 mt-3">
+                        <PinInput
+                            length={4}
+                            initialValue=""
+                            secret
+                            secretDelay={1000}
+                            onChange={(value, index) => {}}
+                            type="numeric"
+                            inputMode="number"
+                            style={{padding: '10px'}}
+                            inputStyle={{borderColor: '#E7E7E7', margin: '0 10px'}}
+                            inputFocusStyle={{borderColor: '#797878'}}
+                            onComplete={(value, index) => {}}
+                            autoSelect={true}
+                            regexCriteria={/^[ A-Za-z0-9_@./#&+-]*$/}
+                        />
+                    </div>
+                    <p className="text-center font-light">Відправити повторно</p>
+                    <div className="w-60 h-12 mx-auto mt-4">
+                        <Button type="submit" cssType="primary" label={'Ok'} onClick={(e) => addObj(e)} />
+                    </div>
                 </div>
-                <div className="">
-                    <label className="text-xs text-black_figma font-light text-center px-4">Введіть перші літери району</label>
-                    <AutoSuggest
-                        classNames={AutoSuggestClassNames}
-                        placeholder={'Район'}
-                        searchInputPlaceholder={'Пошук'}
-                        noOptionsMessage={'Варіантів не знайдено'}
-                        value={district}
-                        options={districts}
-                        isSearchable
-                        onChange={(item) => setDistrict(item)}
-                        isDisabled={!districts.length}
-                    />
-                </div>
-                <div className="py-0">
-                    <label className="text-xs text-black_figma font-light text-center px-4">Введіть перші літери міста</label>
-                    <AutoSuggest
-                        classNames={AutoSuggestClassNames}
-                        placeholder={'Місто'}
-                        searchInputPlaceholder={'Пошук'}
-                        noOptionsMessage={'Варіантів не знайдено'}
-                        value={town}
-                        options={towns}
-                        isSearchable
-                        onChange={(item) => setTown(item)}
-                        isDisabled={!towns.length}
-                    />
-                </div>
-                <div className="mb-2">
-                    <label className="text-xs text-black_figma font-light text-center px-4">Введіть перші літери вулиці та виберіть її зі списку</label>
-                    <AutoSuggest
-                        classNames={AutoSuggestClassNames}
-                        placeholder={'Вулиця'}
-                        searchInputPlaceholder={'Пошук'}
-                        noOptionsMessage={'Варіантів не знайдено'}
-                        value={street}
-                        options={streets}
-                        isSearchable
-                        onChange={(item) => setStreet(item)}
-                        isDisabled={!streets.length}
-                        onSearchInputChange={(e) => {
-                            if (e.nativeEvent.inputType === 'insertFromPaste') {
-                                e.preventDefault();
-                                e.target.value = '';
-                                return;
-                            }
-                        }}
-                    />
-                </div>
-                <div className="py-2">
-                    <AutoSuggest
-                        classNames={AutoSuggestClassNames}
-                        placeholder={'Будинок'}
-                        searchInputPlaceholder={'Пошук'}
-                        noOptionsMessage={'Варіантів не знайдено'}
-                        value={house}
-                        options={houses}
-                        isSearchable
-                        onChange={(item) => setHouse(item)}
-                        isDisabled={!houses.length}
-                    />
-                </div>
-                <div className="py-2">
-                    <AutoSuggest
-                        classNames={AutoSuggestClassNames}
-                        placeholder={'Квартира'}
-                        searchInputPlaceholder={'Пошук'}
-                        noOptionsMessage={'Варіантів не знайдено'}
-                        value={flat}
-                        options={flats}
-                        isSearchable
-                        onChange={(item) => setFlat(item)}
-                        isDisabled={!flats.length}
-                    />
-                </div>
-                <div className="py-2 text-center">
-                    <button
-                        disabled={!flat}
-                        className="w-60 h-12 text-base py-2 rounded text-white_figma bg-yellow_figma disabled:opacity-70"
-                        type="submit">Зберігти</button>
-                </div>
-            </form>
-        </div>
+            }
+        </>
     );
 };
 
