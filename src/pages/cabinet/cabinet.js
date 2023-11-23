@@ -196,6 +196,7 @@ const Cabinet = () => {
                 modalActive && (
                     <Modal close={() => setModalActive(false)}>
                         <div className="p-10">
+                            <h2 className="text-center mb-4">Нова назва обʼєкта</h2>
                             <InputField
                                 // label={'Перейменувати адресу'}
                                 type={'text'}
