@@ -75,6 +75,11 @@ const AddAddress = ({ close }) => {
         const fetchData = async () => {
             const result = await api.getDistricts(region.value);
             setDistricts(result);
+            setDistrict({
+                disabled: false,
+                label: 'КИЇВСЬКА ОБЛ. МІСТА ОБЛ. ЗНАЧЕННЯ',
+                value: 233
+            });
         };
         fetchData();
     }, [region]);
@@ -94,6 +99,11 @@ const AddAddress = ({ close }) => {
         const fetchData = async () => {
             const result = await api.getTowns(district.value);
             setTowns(result);
+            setTown({
+                disabled: false,
+                label: 'КИЇВ',
+                value: 447
+            });
         };
         fetchData();
     }, [district]);
