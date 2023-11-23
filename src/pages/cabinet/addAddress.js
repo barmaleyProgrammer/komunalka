@@ -23,6 +23,7 @@ const AutoSuggestClassNames = {
 };
 const AddAddress = ({ close }) => {
     const [modalPinCode, setModalPinCode] = useState(false);
+    const [pin, setPin] = useState('');
     const [state, dispatch] = useContext(Context);
 
     const objCount = state.addresses.length + 1;
@@ -156,15 +157,15 @@ const AddAddress = ({ close }) => {
         fetchData();
     }, [house]);
 
-    const addObj = async (e) => {
-        e.preventDefault();
+    const addObj = async () => {
+        // add api call to validate pinCode
         await api.addObject(flat.value, flatName);
         await api.getAddress().then((data) => dispatch({ type: 'setAddresses', payload: data }));
         close();
     }
 
-    const openModalPinCode = (e) => {
-        e.stopPropagation();
+    const openModalPinCode = (event) => {
+        event.preventDefault();
         setModalPinCode(true);
     };
 
@@ -173,7 +174,7 @@ const AddAddress = ({ close }) => {
             { !modalPinCode ?
             <div className="px-14 py-6 space-y-3 mt-2 mx-auto w-[464px] rounded-lg shadow-lg">
                 <h4 className="text-black_figma font-medium text-center">Додати адресу</h4>
-                <form action="#">
+                <form action="#" onSubmit={openModalPinCode}>
                     <div className="py-2">
                         <InputField
                             type={'text'}
@@ -278,7 +279,7 @@ const AddAddress = ({ close }) => {
                         <button
                             disabled={!flat}
                             className="w-60 h-12 text-base py-2 rounded text-white_figma bg-yellow_figma disabled:opacity-70"
-                            type="submit" onClick={(e) => openModalPinCode(e)}>Зберігти</button>
+                            type="submit">Зберігти</button>
                     </div>
                 </form>
                 </div>
@@ -289,23 +290,23 @@ const AddAddress = ({ close }) => {
                     <div className="text-center mb-2 mt-3">
                         <PinInput
                             length={4}
-                            initialValue=""
+                            initialValue={pin}
                             secret
                             secretDelay={1000}
-                            onChange={(value, index) => {}}
+                            onChange={(value) => setPin(value)}
                             type="numeric"
                             inputMode="number"
                             style={{padding: '10px'}}
                             inputStyle={{borderColor: '#E7E7E7', margin: '0 10px'}}
                             inputFocusStyle={{borderColor: '#797878'}}
-                            onComplete={(value, index) => {}}
+                            onComplete={addObj}
                             autoSelect={true}
                             regexCriteria={/^[ A-Za-z0-9_@./#&+-]*$/}
                         />
                     </div>
                     <p className="text-center font-light">Відправити повторно</p>
                     <div className="w-60 h-12 mx-auto mt-4">
-                        <Button type="submit" cssType="primary" label={'Ok'} onClick={(e) => addObj(e)} />
+                        <Button type="button" disabled={String(pin).length < 4} cssType="primary" label={'Ok'} onClick={addObj} />
                     </div>
                 </div>
             }
