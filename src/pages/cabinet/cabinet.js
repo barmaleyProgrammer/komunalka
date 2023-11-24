@@ -71,12 +71,14 @@ const Cabinet = () => {
         setCurrentAddress(res);
         setModalRenameObj(true);
     };
+
     const showConfirmDelete = (e, objectId) => {
         e.stopPropagation();
         const res =  state.addresses.find((item) => item.objectId === objectId);
         setCurrentAddress(res);
         setModalConfirmDelete(true);
     };
+
     const openModalAddAddresses = (e) => {
         e.stopPropagation();
         setModalAddAddressActive(true);
@@ -89,7 +91,6 @@ const Cabinet = () => {
         } catch (error) {
             setFormError(error.message);
         }
-
         setCurrentAddress('');
         setModalRenameObj(false);
         try{
@@ -99,9 +100,9 @@ const Cabinet = () => {
         }
     }
 
-    const AddressBlock = ({ item, key }) => {
+    const AddressBlock = ({ item }) => {
         return (
-            <div key={key} className="cursor-pointer p-4 relative border rounded-lg border-[#E7E7E7] w-[368px] h-64" onClick={() => navigate(`/counters/${item.objectId}`)}>
+            <div className="cursor-pointer p-4 relative border rounded-lg border-[#E7E7E7] w-[368px] h-64" onClick={() => navigate(`/counters/${item.objectId}`)}>
                 <div className="absolute top-1 right-1 z-10">
                     <DropDownMenu
                         rename={(e) => openModalRenameObj(e, item.objectId)}
@@ -128,71 +129,73 @@ const Cabinet = () => {
 
     return (
         <>
-                <div>
-                    <Breadcrumbs items={breadCrumbs}/>
-                </div>
-                <div className="mt-6 mb-8">
-                    <Tabs />
-                </div>
-                <div className="rounded-lg shadow-myCustom py-8">
-                    <h3 className="text-center text-xl">Мої адреси</h3>
-                    <div className="w-[820px] mx-auto flex justify-start flex-wrap gap-10 p-5">
-                        {
-                            state.addresses?.map((item, key) => {
-                                return <AddressBlock item={item} key={key}/>
-                            })
-                        }
-                        {
-                            (state.addresses.length < 4)
-                            ?
-                            <div className="cursor-pointer flex justify-center items-center border rounded border-[#E7E7E7] w-[368px] h-64" onClick={(e) => openModalAddAddresses(e)}>
-                                <AiOutlinePlus />
-                                <div className="pl-2">Додати адресу</div>
-                            </div>
-                            : ''
-                        }
+            <div>
+                <Breadcrumbs items={breadCrumbs}/>
+            </div>
+            <div className="mt-6 mb-8">
+                <Tabs />
+            </div>
+            <div className="rounded-lg shadow-myCustom py-8">
+                <h3 className="text-center text-xl">Мої адреси</h3>
+                <div className="w-[820px] mx-auto flex justify-start flex-wrap gap-10 p-5">
+                    { state.addresses?.map((item, key) => <AddressBlock item={item} key={key} />)}
+                    {
+                        (state.addresses.length < 4)
+                        ?
+                        <div className="cursor-pointer flex justify-center items-center border rounded border-[#E7E7E7] w-[368px] h-64" onClick={(e) => openModalAddAddresses(e)}>
+                            <AiOutlinePlus />
+                            <div className="pl-2">Додати адресу</div>
+                        </div>
+                        : ''
+                    }
 
-                    </div>
                 </div>
-                <div className="rounded-lg shadow-myCustom py-8 mt-28">
-                        <h3 className="text-center text-xl">Нейронна мережа</h3>
-                    <div className="w-[945px] mx-auto text-sm font-light">
-                        <div className="w-[760px] bg-[#F7F9FE] mx-auto border-dashed border rounded border-[#797878] mt-8 mb-5">
-                            <p className="text-center mt-5">Перетягніть фото сюди</p>
-                            <p className="text-center mt-5">або</p>
-                            <div className="w-44 mx-auto mt-5 mb-8 px-7">
-                                <NavLink to="#" className="py-3 px-5 text-sm rounded text-white_figma bg-yellow_figma" >
-                                    Завантажте
-                                </NavLink>
-                            </div>
+            </div>
+            <div className="rounded-lg shadow-myCustom py-8 mt-28">
+                <h3 className="text-center text-xl">Нейронна мережа</h3>
+                <div className="w-[945px] mx-auto text-sm font-light">
+                    <div className="w-[760px] bg-[#F7F9FE] mx-auto border-dashed border rounded border-[#797878] mt-8 mb-5">
+                        <p className="text-center mt-5">Перетягніть фото сюди</p>
+                        <p className="text-center mt-5">або</p>
+                        <div className="w-44 mx-auto mt-5 mb-8 px-7">
+                            <NavLink to="#" className="py-3 px-5 text-sm rounded text-white_figma bg-yellow_figma" >
+                                Завантажте
+                            </NavLink>
                         </div>
                     </div>
                 </div>
+            </div>
             <div className="rounded-lg bg-[#F1F5F9] font-light text-sm py-8 px-8 mt-20 space-y-4">
-                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                   labore.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-                   ea commodo con. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-                   eu fugiat nulla pariatu
-                 </p>
-                <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id es
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                    labore.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+                    ea commodo con. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+                    eu fugiat nulla pariatu
+                </p>
+                <p>
+                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id es
                     Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, t
                     o Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit,
                 </p>
-                <p>Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut
+                <p>
+                    Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut
                     al Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed qu
                 </p>
-                <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id es
+                <p>
+                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id es
                 </p>
-                <p>Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatu
+                <p>
+                    Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatu
                     Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatu
                     Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium
                 </p>
-                <p>Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatu
+                <p>
+                    Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatu
                     Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatu
                     Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium
                 </p>
             </div>
-                {
+            {
                 modalRenameObj && (
                     <Modal close={() => setModalRenameObj(false)}>
                         <div className="p-10">
@@ -209,7 +212,6 @@ const Cabinet = () => {
                                 onChange={handleInputChange}
                             />
                         </div>
-
                         <div className="pt-2 w-32 mx-auto mb-2">
                             <Button type="button" onClick={updateAddress} label={'Оновити'} cssType={'primary'} />
                         </div>
@@ -245,7 +247,6 @@ const Cabinet = () => {
                 )
             }
             { formError && <ErrorModal close={() => setFormError('')} error={formError} /> }
-
         </>
     );
 };

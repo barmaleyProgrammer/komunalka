@@ -84,8 +84,7 @@ const Faq = () => {
             }
             return clone;
         });
-    }
-
+    };
 
     const AccordionItem = ({open, toggle, tittle, desc}) => {
         return (

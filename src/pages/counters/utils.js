@@ -1,6 +1,6 @@
 export const UniqueServiceTypes = (data = []) => {
     const unique = new Map();
-    data.filter((item) => item.serviceType).map((item) => {
+    data.filter((item) => item.serviceType).forEach((item) => {
         const id = Number(item.serviceType);
         if (!unique.has(id)) {
             unique.set(id, id);
@@ -20,7 +20,7 @@ export const UniqueProviders = (data = [], serviceType = '') => {
             return true;
         }
         return (Number(item.serviceType) === serviceType);
-    }).map((item) => {
+    }).forEach((item) => {
         const id = Number(item.idFirme);
         if (!unique.has(id)) {
             unique.set(id, item.nameFirme);
