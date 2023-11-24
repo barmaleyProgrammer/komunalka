@@ -2,44 +2,47 @@ import arrow_right from "../img/arrow_right.svg";
 import arrow_left from "../img/arrow_left.svg";
 // https://www.youtube.com/watch?v=s59kRbD4Sw8&t=934s
 
-const Pagination = ({ newsPerPage, totalNews, paginate, currentPage }) => {
-    const newsNumber = []
-    for (let i = 1; i <= Math.ceil(totalNews / newsPerPage); i++) {
-        newsNumber.push(i)
+const Pagination = ({ perPage, total, paginate, currentPage }) => {
+    const pages = []
+    for (let i = 1; i <= Math.ceil(total / perPage); i++) {
+        pages.push(i)
     }
 
-    const nextPage = () => {
+    const next = () => {
         const val = currentPage + 1;
-        if (newsNumber.length >= val) {
+        if (pages.length >= val) {
             paginate(val);
         }
     };
 
-    const prevPage = () => {
+    const prev = () => {
         const val = currentPage - 1;
         if (val > 0) {
             paginate(val);
         }
     }
 
+    const goto = (event, page) => {
+        event.preventDefault();
+        paginate(page);
+    };
+
     return (
-        <div className="relative">
-            <ul className="pagination flex-row flex justify-center">
+        <div className="flex-row flex justify-center">
+            <img className="cursor-pointer" src={arrow_right} alt="" onClick={ prev } />
+            <ul className="flex-row flex justify-center mx-20">
                 {
-                    newsNumber.map(number =>
-                        (
-                            <li className="px-4 text-sm font-medium" key={number}>
-                                <a style={(number === currentPage) ? {color: '#2A3744'} : {color: '#ABABAB'}} href="#" onClick={() => paginate(number)}>
-                                    {
-                                        number
-                                    }
-                                </a>
-                            </li>
+                    pages.map((number, key) => (
+                        <li className="px-4 text-sm font-medium" key={key}>
+                            <a href="#"
+                                style={(number === currentPage) ? {color: '#2A3744'} : {color: '#ABABAB'}}
+                                onClick={(event) => goto(event, number)}
+                            >{ number }</a>
+                        </li>
                     ))
                 }
             </ul>
-            <img className="arrow_next_news cursor-pointer" src={arrow_left} alt="" onClick={nextPage}/>
-            <img className="arrow_prev_news cursor-pointer" src={arrow_right} alt="" onClick={prevPage}/>
+            <img className="cursor-pointer" src={arrow_left} alt="" onClick={ next } />
         </div>
     );
 };

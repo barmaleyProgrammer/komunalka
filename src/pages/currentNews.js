@@ -1,101 +1,9 @@
+import { NavLink } from "react-router-dom";
 import rectangle from "../img/rectangle.png";
 import rectangle_ from "../img/Rectangle_.png";
-import {NavLink} from "react-router-dom";
-import NewsList from "./news"
-import {useState} from "react";
-import arrowLeftCurrentNews from "../img/arrowLeftCurrentNews.svg";
-import arrowRightCurrentNews from "../img/arrowRightCurrentNews.svg";
+import ToRead from "../components/toRead";
 
-const list_imgs = [
-    { image: '/news/News1.png',
-    news: '1'},
-    { image: '/news/News2.png',
-    news: '2'},
-    { image: '/news/News3.png',
-        news: '3' },
-    { image: '/news/News4.png',
-        news: '4' },
-    { image: '/news/News5.png',
-        news: '5' },
-    { image: '/news/News6.png',
-        news: '6' },
-    { image: '/news/News7.png',
-        news: '7' },
-    { image: '/news/News8.png',
-        news: '8' },
-    { image: '/news/News9.png',
-        news: '9' },
-    { image: '/news/News10.png',
-        news: '10' },
-    { image: '/news/News11.png',
-        news: '11' },
-    { image: '/news/News12.png',
-        news: '12' },
-    { image: '/news/News13.png',
-        news: '13' },
-    { image: '/news/News14.png',
-        news: '14' },
-    { image: '/news/News15.png',
-        news: '15' },
-];
-
-
-const CurrentNews = () => {
-    const [currentPage, setCurrentPage] = useState(1);
-    const [newsPerPage] = useState(3);
-
-    const lastNewsIndex = currentPage * newsPerPage;
-    const firstNewsIndex = lastNewsIndex - newsPerPage;
-    const newsOnPage = list_imgs.slice(firstNewsIndex, lastNewsIndex);
-    // console.log(newsOnPage);
-    const paginate = newsNumber => setCurrentPage(newsNumber)
-
-    const PaginationCurrentNews = () => {
-        const newsNumber = []
-        for (let i = 1; i <= Math.ceil(list_imgs.length / newsPerPage); i++) {
-            newsNumber.push(i)
-        }
-
-        const nextPage = () => {
-            const val = currentPage + 1;
-            if (newsNumber.length >= val) {
-                paginate(val);
-            }
-        };
-
-        const prevPage = () => {
-            const val = currentPage - 1;
-            if (val > 0) {
-                paginate(val);
-            }
-        }
-
-        return (
-            <div className="relative">
-                <img className="arrowRightCurrentNews cursor-pointer" src={arrowRightCurrentNews} alt="" onClick={nextPage}/>
-                <img className={` ${ currentPage === 1 ? 'hidden' : 'arrowLeftCurrentNews cursor-pointer'}`} src={arrowLeftCurrentNews} alt="" onClick={prevPage}/>
-            </div>
-        );
-
-    };
-    const NewsList = () => {
-        return (
-            <div className="grid grid-cols-3 mb-8 gap-x-5">
-                {
-                    newsOnPage.map((item, key) => {
-                        return (
-                            <div key={key}>
-                                <NavLink to={`/news/${key}`}>
-                                    <h2>новина № {item.news}</h2>
-                                    <img className="rounded-lg mt-4" src={item.image} alt=""/>
-                                </NavLink>
-                            </div>
-                        );
-                    })
-                }
-            </div>
-        );
-    };
+const CurrentNews = ({ id }) => {
     return (
         <>
             <h1 className="mt-5 text-2xl">Інструкції зі зняття показників для новачків</h1>
@@ -173,14 +81,7 @@ const CurrentNews = () => {
                     Передати показання лічильників
                 </NavLink>
             </div>
-            <div>
-                <h2 className="text-xl mt-2 mb-4 font-medium">Радимо почитати</h2>
-                <hr className="w-full text-borderColor mb-2"/>
-                    <div className="relative">
-                        <PaginationCurrentNews/>
-                    </div>
-                <NewsList/>
-            </div>
+            <ToRead />
         </>
     );
 }

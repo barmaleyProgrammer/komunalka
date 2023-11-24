@@ -130,31 +130,6 @@ img.iconPassive {
 .carousel .control-dots .dot {
     background-color: #CEDDE9 !important;
 }
-.arrow_prev_news {
-    position: absolute;
-    left: 33%;
-    top: 0;
-}
-.arrow_next_news {
-    position: absolute;
-    left: 63%;
-    top: 0;
-}
-.arrowRightCurrentNews {
-    position: absolute;
-    left: 95%;
-    top: -43px;
-}
-.arrowLeftCurrentNews {
-    position: absolute;
-    left: 90%;
-    top: -43px;
-}
-/*.icon_question {*/
-/*    position: absolute;*/
-/*    left: 97%;*/
-/*    top: 7px;*/
-/*}*/
 div#my-tooltip {
     white-space: pre;
     color: #2A3744;
