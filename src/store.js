@@ -45,7 +45,8 @@ const initialSate = {
     serviceTypes: checkServiceTypes(),
     serviceType: '',
     provider: '',
-    startDate: moment().startOf('year'),
+    // startDate: moment().startOf('year'),
+    startDate: moment().subtract('months', 3),
     endDate: moment().endOf('month'),
 
 };
