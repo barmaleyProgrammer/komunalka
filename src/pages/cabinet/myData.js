@@ -123,7 +123,7 @@ const MyData = () => {
             </div>
             <div className="py-10 px-20 font-light space-y-2 rounded-lg shadow-myCustom">
                 <h1 className="font-normal text-lg pb-2 py-2">Основна інформація</h1>
-                <div className="text-xs text-red-900 text-center">{ formError }</div>
+                <div className="text-error text-center">{ formError }</div>
                 {
                     modalRequestDelAccount && (
                         <Modal close={() => setModalRequestDelAccount(false)}>

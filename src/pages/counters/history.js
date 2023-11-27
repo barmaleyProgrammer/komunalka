@@ -45,7 +45,7 @@ const History = () => {
             "to": '',
             "label": 'Історія показань'
         },
-    ]
+    ];
 
     useEffect( () => {
         const fetchData = () => {
@@ -92,10 +92,10 @@ const History = () => {
                 <Tabs2 objectId={objectId} />
                 <div className="my-4 flex flex-row font-medium space-x-8">
                     <div className="p-2 text-sm rounded text-[#FD9800] bg-[#F7F9FE] cursor-pointer" onClick={() => setShowCalendar1(true)}>
-                        обрана початкова дата {moment(state.startDate).format('DD.MM.YYYY')}
+                        початкова дата {moment(state.startDate).format('DD.MM.YYYY')}
                     </div>
                     <div className="p-2 text-sm rounded text-[#FD9800] bg-[#F7F9FE] cursor-pointer" onClick={() => setShowCalendar2(true)}>
-                        обрана кінцева дата {moment(state.endDate).format('DD.MM.YYYY')}
+                        кінцева дата {moment(state.endDate).format('DD.MM.YYYY')}
                     </div>
                     <div>
                         <MySelect options={providers} defaultValue={"Оберіть постачальника"} />
