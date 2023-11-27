@@ -61,14 +61,14 @@ const Notification = () => {
             <div className="mt-6 mb-8">
                 <Tabs />
             </div>
-            <div className="py-10 px-20 font-light rounded-lg shadow-myCustom">
+            <div className="font-light text-sm py-10 px-20 rounded-lg shadow-myCustom">
                 <h1 className="font-normal text-xl mb-4">Email розсилка</h1>
                 <div className="mb-4">
                     <h2>Нагадувати про передачу лічильників</h2>
                     {
                         state.addresses?.map((item, key) => {
                             return (
-                                <div key={key} className="flex mb-2">
+                                <div key={key} className="px-8 flex mb-2 mt-2">
                                     <input className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
                                            id="reminderTransferOfCounters"
                                            name={'reminderTransferOfCounters'}
@@ -76,7 +76,7 @@ const Notification = () => {
                                            checked={form.reminderTransferOfCounters}
                                            onChange={handleInputChange}
                                     />
-                                    <div className="px-2 font-light text-sm">
+                                    <div className="px-1 font-light text-sm">
                                         { item.name }
                                     </div>
                                 </div>
@@ -91,7 +91,7 @@ const Notification = () => {
                             checked={form.receiveNewsletter}
                             onChange={handleInputChange}
                         />
-                        <div className="px-2 font-light text-sm">
+                        <div className="px-1">
                             Отримувати листи с новинами
                         </div>
                     </div>
