@@ -1,12 +1,5 @@
-import axios from "axios";
-
-// const backEndErrors = {
-//     500: 'сервіс тимчасово недоступний',
-//
-//     503: 'таймаут'
-// };
-
-
+import axios from 'axios';
+import ApiError from './error';
 
 const connect = axios.create({
     baseURL: 'https://api-test.komunalka.ua/api',
@@ -48,52 +41,62 @@ const signUp = (data) => {
     return connect.post('/v2/account/signup', data)
         .then((res) => res)
         .catch((error) => {
-            throw error.response.data.error;
+            throw new ApiError(error);
         });
 }
+
 const signIn = (data) => {
     return connect.post('/v2/account/signin', data).then((res) => {
         localStorage.setItem('accessToken', res.data.accessToken);
         return res.data;
     }).catch((error) => {
-        throw error.response.data.error;
+        throw new ApiError(error);
     });
 }
+
 const refreshToken = () => {
     connect.defaults.withCredentials = true;
     return connect.get('/v2/account/refresh/token').then((res) => {
         localStorage.setItem('accessToken', res.data.accessToken);
         return res.data.accessToken;
-    }).catch((error) => console.error(error));
+    }).catch((error) => {
+        throw new ApiError(error);
+    });
 }
 const updateUser = (data) => {
     return connect.put('/v2/account', data).then((res) => {
         localStorage.setItem('user', JSON.stringify(data));
         return res;
+    }).catch((error) => {
+        throw new ApiError(error);
     });
 }
 const changePassword = (password) => {
     return connect.put('/v2/account/password', { password })
         .then((res) => res)
-        .catch((error) => console.error(error));
+        .catch((error) => {
+            throw new ApiError(error);
+        });
 }
 const changeEmailRequest = (email, source) => {
     return connect.get(`/v2/account/email/code?email=${encodeURIComponent(email)}&source=${source}`)
         .then((res) => res)
-        .catch((error) => console.error(error));
+        .catch((error) => {
+            throw new ApiError(error);
+        });
 }
 const validationNewEmail = (form) => {
     return connect.put('/v2/account/email', form)
         .then((res) => res)
-        .catch((error) => console.error(error));
+        .catch((error) => {
+            throw new ApiError(error);
+        });
 }
 const renameAddress = (objectId, name) => {
     return connect.put(`/v2/account/address/${objectId}`, { name })
         .then((res) => res)
         .catch((error) => {
-            console.error(error);
-            // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/message
-            throw new Error(`${error.response.status}: ${error.response.data.error}`);
+            throw new ApiError(error);
         });
 }
 const signOut = () => {
@@ -104,11 +107,16 @@ const validation = (email, token) => {
     return connect.get(`/v2/account/validate/email?email=${encodeURIComponent(email)}&token=${token}`).then((res) => {
         localStorage.setItem('accessToken', res.data.accessToken);
         return res;
+    }).catch((error) => {
+        throw new ApiError(error);
     });
 }
 const resetPasswordRequest = (email, source) => {
     return connect.get(`/v2/account/reset/password?email=${encodeURIComponent(email)}&source=${source}`)
-        .then((res) => res);
+        .then((res) => res)
+        .catch((error) => {
+            throw new ApiError(error);
+        });
 }
 const authSocialNetworks = (type = 'google') => {
     const successUrl = `${window.location.protocol}//${window.location.host}/validateToken`;
@@ -118,7 +126,9 @@ const authSocialNetworks = (type = 'google') => {
 const newPassword = (payload) => {
     return connect.post('/v2/account/reset/password', payload)
         .then((res) => res)
-        .catch((error) => console.error(error));
+        .catch((error) => {
+            throw new ApiError(error);
+        });
 }
 
 const getRegions = () => {
@@ -127,7 +137,9 @@ const getRegions = () => {
             value: Number(item.region_id),
             label: item.name.trim()
         }));
-    })
+    }).catch((error) => {
+        throw new ApiError(error);
+    });
 }
 
 
@@ -137,7 +149,9 @@ const getDistricts = (region_id) => {
             value: Number(item.district_id),
             label: item.name.trim()
         }));
-    })
+    }).catch((error) => {
+        throw new ApiError(error);
+    });
 }
 
 const getTowns = (district_id) => {
@@ -146,7 +160,9 @@ const getTowns = (district_id) => {
             value: Number(item.town_id),
             label: item.name.trim()
         }));
-    })
+    }).catch((error) => {
+        throw new ApiError(error);
+    });
 }
 
 const getStreets = (town_id) => {
@@ -155,7 +171,9 @@ const getStreets = (town_id) => {
             value: Number(item.street_id),
             label: item.name.trim()
         }));
-    })
+    }).catch((error) => {
+        throw new ApiError(error);
+    });
 }
 
 const getHouses = (street_id) => {
@@ -164,7 +182,9 @@ const getHouses = (street_id) => {
             value: Number(item.house_id),
             label: item.name.trim()
         }));
-    })
+    }).catch((error) => {
+        throw new ApiError(error);
+    });
 }
 
 const getFlats = (house_id) => {
@@ -173,12 +193,16 @@ const getFlats = (house_id) => {
             value: Number(item.object_id),
             label: item.name.trim()
         }));
+    }).catch((error) => {
+        throw new ApiError(error);
     });
 }
 const getCounterValue = (objectId) => {
     return connect.get(`/v2/counter/meters/data?objectId=${objectId}`)
         .then((res) => res.data.data)
-        .catch((error) => console.error(error));
+        .catch((error) => {
+            throw new ApiError(error);
+        });
 }
 
 const getCountersHistory = (objectId, dateStart, dateEnd) => {
@@ -195,8 +219,7 @@ const getCountersHistory = (objectId, dateStart, dateEnd) => {
             return res.data.data;
         })
         .catch((error) => {
-            console.error(error);
-            return [];
+            throw new ApiError(error);
         });
 }
 
@@ -206,7 +229,9 @@ const getServices = () => {
             localStorage.setItem('services', JSON.stringify(res.data.data));
             return res.data.data;
         })
-        .catch((error) => console.error(error));
+        .catch((error) => {
+            throw new ApiError(error);
+        });
 }
 const getServiceTypes = () => {
     return connect.get('/v2/counter/service/type')
@@ -214,7 +239,9 @@ const getServiceTypes = () => {
             localStorage.setItem('serviceTypes', JSON.stringify(res.data.data));
             return res.data.data;
         })
-        .catch((error) => console.error(error));
+        .catch((error) => {
+            throw new ApiError(error);
+        });
 }
 const getAddress = () => {
     return connect.get('/v2/account/address')
@@ -223,9 +250,7 @@ const getAddress = () => {
             return res.data;
         })
         .catch((error) => {
-            // debugger;
-            console.error(error);
-            throw new Error(`${error.response.status}: ${error.response.data.error}`);
+            throw new ApiError(error);
         });
 }
 
@@ -235,13 +260,17 @@ const getObject = () => {
             localStorage.setItem('user', JSON.stringify(res.data.account));
             return res.data;
         })
-        .catch((error) => console.error(error));
+        .catch((error) => {
+            throw new ApiError(error);
+        });
 }
 
 const addObject = (objectId, name = '') => {
     return connect.post('/v2/account/address', { objectId, name })
         .then((res) => res)
-        .catch((error) => console.error(error));
+        .catch((error) => {
+            throw new ApiError(error);
+        });
 }
 
 const deleteObject = (objectId) => {
@@ -250,23 +279,31 @@ const deleteObject = (objectId) => {
     };
     return connect.delete('/v2/account/address', payload)
         .then((res) => res)
-        .catch((error) => console.error(error));
+        .catch((error) => {
+            throw new ApiError(error);
+        });
 }
 const deleteAccount = () => {
     return connect.delete('/v2/account')
         .then((res) => res)
-        .catch((error) => console.error(error));
+        .catch((error) => {
+            throw new ApiError(error);
+        });
 }
 
 const getDebt = (objectId) => {
     return connect.get(`/v2/accrual/debt/${objectId}`)
         .then((res) => res.data.debts)
-        .catch((error) => console.error(error));
+        .catch((error) => {
+            throw new ApiError(error);
+        });
 }
 const sendCounterData = (payload) => {
     return connect.post('/v2/counter/meters/data', payload)
         .then((res) => res)
-        .catch((error) => console.error(error));
+        .catch((error) => {
+            throw new ApiError(error);
+        });
 }
 export default {
     signUp,

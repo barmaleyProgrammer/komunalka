@@ -11,27 +11,24 @@ import eye from "../../img/eye.svg";
 import Button from "../../components/button";
 import api from "../../api";
 import { Context } from "../../store";
-import icon_error from "../../img/icon_error.svg";
 import Loader from "../../components/Loader/loader";
 
 const Login = ({ close, showRegister, showResetPass }) => {
     const [,dispatch] = useContext(Context);
     const navigate = useNavigate();
     const [type, setTape] = useState('password');
-    const [errorFlag, setErrorFlag] = useState(false);
-    const [isPostLoading, setIsPostLoading] = useState(false);
-
-    // const [form, setForm] = useState({
-    //     email: (process.env.NODE_ENV === 'development') ? 'grebenyukvd@gmail.com' : '',
-    //     password: (process.env.NODE_ENV === 'development') ? 'Test_Drive5' : '',
-    //     rememberMe: false
-    // });
+    const [isLoading, setIsLoading] = useState(false);
     const [form, setForm] = useState({
-        email: '',
-        password: '',
+        email: (process.env.NODE_ENV === 'development') ? 'grebenyukvd@gmail.com' : '',
+        password: (process.env.NODE_ENV === 'development') ? 'Test_Drive5' : '',
         rememberMe: false
     });
-    const [formError, setFormError] = useState('');
+    // const [form, setForm] = useState({
+    //     email: '',
+    //     password: '',
+    //     rememberMe: false
+    // });
+
 
     const handleInputChange = (event) => {
         const value = (event.target.type === 'checkbox') ? event.target.checked : event.target.value;
@@ -41,35 +38,36 @@ const Login = ({ close, showRegister, showResetPass }) => {
         }));
     };
 
-    const Submit = async (event) => {
+    const Submit = (event) => {
         event.preventDefault();
-        setIsPostLoading(true);
-        try {
-            await api.signIn(form);
+        dispatch({ type: 'error', payload: '' });
+        setIsLoading(true);
+        api.signIn(form).then(() => {
             dispatch({ type: 'logIn' });
-            api.getObject().then((data) => {
+            const req1 = api.getObject().then((data) => {
                 dispatch({ type: 'setAccount', payload: data.account });
             });
-            api.getServices().then((data) => {
+            const req2 = api.getServices().then((data) => {
                 dispatch({ type: 'services', payload: data });
             });
-            api.getServiceTypes().then((data) => {
+            const req3 = api.getServiceTypes().then((data) => {
                 dispatch({ type: 'serviceTypes', payload: data });
             });
-            api.getAddress().then((data) => {
+            const req4 = api.getAddress().then((data) => {
                 dispatch({ type: 'setAddresses', payload: data });
             })
-            navigate('/cabinet');
-            close()
-        } catch (e) {
-            setErrorFlag(true);
-            setFormError(e);
-            setForm({
-                email: '',
-                password: '',
+            Promise.all([req1, req2, req3, req4]).then(() => {
+                navigate('/cabinet');
+                close();
             });
-        }
-        setIsPostLoading(false);
+        }).catch((error) => {
+            dispatch({ type: 'error', payload: error });
+            // setForm({
+            //     email: '',
+            //     password: '',
+            //     rememberMe: false
+            // });
+        }).finally(() => setIsLoading(false));
     };
     const SocialNetworks = (event, type) => {
         event.preventDefault();
@@ -83,21 +81,12 @@ const Login = ({ close, showRegister, showResetPass }) => {
             setTape('password')
         }
     }
+
     return (
-        // <div className="mt-20 mb-20 p-10 mx-auto rounded-lg shadow-lg sm:w-3/4 md:w-3/4 lg:w-3/4 xl:w-1/3 max-w-[450px]">
         <div className="px-10 py-6 space-y-3 mt-2 mx-auto w-[464px] rounded-lg shadow-lg">
             <img src={logo_lichylnyk} className="h-16 mb-8 mx-auto" alt="" />
             <h4 className="text-black_figma text-center">Вхід</h4>
-                { isPostLoading ? <Loader /> :
-                    errorFlag ?
-                        <>
-                            <img className="mx-auto" src={ icon_error } alt=""/>
-                            <p className="text-black_figma text-center">Нажаль, сталася наступна помилка:</p>
-                            <div className="text-red-950 text-center">{ formError }</div>
-                            <div className="pt-2 w-44 mx-auto">
-                                <Button type="button" label={'Спробуйте ще раз'} cssType={'primary'} onClick={() => setErrorFlag(false)} />
-                            </div>
-                        </> :
+                { isLoading ? <Loader /> :
                     <form className="space-y-2" onSubmit={Submit}>
                         <InputField
                             label={'Телефон(не менше 12цифр) або Email'}

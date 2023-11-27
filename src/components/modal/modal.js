@@ -17,16 +17,14 @@ const Modal = ({close, children}) => {
     }, []);
 
     return (
-        // <div className="modal" onClick={close}>
-            <div className="modal">
-                <div className="modal__content" onClick={e => e.stopPropagation()}>
-                    <div className="icon_close" onClick={close}>
-                        <img src={icon_close} alt=""/>
-                    </div>
-                    {children}
+        <div className="modal">
+            <div className="modal__content" onClick={e => e.stopPropagation()}>
+                <div className="icon_close" onClick={close}>
+                    <img src={icon_close} alt="" />
                 </div>
+                {children}
             </div>
-        // </div>
+        </div>
     );
 };
 

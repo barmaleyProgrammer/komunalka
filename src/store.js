@@ -48,7 +48,7 @@ const initialSate = {
     // startDate: moment().startOf('year'),
     startDate: moment().subtract('months', 3),
     endDate: moment().endOf('month'),
-
+    error: ''
 };
 
 const reducer = (state, action) => {
@@ -103,6 +103,11 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 endDate: action.payload
+            };
+        case 'error':
+            return {
+                ...state,
+                error: action.payload
             };
         default:
             return state;
