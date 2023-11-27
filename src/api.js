@@ -122,6 +122,14 @@ const authSocialNetworks = (type = 'google') => {
     const successUrl = `${window.location.protocol}//${window.location.host}/validateToken`;
     const errorUrl = `${window.location.protocol}//${window.location.host}/notValid`;
     window.location = `${connect.defaults.baseURL}/user/oauth2?authTypeId=${type}&successUrl=${successUrl}&errorUrl=${errorUrl}`;
+    // connect.defaults.withCredentials = true;
+    // return connect.get(`/user/oauth2?authTypeId=${type}&successUrl=${successUrl}&errorUrl=${errorUrl}`).then((res) => {
+    //     debugger
+    //     localStorage.setItem('accessToken', res.data.accessToken);
+    //     return res.data.accessToken;
+    // }).catch((error) => {
+    //     throw new ApiError(error);
+    // });
 }
 const newPassword = (payload) => {
     return connect.post('/v2/account/reset/password', payload)
