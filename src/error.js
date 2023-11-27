@@ -1,3 +1,9 @@
+
+const translate = {
+    'Email exists. ': 'користувач з таким Email вже існує',
+    '': ''
+};
+
 class ApiError extends Error {
     constructor(error) {
         if (process.env.NODE_ENV === 'development') {
@@ -14,6 +20,12 @@ class ApiError extends Error {
         if (code === 503) {
             message = 'таймаут';
         }
+
+        // if (translate.hasOwnProperty(message)) {
+        //     message = translate[message];
+        // }
+
+
 
         super(`${code}: ${message}`);
         this.code = error?.response?.status;

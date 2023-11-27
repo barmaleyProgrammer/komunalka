@@ -43,7 +43,6 @@ const MyData = () => {
     });
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState(state.user.email);
-    const [formError, setFormError] = useState('');
     const [type, setTape] = useState('password');
     const [inputPassFlag, setInputPassFlag] = useState(false);
     const [modalActive, setModalActive] = useState(false);
@@ -59,8 +58,7 @@ const MyData = () => {
             dispatch({ type: 'setAccount', payload: form })
             setModalActive(true);
         }).catch((error) => {
-            console.error(error.message);
-            setFormError(error.message);
+            dispatch({ type: 'error', payload: error });
         });
     };
 
@@ -70,8 +68,7 @@ const MyData = () => {
         api.changePassword(password).then(() => {
             setModalActive(true);
         }).catch((error) => {
-            console.error(error.message);
-            setFormError(error.message);
+            dispatch({ type: 'error', payload: error });
         });
     };
 
@@ -81,8 +78,7 @@ const MyData = () => {
         api.changeEmailRequest(email, form.source).then(() => {
             setModalCheckEmail(true);
         }).catch((error) => {
-            console.error(error.message);
-            setFormError(error.message);
+            dispatch({ type: 'error', payload: error });
         });
     };
 
@@ -93,8 +89,7 @@ const MyData = () => {
             dispatch({ type: 'logOut' });
             navigate('/');
         }).catch((error) => {
-            console.error(error.message);
-            setFormError(error.message);
+            dispatch({ type: 'error', payload: error });
         });
     };
 
@@ -123,7 +118,6 @@ const MyData = () => {
             </div>
             <div className="py-10 px-20 font-light space-y-2 rounded-lg shadow-myCustom">
                 <h1 className="font-normal text-lg pb-2 py-2">Основна інформація</h1>
-                <div className="text-error text-center">{ formError }</div>
                 {
                     modalRequestDelAccount && (
                         <Modal close={() => setModalRequestDelAccount(false)}>
