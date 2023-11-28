@@ -8,6 +8,7 @@ import Modal from "./modal/modal";
 import Register from "../pages/auth/register";
 import Login from "../pages/auth/login";
 import ResetPassword from "../pages/auth/resetPassword";
+import ModalRegister from "./modalRegister/modalRegister";
 // import { useLocation } from "react-router-dom";
 
 const Header = () => {
@@ -82,9 +83,9 @@ const Header = () => {
             </div>
             {
                 modalRegistration && (
-                    <Modal close={() => setModalRegistration(false)}>
+                    <ModalRegister close={() => setModalRegistration(false)}>
                         <Register close={() => setModalRegistration(false)} showLogin={showLogin}/>
-                    </Modal>
+                    </ModalRegister>
                 )
             }
             {

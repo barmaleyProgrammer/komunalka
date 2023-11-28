@@ -1,4 +1,4 @@
-.modal {
+.modalRegister {
     height: 100vh;
     width: 100vw;
     background-color: rgba(0,0,0,0.4);
@@ -15,9 +15,9 @@
     overflow-y: auto;
 }
 
-.modal__content {
-    /*top: 10px;*/
-    /*position: absolute;*/
+.modal__contentRegister {
+    top: 10px;
+    position: absolute;
     border-radius: 12px;
     background-color: white;
     transition: 0.4s all;
