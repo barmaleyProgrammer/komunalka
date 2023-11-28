@@ -1,4 +1,4 @@
-import {useContext, useState} from 'react';
+import {useContext} from 'react';
 import { Context } from "../store";
 import InputField from "./inputField";
 import Button from "./button";
@@ -52,7 +52,6 @@ const CounterForms = ({counters, setCounters, Save}) => {
                                     name={`currentReadings-${item.id}`}
                                     value={item.currentReadings}
                                     autocomplete="off"
-                                    id="num"
                                     min={'0'}
                                     step={'0.01'}
                                     onChange={(e) => handleInputChange(e, item)}
