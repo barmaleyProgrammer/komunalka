@@ -1,7 +1,8 @@
 
 const translate = {
     'Email exists. ': 'користувач з таким Email вже існує',
-    '': ''
+    'Invalid login. ': 'Дані для авторизації невірні',
+    'Invalid password. ': 'Дані для авторизації невірні',
 };
 
 class ApiError extends Error {
@@ -21,9 +22,9 @@ class ApiError extends Error {
             message = 'таймаут';
         }
 
-        // if (translate.hasOwnProperty(message)) {
-        //     message = translate[message];
-        // }
+        if (translate.hasOwnProperty(message)) {
+            message = translate[message];
+        }
 
 
 
