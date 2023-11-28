@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { Context } from "../../store";
 import {NavLink, useNavigate} from "react-router-dom";
 import { AiOutlinePlus } from "react-icons/ai";
@@ -13,6 +13,21 @@ import Button from "../../components/button";
 import AddAddress from './addAddress';
 import ErrorModal from '../../components/errorModal';
 
+const breadCrumbs = [
+    {
+        "to": '/',
+        "label": 'Головна'
+    },
+    {
+        "to": '/cabinet',
+        "label": 'Особистий кабінет'
+    },
+    {
+        "to": '',
+        "label": 'Мої адреси'
+    },
+];
+
 const Cabinet = () => {
     const [state, dispatch] = useContext(Context);
     const navigate = useNavigate();
@@ -21,20 +36,13 @@ const Cabinet = () => {
     const [modalAddAddressActive, setModalAddAddressActive] = useState(false);
     const [modalConfirmDelete, setModalConfirmDelete] = useState(false);
     const [currentAddress, setCurrentAddress] = useState('');
-    const breadCrumbs = [
-        {
-            "to": '/',
-            "label": 'Головна'
-        },
-        {
-            "to": '/cabinet',
-            "label": 'Особистий кабінет'
-        },
-        {
-            "to": '',
-            "label": 'Мої адреси'
-        },
-    ]
+
+    useEffect(() => {
+        dispatch({ type: 'serviceType', payload: '' });
+        dispatch({ type: 'provider', payload: '' });
+    }, []);
+
+
 
     const deleteAddress = async (e, objectId) => {
         e.stopPropagation();

@@ -29,10 +29,8 @@ const ServiceTypes = ({types}) => {
                     className="flex flex-col items-center w-[72px]"
                     onClick={() => {
                         if (state.serviceType === serviceType.id) {
-                            // setServiceType('');
                             dispatch({ type: 'serviceType', payload: '' });
                         } else {
-                            // setServiceType(serviceType.id);
                             dispatch({ type: 'serviceType', payload: serviceType.id });
                         }
                     }}>
