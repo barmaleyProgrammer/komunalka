@@ -14,6 +14,8 @@ const InputField = ({
         onFocus = undefined,
         onBlur = undefined,
         pattern = undefined,
+        min = undefined,
+        step = undefined,
     }) => {
     return (
         <fieldset className={cssClass}>
@@ -34,6 +36,8 @@ const InputField = ({
                 onFocus={onFocus}
                 onBlur={onBlur}
                 pattern={pattern}
+                min={min}
+                step={step}
             />
         </fieldset>
     );

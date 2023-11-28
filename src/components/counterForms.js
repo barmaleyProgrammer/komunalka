@@ -5,7 +5,6 @@ import Button from "./button";
 import 'react-tooltip/dist/react-tooltip.css';
 import Neironka from "./neironka";
 
-
 const CounterForms = ({counters, setCounters, Save}) => {
     const [state] = useContext(Context);
 
@@ -39,6 +38,7 @@ const CounterForms = ({counters, setCounters, Save}) => {
                             <div className="w-44">
                                 <InputField
                                     label={'Попередні показники'}
+                                    type={'number'}
                                     name={`oldValue-${item.id}`}
                                     readOnly={true}
                                     value={item.oldValue}
@@ -47,9 +47,12 @@ const CounterForms = ({counters, setCounters, Save}) => {
                             <div className="w-44">
                                 <InputField
                                     label={'Актуальні показники'}
+                                    type={'number'}
                                     name={`currentReadings-${item.id}`}
-                                    autoComplete="off"
                                     value={item.currentReadings}
+                                    autocomplete="off"
+                                    min={'0'}
+                                    step={'0.01'}
                                     onChange={(e) => handleInputChange(e, item)}
                                 />
                             </div>
