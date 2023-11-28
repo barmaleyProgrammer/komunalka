@@ -57,6 +57,7 @@ const CounterForms = ({counters, setCounters, Save}) => {
                                     onChange={(e) => handleInputChange(e, item)}
                                 />
                             </div>
+                            <p className="absolute bottom-0 right-24 text-sm">Зараз прийом показань недоступний</p>
                             <Neironka />
                         </div>
                     );
