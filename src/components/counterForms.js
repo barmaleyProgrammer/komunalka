@@ -38,7 +38,7 @@ const CounterForms = ({counters, setCounters, Save}) => {
                             </div>
                             <div className="w-44">
                                 <InputField
-                                    label={'Попередні показники'}
+                                    label={'Попередні показання'}
                                     type={'number'}
                                     name={`oldValue-${item.id}`}
                                     readOnly={true}
@@ -47,7 +47,7 @@ const CounterForms = ({counters, setCounters, Save}) => {
                             </div>
                             <div className="w-44">
                                 <InputField
-                                    label={'Актуальні показники'}
+                                    label={'Поточні показання'}
                                     type={'number'}
                                     name={`currentReadings-${item.id}`}
                                     value={item.currentReadings}
