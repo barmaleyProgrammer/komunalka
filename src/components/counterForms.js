@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import {useContext, useState} from 'react';
 import { Context } from "../store";
 import InputField from "./inputField";
 import Button from "./button";
@@ -10,9 +10,10 @@ const CounterForms = ({counters, setCounters, Save}) => {
 
     const handleInputChange = (event, item) => {
         setCounters((prevData) => {
+            const limit = 10;
             const clone = [...prevData];
             const index = clone.findIndex((i) => i.id === item.id);
-            clone[index].currentReadings = event.target.value;
+            clone[index].currentReadings = event.target.value.slice(0, limit);
             return clone;
         });
     };
@@ -51,6 +52,7 @@ const CounterForms = ({counters, setCounters, Save}) => {
                                     name={`currentReadings-${item.id}`}
                                     value={item.currentReadings}
                                     autocomplete="off"
+                                    id="num"
                                     min={'0'}
                                     step={'0.01'}
                                     onChange={(e) => handleInputChange(e, item)}

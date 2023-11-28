@@ -148,7 +148,7 @@ div#my-tooltip {
     text-overflow: ellipsis;
     white-space: nowrap;
 }
-
+/*html input number hide arrows*/
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
