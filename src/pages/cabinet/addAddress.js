@@ -22,6 +22,7 @@ const AutoSuggestClassNames = {
     searchIcon: "hidden"
 };
 const AddAddress = ({ close }) => {
+    // const [,dispatch] = useContext(Context);
     const [modalPinCode, setModalPinCode] = useState(false);
     const [pin, setPin] = useState('');
     const [state, dispatch] = useContext(Context);
@@ -159,8 +160,14 @@ const AddAddress = ({ close }) => {
 
     const addObj = async () => {
         // add api call to validate pinCode
-        await api.addObject(flat.value, flatName);
-        await api.getAddress().then((data) => dispatch({ type: 'setAddresses', payload: data }));
+        await api.addObject(flat.value, flatName)
+        .catch((error) => {
+            dispatch({ type: 'error', payload: error });
+        });
+        await api.getAddress().then((data) => dispatch({ type: 'setAddresses', payload: data }))
+        .catch((error) => {
+                dispatch({ type: 'error', payload: error });
+        });
         close();
     }
 
