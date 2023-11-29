@@ -27,7 +27,7 @@ const CounterForms = ({counters, setCounters, Save}) => {
             return (item.serviceType == state.serviceType);
         });
     }
-
+    //https://daveceddia.com/computed-properties-in-react/
     return (
         <form action="#" onSubmit={Save}>
             {
