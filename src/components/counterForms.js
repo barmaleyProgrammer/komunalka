@@ -14,19 +14,24 @@ const CounterForms = ({counters, setCounters, Save}) => {
             const clone = [...prevData];
             const index = clone.findIndex((i) => i.id === item.id);
             clone[index].currentReadings = event.target.value.slice(0, limit);
+            console.log(counters);
             return clone;
         });
     };
 
+    const filteredData = (counters) => {
+        return counters?.filter((item) => {
+            if (!state.serviceType) {
+                return true;
+            }
+            return (item.serviceType == state.serviceType);
+        });
+    }
+
     return (
         <form action="#" onSubmit={Save}>
             {
-                counters?.filter((item) => {
-                    if (!state.serviceType) {
-                        return true;
-                    }
-                    return (item.serviceType == state.serviceType);
-                }).map((item, key) => {
+                filteredData(counters).map((item, key) => {
                     return (
                         <div key={key} className="relative my-4 p-4 flex gap-x-4 rounded-lg border border-borderColor w-full">
                             <div className="w-2/3">
@@ -69,7 +74,7 @@ const CounterForms = ({counters, setCounters, Save}) => {
                     </a>
                 </p>
                 <div className="h-12 w-52">
-                    <Button type="submit" label={'Передати показники'} cssType={'primary'} />
+                    <Button type="submit" label={'Передати показники'} cssType={'primary'} disabled={!filteredData(counters).some((item) => item.currentReadings)} />
                 </div>
             </div>
         </form>
