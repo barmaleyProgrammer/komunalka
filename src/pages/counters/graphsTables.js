@@ -206,7 +206,7 @@ const GraphsTables = () => {
                                     <NavLink to="#" className="ml-2 text-xs font-light" onClick={() => setView('table')}>Таблиця</NavLink>
                                 </div>
                             </div>
-                            <div className="border-collapse border rounded-xl py-10 px-10 border-[#E7E7E7]">
+                            <div className="border-collapse border w-1/2 rounded-xl py-10 px-10 border-[#E7E7E7]">
                                 {
                                     view === 'table'
                                     ? <TableView items={filteredData} />
