@@ -8,7 +8,7 @@ export const UniqueServiceTypes = (data = []) => {
     });
 
     return Array.from(unique.values());
-}
+};
 
 export const UniqueProviders = (data = [], serviceType = '') => {
     const unique = new Map();
@@ -26,6 +26,9 @@ export const UniqueProviders = (data = [], serviceType = '') => {
             unique.set(id, item.nameFirme);
         }
     });
-
     return Array.from(unique).map(([value, label]) => ({ value, label }));
-}
+};
+
+export const UniqueCounters = (data = [], serviceType = '', provider = '') => {
+    const unique = new Map();
+};

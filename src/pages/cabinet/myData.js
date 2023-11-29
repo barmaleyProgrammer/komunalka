@@ -1,31 +1,31 @@
 import {useContext, useState} from 'react';
-import { NavLink } from "react-router-dom";
-import InputField from "../../components/inputField";
-import Tabs from "../../components/tabs";
-import { Context } from "../../store";
-import Breadcrumbs from "../../components/breadcrumbs";
-import api from "../../api";
-import Button from "../../components/button";
-import eye from "../../img/eye.svg";
+import { NavLink } from 'react-router-dom';
+import InputField from '../../components/inputField';
+import Tabs from '../../components/tabs';
+import { Context } from '../../store';
+import Breadcrumbs from '../../components/breadcrumbs';
+import { updateUser, changePassword, changeEmailRequest, deleteAccount } from '../../api';
+import Button from '../../components/button';
+import eye from '../../img/eye.svg';
 import my_data_changed from './../../img/modal_mydata_changed.png';
-import Modal from "../../components/modal/modal";
+import Modal from '../../components/modal/modal';
 import './myData.css';
-import { useNavigate } from "react-router-dom";
-import CheckPassword from "../../components/checkPassword/checkPassword";
-import PhoneField from "../../components/phoneField";
+import { useNavigate } from 'react-router-dom';
+import CheckPassword from '../../components/checkPassword/checkPassword';
+import PhoneField from '../../components/phoneField';
 
 const breadCrumbs = [
     {
-        "to": '/',
-        "label": 'Головна'
+        'to': '/',
+        'label': 'Головна'
     },
     {
-        "to": '/cabinet',
-        "label": 'Особистий кабінет'
+        'to': '/cabinet',
+        'label': 'Особистий кабінет'
     },
     {
-        "to": '',
-        "label": 'Мої дані'
+        'to': '',
+        'label': 'Мої дані'
     },
 ];
 
@@ -54,7 +54,7 @@ const MyData = () => {
 
     const Submit = (event) => {
         event.preventDefault();
-        api.updateUser(form).then(() => {
+        updateUser(form).then(() => {
             dispatch({ type: 'setAccount', payload: form })
             setModalActive(true);
         }).catch((error) => {
@@ -65,7 +65,7 @@ const MyData = () => {
     const ChangePassword = (event) => {
         event.preventDefault();
         setShowChangePasswordModal(false);
-        api.changePassword(password).then(() => {
+        changePassword(password).then(() => {
             setModalActive(true);
         }).catch((error) => {
             dispatch({ type: 'error', payload: error });
@@ -75,7 +75,7 @@ const MyData = () => {
     const ChangeEmailRequest = (event) => {
         event.preventDefault();
         setModalChangeEmail(false);
-        api.changeEmailRequest(email, form.source).then(() => {
+        changeEmailRequest(email, form.source).then(() => {
             setModalCheckEmail(true);
         }).catch((error) => {
             dispatch({ type: 'error', payload: error });
@@ -84,7 +84,7 @@ const MyData = () => {
 
     const DeleteAccount = (event) => {
         event.preventDefault();
-        api.deleteAccount().then(() => {
+        deleteAccount().then(() => {
             setModalRequestDelAccount(false);
             dispatch({ type: 'logOut' });
             navigate('/');
@@ -107,7 +107,7 @@ const MyData = () => {
         } else {
             setTape('password')
         }
-    }
+    };
 
 
     return (

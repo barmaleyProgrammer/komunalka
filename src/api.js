@@ -1,5 +1,6 @@
 import axios from 'axios';
 import ApiError from './error';
+import { UniqueServiceTypes, UniqueProviders, UniqueCounters } from './utils';
 
 const connect = axios.create({
     baseURL: 'https://api-test.komunalka.ua/api',
@@ -22,37 +23,37 @@ connect.interceptors.request.use((config) => {
     connect.defaults.withCredentials = false;
     return config;
 }, (error) => Promise.reject(error));
+
 connect.interceptors.response.use(
     (res) => res,
-    async (error) => {
+    (error) => {
         const prevRequest = error?.config;
         const token = localStorage.getItem('accessToken') || '';
         if (error?.response?.status === 401 && token && !prevRequest?.sent) {
             localStorage.removeItem('accessToken');
             prevRequest.sent = true;
-            await refreshToken();
-            return connect(prevRequest);
+            return refreshToken().then(() => connect(prevRequest));
         }
         return Promise.reject(error);
     }
 );
 
-const signUp = (data) => {
+export const signUp = (data) => {
     return connect.post('/v2/account/signup', data)
         .then((res) => res)
         .catch((error) => {
             throw new ApiError(error);
         });
-}
+};
 
-const signIn = (data) => {
+export const signIn = (data) => {
     return connect.post('/v2/account/signin', data).then((res) => {
         localStorage.setItem('accessToken', res.data.accessToken);
         return res.data;
     }).catch((error) => {
         throw new ApiError(error);
     });
-}
+};
 
 const refreshToken = () => {
     connect.defaults.withCredentials = true;
@@ -62,63 +63,72 @@ const refreshToken = () => {
     }).catch((error) => {
         throw new ApiError(error);
     });
-}
-const updateUser = (data) => {
+};
+
+export const updateUser = (data) => {
     return connect.put('/v2/account', data).then((res) => {
         localStorage.setItem('user', JSON.stringify(data));
         return res;
     }).catch((error) => {
         throw new ApiError(error);
     });
-}
-const changePassword = (password) => {
+};
+
+export const changePassword = (password) => {
     return connect.put('/v2/account/password', { password })
         .then((res) => res)
         .catch((error) => {
             throw new ApiError(error);
         });
-}
-const changeEmailRequest = (email, source) => {
+};
+
+export const changeEmailRequest = (email, source) => {
     return connect.get(`/v2/account/email/code?email=${encodeURIComponent(email)}&source=${source}`)
         .then((res) => res)
         .catch((error) => {
             throw new ApiError(error);
         });
-}
-const validationNewEmail = (form) => {
+};
+
+export const validationNewEmail = (form) => {
     return connect.put('/v2/account/email', form)
         .then((res) => res)
         .catch((error) => {
             throw new ApiError(error);
         });
-}
-const renameAddress = (objectId, name) => {
+};
+
+export const renameAddress = (objectId, name) => {
     return connect.put(`/v2/account/address/${objectId}`, { name })
         .then((res) => res)
         .catch((error) => {
             throw new ApiError(error);
         });
-}
-const signOut = () => {
+};
+
+export const signOut = () => {
     localStorage.clear();
     sessionStorage.clear();
-}
-const validation = (email, token) => {
+};
+
+export const validation = (email, token) => {
     return connect.get(`/v2/account/validate/email?email=${encodeURIComponent(email)}&token=${token}`).then((res) => {
         localStorage.setItem('accessToken', res.data.accessToken);
         return res;
     }).catch((error) => {
         throw new ApiError(error);
     });
-}
-const resetPasswordRequest = (email, source) => {
+};
+
+export const resetPasswordRequest = (email, source) => {
     return connect.get(`/v2/account/reset/password?email=${encodeURIComponent(email)}&source=${source}`)
         .then((res) => res)
         .catch((error) => {
             throw new ApiError(error);
         });
-}
-const authSocialNetworks = (type = 'google') => {
+};
+
+export const authSocialNetworks = (type = 'google') => {
     const successUrl = `${window.location.protocol}//${window.location.host}/validateToken`;
     const errorUrl = `${window.location.protocol}//${window.location.host}/notValid`;
     window.location = `${connect.defaults.baseURL}/user/oauth2?authTypeId=${type}&successUrl=${successUrl}&errorUrl=${errorUrl}`;
@@ -130,16 +140,17 @@ const authSocialNetworks = (type = 'google') => {
     // }).catch((error) => {
     //     throw new ApiError(error);
     // });
-}
-const newPassword = (payload) => {
+};
+
+export const newPassword = (payload) => {
     return connect.post('/v2/account/reset/password', payload)
         .then((res) => res)
         .catch((error) => {
             throw new ApiError(error);
         });
-}
+};
 
-const getRegions = () => {
+export const getRegions = () => {
     return connect.get('/v2/address/regions?country=1').then((res) => {
         return res.data.map((item) => ({
             value: Number(item.region_id),
@@ -148,10 +159,9 @@ const getRegions = () => {
     }).catch((error) => {
         throw new ApiError(error);
     });
-}
+};
 
-
-const getDistricts = (region_id) => {
+export const getDistricts = (region_id) => {
     return connect.get(`/v2/address/districts?region=${region_id}`).then((res) => {
         return res.data.map((item) => ({
             value: Number(item.district_id),
@@ -160,9 +170,9 @@ const getDistricts = (region_id) => {
     }).catch((error) => {
         throw new ApiError(error);
     });
-}
+};
 
-const getTowns = (district_id) => {
+export const getTowns = (district_id) => {
     return connect.get(`/v2/address/towns?district=${district_id}`).then((res) => {
         return res.data.map((item) => ({
             value: Number(item.town_id),
@@ -171,9 +181,9 @@ const getTowns = (district_id) => {
     }).catch((error) => {
         throw new ApiError(error);
     });
-}
+};
 
-const getStreets = (town_id) => {
+export const getStreets = (town_id) => {
     return connect.get(`/v2/address/streets?town=${town_id}`).then((res) => {
         return res.data.map((item) => ({
             value: Number(item.street_id),
@@ -182,9 +192,9 @@ const getStreets = (town_id) => {
     }).catch((error) => {
         throw new ApiError(error);
     });
-}
+};
 
-const getHouses = (street_id) => {
+export const getHouses = (street_id) => {
     return connect.get(`/v2/address/houses?street=${street_id}`).then((res) => {
         return res.data.map((item) => ({
             value: Number(item.house_id),
@@ -193,9 +203,9 @@ const getHouses = (street_id) => {
     }).catch((error) => {
         throw new ApiError(error);
     });
-}
+};
 
-const getFlats = (house_id) => {
+export const getFlats = (house_id) => {
     return connect.get(`/v2/address/flats?house=${house_id}`).then((res) => {
         return res.data.map((item) => ({
             value: Number(item.object_id),
@@ -204,34 +214,61 @@ const getFlats = (house_id) => {
     }).catch((error) => {
         throw new ApiError(error);
     });
-}
-const getCounterValue = (objectId) => {
+};
+
+export const getCounterValue = (objectId) => {
     return connect.get(`/v2/counter/meters/data?objectId=${objectId}`)
         .then((res) => res.data.data)
         .catch((error) => {
             throw new ApiError(error);
         });
-}
+};
 
-const getCountersHistory = (objectId, dateStart, dateEnd) => {
+export const getCountersHistory = (objectId, dateStart, dateEnd) => {
     const key = `${objectId}-${dateStart}-${dateEnd}`;
     const storedData = sessionStorage.getItem(key);
 
-    if (storedData) {
-        return Promise.resolve(JSON.parse(storedData));
-    }
+    // if (storedData) {
+    //     return Promise.resolve(JSON.parse(storedData));
+    // }
 
     return connect.get(`/v2/counter/meters/history/data?objectId=${objectId}&dateStart=${dateStart}&dateEnd=${dateEnd}`)
         .then((res) => {
-            sessionStorage.setItem(key, JSON.stringify(res.data.data));
-            return res.data.data;
+            const all = [...res.data.data];
+            const serviceTypes = new Map();
+            const providers = new Map();
+            const counters = new Map();
+            res.data.data.forEach((item) => {
+                const providerId = Number(item.idFirme);
+                const serviceType = Number(item.serviceType);
+                const providerName = String(item.nameFirme).trim();
+                const counterId = Number(item.abcounter);
+                if (!serviceTypes.has(serviceType)) {
+                    serviceTypes.set(serviceType, serviceType);
+                }
+                if (!providers.has(providerId)) {
+                    providers.set(providerId, { value: providerId, serviceType, label: providerName });
+                }
+                if (!counters.has(`${providerId}-${counterId}`)) {
+                    counters.set(`${providerId}-${counterId}`, { value: counterId, serviceType, providerId, label: counterId });
+                }
+            });
+
+            const result = {
+                all,
+                serviceTypes: Array.from(serviceTypes.values()),
+                providers: Array.from(providers.values()),
+                counters: Array.from(counters.values()),
+            };
+            sessionStorage.setItem(key, JSON.stringify(result));
+            return result;
         })
         .catch((error) => {
             throw new ApiError(error);
         });
-}
+};
 
-const getServices = () => {
+export const getServices = () => {
     return connect.get('/v2/counter/service')
         .then((res) => {
             localStorage.setItem('services', JSON.stringify(res.data.data));
@@ -240,8 +277,9 @@ const getServices = () => {
         .catch((error) => {
             throw new ApiError(error);
         });
-}
-const getServiceTypes = () => {
+};
+
+export const getServiceTypes = () => {
     return connect.get('/v2/counter/service/type')
         .then((res) => {
             localStorage.setItem('serviceTypes', JSON.stringify(res.data.data));
@@ -250,8 +288,9 @@ const getServiceTypes = () => {
         .catch((error) => {
             throw new ApiError(error);
         });
-}
-const getAddress = () => {
+};
+
+export const getAddress = () => {
     return connect.get('/v2/account/address')
         .then((res) => {
             localStorage.setItem('addresses', JSON.stringify(res.data));
@@ -260,9 +299,9 @@ const getAddress = () => {
         .catch((error) => {
             throw new ApiError(error);
         });
-}
+};
 
-const getObject = () => {
+export const getObject = () => {
     return connect.get('/v2/account')
         .then((res) => {
             localStorage.setItem('user', JSON.stringify(res.data.account));
@@ -271,17 +310,17 @@ const getObject = () => {
         .catch((error) => {
             throw new ApiError(error);
         });
-}
+};
 
-const addObject = (objectId, name = '') => {
+export const addObject = (objectId, name = '') => {
     return connect.post('/v2/account/address', { objectId, name })
         .then((res) => res)
         .catch((error) => {
             throw new ApiError(error);
         });
-}
+};
 
-const deleteObject = (objectId) => {
+export const deleteObject = (objectId) => {
     const payload = {
         data: { objectId }
     };
@@ -290,57 +329,28 @@ const deleteObject = (objectId) => {
         .catch((error) => {
             throw new ApiError(error);
         });
-}
-const deleteAccount = () => {
+};
+
+export const deleteAccount = () => {
     return connect.delete('/v2/account')
         .then((res) => res)
         .catch((error) => {
             throw new ApiError(error);
         });
-}
+};
 
-const getDebt = (objectId) => {
+export const getDebt = (objectId) => {
     return connect.get(`/v2/accrual/debt/${objectId}`)
         .then((res) => res.data.debts)
         .catch((error) => {
             throw new ApiError(error);
         });
-}
-const sendCounterData = (payload) => {
+};
+
+export const sendCounterData = (payload) => {
     return connect.post('/v2/counter/meters/data', payload)
         .then((res) => res)
         .catch((error) => {
             throw new ApiError(error);
         });
-}
-export default {
-    signUp,
-    signIn,
-    signOut,
-    validation,
-    resetPasswordRequest,
-    newPassword,
-    changePassword,
-    changeEmailRequest,
-    validationNewEmail,
-    getServices,
-    getServiceTypes,
-    getRegions,
-    getDistricts,
-    getTowns,
-    getStreets,
-    getHouses,
-    getFlats,
-    getObject,
-    getAddress,
-    addObject,
-    deleteObject,
-    getCounterValue,
-    getDebt,
-    updateUser,
-    renameAddress,
-    sendCounterData,
-    getCountersHistory,
-    authSocialNetworks,
-    deleteAccount
 };

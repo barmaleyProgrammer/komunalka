@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 // https://stackoverflow.com/questions/36904185/react-router-scroll-to-top-on-every-transition
 const ScrollToTop = () => {
     const { pathname } = useLocation();

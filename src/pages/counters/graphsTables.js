@@ -1,17 +1,17 @@
 import { useEffect, useState, useContext } from 'react';
-import { useParams, NavLink } from "react-router-dom";
-import { Context } from "../../store";
-import api from "../../api";
-import Breadcrumbs from "../../components/breadcrumbs";
-import ServiceTypes from "../../components/serviceTypes";
-import Tabs2 from "../../components/tabs2";
+import { useParams, NavLink } from 'react-router-dom';
+import { Context } from '../../store';
+import { getCountersHistory } from '../../api';
+import Breadcrumbs from '../../components/breadcrumbs';
+import ServiceTypes from '../../components/serviceTypes';
+import Tabs2 from '../../components/tabs2';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css' ;
 import Modal from '../../components/modal/modal';
 import moment from 'moment';
-import MySelect from "../../components/MySelect";
-import Loader from "../../components/Loader/loader";
-import { UniqueServiceTypes, UniqueProviders } from "./utils";
+import MySelect from '../../components/MySelect';
+import Loader from '../../components/Loader/loader';
+import { UniqueServiceTypes, UniqueProviders } from '../../utils';
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -54,41 +54,38 @@ const GraphsTables = () => {
 
     const breadCrumbs = [
         {
-            "to": '/',
-            "label": 'Головна'
+            'to': '/',
+            'label': 'Головна'
         },
         {
-            "to": '/cabinet',
-            "label": 'Особистий кабінет'
+            'to': '/cabinet',
+            'label': 'Особистий кабінет'
         },
         {
-            "to": '/cabinet',
-            "label": 'Мої адреси'
+            'to': '/cabinet',
+            'label': 'Мої адреси'
         },
         {
-            "to": `/counters/${objectId}`,
-            "label": 'Лічильники'
+            'to': `/counters/${objectId}`,
+            'label': 'Лічильники'
         },
         {
-            "to": '',
-            "label": 'Графіки споживань'
+            'to': '',
+            'label': 'Графіки споживань'
         },
     ]
 
     useEffect( () => {
-        const fetchData = () => {
-            setIsLoading(true);
-            const dateStart = moment(state.startDate).format('YYYY-MM-DD');
-            const dateEnd = moment(state.endDate).format('YYYY-MM-DD');
-            api.getCountersHistory(objectId, dateStart, dateEnd).then((result) => {
-                setCounters(result);
-                const serviceTypes = UniqueServiceTypes(result);
-                setServiceTypes(serviceTypes);
-                const providers = UniqueProviders(result);
-                setProviders(providers);
-            }).finally(() => setIsLoading(false));
-        };
-        fetchData();
+        setIsLoading(true);
+        const dateStart = moment(state.startDate).format('YYYY-MM-DD');
+        const dateEnd = moment(state.endDate).format('YYYY-MM-DD');
+        getCountersHistory(objectId, dateStart, dateEnd).then((result) => {
+            setCounters(result);
+            const serviceTypes = UniqueServiceTypes(result);
+            setServiceTypes(serviceTypes);
+            const providers = UniqueProviders(result);
+            setProviders(providers);
+        }).finally(() => setIsLoading(false));
     }, [objectId, state.startDate, state.endDate]);
 
     useEffect(() => {
@@ -141,7 +138,7 @@ const GraphsTables = () => {
                 </tbody>
             </table>
         );
-    }
+    };
 
     const ChartView = ({items}) => {
         const options = {
@@ -169,7 +166,7 @@ const GraphsTables = () => {
         return (
             <Line options={options} data={data} />
         );
-    }
+    };
 
 
     return (

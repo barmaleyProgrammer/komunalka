@@ -1,6 +1,6 @@
-import icon404 from "../img/icon404.png";
-import Button from "../components/button";
-import { useNavigate } from "react-router-dom";
+import icon404 from '../img/icon404.png';
+import Button from '../components/button';
+import { useNavigate } from 'react-router-dom';
 
 const NotFound = () => {
     const navigate = useNavigate();

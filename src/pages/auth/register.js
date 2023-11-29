@@ -1,15 +1,15 @@
-import {useContext, useState} from "react";
-import { NavLink } from "react-router-dom";
-import InputField from "../../components/inputField";
-import logo_lichylnyk from "../../img/logo_lichylnyk.svg";
-import logo_gerc from "../../img/logo_gerc.svg";
-import logo_com_block from "../../img/logo_com_block.png";
-import Button from "../../components/button";
-import api from "../../api";
-import eye from "../../img/eye.svg";
-import CheckPassword from "../../components/checkPassword/checkPassword";
-import PhoneField from "../../components/phoneField";
-import {Context} from "../../store";
+import { useContext, useState } from 'react';
+import { NavLink } from 'react-router-dom';
+import InputField from '../../components/inputField';
+import logo_lichylnyk from '../../img/logo_lichylnyk.svg';
+import logo_gerc from '../../img/logo_gerc.svg';
+import logo_com_block from '../../img/logo_com_block.png';
+import Button from '../../components/button';
+import { signUp } from '../../api';
+import eye from '../../img/eye.svg';
+import CheckPassword from '../../components/checkPassword/checkPassword';
+import PhoneField from '../../components/phoneField';
+import {Context} from '../../store';
 
 const Register = ({ close, showLogin }) => {
     const [,dispatch] = useContext(Context);
@@ -34,7 +34,6 @@ const Register = ({ close, showLogin }) => {
         source: '2',
         rememberMe: false
     });
-
     const [type, setType] = useState('password');
     const [validateFlag, setValidateFlag] = useState(false);
     const [inputPassFlag, setInputPassFlag] = useState(false);
@@ -49,19 +48,21 @@ const Register = ({ close, showLogin }) => {
             // [name]: value
         }));
     };
+
     const togglePassInput = () => {
         if (type === 'password') {
             setType('text')
         } else {
             setType('password')
         }
-    }
+    };
+
     const Submit = (e) => {
         e.preventDefault();
         setLoading(true);
         const payload = {...form};
         payload.phone = payload.phone.replace(/\D/g, '');
-        api.signUp(payload).then((result) => {
+        signUp(payload).then((result) => {
             if (result.status === 200) {
                 setValidateFlag(true);
             }

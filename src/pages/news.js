@@ -1,19 +1,19 @@
-import Breadcrumbs from "../components/breadcrumbs";
-import { NavLink } from "react-router-dom";
-import { useParams } from "react-router-dom";
-import {useState} from "react";
-import Pagination from "../components/pagination";
-import CurrentNews from "./currentNews";
-import list_imgs from "../newsList";
+import Breadcrumbs from '../components/breadcrumbs';
+import { NavLink } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import {useState} from 'react';
+import Pagination from '../components/pagination';
+import CurrentNews from './currentNews';
+import list_imgs from '../newsList';
 
 const breadCrumbs = [
     {
-        "to": '/',
-        "label": 'Головна'
+        'to': '/',
+        'label': 'Головна'
     },
     {
-        "to": '',
-        "label": 'Новини'
+        'to': '',
+        'label': 'Новини'
     },
 ];
 const newsPerPage = 6;

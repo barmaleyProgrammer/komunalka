@@ -1,30 +1,30 @@
 import { useEffect, useState, useContext } from 'react';
-import { Context } from "../../store";
-import {NavLink, useNavigate} from "react-router-dom";
-import { AiOutlinePlus } from "react-icons/ai";
-import Breadcrumbs from "../../components/breadcrumbs";
-import Tabs from "../../components/tabs";
-import icon_house from "../../img/icon_house.svg";
-import api from "../../api";
-import DropDownMenu from "../../components/dropDownMenu";
+import { Context } from '../../store';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { AiOutlinePlus } from 'react-icons/ai';
+import Breadcrumbs from '../../components/breadcrumbs';
+import Tabs from '../../components/tabs';
+import icon_house from '../../img/icon_house.svg';
+import { deleteObject, getAddress, renameAddress } from '../../api';
+import DropDownMenu from '../../components/dropDownMenu';
 import Modal from '../../components/modal/modal';
-import InputField from "../../components/inputField";
-import Button from "../../components/button";
+import InputField from '../../components/inputField';
+import Button from '../../components/button';
 import AddAddress from './addAddress';
 import ErrorModal from '../../components/errorModal';
 
 const breadCrumbs = [
     {
-        "to": '/',
-        "label": 'Головна'
+        'to': '/',
+        'label': 'Головна'
     },
     {
-        "to": '/cabinet',
-        "label": 'Особистий кабінет'
+        'to': '/cabinet',
+        'label': 'Особистий кабінет'
     },
     {
-        "to": '',
-        "label": 'Мої адреси'
+        'to': '',
+        'label': 'Мої адреси'
     },
 ];
 
@@ -42,27 +42,22 @@ const Cabinet = () => {
         dispatch({ type: 'provider', payload: '' });
     }, []);
 
-
-
-    const deleteAddress = async (e, objectId) => {
+    const deleteAddress = (e, objectId) => {
         e.stopPropagation();
-        try {
-            setModalConfirmDelete(false);
-            await api.deleteObject(objectId);
-            const newObjects = state.addresses.filter((item) => item.objectId !== objectId);
-            dispatch({ type: 'setAddresses', payload: newObjects });
-        }
-        catch (e) {
-            console.error(e.message);
-            setFormError(e.message);
-        }
-        try {
-            api.getAddress();
-        }
-        catch (e) {
-            console.error(e.message);
-            setFormError(e.message);
-        }
+        setModalConfirmDelete(false);
+        deleteObject(objectId)
+            .then(() => {
+                const newObjects = state.addresses.filter((item) => item.objectId !== objectId);
+                dispatch({ type: 'setAddresses', payload: newObjects });
+                getAddress().catch((error) => {
+                    console.error(error.message);
+                    setFormError(error.message);
+                });
+            })
+            .catch((error) => {
+                console.error(error.message);
+                setFormError(error.message);
+            });
     };
 
     const handleInputChange = (event) => {
@@ -92,20 +87,16 @@ const Cabinet = () => {
         setModalAddAddressActive(true);
     };
 
-    const updateAddress = async () => {
+    const updateAddress = () => {
         const {objectId, name} = currentAddress;
-        try{
-            await api.renameAddress(objectId, name);
-        } catch (error) {
-            setFormError(error.message);
-        }
-        setCurrentAddress('');
-        setModalRenameObj(false);
-        try{
-            await api.getAddress().then((data) => dispatch({ type: 'setAddresses', payload: data }));
-        } catch (error) {
-            setFormError(error.message);
-        }
+        renameAddress(objectId, name).then(() => {
+            setCurrentAddress('');
+            setModalRenameObj(false);
+            getAddress()
+                .then((data) => dispatch({ type: 'setAddresses', payload: data }))
+                .catch((error) => setFormError(error.message));
+        }).catch((error) => setFormError(error.message));
+
     }
 
     const AddressBlock = ({ item }) => {

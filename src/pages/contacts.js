@@ -1,20 +1,21 @@
-import Breadcrumbs from "../components/breadcrumbs";
-import FB_icon from "../img/FB_icon.svg";
-import instagram_icon from "../img/instagram_icon.svg";
-import telegram_icon from "../img/telegram_icon.svg";
-import viber_icon from "../img/viber_icon.svg";
+import Breadcrumbs from '../components/breadcrumbs';
+import FB_icon from '../img/FB_icon.svg';
+import instagram_icon from '../img/instagram_icon.svg';
+import telegram_icon from '../img/telegram_icon.svg';
+import viber_icon from '../img/viber_icon.svg';
+
+const breadCrumbs = [
+    {
+        'to': '/',
+        'label': 'Головна'
+    },
+    {
+        'to': '',
+        'label': 'Контакти'
+    },
+];
 
 const Contacts = () => {
-    const breadCrumbs = [
-        {
-            "to": '/',
-            "label": 'Головна'
-        },
-        {
-            "to": '',
-            "label": 'Контакти'
-        },
-    ]
     return (
         <>
             <div>

@@ -1,15 +1,15 @@
-import React, { useEffect, useState, useContext } from 'react';
-import { useParams } from "react-router-dom";
-import { Context } from "../../store";
-import api from "../../api";
-import Breadcrumbs from "../../components/breadcrumbs";
-import ServiceTypes from "../../components/serviceTypes";
-import Tabs2 from "../../components/tabs2";
-import Loader from "../../components/Loader/loader";
-import CounterForms from "../../components/counterForms";
-import { UniqueServiceTypes } from "./utils";
-import Modal from "../../components/modal/modal";
-import Button from "../../components/button";
+import { useEffect, useState, useContext } from 'react';
+import { useParams } from 'react-router-dom';
+import { Context } from '../../store';
+import { getCounterValue, sendCounterData } from '../../api';
+import Breadcrumbs from '../../components/breadcrumbs';
+import ServiceTypes from '../../components/serviceTypes';
+import Tabs2 from '../../components/tabs2';
+import Loader from '../../components/Loader/loader';
+import CounterForms from '../../components/counterForms';
+import { UniqueServiceTypes } from '../../utils';
+import Modal from '../../components/modal/modal';
+import Button from '../../components/button';
 
 const Counters = () => {
     const { objectId } = useParams();
@@ -21,37 +21,33 @@ const Counters = () => {
     const [saved, setSaved] = useState(false);
     const breadCrumbs = [
         {
-            "to": '/',
-            "label": 'Головна'
+            'to': '/',
+            'label': 'Головна'
         },
         {
-            "to": '/cabinet',
-            "label": 'Особистий кабінет'
+            'to': '/cabinet',
+            'label': 'Особистий кабінет'
         },
         {
-            "to": '/cabinet',
-            "label": 'Мої адреси'
+            'to': '/cabinet',
+            'label': 'Мої адреси'
         },
         {
-            "to": '',
-            "label": 'Лічильники'
+            'to': '',
+            'label': 'Лічильники'
         },
     ]
 
     useEffect( () => {
-        const fetchData = async () => {
-            setIsLoading(true);
-            await api.getCounterValue(objectId).then((result) => {
-                setCounters(result);
-                const serviceTypes = UniqueServiceTypes(result);
-                setServiceTypes(serviceTypes);
-            });
-            setIsLoading(false);
-        };
-        fetchData();
+        setIsLoading(true);
+        getCounterValue(objectId).then((result) => {
+            setCounters(result);
+            const serviceTypes = UniqueServiceTypes(result);
+            setServiceTypes(serviceTypes);
+        }).finally(() => setIsLoading(false));
     }, [objectId]);
 
-    const Save = async (event) => {
+    const Save = (event) => {
         event.preventDefault();
         setIsLoading(true);
         const payload = [];
@@ -72,14 +68,13 @@ const Counters = () => {
                 oldValue: item.oldValue || ''
             });
         });
-        const result = await api.sendCounterData(payload);
-        if (result.status === 200) {
+        sendCounterData(payload).then(() => {
             setSaved(true);
-            // console.log('saved', setSaved);
-        }
-        await api.getCounterValue(objectId).then((result) => setCounters(result));
-        setIsLoading(false);
-
+            getCounterValue(objectId).then((result) => {
+                setCounters(result);
+                setIsLoading(false);
+            });
+        });
     };
 
     return (

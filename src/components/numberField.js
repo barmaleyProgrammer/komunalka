@@ -1,4 +1,4 @@
-import InputMask from "react-input-mask";
+import InputMask from 'react-input-mask';
 // https://github.com/sanniassin/react-input-mask#maskplaceholder
 const NumberField = (props) => {
     const mask = /\d*\.?\d?/;

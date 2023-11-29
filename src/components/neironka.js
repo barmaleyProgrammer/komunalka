@@ -1,6 +1,6 @@
-import Neiron from "../img/neiron.png";
-import icon_question from "../img/icon_question.png";
-import {Tooltip} from "react-tooltip";
+import Neiron from '../img/neiron.png';
+import icon_question from '../img/icon_question.png';
+import {Tooltip} from 'react-tooltip';
 // https://www.youtube.com/shorts/jMBs98TJ7Pk
 
 const text = 'Наша потужна нейронна мережа\nробить пошук інформації легким\nта швидким.\n' +

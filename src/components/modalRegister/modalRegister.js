@@ -18,7 +18,7 @@ const ModalRegister = ({close, children}) => {
 
     return (
         <div className="modalRegister">
-            <div className="modal__contentRegister" onClick={e => e.stopPropagation()}>
+            <div className="modal__contentRegister" onClick={(event) => event.stopPropagation()}>
                 <div className="icon_close" onClick={close}>
                     <img src={icon_close} alt="" />
                 </div>

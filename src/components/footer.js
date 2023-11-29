@@ -1,5 +1,5 @@
-import logo_lichylnyk from "../img/logo_lichylnyk.svg";
-import {NavLink} from "react-router-dom";
+import logo_lichylnyk from '../img/logo_lichylnyk.svg';
+import {NavLink} from 'react-router-dom';
 import FB_icon from './../img/FB_icon.svg';
 import instagram_icon from './../img/instagram_icon.svg';
 import telegram_icon from './../img/telegram_icon.svg';

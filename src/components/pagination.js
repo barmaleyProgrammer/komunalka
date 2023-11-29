@@ -1,5 +1,5 @@
-import arrow_right from "../img/arrow_right.svg";
-import arrow_left from "../img/arrow_left.svg";
+import arrow_right from '../img/arrow_right.svg';
+import arrow_left from '../img/arrow_left.svg';
 // https://www.youtube.com/watch?v=s59kRbD4Sw8&t=934s
 
 const Pagination = ({ perPage, total, paginate, currentPage }) => {

@@ -1,14 +1,14 @@
 import './userAgreement.css';
-import Breadcrumbs from "../components/breadcrumbs";
+import Breadcrumbs from '../components/breadcrumbs';
 
 const breadCrumbs = [
     {
-        "to": '/',
-        "label": 'Головна'
+        'to': '/',
+        'label': 'Головна'
     },
     {
-        "to": '',
-        "label": 'Угода користувача'
+        'to': '',
+        'label': 'Угода користувача'
     },
 ]
 const UserAgreement = () => {

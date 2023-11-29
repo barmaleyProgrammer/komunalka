@@ -9,14 +9,14 @@ import komunalka_home from '../img/partners_home/komunalka_home.png';
 import gerc_home from '../img/partners_home/gerc_home.png';
 import kiyvOblEnergo_home from '../img/partners_home/kiyvOblEnergo_home.png';
 import kiyvOblGaz_home from '../img/partners_home/kiyvOblGaz_home.png';
-import "react-responsive-carousel/lib/styles/carousel.min.css";
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { Carousel } from 'react-responsive-carousel';
 
-import Button from "../components/button";
-import { NavLink } from "react-router-dom";
-import {AiOutlineMinus, AiOutlinePlus} from "react-icons/ai";
-import {Collapse} from "react-collapse";
-import {useState} from "react";
+import Button from '../components/button';
+import { NavLink } from 'react-router-dom';
+import {AiOutlineMinus, AiOutlinePlus} from 'react-icons/ai';
+import {Collapse} from 'react-collapse';
+import {useState} from 'react';
 const list_imgs = [
     { image: '/news/News1.png' },
     { image: '/news/News2.png' },
@@ -27,27 +27,27 @@ const Home = (NewsList) => {
     const AccordionData = [
         {
             id: 1,
-            title: "Чому саме Лічильники?",
+            title: 'Чому саме Лічильники?',
             section: 'about',
-            desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+            desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
         },
         {
             id: 2,
-            title: "Які послуги є на сайті?",
+            title: 'Які послуги є на сайті?',
             section: 'about',
-            desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+            desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
         },
         {
             id: 3,
-            title: "Чи передадуться мої показники лічильників до обранної компанії?",
+            title: 'Чи передадуться мої показники лічильників до обранної компанії?',
             section: 'about',
-            desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+            desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
         },
         {
             id: 4,
-            title: "Чи передадуться мої показники лічильників до обранної компанії?",
+            title: 'Чи передадуться мої показники лічильників до обранної компанії?',
             section: 'cabinet',
-            desc: "1Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+            desc: '1Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
         },
     ];
     const [open, setOpen] = useState(0);
@@ -255,4 +255,3 @@ const Home = (NewsList) => {
     );
 };
 export default Home;
-
