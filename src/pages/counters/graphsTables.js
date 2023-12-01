@@ -108,31 +108,33 @@ const GraphsTables = () => {
 
     const TableView = ({items}) => {
         return (
-            <table className="border-collapse border-black_figma">
-                <caption className="text-lg font-normal mt-0 mb-4">Таблиця споживання</caption>
-                <thead>
-                <tr>
-                    <td className="border-[#E7E7E7] text-sm border-l-0 border-b border-r p-2">Період</td>
-                    <td className="border-[#E7E7E7] text-sm border-l-0 border-b border-r p-2">oldValue</td>
-                    <td className="border-[#E7E7E7] text-sm border-l-0 border-b border-r p-2">newValue</td>
-                    <td className="border-[#E7E7E7] font-normal border-b text-sm p-2">{`${moment(state.startDate).format('DD.MM.YYYY')} - ${moment(state.endDate).format('DD.MM.YYYY')}`}</td>
-                </tr>
-                </thead>
-                <tbody>
-                {
-                    items.map((item, index) => {
-                        return (
-                            <tr key={index}>
-                                <td className="border-[#E7E7E7] font-normal border-r p-2">{moment(item.newTransmissionTime).format('DD.MM.YYYY')}</td>
-                                <td className="border-[#E7E7E7] font-normal border-r p-2">{(item.oldValue)}</td>
-                                <td className="border-[#E7E7E7] font-normal border-r p-2">{(item.newValue)}</td>
-                                <td className="border-[#E7E7E7] font-normal text-sm p-2">{(Number(item.newValue) - Number(item.oldValue)).toFixed(2) }</td>
-                            </tr>
-                        );
-                    })
-                }
-                </tbody>
-            </table>
+            <div className="border-collapse border w-1/2 rounded-xl py-10 px-10 border-[#E7E7E7]">
+                <table className="border-collapse border-black_figma">
+                    <caption className="text-lg font-normal mt-0 mb-4">Таблиця споживання</caption>
+                    <thead>
+                    <tr>
+                        <td className="border-[#E7E7E7] text-sm border-l-0 border-b border-r p-2">Період</td>
+                        <td className="border-[#E7E7E7] text-sm border-l-0 border-b border-r p-2">oldValue</td>
+                        <td className="border-[#E7E7E7] text-sm border-l-0 border-b border-r p-2">newValue</td>
+                        <td className="border-[#E7E7E7] font-normal border-b text-sm p-2">{`${moment(state.startDate).format('DD.MM.YYYY')} - ${moment(state.endDate).format('DD.MM.YYYY')}`}</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {
+                        items.map((item, index) => {
+                            return (
+                                <tr key={index}>
+                                    <td className="border-[#E7E7E7] font-normal border-r p-2">{moment(item.newTransmissionTime).format('DD.MM.YYYY')}</td>
+                                    <td className="border-[#E7E7E7] font-normal border-r p-2">{(item.oldValue)}</td>
+                                    <td className="border-[#E7E7E7] font-normal border-r p-2">{(item.newValue)}</td>
+                                    <td className="border-[#E7E7E7] font-normal text-sm p-2">{(Number(item.newValue) - Number(item.oldValue)).toFixed(2) }</td>
+                                </tr>
+                            );
+                        })
+                    }
+                    </tbody>
+                </table>
+            </div>
         );
     };
 
@@ -160,7 +162,9 @@ const GraphsTables = () => {
         };
 
         return (
-            <Line options={options} data={data} />
+            <div className="border-collapse border rounded-xl py-10 px-10 border-[#E7E7E7]">
+                <Line options={options} data={data} />
+            </div>
         );
     };
 
@@ -216,13 +220,11 @@ const GraphsTables = () => {
                                     <NavLink to="#" className="ml-2 text-xs font-light" onClick={() => setView('table')}>Таблиця</NavLink>
                                 </div>
                             </div>
-                            <div className="border-collapse border w-1/2 rounded-xl py-10 px-10 border-[#E7E7E7]">
-                                {
-                                    view === 'table'
-                                    ? <TableView items={filteredData(all, state.serviceType, state.provider, state.counter)} />
-                                    : <ChartView items={filteredData(all, state.serviceType, state.provider, state.counter)} />
-                                }
-                            </div>
+                            {
+                                view === 'table'
+                                ? <TableView items={filteredData(all, state.serviceType, state.provider, state.counter)} />
+                                : <ChartView items={filteredData(all, state.serviceType, state.provider, state.counter)} />
+                            }
                         </>
                 }
             </div>
