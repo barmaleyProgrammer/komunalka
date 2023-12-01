@@ -228,9 +228,9 @@ export const getCountersHistory = (objectId, dateStart, dateEnd) => {
     const key = `${objectId}-${dateStart}-${dateEnd}`;
     const storedData = sessionStorage.getItem(key);
 
-    // if (storedData) {
-    //     return Promise.resolve(JSON.parse(storedData));
-    // }
+    if (storedData) {
+        return Promise.resolve(JSON.parse(storedData));
+    }
 
     return connect.get(`/v2/counter/meters/history/data?objectId=${objectId}&dateStart=${dateStart}&dateEnd=${dateEnd}`)
         .then((res) => {

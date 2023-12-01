@@ -11,7 +11,6 @@ import Modal from '../../components/modal/modal';
 import moment from 'moment';
 import MySelect from '../../components/MySelect2';
 import Loader from '../../components/Loader/loader';
-import { UniqueServiceTypes, UniqueProviders } from '../../utils';
 
 const History = () => {
     const { objectId } = useParams();
@@ -49,9 +48,9 @@ const History = () => {
     ];
 
     useEffect( () => {
+        setIsLoading(true);
         const dateStart = moment(state.startDate).format('YYYY-MM-DD');
         const dateEnd = moment(state.endDate).format('YYYY-MM-DD');
-        setIsLoading(true);
         getCountersHistory(objectId, dateStart, dateEnd).then((result) => {
             setAll(result.all);
             setServiceTypes(result.serviceTypes);
@@ -64,12 +63,7 @@ const History = () => {
         .finally(() => setIsLoading(false));
     }, [objectId, state.startDate, state.endDate]);
 
-    useEffect(() => {
-        const providers = UniqueProviders(all, state.serviceType);
-        setProviders(providers);
-    }, [state.serviceType]);
-
-    const filteredProviders = (serviceType) => {
+    const filteredProviders = (providers, serviceType) => {
         return providers.filter((item) => {
             if (!serviceType) {
                 return true;
@@ -78,7 +72,7 @@ const History = () => {
         });
     };
 
-    const filteredCounters = (serviceType, provider) => {
+    const filteredCounters = (counters, serviceType, provider) => {
         return counters.filter((item) => {
             if (!serviceType) {
                 return true;
@@ -88,7 +82,28 @@ const History = () => {
             if (!provider) {
                 return true;
             } else {
-                return (item.providerId == provider)
+                return (item.providerId === provider)
+            }
+        });
+    };
+
+    const filteredData = (all, serviceType, provider, counter) => {
+        return all.filter((item) => {
+            if (!serviceType) {
+                return true;
+            }
+            return (Number(item.serviceType) === serviceType);
+        }).filter((item) => {
+            if (!provider) {
+                return true;
+            } else {
+                return (Number(item.idFirme) === provider)
+            }
+        }).filter((item) => {
+            if (!counter) {
+                return true;
+            } else {
+                return (Number(item.abcounter) === counter)
             }
         });
     };
@@ -123,7 +138,7 @@ const History = () => {
                     </div>
                     <div>
                         <MySelect
-                            options={filteredProviders(state.serviceType)}
+                            options={filteredProviders(providers, state.serviceType)}
                             defaultValue={'Оберіть постачальника'}
                             value={state.provider}
                             onChange={(event) => dispatch({ type: 'provider', payload: event.target.value })}
@@ -131,7 +146,7 @@ const History = () => {
                     </div>
                     <div>
                         <MySelect
-                            options={filteredCounters(state.serviceType, state.provider)}
+                            options={filteredCounters(counters, state.serviceType, state.provider)}
                             defaultValue={'Оберіть лічильник'}
                             value={state.counter}
                             onChange={(event) => dispatch({ type: 'counter', payload: event.target.value })}
@@ -143,27 +158,7 @@ const History = () => {
                     ? <Loader />
                     : <div>
                             {
-                                all?.filter((item) => {
-                                    if (!state.serviceType) {
-                                        return true;
-                                    } else {
-                                        return (item.serviceType == state.serviceType)
-                                    }
-                                })
-                                .filter((item) => {
-                                    if (!state.provider) {
-                                        return true;
-                                    } else {
-                                        return (item.idFirme == state.provider)
-                                    }
-                                })
-                                .filter((item) => {
-                                    if (!state.counter) {
-                                        return true;
-                                    } else {
-                                        return (item.abcounter == state.counter)
-                                    }
-                                })
+                                filteredData(all, state.serviceType, state.provider, state.counter)
                                 .map((item, key) => <CounterBlock item={item} key={`CounterBlock_${key}`} />)
                             }
                         </div>

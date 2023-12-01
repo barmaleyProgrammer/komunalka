@@ -46,7 +46,8 @@ export const initialSate = {
     serviceType: '',
     provider: '',
     counter: '',
-    startDate: moment().add(-3, 'months'),
+    // startDate: moment().add(-3, 'months'),
+    startDate: moment().startOf('year'),
     endDate: moment().endOf('month'),
     error: ''
 };
@@ -87,17 +88,19 @@ export const reducer = (state, action) => {
             return {
                 ...state,
                 provider: '',
-                serviceType: action.payload
+                counter: '',
+                serviceType: Number(action.payload)
             };
         case 'provider':
             return {
                 ...state,
-                provider: action.payload
+                counter: '',
+                provider: Number(action.payload)
             };
         case 'counter':
             return {
                 ...state,
-                counter: action.payload
+                counter: Number(action.payload)
             };
         case 'startDate':
             return {
