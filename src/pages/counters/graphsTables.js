@@ -92,6 +92,20 @@ const GraphsTables = () => {
         .finally(() => setIsLoading(false));
     }, [objectId, state.startDate, state.endDate]);
 
+    useEffect( () => {
+        const res = filteredProviders(providers, state.serviceType);
+        if (res.length === 1) {
+            dispatch({ type: 'provider', payload: res[0].value });
+        }
+    }, [state.serviceType]);
+
+    useEffect( () => {
+        const res = filteredCounters(counters, state.serviceType, state.provider)
+        if (res.length === 1) {
+            dispatch({ type: 'counter', payload: res[0].value });
+        }
+    }, [state.provider]);
+
     const TableView = ({items}) => {
         return (
             <table className="border-collapse border-black_figma">
@@ -188,9 +202,14 @@ const GraphsTables = () => {
                         : <>
                             <div className="text-sm my-4 flex flex-row justify-between">
                                 <div className="space-y-2">
-                                    <p>Підприємство: xxxx</p>
-                                    <p>Послуга: xxxx</p>
-                                    <p>Номер лічильників: xxxx</p>
+                                    <p>Послуга: <b>{state.serviceType ? state.serviceTypes.find((item) => item.id === state.serviceType).name : ''}</b></p>
+                                    {<p>Підприємство: <b>{
+                                        (
+                                            Array.isArray(providers) &&
+                                            state.provider &&
+                                            providers.findIndex((item) => item.value === state.provider) !== -1
+                                        ) ? providers.find((item) => item.value === state.provider).label : ''}</b></p>}
+                                    <p>Номер лічильника: <b>{state.counter ? state.counter : ''}</b></p>
                                 </div>
                                 <div>
                                     <NavLink to="#" className="text-xs font-light" onClick={() => setView('chart')}>Графік</NavLink>

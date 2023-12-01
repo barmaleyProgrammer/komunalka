@@ -64,6 +64,20 @@ const History = () => {
         .finally(() => setIsLoading(false));
     }, [objectId, state.startDate, state.endDate]);
 
+    useEffect( () => {
+        const res = filteredProviders(providers, state.serviceType);
+        if (res.length === 1) {
+            dispatch({ type: 'provider', payload: res[0].value });
+        }
+    }, [state.serviceType]);
+
+    useEffect( () => {
+        const res = filteredCounters(counters, state.serviceType, state.provider)
+        if (res.length === 1) {
+            dispatch({ type: 'counter', payload: res[0].value });
+        }
+    }, [state.provider]);
+
     const CounterBlock = ({item}) => {
         return (
             <div className="my-4 p-4 flex items-stretch gap-x-4 rounded-lg border border-borderColor">
