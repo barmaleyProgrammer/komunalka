@@ -46,8 +46,8 @@ export const initialSate = {
     serviceType: '',
     provider: '',
     counter: '',
-    // startDate: moment().add(-3, 'months'),
-    startDate: moment().startOf('year'),
+    startDate: moment().add(-3, 'months'),
+    // startDate: moment().startOf('year'),
     endDate: moment().endOf('month'),
     error: ''
 };
