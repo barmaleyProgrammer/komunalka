@@ -72,9 +72,21 @@ const Main = () => {
                     } />
                 </Route>
                 <Route path="/counters">
-                    <Route index path=":objectId" element={<Counters />} />
-                    <Route path=":objectId/history" element={<CountersHistory />} />
-                    <Route path=":objectId/graphsTables" element={<CountersGraphsTables />} />
+                    <Route index path=":objectId" element={
+                        <RequireAuth>
+                            <Counters />
+                        </RequireAuth>
+                    } />
+                    <Route path=":objectId/history" element={
+                        <RequireAuth>
+                            <CountersHistory />
+                        </RequireAuth>
+                    } />
+                    <Route path=":objectId/graphsTables" element={
+                        <RequireAuth>
+                            <CountersGraphsTables />
+                        </RequireAuth>
+                    } />
                 </Route>
                 <Route path="*" element={<NotFound />} />
             </Routes>
