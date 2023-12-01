@@ -1,22 +1,16 @@
-import { useContext } from 'react';
-import { Context } from "../store";
-
-const Select = ({options, defaultValue = ''}) => {
-    const [state, dispatch] = useContext(Context);
+const MySelect = (props) => {
 
     return (
         <select
             className="text-sm outline-none rounded text-[#FD9800] bg-[#F7F9FE] w-full h-full p-2"
-            value={state.provider}
-            name=""
-            onChange = {event => dispatch({ type: 'provider', payload: event.target.value })}
+            value={props.value}
+            name={props.name}
+            onChange = {props.onChange}
         >
-            <option value="">{defaultValue}</option>
-            {options.map(option =>
-                <option key={option.value} value={option.value}>{option.label}</option>
-            )}
+            <option value="">{props.defaultValue}</option>
+            { props.options.map((option, key) => <option key={key} value={option.value}>{option.label}</option>) }
         </select>
     );
 };
 
-export default Select;
+export default MySelect;

@@ -1,10 +1,9 @@
 import Tabs from "../../components/tabs";
 import Breadcrumbs from "../../components/breadcrumbs";
 import Button from "../../components/button";
-import {useContext, useState} from "react";
-import {NavLink} from "react-router-dom";
-import api from "../../api";
-import {Context} from "../../store";
+import { useContext, useState } from "react";
+import { updateUser } from "../../api";
+import { Context } from "../../store";
 
 const breadCrumbs = [
     {
@@ -26,7 +25,7 @@ const breadCrumbs = [
 ];
 
 const Notification = () => {
-    const [state, dispatch] = useContext(Context);
+    const [state] = useContext(Context);
     const [form, setForm] = useState({
         firstName: state.user.firstName,
         lastName: state.user.lastName,
@@ -36,11 +35,9 @@ const Notification = () => {
         reminderTransferOfCounters: false
     });
 
-
-
     const Submit = (event) => {
         event.preventDefault();
-        api.updateUser(form).catch((error) => {
+        updateUser(form).catch((error) => {
             console.error(error.message);
         });
     };
@@ -51,7 +48,6 @@ const Notification = () => {
             [event.target.name]: value
         }));
     };
-
 
     return (
         <>

@@ -1,7 +1,7 @@
-import { NavLink } from "react-router-dom";
-import rectangle from "../img/rectangle.png";
-import rectangle_ from "../img/Rectangle_.png";
-import ToRead from "../components/toRead";
+import { NavLink } from 'react-router-dom';
+import rectangle from '../img/rectangle.png';
+import rectangle_ from '../img/Rectangle_.png';
+import ToRead from '../components/toRead';
 
 const CurrentNews = ({ id }) => {
     return (

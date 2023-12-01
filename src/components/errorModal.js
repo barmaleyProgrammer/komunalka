@@ -1,6 +1,6 @@
-import Button from "./button";
+import Button from './button';
 import Modal from './modal/modal';
-import icon_error from "../img/icon_error.svg";
+import icon_error from '../img/icon_error.svg';
 
 const ErrorModal = ({error, close}) => {
     return (

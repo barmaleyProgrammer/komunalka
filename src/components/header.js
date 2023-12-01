@@ -1,19 +1,16 @@
-import {useContext, useState} from "react";
-import { Context } from "../store";
-import logo_lichylnyk from "../img/logo_lichylnyk.svg";
-import { NavLink } from "react-router-dom";
-import Logout from "./Logout";
-// import AddAddress from "../pages/cabinet/addAddress";
-import Modal from "./modal/modal";
-import Register from "../pages/auth/register";
-import Login from "../pages/auth/login";
-import ResetPassword from "../pages/auth/resetPassword";
-import ModalRegister from "./modalRegister/modalRegister";
-// import { useLocation } from "react-router-dom";
+import {useContext, useState} from 'react';
+import { Context } from '../store';
+import logo_lichylnyk from '../img/logo_lichylnyk.svg';
+import { NavLink } from 'react-router-dom';
+import Logout from './Logout';
+import Modal from './modal/modal';
+import Register from '../pages/auth/register';
+import Login from '../pages/auth/login';
+import ResetPassword from '../pages/auth/resetPassword';
+import ModalRegister from './modalRegister/modalRegister';
 
 const Header = () => {
     const [state] = useContext(Context);
-    // const location = useLocation();
     const [modalRegistration, setModalRegistration] = useState(false);
     const [modalAuthorization, setModalAuthorization] = useState(false);
     const [modalResetPass, setModalResetPass] = useState(false);

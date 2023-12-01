@@ -1,10 +1,10 @@
-import { useContext } from "react";
-import { Context } from "../store";
-import { NavLink } from "react-router-dom";
-import water from "../img/logo_counters/water.svg";
-import gas from "../img/logo_counters/gas.svg";
-import electric from "../img/logo_counters/electric.svg";
-import warm from "../img/logo_counters/warm.svg";
+import { useContext } from 'react';
+import { Context } from '../store';
+import { NavLink } from 'react-router-dom';
+import water from '../img/logo_counters/water.svg';
+import gas from '../img/logo_counters/gas.svg';
+import electric from '../img/logo_counters/electric.svg';
+import warm from '../img/logo_counters/warm.svg';
 
 const serviceIcons = {
     1: warm,

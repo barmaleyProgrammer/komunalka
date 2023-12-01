@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext } from 'react';
 import moment from 'moment';
 
 const checkToken = () => {
@@ -35,9 +35,9 @@ const checkServices = () => {
     return data ? JSON.parse(data) : [];
 };
 
-const Context = createContext(null);
+export const Context = createContext(null);
 
-const initialSate = {
+export const initialSate = {
     isLoggedIn: checkToken(),
     user: checkUser(),
     addresses: checkAddresses(),
@@ -45,12 +45,14 @@ const initialSate = {
     serviceTypes: checkServiceTypes(),
     serviceType: '',
     provider: '',
-    startDate: moment().add(-3, 'months'),
+    counter: '',
+    // startDate: moment().add(-3, 'months'),
+    startDate: moment().startOf('year'),
     endDate: moment().endOf('month'),
     error: ''
 };
 
-const reducer = (state, action) => {
+export const reducer = (state, action) => {
     switch (action.type) {
         case 'logIn':
             return {
@@ -86,12 +88,19 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 provider: '',
-                serviceType: action.payload
+                counter: '',
+                serviceType: Number(action.payload)
             };
         case 'provider':
             return {
                 ...state,
-                provider: action.payload
+                counter: '',
+                provider: Number(action.payload)
+            };
+        case 'counter':
+            return {
+                ...state,
+                counter: Number(action.payload)
             };
         case 'startDate':
             return {
@@ -112,9 +121,3 @@ const reducer = (state, action) => {
             return state;
     }
 };
-
-export {
-    initialSate,
-    Context,
-    reducer
-}

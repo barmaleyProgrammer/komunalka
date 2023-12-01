@@ -9,7 +9,7 @@ import google from "../../img/google.svg";
 import facebook from "../../img/facebook.svg";
 import eye from "../../img/eye.svg";
 import Button from "../../components/button";
-import api from "../../api";
+import { signIn, getObject, getServices, getServiceTypes, getAddress, authSocialNetworks } from "../../api";
 import { Context } from "../../store";
 import Loader from "../../components/Loader/loader";
 
@@ -42,18 +42,18 @@ const Login = ({ close, showRegister, showResetPass }) => {
         event.preventDefault();
         dispatch({ type: 'error', payload: '' });
         setIsLoading(true);
-        api.signIn(form).then(() => {
+        signIn(form).then(() => {
             dispatch({ type: 'logIn' });
-            const req1 = api.getObject().then((data) => {
+            const req1 = getObject().then((data) => {
                 dispatch({ type: 'setAccount', payload: data.account });
             });
-            const req2 = api.getServices().then((data) => {
+            const req2 = getServices().then((data) => {
                 dispatch({ type: 'services', payload: data });
             });
-            const req3 = api.getServiceTypes().then((data) => {
+            const req3 = getServiceTypes().then((data) => {
                 dispatch({ type: 'serviceTypes', payload: data });
             });
-            const req4 = api.getAddress().then((data) => {
+            const req4 = getAddress().then((data) => {
                 dispatch({ type: 'setAddresses', payload: data });
             })
             Promise.all([req1, req2, req3, req4]).then(() => {
@@ -71,7 +71,7 @@ const Login = ({ close, showRegister, showResetPass }) => {
     };
     const SocialNetworks = (event, type) => {
         event.preventDefault();
-        api.authSocialNetworks(type);
+        authSocialNetworks(type);
     };
 
     const togglePassInput = () => {

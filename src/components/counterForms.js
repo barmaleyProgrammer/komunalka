@@ -1,9 +1,9 @@
 import {useContext} from 'react';
-import { Context } from "../store";
-import InputField from "./inputField";
-import Button from "./button";
+import { Context } from '../store';
+import InputField from './inputField';
+import Button from './button';
 import 'react-tooltip/dist/react-tooltip.css';
-import Neironka from "./neironka";
+import Neironka from './neironka';
 
 const CounterForms = ({counters, setCounters, Save}) => {
     const [state] = useContext(Context);

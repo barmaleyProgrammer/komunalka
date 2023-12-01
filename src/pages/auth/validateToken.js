@@ -1,7 +1,7 @@
 import { useEffect, useContext } from 'react';
-import { useNavigate } from "react-router-dom";
-import { Context } from "../../store";
-import api from "../../api";
+import { useNavigate } from 'react-router-dom';
+import { Context } from '../../store';
+import { getObject, getServices, getServiceTypes, getAddress } from '../../api';
 
 const ValidateToken = () => {
     const [,dispatch] = useContext(Context);
@@ -12,19 +12,21 @@ const ValidateToken = () => {
         if (token) {
             localStorage.setItem('accessToken', token);
             dispatch({ type: 'logIn' });
-            api.getObject().then((data) => {
+            const req1 = getObject().then((data) => {
                 dispatch({ type: 'setAccount', payload: data.account });
             });
-            api.getServices().then((data) => {
+            const req2 = getServices().then((data) => {
                 dispatch({ type: 'services', payload: data });
             });
-            api.getServiceTypes().then((data) => {
+            const req3 = getServiceTypes().then((data) => {
                 dispatch({ type: 'serviceTypes', payload: data });
             });
-            api.getAddress().then((data) => {
+            const req4 = getAddress().then((data) => {
                 dispatch({ type: 'setAddresses', payload: data });
-            })
-            navigate('/cabinet');
+            });
+            Promise.all([req1, req2, req3, req4]).then(() => {
+                navigate('/cabinet');
+            });
         }
     }, []);
     return (<></>);

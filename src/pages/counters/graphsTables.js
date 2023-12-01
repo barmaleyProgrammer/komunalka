@@ -1,17 +1,17 @@
 import { useEffect, useState, useContext } from 'react';
-import { useParams, NavLink } from "react-router-dom";
-import { Context } from "../../store";
-import api from "../../api";
-import Breadcrumbs from "../../components/breadcrumbs";
-import ServiceTypes from "../../components/serviceTypes";
-import Tabs2 from "../../components/tabs2";
+import { useParams, NavLink } from 'react-router-dom';
+import { Context } from '../../store';
+import { getCountersHistory } from '../../api';
+import Breadcrumbs from '../../components/breadcrumbs';
+import ServiceTypes from '../../components/serviceTypes';
+import Tabs2 from '../../components/tabs2';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css' ;
 import Modal from '../../components/modal/modal';
 import moment from 'moment';
-import MySelect from "../../components/MySelect";
-import Loader from "../../components/Loader/loader";
-import { UniqueServiceTypes, UniqueProviders } from "./utils";
+import MySelect from '../../components/MySelect2';
+import Loader from '../../components/Loader/loader';
+import { UniqueServiceTypes, UniqueProviders } from '../../utils';
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -41,8 +41,8 @@ const GraphsTables = () => {
     const { objectId } = useParams();
     const [state, dispatch] = useContext(Context);
 
+    const [all, setAll] = useState([]);
     const [counters, setCounters] = useState([]);
-    const [filteredData, setFilteredData] = useState([]);
     const [serviceTypes, setServiceTypes] = useState([]);
     const [providers, setProviders] = useState([]);
 
@@ -54,64 +54,87 @@ const GraphsTables = () => {
 
     const breadCrumbs = [
         {
-            "to": '/',
-            "label": 'Головна'
+            'to': '/',
+            'label': 'Головна'
         },
         {
-            "to": '/cabinet',
-            "label": 'Особистий кабінет'
+            'to': '/cabinet',
+            'label': 'Особистий кабінет'
         },
         {
-            "to": '/cabinet',
-            "label": 'Мої адреси'
+            'to': '/cabinet',
+            'label': 'Мої адреси'
         },
         {
-            "to": `/counters/${objectId}`,
-            "label": 'Лічильники'
+            'to': `/counters/${objectId}`,
+            'label': 'Лічильники'
         },
         {
-            "to": '',
-            "label": 'Графіки споживань'
+            'to': '',
+            'label': 'Графіки споживань'
         },
     ]
 
     useEffect( () => {
-        const fetchData = () => {
-            setIsLoading(true);
-            const dateStart = moment(state.startDate).format('YYYY-MM-DD');
-            const dateEnd = moment(state.endDate).format('YYYY-MM-DD');
-            api.getCountersHistory(objectId, dateStart, dateEnd).then((result) => {
-                setCounters(result);
-                const serviceTypes = UniqueServiceTypes(result);
-                setServiceTypes(serviceTypes);
-                const providers = UniqueProviders(result);
-                setProviders(providers);
-            }).finally(() => setIsLoading(false));
-        };
-        fetchData();
+        setIsLoading(true);
+        const dateStart = moment(state.startDate).format('YYYY-MM-DD');
+        const dateEnd = moment(state.endDate).format('YYYY-MM-DD');
+        getCountersHistory(objectId, dateStart, dateEnd).then((result) => {
+            setAll(result.all);
+            setServiceTypes(result.serviceTypes);
+            setProviders(result.providers);
+            setCounters(result.counters);
+        })
+        .catch((error) => {
+            dispatch({ type: 'error', payload: error });
+        })
+        .finally(() => setIsLoading(false));
     }, [objectId, state.startDate, state.endDate]);
 
-    useEffect(() => {
-        const providers = UniqueProviders(counters, state.serviceType);
-        setProviders(providers);
-    }, [state.serviceType]);
-
-    useEffect(() => {
-        const filteredData = counters?.filter((item) => {
-            if (!state.serviceType) {
+    const filteredProviders = (providers, serviceType) => {
+        return providers.filter((item) => {
+            if (!serviceType) {
                 return true;
-            } else {
-                return (item.serviceType == state.serviceType)
             }
+            return (Number(item.serviceType) === serviceType);
+        });
+    };
+
+    const filteredCounters = (counters, serviceType, provider) => {
+        return counters.filter((item) => {
+            if (!serviceType) {
+                return true;
+            }
+            return (Number(item.serviceType) === serviceType);
         }).filter((item) => {
-            if (!state.provider) {
+            if (!provider) {
                 return true;
             } else {
-                return (item.idFirme == state.provider)
+                return (item.providerId === provider)
             }
         });
-        setFilteredData(filteredData);
-    }, [counters, state.serviceType, state.provider]);
+    };
+
+    const filteredData = (all, serviceType, provider, counter) => {
+        return all.filter((item) => {
+            if (!serviceType) {
+                return true;
+            }
+            return (Number(item.serviceType) === serviceType);
+        }).filter((item) => {
+            if (!provider) {
+                return true;
+            } else {
+                return (Number(item.idFirme) === provider)
+            }
+        }).filter((item) => {
+            if (!counter) {
+                return true;
+            } else {
+                return (Number(item.abcounter) === counter)
+            }
+        });
+    };
 
     const TableView = ({items}) => {
         return (
@@ -141,7 +164,7 @@ const GraphsTables = () => {
                 </tbody>
             </table>
         );
-    }
+    };
 
     const ChartView = ({items}) => {
         const options = {
@@ -169,8 +192,7 @@ const GraphsTables = () => {
         return (
             <Line options={options} data={data} />
         );
-    }
-
+    };
 
     return (
         <div className="font-normal mb-4">
@@ -188,7 +210,20 @@ const GraphsTables = () => {
                         до {moment(state.endDate).format('DD.MM.YYYY')}
                     </div>
                     <div>
-                        <MySelect options={providers} defaultValue={"Оберіть постачальника"} />
+                        <MySelect
+                            options={filteredProviders(providers, state.serviceType)}
+                            defaultValue={'Оберіть постачальника'}
+                            value={state.provider}
+                            onChange={(event) => dispatch({ type: 'provider', payload: event.target.value })}
+                        />
+                    </div>
+                    <div>
+                        <MySelect
+                            options={filteredCounters(counters, state.serviceType, state.provider)}
+                            defaultValue={'Оберіть лічильник'}
+                            value={state.counter}
+                            onChange={(event) => dispatch({ type: 'counter', payload: event.target.value })}
+                        />
                     </div>
                 </div>
                 {
@@ -209,8 +244,8 @@ const GraphsTables = () => {
                             <div className="border-collapse border w-1/2 rounded-xl py-10 px-10 border-[#E7E7E7]">
                                 {
                                     view === 'table'
-                                    ? <TableView items={filteredData} />
-                                    : <ChartView items={filteredData} />
+                                    ? <TableView items={filteredData(all, state.serviceType, state.provider, state.counter)} />
+                                    : <ChartView items={filteredData(all, state.serviceType, state.provider, state.counter)} />
                                 }
                             </div>
                         </>

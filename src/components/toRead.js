@@ -1,8 +1,8 @@
-import { useState } from "react";
-import { NavLink } from "react-router-dom";
-import arrowLeftCurrentNews from "../img/arrowLeftCurrentNews.svg";
-import arrowRightCurrentNews from "../img/arrowRightCurrentNews.svg";
-import list_imgs from "../newsList";
+import { useState } from 'react';
+import { NavLink } from 'react-router-dom';
+import arrowLeftCurrentNews from '../img/arrowLeftCurrentNews.svg';
+import arrowRightCurrentNews from '../img/arrowRightCurrentNews.svg';
+import list_imgs from '../newsList';
 
 const newsPerPage = 3;
 

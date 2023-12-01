@@ -1,25 +1,24 @@
 import { useEffect, useState, useContext } from 'react';
-import { Context } from "../../store";
-import api from "../../api";
-import InputField from "../../components/inputField";
-
-import AutoSuggest from "react-tailwindcss-select";
-import PinInput from "react-pin-input";
-import Button from "../../components/button";
+import { Context } from '../../store';
+import { getRegions, getDistricts, getTowns, getStreets, getHouses, getFlats, addObject, getAddress } from '../../api';
+import InputField from '../../components/inputField';
+import AutoSuggest from 'react-tailwindcss-select';
+import PinInput from 'react-pin-input';
+import Button from '../../components/button';
 // https://www.npmjs.com/package/react-tailwindcss-select
 
 const AutoSuggestClassNames = {
     menuButton: ({ isDisabled }) => (
         `AutoSuggestClassNames p-2 flex text-sm text-[#797878] border border-borderColor rounded shadow-sm transition-all duration-300 focus:ring-0 focus:outline-none focus:border-yellow_figma ${
             isDisabled
-                ? "bg-gray-200"
-                : "bg-white_figma"
+                ? 'bg-gray-200'
+                : 'bg-white_figma'
         }`
     ),
     tagItemText: 'aaa',
-    menu: "absolute z-10 w-full bg-white_figma rounded-lg shadow-myCustom text-sm",
-    searchBox: "w-full py-2 pl-2 text-sm border border-borderColor rounded focus:ring-0 focus:outline-none",
-    searchIcon: "hidden"
+    menu: 'absolute z-10 w-full bg-white_figma rounded-lg shadow-myCustom text-sm',
+    searchBox: 'w-full py-2 pl-2 text-sm border border-borderColor rounded focus:ring-0 focus:outline-none',
+    searchIcon: 'hidden'
 };
 const AddAddress = ({ close }) => {
     // const [,dispatch] = useContext(Context);
@@ -50,16 +49,14 @@ const AddAddress = ({ close }) => {
     const [flatName, setFlatName] = useState(`Квартира ${objCount}`);
 
     useEffect( () => {
-        const fetchData = async () => {
-            await api.getRegions().then((data) => setRegions(data));
+        getRegions().then((data) => {
+            setRegions(data);
             setRegion({
                 disabled: false,
-                label: "Київська область",
+                label: 'Київська область',
                 value: 11
             });
-        };
-        fetchData();
-
+        });
     }, []);
 
     useEffect( () => {
@@ -76,17 +73,14 @@ const AddAddress = ({ close }) => {
         if (!region) {
             return;
         }
-
-        const fetchData = async () => {
-            const result = await api.getDistricts(region.value);
+        getDistricts(region.value).then((result) => {
             setDistricts(result);
             setDistrict({
                 disabled: false,
                 label: 'КИЇВСЬКА ОБЛ. МІСТА ОБЛ. ЗНАЧЕННЯ',
                 value: 233
             });
-        };
-        fetchData();
+        });
     }, [region]);
 
     useEffect( () => {
@@ -101,16 +95,14 @@ const AddAddress = ({ close }) => {
         if (!district) {
             return;
         }
-        const fetchData = async () => {
-            const result = await api.getTowns(district.value);
+        getTowns(district.value).then((result) => {
             setTowns(result);
             setTown({
                 disabled: false,
                 label: 'КИЇВ',
                 value: 447
             });
-        };
-        fetchData();
+        });
     }, [district]);
 
     useEffect( () => {
@@ -123,11 +115,7 @@ const AddAddress = ({ close }) => {
         if (!town) {
             return;
         }
-        const fetchData = async () => {
-            const result = await api.getStreets(town.value);
-            setStreets(result);
-        };
-        fetchData();
+        getStreets(town.value).then((result) => setStreets(result));
     }, [town]);
 
     useEffect( () => {
@@ -138,11 +126,7 @@ const AddAddress = ({ close }) => {
         if (!street) {
             return;
         }
-        const fetchData = async () => {
-            const result = await api.getHouses(street.value);
-            setHouses(result);
-        };
-        fetchData();
+        getHouses(street.value).then((result) => setHouses(result));
     }, [street]);
 
     useEffect( () => {
@@ -151,24 +135,18 @@ const AddAddress = ({ close }) => {
         if (!house) {
             return;
         }
-        const fetchData = async () => {
-            const result = await api.getFlats(house.value);
-            setFlats(result);
-        };
-        fetchData();
+        getFlats(house.value).then((result) => setFlats(result));
     }, [house]);
 
-    const addObj = async () => {
+    const addObj = () => {
         // add api call to validate pinCode
-        await api.addObject(flat.value, flatName)
-        .catch((error) => {
-            dispatch({ type: 'error', payload: error });
-        });
-        await api.getAddress().then((data) => dispatch({ type: 'setAddresses', payload: data }))
-        .catch((error) => {
-                dispatch({ type: 'error', payload: error });
-        });
-        close();
+        addObject(flat.value, flatName).then(() => {
+            getAddress()
+                .then((data) => dispatch({ type: 'setAddresses', payload: data }))
+                .catch((error) => dispatch({ type: 'error', payload: error }));
+        })
+        .catch((error) => dispatch({ type: 'error', payload: error }))
+        .finally(() => close());
     }
 
     const openModalPinCode = (event) => {

@@ -18,7 +18,7 @@ const Modal = ({close, children}) => {
 
     return (
         <div className="modal">
-            <div className="modal__content" onClick={e => e.stopPropagation()}>
+            <div className="modal__content" onClick={(event) => event.stopPropagation()}>
                 <div className="icon_close" onClick={close}>
                     <img src={icon_close} alt="" />
                 </div>

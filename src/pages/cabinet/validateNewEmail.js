@@ -1,7 +1,7 @@
 import {useContext, useEffect, useState} from 'react';
-import { useNavigate } from "react-router-dom";
-import api from "../../api";
-import {Context} from "../../store";
+import { useNavigate } from 'react-router-dom';
+import { validationNewEmail, getObject } from '../../api';
+import { Context } from '../../store';
 
 const ValidateNewEmail = () => {
     const [,dispatch] = useContext(Context);
@@ -12,17 +12,12 @@ const ValidateNewEmail = () => {
     });
     const navigate = useNavigate();
     useEffect(() => {
-        const fetchData = async () => {
-                const result = await api.validationNewEmail(form);
-                if (result.status === 200) {
-                    await api.getObject().then((data) => {
-                        dispatch({ type: 'setAccount', payload: data.account });
-                    });
-                    console.log(result)
-                    navigate('/cabinet/myData');
-                }
-        };
-        fetchData();
+        validationNewEmail(form).then(() => {
+            getObject().then((data) => {
+                dispatch({ type: 'setAccount', payload: data.account });
+                navigate('/cabinet/myData');
+            });
+        });
     }, []);
     return (<div>валидация</div>);
 };

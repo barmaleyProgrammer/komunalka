@@ -1,41 +1,40 @@
-import { useEffect, useState, useContext } from 'react';
-import { useNavigate } from "react-router-dom";
-import { Context } from "../../store";
-import api from "../../api";
+import { useEffect, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Context } from '../../store';
+import { validation, getObject, getServices, getServiceTypes, getAddress } from '../../api';
 
 const Validate = () => {
     const [,dispatch] = useContext(Context);
     const navigate = useNavigate();
-    const [validateFlag, setValidateFlag] = useState(false);
     useEffect(() => {
-        const fetchData = async () => {
+        const fetchData = () => {
             const url = new URL(window.location);
             const email = url.searchParams.get('email') || '';
             const token = url.searchParams.get('code') || '';
             if (email && token) {
-                const result = await api.validation(email, token);
-                if (result.status === 200) {
-                    setValidateFlag(true);
+                validation(email, token).then(() => {
                     dispatch({ type: 'logIn' });
-                    await api.getObject().then((data) => {
+                    const req1 = getObject().then((data) => {
                         dispatch({ type: 'setAccount', payload: data.account });
                     });
-                    await api.getServices().then((data) => {
+                    const req2 = getServices().then((data) => {
                         dispatch({ type: 'services', payload: data });
                     });
-                    await api.getServiceTypes().then((data) => {
+                    const req3 = getServiceTypes().then((data) => {
                         dispatch({ type: 'serviceTypes', payload: data });
                     });
-                    await api.getAddress().then((data) => {
+                    const req4 = getAddress().then((data) => {
                         dispatch({ type: 'setAddresses', payload: data });
-                    })
-                    navigate('/cabinet');
-                }
-
+                    });
+                    Promise.all([req1, req2, req3, req4]).then(() => {
+                        navigate('/cabinet');
+                    });
+                });
             }
         };
         fetchData();
     }, []);
-    return (<div></div>);
+
+    return (<></>);
 };
 export default Validate;

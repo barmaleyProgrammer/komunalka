@@ -1,16 +1,17 @@
-import Breadcrumbs from "../components/breadcrumbs";
+import Breadcrumbs from '../components/breadcrumbs';
+
+const breadCrumbs = [
+    {
+        'to': '/',
+        'label': 'Головна'
+    },
+    {
+        'to': '',
+        'label': 'Про нас'
+    },
+];
 
 const About = () => {
-    const breadCrumbs = [
-        {
-            "to": '/',
-            "label": 'Головна'
-        },
-        {
-            "to": '',
-            "label": 'Про нас'
-        },
-    ]
     return (
         <>
             <div className="mb-4">
