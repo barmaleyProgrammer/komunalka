@@ -91,7 +91,7 @@ const Faq = () => {
             <div>
                 <div className="flex justify-between items-center cursor-pointer" onClick={toggle}>
                     <p className="text-base font-normal py-3">{tittle}</p>
-                    {open ? <AiOutlineMinus className="AiOutlineMinusClassNames"/> : <AiOutlinePlus /> }
+                    {open ? <AiOutlineMinus className="AiOutlineMinusClassNames" /> : <AiOutlinePlus className="AiOutlineMinusClassNames" /> }
                 </div>
                 <Collapse isOpened={open}>
                     <div className="font-normal text-sm mb-4">{desc}</div>
