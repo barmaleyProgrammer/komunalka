@@ -11,7 +11,8 @@ import Modal from '../../components/modal/modal';
 import moment from 'moment';
 import MySelect from '../../components/MySelect2';
 import Loader from '../../components/Loader/loader';
-import { UniqueServiceTypes, UniqueProviders } from '../../utils';
+import { filteredProviders, filteredCounters, filteredData } from '../../utils';
+
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -90,51 +91,6 @@ const GraphsTables = () => {
         })
         .finally(() => setIsLoading(false));
     }, [objectId, state.startDate, state.endDate]);
-
-    const filteredProviders = (providers, serviceType) => {
-        return providers.filter((item) => {
-            if (!serviceType) {
-                return true;
-            }
-            return (Number(item.serviceType) === serviceType);
-        });
-    };
-
-    const filteredCounters = (counters, serviceType, provider) => {
-        return counters.filter((item) => {
-            if (!serviceType) {
-                return true;
-            }
-            return (Number(item.serviceType) === serviceType);
-        }).filter((item) => {
-            if (!provider) {
-                return true;
-            } else {
-                return (item.providerId === provider)
-            }
-        });
-    };
-
-    const filteredData = (all, serviceType, provider, counter) => {
-        return all.filter((item) => {
-            if (!serviceType) {
-                return true;
-            }
-            return (Number(item.serviceType) === serviceType);
-        }).filter((item) => {
-            if (!provider) {
-                return true;
-            } else {
-                return (Number(item.idFirme) === provider)
-            }
-        }).filter((item) => {
-            if (!counter) {
-                return true;
-            } else {
-                return (Number(item.abcounter) === counter)
-            }
-        });
-    };
 
     const TableView = ({items}) => {
         return (
