@@ -8,7 +8,7 @@ const RequireAuth = ({ children }) => {
     const isTokenExist = state.isLoggedIn;
 
     if (!isTokenExist) {
-        return (<h1 className="text-xl text-center">Для входу на цю сторінку треба зереєструватися</h1>)
+        return (<h1 className="text-xl text-center">Для доступу до сторінки необхідно увійти до системи</h1>)
     }
 
     return children;
