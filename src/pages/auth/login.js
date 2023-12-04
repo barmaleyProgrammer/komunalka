@@ -59,6 +59,8 @@ const Login = ({ close, showRegister, showResetPass }) => {
             Promise.all([req1, req2, req3, req4]).then(() => {
                 navigate('/cabinet');
                 close();
+            }).catch((error) => {
+                dispatch({type: 'error', payload: error});
             });
         }).catch((error) => {
             dispatch({ type: 'error', payload: error });
