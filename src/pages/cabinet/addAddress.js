@@ -56,6 +56,9 @@ const AddAddress = ({ close }) => {
                 label: 'Київська область',
                 value: 11
             });
+        }).catch((error) => {
+            dispatch({type: 'error', payload: error});
+            close();
         });
     }, []);
 
@@ -80,6 +83,9 @@ const AddAddress = ({ close }) => {
                 label: 'КИЇВСЬКА ОБЛ. МІСТА ОБЛ. ЗНАЧЕННЯ',
                 value: 233
             });
+        }).catch((error) => {
+            dispatch({type: 'error', payload: error});
+            close();
         });
     }, [region]);
 
@@ -102,6 +108,9 @@ const AddAddress = ({ close }) => {
                 label: 'КИЇВ',
                 value: 447
             });
+        }).catch((error) => {
+            dispatch({type: 'error', payload: error});
+            close();
         });
     }, [district]);
 
@@ -115,7 +124,10 @@ const AddAddress = ({ close }) => {
         if (!town) {
             return;
         }
-        getStreets(town.value).then((result) => setStreets(result));
+        getStreets(town.value).then((result) => setStreets(result)).catch((error) => {
+            dispatch({type: 'error', payload: error});
+            close();
+        });
     }, [town]);
 
     useEffect( () => {
@@ -126,7 +138,10 @@ const AddAddress = ({ close }) => {
         if (!street) {
             return;
         }
-        getHouses(street.value).then((result) => setHouses(result));
+        getHouses(street.value).then((result) => setHouses(result)).catch((error) => {
+            dispatch({type: 'error', payload: error});
+            close();
+        });
     }, [street]);
 
     useEffect( () => {
@@ -135,7 +150,10 @@ const AddAddress = ({ close }) => {
         if (!house) {
             return;
         }
-        getFlats(house.value).then((result) => setFlats(result));
+        getFlats(house.value).then((result) => setFlats(result)).catch((error) => {
+            dispatch({type: 'error', payload: error});
+            close();
+        });
     }, [house]);
 
     const addObj = () => {

@@ -26,6 +26,9 @@ const ValidateToken = () => {
             });
             Promise.all([req1, req2, req3, req4]).then(() => {
                 navigate('/cabinet');
+            }).catch((error) => {
+                dispatch({type: 'error', payload: error});
+                navigate('/');
             });
         }
     }, []);
