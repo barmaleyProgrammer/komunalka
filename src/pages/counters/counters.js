@@ -12,6 +12,7 @@ import Modal from '../../components/modal/modal';
 import Button from '../../components/button';
 
 const Counters = () => {
+    const [,dispatch] = useContext(Context);
     const { objectId } = useParams();
     const [state] = useContext(Context);
     const [counters, setCounters] = useState([]);
@@ -44,7 +45,10 @@ const Counters = () => {
             setCounters(result);
             const serviceTypes = UniqueServiceTypes(result);
             setServiceTypes(serviceTypes);
-        }).finally(() => setIsLoading(false));
+        }).finally(() => setIsLoading(false))
+            .catch((error) => {
+            dispatch({type: 'error', payload: error});
+        });
     }, [objectId]);
 
     const Save = (event) => {
