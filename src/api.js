@@ -293,8 +293,8 @@ export const getObject = () => {
         });
 };
 
-export const addObject = (objectId, name = '') => {
-    return connect.post('/v2/account/address', { objectId, name })
+export const addObject = (objectId, name = '', code = '') => {
+    return connect.post('/v2/account/address', { objectId, name, code })
         .then((res) => res)
         .catch((error) => {
             throw new ApiError(error);

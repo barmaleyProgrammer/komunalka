@@ -47,6 +47,7 @@ const AddAddress = ({ close }) => {
     const [flat, setFlat] = useState('');
 
     const [flatName, setFlatName] = useState(`Квартира ${objCount}`);
+    const [code, setCode] = useState('');
 
     useEffect( () => {
         getRegions().then((data) => {
@@ -158,7 +159,7 @@ const AddAddress = ({ close }) => {
 
     const addObj = () => {
         // add api call to validate pinCode
-        addObject(flat.value, flatName).then(() => {
+        addObject(flat.value, flatName, code).then(() => {
             getAddress()
                 .then((data) => dispatch({ type: 'setAddresses', payload: data }))
                 .catch((error) => dispatch({ type: 'error', payload: error }));
@@ -188,6 +189,18 @@ const AddAddress = ({ close }) => {
                             value={flatName}
                             autoComplete="off"
                             onChange={event => setFlatName(event.target.value)}
+                            // onPaste={(e)=> { e.preventDefault(); return false; }}
+                        />
+                    </div>
+                    <div className="py-2">
+                        <InputField
+                            type={'text'}
+                            placeholder={'Code'}
+                            name={'code'}
+                            required={true}
+                            value={code}
+                            autoComplete="off"
+                            onChange={event => setCode(event.target.value)}
                             // onPaste={(e)=> { e.preventDefault(); return false; }}
                         />
                     </div>
