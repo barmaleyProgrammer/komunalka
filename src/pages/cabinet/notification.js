@@ -1,7 +1,7 @@
 import Tabs from "../../components/tabs";
 import Breadcrumbs from "../../components/breadcrumbs";
 import Button from "../../components/button";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { updateUser } from "../../api";
 import { Context } from "../../store";
 
@@ -31,9 +31,17 @@ const Notification = () => {
         lastName: state.user.lastName,
         secondName: state.user.secondName,
         phone: state.user.phone,
-        receiveNewsletter: false,
-        reminderTransferOfCounters: false
+        receiveNewsletter: false
     });
+    const [form2, setForm2] = useState({});
+
+    useEffect(() => {
+        const data = [];
+        state.addresses?.map((item) => {
+            data[item.objectId] = item.reminderTransferOfCounters;
+        });
+        setForm2(data);
+    }, []);
 
     const Submit = (event) => {
         event.preventDefault();
@@ -46,6 +54,12 @@ const Notification = () => {
         setForm((prevProps) => ({
             ...prevProps,
             [event.target.name]: value
+        }));
+    };
+    const handleInputChange2 = (event) => {
+        setForm2((prevProps) => ({
+            ...prevProps,
+            [event.target.name]: event.target.checked
         }));
     };
 
@@ -61,24 +75,24 @@ const Notification = () => {
                 <h1 className="font-normal text-xl mb-4">Email розсилка</h1>
                 <div className="mb-4">
                     <h2>Нагадувати про передачу лічильників</h2>
-                    {
-                        state.addresses?.map((item, key) => {
-                            return (
-                                <div key={key} className="px-8 flex mb-2 mt-2">
-                                    <input className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
-                                           id="reminderTransferOfCounters"
-                                           name={'reminderTransferOfCounters'}
-                                           type="checkbox"
-                                           checked={form.reminderTransferOfCounters}
-                                           onChange={handleInputChange}
-                                    />
-                                    <div className="px-1 font-light text-sm">
-                                        { item.name }
-                                    </div>
-                                </div>
-                            );
-                        })
-                    }
+                    {/*{*/}
+                    {/*    state.addresses?.map((item, key) => {*/}
+                    {/*        return (*/}
+                    {/*            <div key={key} className="px-8 flex mb-2 mt-2">*/}
+                    {/*                <input className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"*/}
+                    {/*                       id={form2.item.objectId}*/}
+                    {/*                       name={form2.item.objectId}*/}
+                    {/*                       type="checkbox"*/}
+                    {/*                       checked={form2.item.reminderTransferOfCounters}*/}
+                    {/*                       onChange={handleInputChange2}*/}
+                    {/*                />*/}
+                    {/*                <div className="px-1 font-light text-sm">*/}
+                    {/*                    { item.name }*/}
+                    {/*                </div>*/}
+                    {/*            </div>*/}
+                    {/*        );*/}
+                    {/*    })*/}
+                    {/*}*/}
                     <div className="flex">
                         <input className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
                             id="receiveNewsletter"
