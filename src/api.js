@@ -98,8 +98,9 @@ export const validationNewEmail = (form) => {
         });
 };
 
-export const renameAddress = (objectId, name) => {
-    return connect.put(`/v2/account/address/${objectId}`, { name })
+export const updateAddress = (objectId, payload) => {
+    console.log(payload);
+    return connect.put(`/v2/account/address/${objectId}`, payload)
         .then((res) => res)
         .catch((error) => {
             throw new ApiError(error);

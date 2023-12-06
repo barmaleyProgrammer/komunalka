@@ -5,7 +5,7 @@ import { AiOutlinePlus } from 'react-icons/ai';
 import Breadcrumbs from '../../components/breadcrumbs';
 import Tabs from '../../components/tabs';
 import icon_house from '../../img/icon_house.svg';
-import { deleteObject, getAddress, renameAddress } from '../../api';
+import { deleteObject, getAddress, updateAddress } from '../../api';
 import DropDownMenu from '../../components/dropDownMenu';
 import Modal from '../../components/modal/modal';
 import InputField from '../../components/inputField';
@@ -87,9 +87,9 @@ const Cabinet = () => {
         setModalAddAddressActive(true);
     };
 
-    const updateAddress = () => {
-        const {objectId, name} = currentAddress;
-        renameAddress(objectId, name).then(() => {
+    const update = () => {
+        const { objectId, name } = currentAddress;
+        updateAddress(objectId, { name }).then(() => {
             setCurrentAddress('');
             setModalRenameObj(false);
             getAddress()
@@ -212,7 +212,7 @@ const Cabinet = () => {
                             />
                         </div>
                         <div className="pt-2 w-32 mx-auto mb-2">
-                            <Button type="button" onClick={updateAddress} label={'Оновити'} cssType={'primary'} />
+                            <Button type="button" onClick={update} label={'Оновити'} cssType={'primary'} />
                         </div>
                     </Modal>
                 )
