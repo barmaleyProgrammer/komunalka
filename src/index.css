@@ -163,3 +163,7 @@ input[type=number] {
 .AiOutlineMinusClassNames:hover {
     color: #FDC500;
 }
+.error {
+    color: #f00;
+
+}
