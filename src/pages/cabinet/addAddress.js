@@ -170,7 +170,9 @@ const AddAddress = ({ close }) => {
         };
         setFormError('');
         addObject(payload).then((res) => {
+            console.log('res', res);
             if (res.data.status === 'CODE_SEND') {
+                setFormError('CODE_SEND');
                 setViewMode(3);
                 return;
             }
@@ -181,6 +183,7 @@ const AddAddress = ({ close }) => {
                     .finally(() => close());
             }
             if (res.data.status === 'WRONG_CODE') {
+                setCode('');
                 setFormError('WRONG_CODE');
                 return;
             }
