@@ -25,6 +25,7 @@ const AddAddress = ({ close }) => {
     const [state, dispatch] = useContext(Context);
     const [viewMode, setViewMode] = useState(1);
     const [formError, setFormError] = useState('');
+    const [attempts, setAttempts] = useState('');
 
     const [pin, setPin] = useState('');
     const [code, setCode] = useState('');
@@ -185,6 +186,8 @@ const AddAddress = ({ close }) => {
             if (res.data.status === 'WRONG_CODE') {
                 setCode('');
                 setFormError('WRONG_CODE');
+                setViewMode(4);
+                setAttempts(res.data.attempts);
                 return;
             }
             if (res.data.status === 'LOCKED') {
@@ -317,7 +320,7 @@ const AddAddress = ({ close }) => {
                 <div className="p-8 w-[464px] h-[355px]">
                     <h1 className="text-lg text-center mb-8 font-medium">Ключ авторизації</h1>
                     <p>Використовуйте ключ авторизації з рахунків,<br/> за останні 3 місяці</p>
-                    { formError && <p className="error">{formError}</p> }
+                    { formError && <p className="error">{formError}{attempts}</p> }
                     <div className="mb-2 mt-3">
                         <InputCodeField
                             label={'Ключ авторизації'}
@@ -339,13 +342,42 @@ const AddAddress = ({ close }) => {
                  <div className="p-8 w-auto h-[355px]">
                      <h1 className="text-lg text-center mb-8 font-medium">PIN-код</h1>
                      <p>Для підтвердження введіть 4-х значний <br/> PIN-код відправлений Вам на електронну пошту</p>
-                     { formError && <p className="error">{formError}</p> }
                      <div className="text-center mb-2 mt-3">
                          <PinInput
                              length={6}
                              initialValue={pin}
                              secret
                              secretDelay={1000}
+                             onChange={(value) => setPin(value)}
+                             type="numeric"
+                             inputMode="number"
+                             style={{padding: '10px'}}
+                             inputStyle={{borderColor: '#E7E7E7', margin: '0 10px'}}
+                             inputFocusStyle={{borderColor: '#797878'}}
+                             autoSelect={true}
+                             regexCriteria={/^[ A-Za-z0-9_@./#&+-]*$/}
+                         />
+                     </div>
+                     <p className="text-center font-light">Відправити повторно</p>
+                     <div className="w-60 h-12 mx-auto mt-4">
+                         <Button type="button" disabled={String(pin).length < 6} cssType="primary" label={'Ok'} onClick={addObj} />
+                     </div>
+                 </div>
+            }
+            { viewMode === 4 &&
+                 <div className="p-8 w-auto h-[355px]">
+                     <h1 className="text-lg text-center mb-8 font-medium">PIN-код</h1>
+                     { formError &&
+                         <div>
+                             <p className="font-light">Невірний PIN-код.<br/></p>
+                             <p className="font-medium">Залишилося спроб: {5 - attempts}</p>
+                         </div>
+                     }
+                     <div className="text-center mb-2 mt-3">
+                         <PinInput
+                             length={6}
+                             initialValue={pin}
+                             secret={false}
                              onChange={(value) => setPin(value)}
                              type="numeric"
                              inputMode="number"
