@@ -381,8 +381,8 @@ const AddAddress = ({ close }) => {
                              onChange={(value) => setPin(value)}
                              type="numeric"
                              inputMode="number"
-                             style={{padding: '10px'}}
-                             inputStyle={{borderColor: '#E7E7E7', margin: '0 10px'}}
+                             style={{padding: '10px', borderColor: '#f00'}}
+                             inputStyle={{borderColor: '#f00', margin: '0 10px'}}
                              inputFocusStyle={{borderColor: '#797878'}}
                              autoSelect={true}
                              regexCriteria={/^[ A-Za-z0-9_@./#&+-]*$/}
