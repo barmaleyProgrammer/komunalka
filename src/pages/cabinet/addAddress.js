@@ -330,7 +330,6 @@ const AddAddress = ({ close }) => {
                             placeholder="XXX-YYY-ZZZ"
                             maskPlaceholder={null}
                             name={'code'}
-                            cssClass="email-field"
                             required={true}
                             value={code}
                             onChange={(event) => setCode(event.target.value)}
