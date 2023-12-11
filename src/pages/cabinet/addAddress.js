@@ -25,7 +25,7 @@ const AddAddress = ({ close }) => {
     const [state, dispatch] = useContext(Context);
     const [viewMode, setViewMode] = useState(1);
     const [formError, setFormError] = useState('');
-    const [attempts, setAttempts] = useState('');
+    const [attempts, setAttempts] = useState(0);
 
     const [pin, setPin] = useState('');
     const [code, setCode] = useState('');
@@ -170,10 +170,10 @@ const AddAddress = ({ close }) => {
             code: pin || code || null
         };
         setFormError('');
+        setAttempts(0);
         addObject(payload).then((res) => {
             console.log('res', res);
             if (res.data.status === 'CODE_SEND') {
-                setFormError('CODE_SEND');
                 setViewMode(3);
                 return;
             }
@@ -184,9 +184,7 @@ const AddAddress = ({ close }) => {
                     .finally(() => close());
             }
             if (res.data.status === 'WRONG_CODE') {
-                setCode('');
                 setFormError('WRONG_CODE');
-                setViewMode(4);
                 setAttempts(res.data.attempts);
                 return;
             }
@@ -320,7 +318,12 @@ const AddAddress = ({ close }) => {
                 <div className="p-8 w-[464px] h-[355px]">
                     <h1 className="text-lg text-center mb-8 font-medium">Ключ авторизації</h1>
                     <p>Використовуйте ключ авторизації з рахунків,<br/> за останні 3 місяці</p>
-                    { formError && <p className="error">{formError}{attempts}</p> }
+                    { formError &&
+                        <div>
+                            <p className="font-light">Невірний Ключ авторизації.<br/></p>
+                            <p className="font-medium">Залишилося спроб: {5 - attempts}</p>
+                        </div>
+                    }
                     <div className="mb-2 mt-3">
                         <InputCodeField
                             label={'Ключ авторизації'}
@@ -341,12 +344,19 @@ const AddAddress = ({ close }) => {
             { viewMode === 3 &&
                  <div className="p-8 w-auto h-[355px]">
                      <h1 className="text-lg text-center mb-8 font-medium">PIN-код</h1>
-                     <p>Для підтвердження введіть 4-х значний <br/> PIN-код відправлений Вам на електронну пошту</p>
+                     { !formError && <p>Для підтвердження введіть 4-х значний <br/> PIN-код відправлений Вам на електронну пошту</p> }
+                     { formError &&
+                         <div>
+                             <p className="font-light">Невірний PIN-код.<br/></p>
+                             <p className="font-medium">Залишилося спроб: {5 - attempts}</p>
+                         </div>
+                     }
                      <div className="text-center mb-2 mt-3">
+                     { !formError &&
                          <PinInput
                              length={6}
                              initialValue={pin}
-                             secret
+                             secret={true}
                              secretDelay={1000}
                              onChange={(value) => setPin(value)}
                              type="numeric"
@@ -357,23 +367,8 @@ const AddAddress = ({ close }) => {
                              autoSelect={true}
                              regexCriteria={/^[ A-Za-z0-9_@./#&+-]*$/}
                          />
-                     </div>
-                     <p className="text-center font-light">Відправити повторно</p>
-                     <div className="w-60 h-12 mx-auto mt-4">
-                         <Button type="button" disabled={String(pin).length < 6} cssType="primary" label={'Ok'} onClick={addObj} />
-                     </div>
-                 </div>
-            }
-            { viewMode === 4 &&
-                 <div className="p-8 w-auto h-[355px]">
-                     <h1 className="text-lg text-center mb-8 font-medium">PIN-код</h1>
-                     { formError &&
-                         <div>
-                             <p className="font-light">Невірний PIN-код.<br/></p>
-                             <p className="font-medium">Залишилося спроб: {5 - attempts}</p>
-                         </div>
                      }
-                     <div className="text-center mb-2 mt-3">
+                     { formError &&
                          <PinInput
                              length={6}
                              initialValue={pin}
@@ -387,6 +382,7 @@ const AddAddress = ({ close }) => {
                              autoSelect={true}
                              regexCriteria={/^[ A-Za-z0-9_@./#&+-]*$/}
                          />
+                     }
                      </div>
                      <p className="text-center font-light">Відправити повторно</p>
                      <div className="w-60 h-12 mx-auto mt-4">
