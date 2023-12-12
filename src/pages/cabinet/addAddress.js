@@ -318,23 +318,38 @@ const AddAddress = ({ close }) => {
                 <div className="p-8 w-[464px] h-[355px]">
                     <h1 className="text-lg text-center mb-8 font-medium">Ключ авторизації</h1>
                     <p>Використовуйте ключ авторизації з рахунків,<br/> за останні 3 місяці</p>
-                    { formError &&
-                        <div>
-                            <p className="font-light">Невірний Ключ авторизації.<br/></p>
-                            <p className="font-medium">Залишилося спроб: {5 - attempts}</p>
+                    { !formError &&
+                        <div className="mb-2 mt-3">
+                            <InputCodeField
+                                label={'Ключ авторизації'}
+                                placeholder="XXX-YYY-ZZZ-WWW"
+                                maskPlaceholder={null}
+                                name={'code'}
+                                required={true}
+                                value={code}
+                                onChange={(event) => setCode(event.target.value)}
+                            />
                         </div>
                     }
-                    <div className="mb-2 mt-3">
-                        <InputCodeField
-                            label={'Ключ авторизації'}
-                            placeholder="XXX-YYY-ZZZ"
-                            maskPlaceholder={null}
-                            name={'code'}
-                            required={true}
-                            value={code}
-                            onChange={(event) => setCode(event.target.value)}
-                        />
-                    </div>
+                    { formError &&
+                        <div>
+                            <div>
+                                <p className="font-light">Невірний Ключ авторизації.<br/></p>
+                                <p className="font-medium">Залишилося спроб: {5 - attempts}</p>
+                            </div>
+                            <div className="mb-2 mt-3">
+                                <InputCodeField
+                                    label={'Ключ авторизації'}
+                                    placeholder="XXX-YYY-ZZZ"
+                                    maskPlaceholder={null}
+                                    name={'code'}
+                                    required={true}
+                                    value={code}
+                                    onChange={(event) => setCode(event.target.value)}
+                                />
+                            </div>
+                        </div>
+                    }
                     <div className="w-60 h-12 mx-auto mt-4">
                         <Button type="button" cssType="primary" label={'Ok'} onClick={addObj} />
                     </div>

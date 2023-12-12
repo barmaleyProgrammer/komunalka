@@ -7,7 +7,7 @@ const InputCodeField = (props) => {
             <InputMask
                 className="text-sm text-[#797878] outline-none rounded border border-borderColor focus:border-yellow_figma w-full p-3"
                 // mask="+99 (999) 999-99-99"
-                mask="999-999-999"
+                mask="************"
                 onChange={props.onChange}
                 value={props.value}
                 name={props.name}
