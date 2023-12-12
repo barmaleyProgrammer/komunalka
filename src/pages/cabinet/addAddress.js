@@ -168,7 +168,6 @@ const AddAddress = ({ close }) => {
 
     const addObj = (e) => {
         e.preventDefault();
-        // add api call to validate pinCode
         const payload = {
             objectId: flat.value,
             name: flatName,
@@ -177,7 +176,6 @@ const AddAddress = ({ close }) => {
         setFormError('');
         setAttempts(0);
         addObject(payload).then((res) => {
-            console.log('res', res);
             if (res.data.status === 'REQUIRED_CODE') {
                 setViewMode(2);
                 return;
