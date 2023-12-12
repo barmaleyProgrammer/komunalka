@@ -163,7 +163,25 @@ input[type=number] {
 .AiOutlineMinusClassNames:hover {
     color: #FDC500;
 }
-.error {
-    color: #f00;
-
+.wrong_code {
+    content: url('./img/wrong_code.svg');
+    position: absolute;
+    bottom: 121px;
+    right: 45px;
+}
+.codeInput input {
+    border: 1px solid #E63147;
+}
+div#tooltip_wrong_code {
+    white-space: pre;
+    padding: 16px 46px 16px 16px;
+    color: #2A3744;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%; /* 21px */
+    border-radius: 6px;
+    border: 1px solid #E7E7E7;
+    background: #FFF;
+    position: absolute;
 }

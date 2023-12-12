@@ -6,7 +6,12 @@ import AutoSuggest from 'react-tailwindcss-select';
 import PinInput from 'react-pin-input';
 import Button from '../../components/button';
 import InputCodeField from "../../components/inputCodeField";
+import wrong_code from './../../img/wrong_code.svg'
+import {Tooltip} from "react-tooltip";
+import {getOffsetLeft} from "@mui/material";
 // https://www.npmjs.com/package/react-tailwindcss-select
+
+const text = 'Невірний ключ авторизації.\nСпробуйте ще раз.';
 
 const AutoSuggestClassNames = {
     menuButton: ({ isDisabled }) => (
@@ -23,7 +28,7 @@ const AutoSuggestClassNames = {
 };
 const AddAddress = ({ close }) => {
     const [state, dispatch] = useContext(Context);
-    const [viewMode, setViewMode] = useState(1);
+    const [viewMode, setViewMode] = useState(2);
     const [formError, setFormError] = useState('');
     const [attempts, setAttempts] = useState(0);
 
@@ -318,7 +323,7 @@ const AddAddress = ({ close }) => {
                 <div className="p-8 w-[464px] h-[355px]">
                     <h1 className="text-lg text-center mb-8 font-medium">Ключ авторизації</h1>
                     <p>Використовуйте ключ авторизації з рахунків,<br/> за останні 3 місяці</p>
-                    { !formError &&
+                    { formError &&
                         <div className="mb-2 mt-3">
                             <InputCodeField
                                 label={'Ключ авторизації'}
@@ -331,15 +336,16 @@ const AddAddress = ({ close }) => {
                             />
                         </div>
                     }
-                    { formError &&
+                    { !formError &&
                         <div>
                             <div>
-                                <p className="font-light">Невірний Ключ авторизації.<br/></p>
+                                {/*<p className="font-light">Невірний Ключ авторизації.<br/></p>*/}
                                 <p className="font-medium">Залишилося спроб: {5 - attempts}</p>
                             </div>
-                            <div className="mb-2 mt-3">
+                            <div className="relative mb-2 mt-3">
                                 <InputCodeField
                                     label={'Ключ авторизації'}
+                                    cssClass="codeInput"
                                     placeholder="XXX-YYY-ZZZ"
                                     maskPlaceholder={null}
                                     name={'code'}
@@ -348,6 +354,13 @@ const AddAddress = ({ close }) => {
                                     onChange={(event) => setCode(event.target.value)}
                                 />
                             </div>
+                            <div className="">
+                            <p className="" data-tooltip-id="tooltip_wrong_code" data-tooltip-place="right" data-tooltip-content={text}>
+                                <img className="wrong_code"  src={wrong_code} alt={wrong_code}/>
+                            </p>
+                            <Tooltip id="tooltip_wrong_code" arrowColor="#E7E7E7"/>
+                            {/*https://react-tooltip.com/docs/options*/}
+                        </div>
                         </div>
                     }
                     <div className="w-60 h-12 mx-auto mt-4">
