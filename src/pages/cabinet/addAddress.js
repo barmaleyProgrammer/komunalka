@@ -177,6 +177,10 @@ const AddAddress = ({ close }) => {
         setAttempts(0);
         addObject(payload).then((res) => {
             console.log('res', res);
+            if (res.data.status === 'REQUIRED_CODE') {
+                setViewMode(2);
+                return;
+            }
             if (res.data.status === 'CODE_SEND') {
                 setViewMode(3);
                 return;
@@ -208,7 +212,7 @@ const AddAddress = ({ close }) => {
             { viewMode === 1 &&
             <div className="px-14 py-6 space-y-3 mt-2 mx-auto w-[464px] rounded-lg shadow-lg">
                 <h4 className="text-black_figma font-medium text-center">Додати адресу</h4>
-                <form action="#" onSubmit={(event) => { event.preventDefault(); setViewMode(2); }}>
+                <form action="#" onSubmit={addObj}>
                     <div className="py-2">
                         <InputField
                             type={'text'}
