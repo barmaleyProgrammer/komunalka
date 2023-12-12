@@ -166,7 +166,8 @@ const AddAddress = ({ close }) => {
         });
     }, [house]);
 
-    const addObj = () => {
+    const addObj = (e) => {
+        e.preventDefault();
         // add api call to validate pinCode
         const payload = {
             objectId: flat.value,
@@ -386,8 +387,7 @@ const AddAddress = ({ close }) => {
                          <PinInput
                              length={6}
                              initialValue={pin}
-                             secret={true}
-                             secretDelay={1000}
+                             secret={false}
                              onChange={(value) => setPin(value)}
                              type="numeric"
                              inputMode="number"
