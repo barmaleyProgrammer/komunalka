@@ -27,7 +27,7 @@ const AutoSuggestClassNames = {
 };
 const AddAddress = ({ close }) => {
     const [state, dispatch] = useContext(Context);
-    const [viewMode, setViewMode] = useState(2);
+    const [viewMode, setViewMode] = useState(1);
     const [formError, setFormError] = useState('');
     const [attempts, setAttempts] = useState(0);
 
@@ -322,7 +322,7 @@ const AddAddress = ({ close }) => {
                 <div className="p-8 w-[464px] h-[355px]">
                     <h1 className="text-lg text-center mb-8 font-medium">Ключ авторизації</h1>
                     <p>Використовуйте ключ авторизації з рахунків,<br/> за останні 3 місяці</p>
-                    { formError &&
+                    { !formError &&
                         <div className="mb-2 mt-3">
                             <InputCodeField
                                 label={'Ключ авторизації'}
@@ -335,7 +335,7 @@ const AddAddress = ({ close }) => {
                             />
                         </div>
                     }
-                    { !formError &&
+                    { formError &&
                         <div>
                             <div>
                                 {/*<p className="font-light">Невірний Ключ авторизації.<br/></p>*/}
