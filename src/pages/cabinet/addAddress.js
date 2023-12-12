@@ -8,7 +8,6 @@ import Button from '../../components/button';
 import InputCodeField from "../../components/inputCodeField";
 import wrong_code from './../../img/wrong_code.svg'
 import {Tooltip} from "react-tooltip";
-import {getOffsetLeft} from "@mui/material";
 // https://www.npmjs.com/package/react-tailwindcss-select
 
 const text = 'Невірний ключ авторизації.\nСпробуйте ще раз.';
