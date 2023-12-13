@@ -382,7 +382,7 @@ const AddAddress = ({ close }) => {
             { viewMode === 3 &&
                  <div className="p-8 w-auto h-[355px]">
                      <h1 className="text-lg text-center mb-8 font-medium">PIN-код</h1>
-                     { !formError && <p>Для підтвердження введіть 4-х значний <br/> PIN-код відправлений Вам на електронну пошту</p> }
+                     { !formError && <p>Для підтвердження введіть 6-ти значний <br/> PIN-код відправлений Вам на електронну пошту</p> }
                      { formError &&
                          <div>
                              <p className="font-light">Невірний PIN-код.<br/></p>
