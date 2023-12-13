@@ -166,8 +166,8 @@ input[type=number] {
 .wrong_code {
     content: url('./img/wrong_code.svg');
     position: absolute;
-    bottom: 121px;
-    right: 45px;
+    bottom: 14px;
+    right: 12px;
 }
 .codeInput input {
     border: 1px solid #E63147;

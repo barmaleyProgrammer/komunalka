@@ -355,14 +355,23 @@ const AddAddress = ({ close }) => {
                                     value={code}
                                     onChange={(event) => setCode(event.target.value)}
                                 />
+                                <img className="wrong_code" src={wrong_code} alt=""
+                                     data-tooltip-id="tooltip_wrong_code"
+                                     data-tooltip-place="right"
+                                     data-tooltip-content={text}
+                                     data-tooltip-offset={25}
+                                />
+                                <Tooltip
+                                    id="tooltip_wrong_code"
+                                    arrowColor="#E7E7E7"
+                                    // openOnClick={true}
+                                    // isOpen={true}
+                                />
+                                {/*https://react-tooltip.com/docs/options*/}
                             </div>
-                            <div className="">
-                            <p className="" data-tooltip-id="tooltip_wrong_code" data-tooltip-place="right" data-tooltip-content={text}>
-                                <img className="wrong_code"  src={wrong_code} alt={wrong_code}/>
-                            </p>
-                            <Tooltip id="tooltip_wrong_code" arrowColor="#E7E7E7"/>
-                            {/*https://react-tooltip.com/docs/options*/}
-                        </div>
+                            <div>
+
+                            </div>
                         </div>
                     }
                     <div className="w-60 h-12 mx-auto mt-4">
