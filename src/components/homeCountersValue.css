@@ -1,0 +1,12 @@
+.rectangleActive{
+    width:82px;
+    height:8px;
+    background:#FDC500;
+    border-radius: 8px;
+}
+.rectangle{
+    width:82px;
+    height:8px;
+    background:#ECECF0;
+    border-radius: 8px;
+}

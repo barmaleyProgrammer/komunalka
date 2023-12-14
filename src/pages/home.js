@@ -17,6 +17,10 @@ import { NavLink } from 'react-router-dom';
 import {AiOutlineMinus, AiOutlinePlus} from 'react-icons/ai';
 import {Collapse} from 'react-collapse';
 import {useState} from 'react';
+import Modal from "../components/modal/modal";
+import HomeCountersValue from "../components/homeCountersValue";
+import HomeConsumptionCalculator from "../components/homeConsumptionCalculator";
+
 const list_imgs = [
     { image: '/news/News1.png' },
     { image: '/news/News2.png' },
@@ -24,6 +28,18 @@ const list_imgs = [
 ];
 
 const Home = (NewsList) => {
+    const [modalCountersHomeBlock, setModalCountersHomeBlock] = useState(false);
+    const [modalConsumptionCalculator, setModalConsumptionCalculator] = useState(false);
+
+    const CountersHomeBlockActive = (e) => {
+        e.stopPropagation();
+        setModalCountersHomeBlock(true);
+    };
+    const ConsumptionCalculator = (e) => {
+        e.stopPropagation();
+        setModalConsumptionCalculator(true);
+    };
+
     const AccordionData = [
         {
             id: 1,
@@ -103,24 +119,13 @@ const Home = (NewsList) => {
                 </section>
             </Carousel>
             <section>
-                {/*<div className="flex justify-center space-x-2 mt-2">*/}
-                {/*    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">*/}
-                {/*        <circle cx="6" cy="6" r="6" fill="#CEDDE9"/>*/}
-                {/*    </svg>*/}
-                {/*    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">*/}
-                {/*        <circle cx="6" cy="6" r="6" fill="#E7E7E7"/>*/}
-                {/*    </svg>*/}
-                {/*    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">*/}
-                {/*        <circle cx="6" cy="6" r="6" fill="#E7E7E7"/>*/}
-                {/*    </svg>*/}
-                {/*</div>*/}
                 <div className="grid grid-cols-3 gap-x-8 mt-24 mb-28">
                     <div className="rounded-lg shadow-myCustom w-[361px] h-52">
                         <p className="py-6 text-xl text-center">Актуальні показання</p>
                         <p className="text-sm font-light px-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                             Ut quis libero quis arcu laoreet</p>
                         <div className="w-56 mx-auto mt-6">
-                            <Button type="submit" label={'Перевірити показання'} cssType={'secondary'} />
+                            <Button type="submit" label={'Перевірити показання'} cssType={'secondary'} onClick={CountersHomeBlockActive} />
                         </div>
                     </div>
                     <div className="rounded-lg shadow-myCustom w-[361px] h-52">
@@ -128,7 +133,7 @@ const Home = (NewsList) => {
                         <p className="text-sm font-light px-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                             Ut quis libero quis arcu laoreet</p>
                         <div className="w-56 mx-auto mt-6 whitespace-nowrap">
-                            <Button type="submit" label={'Розрахувати споживання'} cssType={'secondary'} />
+                            <Button type="submit" label={'Розрахувати споживання'} cssType={'secondary'} onClick={ConsumptionCalculator} />
                         </div>
                     </div>
                     <div className="rounded-lg shadow-myCustom w-[361px] h-52">
@@ -140,6 +145,20 @@ const Home = (NewsList) => {
                         </div>
                     </div>
                 </div>
+                {
+                    modalCountersHomeBlock && (
+                        <Modal close={() => setModalCountersHomeBlock(false)}>
+                            <HomeCountersValue close={() => setModalCountersHomeBlock(false)} />
+                        </Modal>
+                    )
+                }
+                {
+                    modalConsumptionCalculator && (
+                        <Modal close={() => setModalConsumptionCalculator(false)}>
+                            <HomeConsumptionCalculator close={() => setModalConsumptionCalculator(false)} />
+                        </Modal>
+                    )
+                }
             </section>
             <section>
                 <div className="py-3 shadow-myCustom">

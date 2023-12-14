@@ -335,3 +335,11 @@ export const sendCounterData = (payload) => {
             throw new ApiError(error);
         });
 };
+
+export const getProvidersByServiceTypeId = (service_type) => {
+    return connect.get(`/v2/counter/service/provider?serviceType=${service_type}`)
+        .then((res) => res)
+        .catch((error) => {
+            throw new ApiError(error);
+        });
+};
