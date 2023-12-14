@@ -421,7 +421,6 @@ const AddAddress = ({ close }) => {
                          />
                      }
                      </div>
-                     <p className="text-center font-light">Відправити повторно</p>
                      <div className="w-60 h-12 mx-auto mt-4">
                          <Button type="button" disabled={String(pin).length < 6} cssType="primary" label={'Ok'} onClick={addObj} />
                      </div>
