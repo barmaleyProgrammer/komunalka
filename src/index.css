@@ -186,3 +186,16 @@ div#tooltip_wrong_code {
     background: #FFF;
     position: absolute;
 }
+div#tooltip_readingDayComment {
+    white-space: pre;
+    padding: 16px 46px 16px 16px;
+    color: #2A3744;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%; /* 21px */
+    border-radius: 6px;
+    border: 1px solid #FDC500;
+    background: #FFF;
+    position: absolute;
+}

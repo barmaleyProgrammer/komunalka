@@ -4,6 +4,7 @@ import InputField from './inputField';
 import Button from './button';
 import 'react-tooltip/dist/react-tooltip.css';
 import Neironka from './neironka';
+import {Tooltip} from "react-tooltip";
 
 const CounterForms = ({counters, setCounters, Save}) => {
     const [state] = useContext(Context);
@@ -50,7 +51,11 @@ const CounterForms = ({counters, setCounters, Save}) => {
                                     value={item.oldValue}
                                 />
                             </div>
-                            <div className="w-44">
+                            <div className="w-44"
+                                 data-tooltip-id="tooltip_readingDayComment"
+                                 data-tooltip-place="bottom"
+                                 data-tooltip-content={item.readingDayComment}
+                                 data-tooltip-offset={0}>
                                 <InputField
                                     label={'Поточні показання'}
                                     type={'number'}
@@ -61,8 +66,13 @@ const CounterForms = ({counters, setCounters, Save}) => {
                                     step={'0.01'}
                                     onChange={(e) => handleInputChange(e, item)}
                                 />
+                                <Tooltip
+                                    id="tooltip_readingDayComment"
+                                    arrowColor="#FDC500"
+                                    // openOnClick={true}
+                                    // isOpen={true}
+                                />
                             </div>
-                            <p className="absolute bottom-0 right-24 text-sm">Зараз прийом показань недоступний</p>
                             <Neironka />
                         </div>
                     );
