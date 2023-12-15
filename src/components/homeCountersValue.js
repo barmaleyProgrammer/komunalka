@@ -31,7 +31,6 @@ const HomeCountersValue = ({showRegister}) => {
     const [streets, setStreets] = useState([]);
     const [serviceType, setServiceType] = useState([]);
     const [actualValue, setActualValue] = useState([]);
-    const [countersForm, setCountersForm] = useState(false);
 
     useEffect(() => {
         getServiceTypes().then((result) => {
@@ -78,14 +77,12 @@ const HomeCountersValue = ({showRegister}) => {
         event.preventDefault();
         getCounterValue(objectId).then((result) => {
             setActualValue(result)
-            console.log(result);
         })
     };
 
     const filteredServices = (actualValue) => {
         return actualValue?.filter((item) => {
             if (item.idFirme == 116977) {
-                console.log('filteredServices', filteredServices);
                 return true;
             }
             return false;
@@ -97,66 +94,67 @@ const HomeCountersValue = ({showRegister}) => {
         <div>
             {
                 filteredServices(actualValue).map((item, key) => {
-                return (
-                    <div key={key}>
-                        <p>{item.nameFirme}</p>
-                        <p className="lowercase mb-4">{item.namePlat}</p>
-                        <span className="font-light mb-3">Особовий рахунок: </span>
-                        <span className="">{objectId}</span>
-                        <hr className="text-[#E2E8F0] mb-3 mt-3"/>
-                        <p className="text-xs text-[#949494]">Лічильник №1</p>
-                        <p className="mb-3">{item.abcounter}</p>
-                        <p className="mb-3">Актуальні показання</p>
-                        <p className="mb-3 text-[#797878]">{item.oldValue}</p>
-                        <NavLink to="#" >
-                            <p className="text-[#3E77AA]">Некоректні показання</p>
-                        </NavLink>
-                        <hr className="text-[#E2E8F0] mt-3 mb-3"/>
-                        <h2>Для передачі нових показань перейдіть у<br/><p className="text-[#3E77AA] mb-3">Особистий кабінет</p></h2>
-                        <Button type="submit" label={'Увійти'} cssType={'primary'} />
-                        <div className="py-2 font-light text-base">
-                            Ще немає аккаунту? <NavLink to="#" onClick={showRegister} className="text-[#3E77AA]">Зареєструватися</NavLink>
-                        </div>
+                    return (
+                        <div key={key}>
+                            <p>{item.nameFirme}</p>
+                            <p className="lowercase mb-4">{item.namePlat}</p>
+                            <span className="font-light mb-3">Особовий рахунок: </span>
+                            <span className="">{objectId}</span>
+                            <hr className="text-[#E2E8F0] mb-3 mt-3"/>
+                            <p className="text-xs text-[#949494]">Лічильник №1</p>
+                            <p className="mb-3">{item.abcounter}</p>
+                            <p className="mb-3">Актуальні показання</p>
+                            <p className="mb-3 text-[#797878]">{item.oldValue}</p>
+                            <NavLink to="#" >
+                                <p className="text-[#3E77AA]">Некоректні показання</p>
+                            </NavLink>
 
-                        <div className="flex gap-2 text-[#797878] mb-2">
-                            <hr className="w-1/3 mt-3"/>
-                            <span className="w-1/3 whitespace-nowrap">чи за допомогою</span>
-                            <hr className="ml-4 w-1/3 mt-3"/>
                         </div>
-                        <div className="flex flex-row space-x-2 mb-2">
-                            <div className="cursor-pointer basis-1/2 border border-[#E8E8E8;] rounded"
-                                 onClick={(event) => SocialNetworks(event, 'google')}
-                            >
-                                <div className="flex py-3 justify-center space-x-2">
-                                    <img src={google} alt="" />
-                                    <p className="text-sm whitespace-nowrap">Ввійти з Google</p>
-                                </div>
-                            </div>
-                            <div className="cursor-pointer basis-1/2 border border-[#E8E8E8;] rounded"
-                                 onClick={(event) => SocialNetworks(event, 'facebook')}
-                            >
-                                <div className="flex py-3 justify-center space-x-2">
-                                    <img src={facebook} alt="" />
-                                    <p className="text-sm whitespace-nowrap">Ввійти з Facebook</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="flex flex-row space-x-2">
-                            <div className="basis-1/2 border border-[#E8E8E8;] rounded">
-                                <div className="flex p-2 justify-center space-x-1">
-                                    <img src={logo_com_block} alt=""/>
-                                </div>
-                            </div>
-                            <div className="basis-1/2 border border-[#E8E8E8;] rounded">
-                                <div className="flex p-2 justify-center">
-                                    <img src={logo_gerc} alt="" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                )
-            })
+                    )
+                })
             }
+            <hr className="text-[#E2E8F0] mt-3 mb-3"/>
+            <h2>Для передачі нових показань перейдіть у<br/><p className="text-[#3E77AA] mb-3">Особистий кабінет</p></h2>
+            <Button type="submit" label={'Увійти'} cssType={'primary'} />
+            <div className="py-2 font-light text-base">
+                Ще немає аккаунту? <NavLink to="#" onClick={showRegister} className="text-[#3E77AA]">Зареєструватися</NavLink>
+            </div>
+
+            <div className="flex gap-2 text-[#797878] mb-2">
+                <hr className="w-1/3 mt-3"/>
+                <span className="w-1/3 whitespace-nowrap">чи за допомогою</span>
+                <hr className="ml-4 w-1/3 mt-3"/>
+            </div>
+            <div className="flex flex-row space-x-2 mb-2">
+                <div className="cursor-pointer basis-1/2 border border-[#E8E8E8;] rounded"
+                     onClick={(event) => SocialNetworks(event, 'google')}
+                >
+                    <div className="flex py-3 justify-center space-x-2">
+                        <img src={google} alt="" />
+                        <p className="text-sm whitespace-nowrap">Ввійти з Google</p>
+                    </div>
+                </div>
+                <div className="cursor-pointer basis-1/2 border border-[#E8E8E8;] rounded"
+                     onClick={(event) => SocialNetworks(event, 'facebook')}
+                >
+                    <div className="flex py-3 justify-center space-x-2">
+                        <img src={facebook} alt="" />
+                        <p className="text-sm whitespace-nowrap">Ввійти з Facebook</p>
+                    </div>
+                </div>
+            </div>
+            <div className="flex flex-row space-x-2">
+                <div className="basis-1/2 border border-[#E8E8E8;] rounded">
+                    <div className="flex p-2 justify-center space-x-1">
+                        <img src={logo_com_block} alt=""/>
+                    </div>
+                </div>
+                <div className="basis-1/2 border border-[#E8E8E8;] rounded">
+                    <div className="flex p-2 justify-center">
+                        <img src={logo_gerc} alt="" />
+                    </div>
+                </div>
+            </div>
         </div>
         )
     }
