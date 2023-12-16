@@ -34,7 +34,7 @@ const MyData = () => {
     const [state, dispatch] = useContext(Context);
     const [form, setForm] = useState({
         firstName: state.user.firstName,
-        // email: state.user.email,
+        email: state.user.email,
         lastName: state.user.lastName,
         secondName: state.user.secondName,
         phone: state.user.phone,
