@@ -156,7 +156,7 @@ const Login = ({ close, showRegister, showResetPass }) => {
                                 >
                                 <div className="flex py-3 justify-center space-x-2">
                                     <img src={facebook} alt="" />
-                                    <p className="text-sm whitespace-nowrap">Ввійти з 7Facebook</p>
+                                    <p className="text-sm whitespace-nowrap">Ввійти з Facebook</p>
                                 </div>
                             </div>
                         </div>
