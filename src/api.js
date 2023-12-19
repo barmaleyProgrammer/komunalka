@@ -47,6 +47,7 @@ export const signUp = (data) => {
 };
 
 export const signIn = (data) => {
+    connect.defaults.withCredentials = true;
     return connect.post('/v2/account/signin', data).then((res) => {
         localStorage.setItem('accessToken', res.data.accessToken);
         return res.data;
