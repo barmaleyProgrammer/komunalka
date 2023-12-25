@@ -33,6 +33,9 @@ connect.interceptors.response.use(
             localStorage.removeItem('accessToken');
             prevRequest.sent = true;
             return refreshToken().then(() => connect(prevRequest));
+        } else {
+            signOut();
+            window.location.href = '/';
         }
         return Promise.reject(error);
     }
