@@ -16,15 +16,15 @@ const BannersBottom = () => {
                 {
                     banners.map((item, key) => {
                         return (
-                            <div key={ key } className="w-auto text-center">
+                            <div key={ key } className="relative w-auto text-center">
                                 <a href={ item.url }>
-                                <img src={ item.image } alt="" className="mx-auto"/>
-                               <div className="">
+                                <img src={ item.image } alt="" className="mx-auto mb-3"/>
+                               {/*<div className="absolute top-16">*/}
+                               <div>
                                    { item.title }
                                </div>
                                 </a>
                             </div>
-
                         );
                     })
                 }
