@@ -20,6 +20,8 @@ import {useState} from 'react';
 import Modal from "../components/modal/modal";
 import HomeCountersValue from "../components/homeCountersValue";
 import HomeConsumptionCalculator from "../components/homeConsumptionCalculator";
+import BannersBottom from "../components/BannersBottom";
+
 
 const list_imgs = [
     { image: '/news/News1.png' },
@@ -90,6 +92,7 @@ const Home = (NewsList) => {
             </div>
         );
     };
+
     return (
         <>
             <Carousel >
@@ -257,18 +260,7 @@ const Home = (NewsList) => {
                 </div>
             </section>
             <section>
-                <div className="relative border border-[#E7E7E7] mt-32 h-[141px]">
-                    <div className="flex w-[893px] gap-x-12 mt-8 h-20 justify-between mx-auto">
-                        <img src={ kiyvOblEnergo_home } alt=""/>
-                        <img src={ kiyvOblGaz_home } alt=""/>
-                        <img src={ komunalka_home } alt=""/>
-                        <img src={ gerc_home } alt=""/>
-                        <img src={ kiyvOblEnergo_home } alt=""/>
-                        <img src={ kiyvOblGaz_home } alt=""/>
-                    </div>
-                    <img className="arrow_right_partners" src={arrow_right} alt=""/>
-                    <img className="arrow_left_partners" src={arrow_left} alt=""/>
-                </div>
+                <BannersBottom />
             </section>
         </>
     );
