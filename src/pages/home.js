@@ -5,10 +5,6 @@ import icon_eco_world from '../img/icon_eco_world.svg';
 import group from '../img/group.svg';
 import arrow_right from '../img/arrow_right.svg';
 import arrow_left from '../img/arrow_left.svg';
-import komunalka_home from '../img/partners_home/komunalka_home.png';
-import gerc_home from '../img/partners_home/gerc_home.png';
-import kiyvOblEnergo_home from '../img/partners_home/kiyvOblEnergo_home.png';
-import kiyvOblGaz_home from '../img/partners_home/kiyvOblGaz_home.png';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { Carousel } from 'react-responsive-carousel';
 
