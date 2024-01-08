@@ -28,14 +28,16 @@ connect.interceptors.response.use(
     (res) => res,
     (error) => {
         const prevRequest = error?.config;
-        const token = localStorage.getItem('accessToken') || '';
-        if (error?.response?.status === 401 && token && !prevRequest?.sent) {
-            localStorage.removeItem('accessToken');
-            prevRequest.sent = true;
-            return refreshToken().then(() => connect(prevRequest));
-        } else {
-            signOut();
-            window.location.href = '/';
+        if (error?.response?.status === 401) {
+            const token = localStorage.getItem('accessToken') || '';
+            if (token && !prevRequest?.sent) {
+                localStorage.removeItem('accessToken');
+                prevRequest.sent = true;
+                return refreshToken().then(() => connect(prevRequest));
+            } else {
+                signOut();
+                window.location.href = '/';
+            }
         }
         return Promise.reject(error);
     }

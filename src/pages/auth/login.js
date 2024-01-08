@@ -164,7 +164,6 @@ const Login = ({ close, showRegister, showResetPass }) => {
                             <div className="basis-1/2 border border-[#E8E8E8;] rounded">
                                 <div className="flex p-2 justify-center space-x-1">
                                     <img src={logo_com_block} alt=""/>
-                                    {/*<p className="text-sm pt-1">Комуналка</p>*/}
                                 </div>
                             </div>
                             <div className="basis-1/2 border border-[#E8E8E8;] rounded">
