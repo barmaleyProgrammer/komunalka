@@ -17,6 +17,8 @@ const Login = ({ close, showRegister, showResetPass }) => {
     const [,dispatch] = useContext(Context);
     const navigate = useNavigate();
     const [type, setTape] = useState('password');
+    const [loginType, setLoginType] = useState('email');
+    const [loginPattern, setLoginPattern] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [form, setForm] = useState({
         email: (process.env.NODE_ENV === 'development') ? 'grebenyukvd@gmail.com' : '',
@@ -35,6 +37,24 @@ const Login = ({ close, showRegister, showResetPass }) => {
         setForm((prevProps) => ({
             ...prevProps,
             [event.target.name]: value
+        }));
+    };
+
+    const handleInputChange2 = (event) => {
+        const value = event.target.value;
+        if (value.search(/^\d+/) !== -1) {
+            setLoginType('tel');
+            setLoginPattern('^\\d{12}$');
+            setTimeout(() => {
+                event.target.setSelectionRange(String(value).length, String(value).length);
+            }, 1);
+        } else {
+            setLoginType('email');
+            setLoginPattern(null);
+        }
+        setForm((prevProps) => ({
+            ...prevProps,
+            email: value
         }));
     };
 
@@ -92,16 +112,16 @@ const Login = ({ close, showRegister, showResetPass }) => {
                     <form className="space-y-2" onSubmit={Submit}>
                         <InputField
                             label={'Телефон(не менше 12цифр) або Email'}
-                            type={'text'}
+                            type={loginType}
                             placeholder={'Введіть свій телефон або Email'}
-                            name={'email'}
+                            name={'tel'}
                             cssClass="email-field"
                             required={true}
                             value={form.email}
                             autocomplete="on"
-                            // pattern="^([a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3})|(\d{12})$"
-                            pattern="^[a-zA-Z0-9\-.]+@[a-z0-9]+\.[a-z]{2,3}|(\+\d{12,15})$"
-                            onChange={handleInputChange}
+                            pattern={loginPattern}
+                            // pattern="^[a-zA-Z0-9\-.]+@[a-z0-9]+\.[a-z]{2,3}|(\+\d{12,15})$"
+                            onChange={handleInputChange2}
                         />
                         <div className={'relative'}>
                             <InputField
