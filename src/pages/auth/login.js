@@ -44,7 +44,7 @@ const Login = ({ close, showRegister, showResetPass }) => {
         const value = event.target.value;
         if (value.search(/^\d+/) !== -1) {
             setLoginType('tel');
-            setLoginPattern('^\\d{12}$');
+            setLoginPattern('^\\d{12+}$');
             setTimeout(() => {
                 event.target.setSelectionRange(String(value).length, String(value).length);
             }, 1);
