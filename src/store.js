@@ -34,6 +34,11 @@ const checkServices = () => {
     const data = localStorage.getItem('services');
     return data ? JSON.parse(data) : [];
 };
+const checkNews = () => {
+    const data = localStorage.getItem('news');
+    console.log(localStorage.news)
+    return data ? JSON.parse(data) : [];
+};
 
 export const Context = createContext(null);
 
@@ -41,6 +46,7 @@ export const initialSate = {
     isLoggedIn: checkToken(),
     user: checkUser(),
     addresses: checkAddresses(),
+    news: checkNews(),
     services: checkServices(),
     serviceTypes: checkServiceTypes(),
     serviceType: '',
@@ -73,6 +79,11 @@ export const reducer = (state, action) => {
             return {
                 ...state,
                 addresses: action.payload
+            };
+            case 'setNews':
+            return {
+                ...state,
+                news: action.payload
             };
         case 'service':
             return {

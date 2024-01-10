@@ -12,3 +12,12 @@ export const bannersList = () => {
     return connect.get('/banners')
         .then((res) => res.data)
 };
+
+// export const newsList = () => {
+//     return connect.get('/news')
+//         .then((res) => res.data)
+// };
+
+// export const newsList = () => {
+//     return connect.get('/news').then((res) => res.data);
+// };
