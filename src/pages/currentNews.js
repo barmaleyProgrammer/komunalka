@@ -8,14 +8,14 @@ const CurrentNews = ({ id }) => {
     const [news, setNews] = useState({});
     useEffect( () => {
         getNews(id).then((result) => setNews(result));
-    }, []);
+    }, [id]);
     return (
         <>
             <h1 className="mt-5 text-2xl">{news.title}</h1>
             <p className="text-sm font-extralight mt-4">{moment(news.publish_date).format('DD.MM.YYYY')}</p>
             <img className="mt-4" src={news.banner} alt=""/>
             <div className="w-[956px] mx-auto">
-                <div className="agreement">
+                <div className="news">
                 <div dangerouslySetInnerHTML = {{ __html: news.body }} ></div>
                 </div>
             </div>

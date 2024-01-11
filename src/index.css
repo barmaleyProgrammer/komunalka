@@ -199,3 +199,12 @@ div#tooltip_readingDayComment {
     background: #FFF;
     position: absolute;
 }
+
+.news ol {
+    counter-reset: item
+}
+.news li:before {
+    content: counters(item, ".") "." " ";
+    counter-increment: item;
+    font-weight: bold;
+}
