@@ -350,13 +350,3 @@ export const getProvidersByServiceTypeId = (service_type) => {
         });
 };
 
-export const newsList = () => {
-    return connect.get('http://127.0.0.1:8000/api/news')
-        .then((res) => {
-            localStorage.setItem('news', JSON.stringify(res.data));
-            return res.data;
-        })
-        .catch((error) => {
-            throw new ApiError(error);
-        });
-};

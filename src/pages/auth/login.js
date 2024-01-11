@@ -9,7 +9,7 @@ import google from "../../img/google.svg";
 import facebook from "../../img/facebook.svg";
 import eye from "../../img/eye.svg";
 import Button from "../../components/button";
-import { signIn, getObject, getServices, getServiceTypes, getAddress, authSocialNetworks, newsList } from "../../api";
+import { signIn, getObject, getServices, getServiceTypes, getAddress, authSocialNetworks } from "../../api";
 import { Context } from "../../store";
 import Loader from "../../components/Loader/loader";
 
@@ -76,10 +76,7 @@ const Login = ({ close, showRegister, showResetPass }) => {
             const req4 = getAddress().then((data) => {
                 dispatch({ type: 'setAddresses', payload: data });
             })
-            const req5 = newsList().then((data) => {
-                dispatch({ type: 'setNews', payload: data });
-            })
-            Promise.all([req1, req2, req3, req4, req5]).then(() => {
+            Promise.all([req1, req2, req3, req4]).then(() => {
                 navigate('/cabinet');
                 close();
             }).catch((error) => {
