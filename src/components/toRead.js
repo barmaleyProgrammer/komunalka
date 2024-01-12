@@ -2,8 +2,8 @@ import {useEffect, useState} from 'react';
 import { NavLink } from 'react-router-dom';
 import arrowLeftCurrentNews from '../img/arrowLeft.svg';
 import arrowRightCurrentNews from '../img/arrowRight.svg';
-import {newsList} from "../api2";
-import moment from "moment";
+import {newsList} from '../api2';
+import moment from 'moment';
 
 const newsPerPage = 3;
 

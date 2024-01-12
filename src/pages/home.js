@@ -16,16 +16,17 @@ import {useState} from 'react';
 import Modal from "../components/modal/modal";
 import HomeCountersValue from "../components/homeCountersValue";
 import HomeConsumptionCalculator from "../components/homeConsumptionCalculator";
+import NewsList from './newsList';
 import BannersBottom from "../components/BannersBottom";
 
 
-const list_imgs = [
-    { image: '/news/News1.png' },
-    { image: '/news/News2.png' },
-    { image: '/news/News3.png' },
-];
+// const list_imgs = [
+//     { image: '/news/News1.png' },
+//     { image: '/news/News2.png' },
+//     { image: '/news/News3.png' },
+// ];
 
-const Home = (NewsList) => {
+const Home = () => {
     const [modalCountersHomeBlock, setModalCountersHomeBlock] = useState(false);
     const [modalConsumptionCalculator, setModalConsumptionCalculator] = useState(false);
 
@@ -216,23 +217,14 @@ const Home = (NewsList) => {
                 </div>
             </section>
             <section>
-                    <h1 className="text-center text-2xl mt-14">Новини</h1>
-                        <div className="grid grid-cols-3">
-                            {
-                                list_imgs.map((item, key) => {
-                                    return (
-                                        <div key={key}>
-                                            <NavLink to={`/news/${key}`}>
-                                                <img className="rounded-lg mt-4" src={item.image} alt=""/>
-                                            </NavLink>
-                                        </div>
-                                    );
-                                })
-                            }
-                        </div>
-                <NavLink to="/news">
-                    <h1 className="text-center text-[#2A3744] text-base mt-6 mb-24 underline underline-offset-4 decoration-0">Переглянути всі новини</h1>
-                </NavLink>
+                <div>
+                    <h2 className="mt-12 font-medium text-2xl text-center">Новини</h2>
+                    <NewsList showPagination={false} perPage={3} />
+                    <NavLink to="/news">
+                        <h1 className="text-center text-[#2A3744] text-base mt-6 mb-24 underline underline-offset-4 decoration-0">Переглянути всі новини</h1>
+                    </NavLink>
+                </div>
+
             </section>
             <section className="bg-[#F0F5FA]">
                 <div className="p-4">
