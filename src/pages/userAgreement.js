@@ -1,5 +1,7 @@
 import './userAgreement.css';
 import Breadcrumbs from '../components/breadcrumbs';
+import {useEffect, useState} from "react";
+import {agreementInfo} from "../api2";
 
 const breadCrumbs = [
     {
@@ -12,41 +14,17 @@ const breadCrumbs = [
     },
 ]
 const UserAgreement = () => {
+    const [agreement, setAgreement] = useState({});
+    useEffect( () => {
+        agreementInfo().then((result) => setAgreement(result));
+    }, []);
     return (
         <>
             <Breadcrumbs items={breadCrumbs} />
-            <h1 className="mt-5 mb-5 text-2xl font-normal not-italic">Угода користувача</h1>
-            <p className="text-base mb-8 font-light">Ця Угода Користувача (далі - «Угода») укладається між Користувачем (будь-якою дієздатною фізичною особою або юридичною особою)
-                та комунальним концерном «Центр комунального сервісу»
-                (далі – Концерн) і регулює питання використання інтернет-сайту cks.com.ua та або інших доменних імен (далі - «Сайт»).</p>
-
-            <div className="agreement">
-                <ol>
-                    <li className="text-lg font-normal leading-10">
-                        Загальна частина
-                        <ol className="text-base font-light leading-10">
-                            <li>При використанні Сайту та/або будь-якої його частини, Користувач автоматично погоджується з умовами даної Угоди.</li>
-                            <li>Користувач зобовʼязаний ознайомитися з Угодою перед використанням Сайту.</li>
-                            <li>При використанні будь-якої частини Сайту, Користувач погоджується з умовами даної Угоди.</li>
-                            <li>Умови Угоди поширюються на всіх користувачів Сайту.</li>
-                        </ol>
-                    </li>
-                    <li className="text-lg font-normal leading-10">
-                        Права, обов’язки та відповідальність Користувача та Концерну
-                        <ol className="text-base font-light">
-                            <li className="leading-10">Користувач має право повного доступу до Сайту, зокрема ознайомлення з більш повною інформацією та заповнення форм, що розміщені на Сайті («Питання до фахівця» тощо)</li>
-                            <li className="leading-10">За порушення умов даної Угоди, Концерн має право без попереднього повідомлення блокувати доступ Користувача до Сайту.</li>
-                            <li className="">Якщо Користувач вважає, що на Сайті наявна інформація, що порушує його права,
-                                Користувач зобовʼязаний повідомити про це Концерн і надати йому інформацію,
-                                яка підтверджує дане порушення прав.
-                                У випадку якщо Користувач надасть неправдиву інформацію про порушення його прав,
-                                він несе повну відповідальність за заподіяну шкоду (включаючи всі витрати,
-                                державне мито та оплату послуг адвоката).</li>
-                            <li className="text-lg font-normal">Користувачу заборонено:</li>
-                            <li className="agr_li">сприяти розпалюванню релігійної, расової або міжнаціональної ворожнечі;</li>
-                        </ol>
-                    </li>
-                </ol>
+            <h1 dangerouslySetInnerHTML = {{ __html: agreement.title }} className="mt-5 mb-5 text-2xl font-normal not-italic"></h1>
+            <p dangerouslySetInnerHTML = {{ __html: agreement.description }} className="text-base mb-8 font-light"></p>
+            <div className="news">
+                <div dangerouslySetInnerHTML = {{ __html: agreement.body }} ></div>
             </div>
         </>
     );
