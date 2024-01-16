@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import {useEffect, useState} from 'react';
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
 import { Collapse } from 'react-collapse';
 import Breadcrumbs from '../components/breadcrumbs';
+import { faqList } from "../api2";
 
 const breadCrumbs = [
     {
@@ -13,65 +14,75 @@ const breadCrumbs = [
         'label': 'Часті питання'
     },
 ];
-const AccordionData = [
-    {
-        id: 1,
-        title: 'Чому саме Лічильники?',
-        section: 'about',
-        desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-    },
-    {
-        id: 2,
-        title: 'Які послуги є на сайті?',
-        section: 'about',
-        desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-    },
-    {
-        id: 3,
-        title: 'Чи передадуться мої показники лічильників до обранної компанії?',
-        section: 'about',
-        desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-    },
-    {
-        id: 4,
-        title: 'Чому саме Лічильники?',
-        section: 'about2',
-        desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-    },
-    {
-        id: 5,
-        title: 'Чи передадуться мої показники лічильників до обранної компанії?',
-        section: 'about2',
-        desc: '1Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-    },
-    {
-        id: 6,
-        title: 'Чи передадуться мої показники лічильників до обранної компанії?',
-        section: 'about2',
-        desc: '1Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-    },
-    {
-        id: 7,
-        title: 'Чи передадуться мої показники лічильників до обранної компанії?',
-        section: 'cabinet',
-        desc: '1Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-    },
-    {
-        id: 8,
-        title: 'Чи передадуться мої показники лічильників до обранної компанії?',
-        section: 'cabinet',
-        desc: '1Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-    },
-    {
-        id: 9,
-        title: 'Чи передадуться мої показники лічильників до обранної компанії?',
-        section: 'cabinet',
-        desc: '1Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-    },
-];
+// const AccordionData = [
+//     {
+//         id: 1,
+//         title: 'Чому саме Лічильники?',
+//         section: 'about',
+//         desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+//     },
+//     {
+//         id: 2,
+//         title: 'Які послуги є на сайті?',
+//         section: 'about',
+//         desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+//     },
+//     {
+//         id: 3,
+//         title: 'Чи передадуться мої показники лічильників до обранної компанії?',
+//         section: 'about',
+//         desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+//     },
+//     {
+//         id: 4,
+//         title: 'Чому саме Лічильники?',
+//         section: 'about2',
+//         desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+//     },
+//     {
+//         id: 5,
+//         title: 'Чи передадуться мої показники лічильників до обранної компанії?',
+//         section: 'about2',
+//         desc: '1Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+//     },
+//     {
+//         id: 6,
+//         title: 'Чи передадуться мої показники лічильників до обранної компанії?',
+//         section: 'about2',
+//         desc: '1Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+//     },
+//     {
+//         id: 7,
+//         title: 'Чи передадуться мої показники лічильників до обранної компанії?',
+//         section: 'cabinet',
+//         desc: '1Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+//     },
+//     {
+//         id: 8,
+//         title: 'Чи передадуться мої показники лічильників до обранної компанії?',
+//         section: 'cabinet',
+//         desc: '1Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+//     },
+//     {
+//         id: 9,
+//         title: 'Чи передадуться мої показники лічильників до обранної компанії?',
+//         section: 'cabinet',
+//         desc: '1Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+//     },
+// ];
 
 const Faq = () => {
+    const [categories, setCategories] = useState([]);
+    const [faqs, setFaqs] = useState([]);
     const [opened, setOpened] = useState([]);
+
+    useEffect( () => {
+        faqList().then((result) => {
+            setCategories(result.categories);
+            setFaqs(result.faqs);
+        });
+    }, []);
+
 
     const toggle = (id) => {
         setOpened((prevData) => {
@@ -105,36 +116,25 @@ const Faq = () => {
         <section>
             <Breadcrumbs items={breadCrumbs}/>
             <h2 className="text-center text-2xl">Часті питання</h2>
-            <h4 className="text-center text-lg mt-10">Про сервіс LYCHYLNYK</h4>
-            {AccordionData.filter((item) => item.section === 'about').map((data, index) => {
-                return <AccordionItem
-                    key={data.id}
-                    open={opened.includes(data.id)}
-                    tittle={data.title}
-                    desc={data.desc}
-                    toggle={() => toggle(data.id)}
-                />;
-            })}
-            <h4 className="text-center text-lg mt-10">Про особистий кабінет</h4>
-            {AccordionData.filter((item) => item.section === 'about2').map((data, index) => {
-                return <AccordionItem
-                    key={data.id}
-                    open={opened.includes(data.id)}
-                    tittle={data.title}
-                    desc={data.desc}
-                    toggle={() => toggle(data.id)}
-                />;
-            })}
-            <h4 className="text-center text-lg mt-10">Рахунки-повідомлення та квитанції</h4>
-            {AccordionData.filter((item) => item.section === 'cabinet').map((data, index) => {
-                return <AccordionItem
-                    key={data.id}
-                    open={opened.includes(data.id)}
-                    tittle={data.title}
-                    desc={data.desc}
-                    toggle={() => toggle(data.id)}
-                />;
-            })}
+            {
+                categories.map((category, index) => {
+                    return (
+                        <div key={index}>
+                            <h4 className="text-center text-lg mt-10">{category.name}</h4>
+                            {
+                                faqs.filter((item) => item.category_id === category.id).map((faq, index2) => {
+                                    return <AccordionItem
+                                        key={index2}
+                                        open={opened.includes(faq.id)}
+                                        tittle={faq.title}
+                                        desc={faq.description}
+                                        toggle={() => toggle(faq.id)} />
+                                })
+                            }
+                        </div>
+                    );
+                })
+            }
         </section>
     );
 }

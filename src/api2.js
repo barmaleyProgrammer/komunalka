@@ -44,3 +44,11 @@ export const agreementInfo = () => {
             throw new ApiError(error);
         });
 };
+
+export const faqList = () => {
+    return connect.get('/faq')
+        .then((res) => res.data)
+        .catch((error) => {
+            throw new ApiError(error);
+        });
+};
