@@ -101,7 +101,7 @@ const Faq = () => {
         return (
             <div>
                 <div className="flex justify-between items-center cursor-pointer" onClick={toggle}>
-                    <p className="text-base font-normal py-3">{tittle}</p>
+                    <p className="text-base font-medium py-3">{tittle}</p>
                     {open ? <AiOutlineMinus className="AiOutlineMinusClassNames" /> : <AiOutlinePlus className="AiOutlineMinusClassNames" /> }
                 </div>
                 <Collapse isOpened={open}>
@@ -115,12 +115,12 @@ const Faq = () => {
     return (
         <section>
             <Breadcrumbs items={breadCrumbs}/>
-            <h2 className="text-center text-2xl">Часті питання</h2>
+            <h2 className="text-center font-medium text-2xl">Часті питання</h2>
             {
                 categories.map((category, index) => {
                     return (
                         <div key={index}>
-                            <h4 className="text-center text-lg mt-10">{category.name}</h4>
+                            <h4 className="text-center font-medium text-lg mt-10">{category.name}</h4>
                             {
                                 faqs.filter((item) => item.category_id === category.id).map((faq, index2) => {
                                     return <AccordionItem
