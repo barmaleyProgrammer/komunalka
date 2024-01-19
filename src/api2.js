@@ -45,6 +45,14 @@ export const agreementInfo = () => {
         });
 };
 
+export const aboutInfo = () => {
+    return connect.get('/about/1')
+        .then((res) => res.data)
+        .catch((error) => {
+            throw new ApiError(error);
+        });
+};
+
 export const faqList = () => {
     return connect.get('/faq')
         .then((res) => res.data)
