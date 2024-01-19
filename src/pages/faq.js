@@ -14,62 +14,6 @@ const breadCrumbs = [
         'label': 'Часті питання'
     },
 ];
-// const AccordionData = [
-//     {
-//         id: 1,
-//         title: 'Чому саме Лічильники?',
-//         section: 'about',
-//         desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-//     },
-//     {
-//         id: 2,
-//         title: 'Які послуги є на сайті?',
-//         section: 'about',
-//         desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-//     },
-//     {
-//         id: 3,
-//         title: 'Чи передадуться мої показники лічильників до обранної компанії?',
-//         section: 'about',
-//         desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-//     },
-//     {
-//         id: 4,
-//         title: 'Чому саме Лічильники?',
-//         section: 'about2',
-//         desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-//     },
-//     {
-//         id: 5,
-//         title: 'Чи передадуться мої показники лічильників до обранної компанії?',
-//         section: 'about2',
-//         desc: '1Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-//     },
-//     {
-//         id: 6,
-//         title: 'Чи передадуться мої показники лічильників до обранної компанії?',
-//         section: 'about2',
-//         desc: '1Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-//     },
-//     {
-//         id: 7,
-//         title: 'Чи передадуться мої показники лічильників до обранної компанії?',
-//         section: 'cabinet',
-//         desc: '1Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-//     },
-//     {
-//         id: 8,
-//         title: 'Чи передадуться мої показники лічильників до обранної компанії?',
-//         section: 'cabinet',
-//         desc: '1Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-//     },
-//     {
-//         id: 9,
-//         title: 'Чи передадуться мої показники лічильників до обранної компанії?',
-//         section: 'cabinet',
-//         desc: '1Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-//     },
-// ];
 
 const Faq = () => {
     const [categories, setCategories] = useState([]);

@@ -12,21 +12,27 @@ import Button from '../components/button';
 import { NavLink } from 'react-router-dom';
 import {AiOutlineMinus, AiOutlinePlus} from 'react-icons/ai';
 import {Collapse} from 'react-collapse';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import Modal from "../components/modal/modal";
 import HomeCountersValue from "../components/homeCountersValue";
 import HomeConsumptionCalculator from "../components/homeConsumptionCalculator";
 import NewsList from './newsList';
 import BannersBottom from "../components/BannersBottom";
-
-
-// const list_imgs = [
-//     { image: '/news/News1.png' },
-//     { image: '/news/News2.png' },
-//     { image: '/news/News3.png' },
-// ];
+import {faqList} from "../api2";
 
 const Home = () => {
+
+    const [categories, setCategories] = useState([]);
+    const [faqs, setFaqs] = useState([]);
+    const [opened, setOpened] = useState([]);
+
+    useEffect( () => {
+        faqList().then((result) => {
+            setCategories(result.categories[0]);
+            setFaqs(result.faqs);
+        });
+    }, []);
+
     const [modalCountersHomeBlock, setModalCountersHomeBlock] = useState(false);
     const [modalConsumptionCalculator, setModalConsumptionCalculator] = useState(false);
 
@@ -39,45 +45,23 @@ const Home = () => {
         setModalConsumptionCalculator(true);
     };
 
-    const AccordionData = [
-        {
-            id: 1,
-            title: 'Чому саме Лічильники?',
-            section: 'about',
-            desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-        },
-        {
-            id: 2,
-            title: 'Які послуги є на сайті?',
-            section: 'about',
-            desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-        },
-        {
-            id: 3,
-            title: 'Чи передадуться мої показники лічильників до обранної компанії?',
-            section: 'about',
-            desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-        },
-        {
-            id: 4,
-            title: 'Чи передадуться мої показники лічильників до обранної компанії?',
-            section: 'cabinet',
-            desc: '1Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-        },
-    ];
-    const [open, setOpen] = useState(0);
-    const toggle = (index) => {
-        if (open === index) {
-            setOpen(0);
-        } else {
-            setOpen(index);
-        }
-    }
+    const toggle = (id) => {
+        setOpened((prevData) => {
+            const clone = [...prevData];
+            const index = clone.findIndex((item) => item === id);
+            if (index === -1) {
+                clone.push(id)
+            } else {
+                clone.splice(index, 1);
+            }
+            return clone;
+        });
+    };
     const AccordionItem = ({open, toggle, tittle, desc}) => {
         return (
             <div>
                 <div className="bg-white flex justify-between items-center cursor-pointer" onClick={toggle}>
-                    <p className="text-base font-normal py-3">{tittle}</p>
+                    <p className="text-base font-medium py-3">{tittle}</p>
                     <div>
                         {open ? <AiOutlineMinus /> : <AiOutlinePlus /> }
                     </div>
@@ -228,18 +212,17 @@ const Home = () => {
             </section>
             <section className="bg-[#F0F5FA]">
                 <div className="p-4">
-                    <h2 className="text-2xl text-center font-normal mt-4 mb-5">Популярні питання</h2>
-                    <div>
-                        {AccordionData.filter((item) => item.section === 'about').map((data, index) => {
-                            return <AccordionItem
-                                key={data.id}
-                                open={data.id === open}
-                                tittle={data.title}
-                                desc={data.desc}
-                                toggle={() =>toggle(data.id)}
-                            />;
-                        })}
-                    </div>
+                    <h2 className="text-2xl text-center font-medium mt-4 mb-5">Популярні питання</h2>
+                            {
+                                faqs.filter((item) => item.category_id === categories.id).map((faq, index2) => {
+                                    return <AccordionItem
+                                        key={index2}
+                                        open={opened.includes(faq.id)}
+                                        tittle={faq.title}
+                                        desc={faq.description}
+                                        toggle={() => toggle(faq.id)} />
+                                })
+                            }
                 </div>
                 <div className="py-10">
                     <NavLink to="/faq">

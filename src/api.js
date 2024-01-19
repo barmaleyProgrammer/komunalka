@@ -15,14 +15,17 @@ const connect = axios.create({
     headers: {'Content-Type': 'application/json'}
 });
 
-connect.interceptors.request.use((config) => {
-    const token = localStorage.getItem('accessToken') || '';
-    if (token) {
-        config.headers.apiauthorization = `Bearer ${token}`;
-    }
-    connect.defaults.withCredentials = false;
-    return config;
-}, (error) => Promise.reject(error));
+connect.interceptors.request.use(
+    (config) => {
+        const token = localStorage.getItem('accessToken') || '';
+        if (token) {
+            config.headers.apiauthorization = `Bearer ${token}`;
+        }
+        connect.defaults.withCredentials = false;
+        return config;
+    },
+    (error) => Promise.reject(error)
+);
 
 connect.interceptors.response.use(
     (res) => res,
