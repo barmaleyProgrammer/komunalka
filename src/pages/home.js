@@ -18,18 +18,23 @@ import HomeCountersValue from "../components/homeCountersValue";
 import HomeConsumptionCalculator from "../components/homeConsumptionCalculator";
 import NewsList from './newsList';
 import BannersBottom from "../components/BannersBottom";
-import {faqList} from "../api2";
+import {faqList, topBannerList} from "../api2";
 
 const Home = () => {
 
     const [categories, setCategories] = useState([]);
     const [faqs, setFaqs] = useState([]);
     const [opened, setOpened] = useState([]);
+    const [topBanners, setTopBanners] = useState([]);
 
     useEffect( () => {
         faqList().then((result) => {
             setCategories(result.categories[0]);
             setFaqs(result.faqs);
+        });
+        topBannerList().then((res) => {
+            console.log(res[0])
+            setTopBanners(res);
         });
     }, []);
 
@@ -77,30 +82,43 @@ const Home = () => {
     return (
         <>
             <Carousel >
+                {
+                    topBanners.map((topBanner, index) => {
+                        return (
+                            <section key={index} className="bg-[#F0F9FF] h-[406px] relative">
+                                <img src={ topBanner.image }/>
+                            </section>
+                        )
+                    })
+                }
                 {/*https://www.youtube.com/watch?v=VFHWuy2olto*/}
                 {/*https://www.youtube.com/watch?v=C5NjxM1dyxY*/}
-                <section className="bg-[#F0F9FF] h-[406px] relative">
-                    <div>
-                        <div className="logo_minion">
-                            <img className="" src={logo_minion} alt=""/>
-                        </div>
-                        <div className="logo_counter">
-                            <img className="" src={logo_counter} alt=""/>
-                        </div>
-                    </div>
-                    <h1 className="text-center text-3xl select-none">Передати покази лічильника – легко та швидко!</h1>
-                </section>
-                <section className="bg-[#F0F9FF] h-[406px]">
-                    <div>
-                        <div className="logo_minion">
-                            <img className="mx-auto" src={logo_minion} alt=""/>
-                        </div>
-                        <div className="logo_counter">
-                            <img className="mx-auto" src={logo_counter} alt=""/>
-                        </div>
-                    </div>
-                    <h1 className="text-center text-3xl select-none">Передати покази лічильника – легко та швидко! 2</h1>
-                </section>
+                {/*<section className="bg-[#F0F9FF] h-[406px] relative">*/}
+                {/*    <div>*/}
+                {/*        <img src={ topBanners.image }/>*/}
+                        {/*<div className="logo_minion">*/}
+                        {/*    <img className="" src={logo_minion} alt=""/>*/}
+                        {/*</div>*/}
+                        {/*<div className="logo_counter">*/}
+                        {/*    <img className="" src={logo_counter} alt=""/>*/}
+                        {/*</div>*/}
+                    {/*</div>*/}
+                    {/*<h1 className="text-center text-3xl select-none">Передати покази лічильника – легко та швидко!</h1>*/}
+                {/*</section>*/}
+                {/*<section className="bg-[#F0F9FF] h-[406px] relative">*/}
+                {/*        <img src={ topBanners.image }/>*/}
+                {/*</section>*/}
+                {/*<section className="bg-[#F0F9FF] h-[406px]">*/}
+                {/*    <div>*/}
+                {/*        <div className="logo_minion">*/}
+                {/*            <img className="mx-auto" src={logo_minion} alt=""/>*/}
+                {/*        </div>*/}
+                {/*        <div className="logo_counter">*/}
+                {/*            <img className="mx-auto" src={logo_counter} alt=""/>*/}
+                {/*        </div>*/}
+                {/*    </div>*/}
+                {/*    <h1 className="text-center text-3xl select-none">Передати покази лічильника – легко та швидко! 2</h1>*/}
+                {/*</section>*/}
             </Carousel>
             <section>
                 <div className="grid grid-cols-3 gap-x-8 mt-24 mb-28">

@@ -60,3 +60,11 @@ export const faqList = () => {
             throw new ApiError(error);
         });
 };
+
+export const topBannerList = () => {
+    return connect.get('/topbanners')
+        .then((res) => res.data)
+        .catch((error) => {
+            throw new ApiError(error);
+        });
+};
