@@ -81,18 +81,19 @@ const Home = () => {
 
     return (
         <>
-            <Carousel >
+            {/*https://www.youtube.com/watch?v=VFHWuy2olto*/}
+            {/*https://medium.com/stackanatomy/build-an-elegant-gallery-with-react-responsive-carousel-926c4f34768e*/}
+            {/*https://www.youtube.com/watch?v=C5NjxM1dyxY*/}
+            <Carousel infiniteLoop={true}>
                 {
                     topBanners.map((topBanner, index) => {
                         return (
                             <section key={index} className="bg-[#F0F9FF] h-[406px] relative">
-                                <img src={ topBanner.image }/>
+                                <img src={ topBanner.image } alt={topBanner}/>
                             </section>
                         )
                     })
                 }
-                {/*https://www.youtube.com/watch?v=VFHWuy2olto*/}
-                {/*https://www.youtube.com/watch?v=C5NjxM1dyxY*/}
                 {/*<section className="bg-[#F0F9FF] h-[406px] relative">*/}
                 {/*    <div>*/}
                 {/*        <img src={ topBanners.image }/>*/}
