@@ -89,7 +89,7 @@ const Home = () => {
                     topBanners.map((topBanner, index) => {
                         return (
                             <section key={index} className="bg-[#F0F9FF] h-[406px] relative">
-                                <img src={ topBanner.image } alt={topBanner}/>
+                                <img src={ topBanner.image } alt="topBanner"/>
                             </section>
                         )
                     })
