@@ -33,7 +33,6 @@ const Home = () => {
             setFaqs(result.faqs);
         });
         topBannerList().then((res) => {
-            console.log(res[0])
             setTopBanners(res);
         });
     }, []);
@@ -84,13 +83,17 @@ const Home = () => {
             {/*https://www.youtube.com/watch?v=VFHWuy2olto*/}
             {/*https://medium.com/stackanatomy/build-an-elegant-gallery-with-react-responsive-carousel-926c4f34768e*/}
             {/*https://www.youtube.com/watch?v=C5NjxM1dyxY*/}
-            <Carousel infiniteLoop={true}>
+            <Carousel >
                 {
                     topBanners.map((topBanner, index) => {
                         return (
-                            <section key={index} className="bg-[#F0F9FF] h-[406px] relative">
-                                <img src={ topBanner.image } alt="topBanner"/>
-                            </section>
+                           <div key={index}>
+                                <a href={ topBanner.url }>
+                                    <section className="bg-[#F0F9FF] h-[406px]">
+                                        <img src={ topBanner.image } alt="topBanner"/>
+                                    </section>
+                                </a>
+                            </div>
                         )
                     })
                 }

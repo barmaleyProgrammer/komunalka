@@ -15,7 +15,7 @@ const Footer = () => {
                     </a>
                     <div className="mb-1 mt-1 text-xs font-light">
                         <p className="mb-2 text-center">made by GERC</p>
-                        <p>lichylnyk.com.ua © 2023</p>
+                        <p>lichylnyk.com.ua © { new Date().getFullYear() }</p>
                     </div>
                 </div>
                 <div>

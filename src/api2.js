@@ -1,6 +1,5 @@
 import axios from 'axios';
 import ApiError from './error';
-import {data} from "autoprefixer";
 
 const connect = axios.create({
     baseURL: (process.env.NODE_ENV === 'development') ? 'http://127.0.0.1:8000/api' : 'https://komunalka-cms.ssoloviov.kiev.ua/api',
@@ -62,7 +61,18 @@ export const faqList = () => {
 };
 
 export const topBannerList = () => {
-    return connect.get('/topbanners')
+    const fields = [
+        'id','image', 'url'
+    ];
+    return connect.get(`/topbanners?fields=${fields.join(',')}`)
+        .then((res) => res.data)
+        .catch((error) => {
+            throw new ApiError(error);
+        });
+};
+
+export const contactInfo = () => {
+    return connect.get('/contact')
         .then((res) => res.data)
         .catch((error) => {
             throw new ApiError(error);
