@@ -34,6 +34,14 @@ const checkServices = () => {
     const data = localStorage.getItem('services');
     return data ? JSON.parse(data) : [];
 };
+const checkContacts = () => {
+    const data = localStorage.getItem('contacts');
+    return data ? JSON.parse(data) : {
+        phones: [],
+        emails: [],
+        socials: []
+    };
+};
 
 export const Context = createContext(null);
 
@@ -45,6 +53,12 @@ export const initialSate = {
     serviceTypes: checkServiceTypes(),
     serviceType: '',
     provider: '',
+    // contacts: checkContacts(),
+    contacts: {
+        phones: [],
+        emails: [],
+        socials: []
+    },
     counter: '',
     startDate: moment().add(-3, 'months'),
     // startDate: moment().startOf('year'),
@@ -73,6 +87,11 @@ export const reducer = (state, action) => {
             return {
                 ...state,
                 addresses: action.payload
+            };
+        case 'contacts':
+            return {
+                ...state,
+                contacts: action.payload
             };
         case 'service':
             return {

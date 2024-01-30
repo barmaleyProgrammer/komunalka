@@ -73,8 +73,10 @@ export const topBannerList = () => {
 
 export const contactInfo = () => {
     return connect.get('/contact')
-        .then((res) => res.data)
-        .catch((error) => {
+        .then((res) => {
+            // localStorage.setItem('contacts', JSON.stringify(res.data));
+            return res.data;
+        }).catch((error) => {
             throw new ApiError(error);
         });
 };

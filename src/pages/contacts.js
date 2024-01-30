@@ -1,6 +1,6 @@
 import Breadcrumbs from '../components/breadcrumbs';
-import {useEffect, useState} from "react";
-import {contactInfo} from "../api2";
+import { useContext } from "react";
+import { Context } from "../store";
 
 const breadCrumbs = [
     {
@@ -15,16 +15,7 @@ const breadCrumbs = [
 
 const Contacts = () => {
 
-    const [phones, setPhones] = useState([]);
-    const [emails, setEmails] = useState([]);
-    const [socials, setSocials] = useState([]);
-    useEffect( () => {
-        contactInfo().then((result) => {
-            setPhones(result.phones)
-            setEmails(result.emails)
-            setSocials(result.socials)
-        });
-    }, []);
+    const [state] = useContext(Context);
 
     return (
         <>
@@ -38,7 +29,7 @@ const Contacts = () => {
                     <div className="text-sm font-light gap-y-3">
                         <ul>
                             {
-                                phones.map((item, key) => {
+                                state.contacts.phones.map((item, key) => {
                                     return (
                                         <li key={key} className="whitespace-nowrap mb-4"><a href={`tel:${item}`}></a>{ item }</li>
                                     )
@@ -50,7 +41,7 @@ const Contacts = () => {
                 <div className=" mt-4">
                     <p className="text-lg mb-4">Email</p>
                     {
-                        emails.map((item, key) => {
+                        state.contacts.emails.map((item, key) => {
                             return (
                                 <a key={key} className="text-sm font-light" href={`mailto:${item}`}>{ item }</a>
                             )
@@ -61,7 +52,7 @@ const Contacts = () => {
                     <p className="text-lg mb-4 whitespace-nowrap">Соціальні мережі</p>
                     <div className="flex space-x-4 justify-between">
                         {
-                            socials.map((item, key) => {
+                            state.contacts.socials.map((item, key) => {
                                 return (
                                     <a key={key} href={`${item.url}`}>
                                         <img src={ item.img } alt=""/>
