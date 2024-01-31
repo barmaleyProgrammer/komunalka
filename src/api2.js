@@ -80,3 +80,15 @@ export const contactInfo = () => {
             throw new ApiError(error);
         });
 };
+
+export const advantagesList = () => {
+    const fields = [
+        'id','title', 'body', 'icon'
+    ];
+    return connect.get(`/advantages?fields=${fields.join(',')}`)
+        .then((res) => {
+            return res.data;
+        }).catch((error) => {
+            throw new ApiError(error);
+        });
+};

@@ -1,8 +1,3 @@
-import logo_counter from '../img/logo_counter.png';
-import logo_minion from '../img/logo_minion.png';
-import icon_effective from '../img/icon_effective.svg';
-import icon_eco_world from '../img/icon_eco_world.svg';
-import group from '../img/group.svg';
 import arrow_right from '../img/arrow_right.svg';
 import arrow_left from '../img/arrow_left.svg';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
@@ -18,7 +13,7 @@ import HomeCountersValue from "../components/homeCountersValue";
 import HomeConsumptionCalculator from "../components/homeConsumptionCalculator";
 import NewsList from './newsList';
 import BannersBottom from "../components/BannersBottom";
-import {faqList, topBannerList} from "../api2";
+import {faqList, topBannerList, advantagesList} from "../api2";
 
 const Home = () => {
 
@@ -26,6 +21,7 @@ const Home = () => {
     const [faqs, setFaqs] = useState([]);
     const [opened, setOpened] = useState([]);
     const [topBanners, setTopBanners] = useState([]);
+    const [advantages, setAdvantages] = useState([]);
 
     useEffect( () => {
         faqList().then((result) => {
@@ -34,6 +30,9 @@ const Home = () => {
         });
         topBannerList().then((res) => {
             setTopBanners(res);
+        });
+        advantagesList().then((res) => {
+            setAdvantages(res);
         });
     }, []);
 
@@ -169,25 +168,18 @@ const Home = () => {
             <section>
                 <div className="py-3 shadow-myCustom">
                     <p className="text-2xl font-normal text-center mt-4">Навіщо реєструватись на Лічильник?</p>
-                    <div className="relative grid grid-cols-3 mt-6">
-                        <div className="text-center w-72 mx-auto">
-                            <img className="mx-auto" src={icon_effective} alt=""/>
-                            <p className="text-base font-medium p-4">Зручність та ефективність</p>
-                            <p className="text-sm font-light">Сайт надає мешканцям Києва зручний та швидкий спосіб передавати показання лічильників,
-                                не вимагаючи додаткових поїздок чи дзвінків. Це дозволяє заощадити час та зусилля.</p>
-                        </div>
-                        <div className="text-center w-72 mx-auto">
-                            <img className="mx-auto" src={icon_eco_world} alt=""/>
-                            <p className="text-base font-medium p-4">Екологічна відповідальність</p>
-                            <p className="text-sm font-light">Використання онлайн-платформи для передачі показань лічильників сприяє
-                                зниженню паперового споживання та, отже, захисту навколишнього середовища.</p>
-                        </div>
-                        <div className="text-center w-72 mx-auto">
-                            <img className="mx-auto" src={group} alt=""/>
-                            <p className="text-base font-medium p-4">Точність та надійність</p>
-                            <p className="text-sm font-light">Можливість зробити показання самостійно зменшує ризик помилок,
-                                повʼязаних з передачею інформації оператору. Це забезпечує точніше облікове обслуговування.</p>
-                        </div>
+                    <div className="flex justify-between relative mt-6">
+                            {
+                                advantages.map((item, key) => {
+                                    return (
+                                        <div key={key} className="text-center w-72 mx-auto">
+                                            <img className="mx-auto" src={item.icon} alt=""/>
+                                            <p className="text-base font-medium p-4">{item.title}</p>
+                                            <p className="text-sm font-light">{item.body}</p>
+                                        </div>
+                                    )
+                                })
+                            }
                         <img className="arrow_right" src={arrow_right} alt=""/>
                         <img className="arrow_left" src={arrow_left} alt=""/>
                     </div>
