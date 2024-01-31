@@ -92,3 +92,11 @@ export const advantagesList = () => {
             throw new ApiError(error);
         });
 };
+
+export const neuronInfo = () => {
+    return connect.get('/neuron/1').then((res) => {
+        return res.data;
+    }).catch((error) => {
+    throw new ApiError(error);
+    });
+};

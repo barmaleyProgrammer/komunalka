@@ -13,7 +13,7 @@ import HomeCountersValue from "../components/homeCountersValue";
 import HomeConsumptionCalculator from "../components/homeConsumptionCalculator";
 import NewsList from './newsList';
 import BannersBottom from "../components/BannersBottom";
-import {faqList, topBannerList, advantagesList} from "../api2";
+import {faqList, topBannerList, advantagesList, neuronInfo} from "../api2";
 
 const Home = () => {
 
@@ -22,6 +22,7 @@ const Home = () => {
     const [opened, setOpened] = useState([]);
     const [topBanners, setTopBanners] = useState([]);
     const [advantages, setAdvantages] = useState([]);
+    const [neuron, setNeuron] = useState([]);
 
     useEffect( () => {
         faqList().then((result) => {
@@ -33,6 +34,9 @@ const Home = () => {
         });
         advantagesList().then((res) => {
             setAdvantages(res);
+        });
+        neuronInfo().then((res) => {
+            setNeuron(res);
         });
     }, []);
 
@@ -96,32 +100,6 @@ const Home = () => {
                         )
                     })
                 }
-                {/*<section className="bg-[#F0F9FF] h-[406px] relative">*/}
-                {/*    <div>*/}
-                {/*        <img src={ topBanners.image }/>*/}
-                        {/*<div className="logo_minion">*/}
-                        {/*    <img className="" src={logo_minion} alt=""/>*/}
-                        {/*</div>*/}
-                        {/*<div className="logo_counter">*/}
-                        {/*    <img className="" src={logo_counter} alt=""/>*/}
-                        {/*</div>*/}
-                    {/*</div>*/}
-                    {/*<h1 className="text-center text-3xl select-none">Передати покази лічильника – легко та швидко!</h1>*/}
-                {/*</section>*/}
-                {/*<section className="bg-[#F0F9FF] h-[406px] relative">*/}
-                {/*        <img src={ topBanners.image }/>*/}
-                {/*</section>*/}
-                {/*<section className="bg-[#F0F9FF] h-[406px]">*/}
-                {/*    <div>*/}
-                {/*        <div className="logo_minion">*/}
-                {/*            <img className="mx-auto" src={logo_minion} alt=""/>*/}
-                {/*        </div>*/}
-                {/*        <div className="logo_counter">*/}
-                {/*            <img className="mx-auto" src={logo_counter} alt=""/>*/}
-                {/*        </div>*/}
-                {/*    </div>*/}
-                {/*    <h1 className="text-center text-3xl select-none">Передати покази лічильника – легко та швидко! 2</h1>*/}
-                {/*</section>*/}
             </Carousel>
             <section>
                 <div className="grid grid-cols-3 gap-x-8 mt-24 mb-28">
@@ -192,24 +170,10 @@ const Home = () => {
             </section>
             <section className="bg-[#F0F5FA]">
                 <div className="p-4">
-                    <h2 className="text-2xl text-center font-normal mt-4 mb-5">Нейронна мережа</h2>
+                    <h2 className="text-2xl text-center font-normal mt-4 mb-5">{neuron.title}</h2>
                     <div className="w-[945px] mx-auto text-sm font-light">
                         <div className="space-y-4">
-                            <p>Наша інноваційна система використовує потужну нейронну мережу для автоматичного визначення адреси, повʼязаної
-                                з<br/> обраними користувачем параметрами:
-                                <q lang="fr">вода</q>, <q lang="fr">газ</q>, <q lang="fr">електрика</q> або <q lang="fr">тепло</q>.</p>
-                            <p>Просто оберіть необхідний блок та завантажте відповідне фото, і наша система автоматично розпізнає зображення
-                                та визначає відповідну адресу. Наш розроблений алгоритм забезпечує швидку та точну ідентифікацію,
-                                допомагаючи ефективно знаходити необхідну інформацію без зайвих зусиль.</p>
-                        </div>
-                        <div className="w-[760px] mx-auto border-dashed border rounded border-[#797878] mt-8 mb-5">
-                            <p className="text-center mt-5">Перетягніть фото сюди</p>
-                            <p className="text-center mt-5">або</p>
-                            <div className="w-44 mx-auto mt-5 mb-5 px-7">
-                                <NavLink to="#" className="py-3 px-5 text-sm rounded text-white_figma bg-yellow_figma" >
-                                    Завантажте
-                                </NavLink>
-                            </div>
+                            <p dangerouslySetInnerHTML = {{ __html: neuron.body }}></p>
                         </div>
                     </div>
                 </div>
