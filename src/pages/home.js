@@ -175,6 +175,15 @@ const Home = () => {
                         <div className="space-y-4">
                             <p dangerouslySetInnerHTML = {{ __html: neuron.body }}></p>
                         </div>
+                        <div className="w-[760px] mx-auto border-dashed border rounded border-[#797878] mt-8 mb-5">
+                            <p className="text-center mt-5">Перетягніть фото сюди</p>
+                            <p className="text-center mt-5">або</p>
+                            <div className="w-44 mx-auto mt-5 mb-5 px-7">
+                                <NavLink to="#" className="py-3 px-5 text-sm rounded text-white_figma bg-yellow_figma" >
+                                    Завантажте
+                                </NavLink>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
