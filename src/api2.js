@@ -100,3 +100,11 @@ export const neuronInfo = () => {
     throw new ApiError(error);
     });
 };
+
+export const indicatorsInfo = () => {
+    return connect.get('/indicator').then((res) => {
+        return res.data;
+    }).catch((error) => {
+        throw new ApiError(error);
+    });
+};

@@ -13,7 +13,7 @@ import HomeCountersValue from "../components/homeCountersValue";
 import HomeConsumptionCalculator from "../components/homeConsumptionCalculator";
 import NewsList from './newsList';
 import BannersBottom from "../components/BannersBottom";
-import {faqList, topBannerList, advantagesList, neuronInfo} from "../api2";
+import {faqList, topBannerList, advantagesList, neuronInfo, indicatorsInfo} from "../api2";
 
 const Home = () => {
 
@@ -23,6 +23,7 @@ const Home = () => {
     const [topBanners, setTopBanners] = useState([]);
     const [advantages, setAdvantages] = useState([]);
     const [neuron, setNeuron] = useState([]);
+    const [indicators, setIndicators] = useState([]);
 
     useEffect( () => {
         faqList().then((result) => {
@@ -38,19 +39,35 @@ const Home = () => {
         neuronInfo().then((res) => {
             setNeuron(res);
         });
+        indicatorsInfo().then((res) => {
+            setIndicators(res);
+        });
     }, []);
 
     const [modalCountersHomeBlock, setModalCountersHomeBlock] = useState(false);
     const [modalConsumptionCalculator, setModalConsumptionCalculator] = useState(false);
 
-    const CountersHomeBlockActive = (e) => {
+    // const CountersHomeBlockActive = (e) => {
+    //     e.stopPropagation();
+    //     setModalCountersHomeBlock(true);
+    // };
+    // const ConsumptionCalculator = (e) => {
+    //     e.stopPropagation();
+    //     setModalConsumptionCalculator(true);
+    // };
+
+    const HomeBlock = (e, type) => {
         e.stopPropagation();
-        setModalCountersHomeBlock(true);
-    };
-    const ConsumptionCalculator = (e) => {
-        e.stopPropagation();
-        setModalConsumptionCalculator(true);
-    };
+        if (type === 'indication') {
+            setModalCountersHomeBlock(true);
+        }
+        if (type === 'calculator') {
+            setModalConsumptionCalculator(true);
+        }
+        if (type === 'incorrect') {
+            setModalConsumptionCalculator(true);
+        }
+     }
 
     const toggle = (id) => {
         setOpened((prevData) => {
@@ -102,31 +119,42 @@ const Home = () => {
                 }
             </Carousel>
             <section>
-                <div className="grid grid-cols-3 gap-x-8 mt-24 mb-28">
-                    <div className="rounded-lg shadow-myCustom w-[361px] h-52">
-                        <p className="py-6 text-xl text-center">Актуальні показання</p>
-                        <p className="text-sm font-light px-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            Ut quis libero quis arcu laoreet</p>
-                        <div className="w-56 mx-auto mt-6">
-                            <Button type="submit" label={'Перевірити показання'} cssType={'secondary'} onClick={CountersHomeBlockActive} />
-                        </div>
-                    </div>
-                    <div className="rounded-lg shadow-myCustom w-[361px] h-52">
-                        <p className="py-6 text-xl text-center">Калькулятор споживання</p>
-                        <p className="text-sm font-light px-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            Ut quis libero quis arcu laoreet</p>
-                        <div className="w-56 mx-auto mt-6 whitespace-nowrap">
-                            <Button type="submit" label={'Розрахувати споживання'} cssType={'secondary'} onClick={ConsumptionCalculator} />
-                        </div>
-                    </div>
-                    <div className="rounded-lg shadow-myCustom w-[361px] h-52">
-                        <p className="py-6 text-xl text-center">Некоректні показання</p>
-                        <p className="text-sm font-light px-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            Ut quis libero quis arcu laoreet</p>
-                        <div className="w-56 mx-auto mt-6">
-                            <Button type="submit" label={'Надіслати запит'} cssType={'secondary'} />
-                        </div>
-                    </div>
+                <div className="flex justify-center gap-8 mt-24 mb-28">
+                        {
+                            indicators.map((item, key) => {
+                                 return (
+                                     <div key={key} className="rounded-lg shadow-myCustom w-[361px] h-52">
+                                         <p className="py-6 text-xl text-center">{item.title}</p>
+                                         <p className="text-sm font-light px-4">{item.body}</p>
+                                         <div className="w-56 mx-auto mt-6">
+                                             <Button type="submit" cssType={'secondary'} label={item.label_button}  onClick={(e) => HomeBlock(e, `${item.type_button}`)} />
+                                         </div>
+                                     </div>
+                                 )
+                            })
+                        }
+                        {/*<p className="py-6 text-xl text-center">Актуальні показання</p>*/}
+                        {/*<p className="text-sm font-light px-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit.*/}
+                        {/*    Ut quis libero quis arcu laoreet</p>*/}
+                        {/*<div className="w-56 mx-auto mt-6">*/}
+                        {/*    <Button type="submit" label={'Перевірити показання'} cssType={'secondary'} onClick={(e) => HomeBlock(e, 'indication')} />*/}
+                        {/*</div>*/}
+                    {/*<div className="rounded-lg shadow-myCustom w-[361px] h-52">*/}
+                    {/*    <p className="py-6 text-xl text-center">Калькулятор споживання</p>*/}
+                    {/*    <p className="text-sm font-light px-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit.*/}
+                    {/*        Ut quis libero quis arcu laoreet</p>*/}
+                    {/*    <div className="w-56 mx-auto mt-6 whitespace-nowrap">*/}
+                    {/*        <Button type="submit" label={'Розрахувати споживання'} cssType={'secondary'} onClick={(e) => HomeBlock(e, 'calculator')} />*/}
+                    {/*    </div>*/}
+                    {/*</div>*/}
+                    {/*<div className="rounded-lg shadow-myCustom w-[361px] h-52">*/}
+                    {/*    <p className="py-6 text-xl text-center">Некоректні показання</p>*/}
+                    {/*    <p className="text-sm font-light px-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit.*/}
+                    {/*        Ut quis libero quis arcu laoreet</p>*/}
+                    {/*    <div className="w-56 mx-auto mt-6">*/}
+                    {/*        <Button type="submit" label={'Надіслати запит'} cssType={'secondary'} />*/}
+                    {/*    </div>*/}
+                    {/*</div>*/}
                 </div>
                 {
                     modalCountersHomeBlock && (
