@@ -291,6 +291,14 @@ export const getAddress = () => {
         });
 };
 
+// const getAttributes = (objectId) => {
+//     return connect.get(`/v2/account/address/attributes/${objectId}`)
+//         .then((res) => res.data)
+//         .catch((error) => {
+//             throw new ApiError(error);
+//         });
+// };
+
 export const getObject = () => {
     return connect.get('/v2/account')
         .then((res) => {
