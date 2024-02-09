@@ -2,7 +2,7 @@ import Tabs from "../../components/tabs";
 import Breadcrumbs from "../../components/breadcrumbs";
 import Button from "../../components/button";
 import { useContext, useState } from "react";
-import { updateUser } from "../../api";
+import {getAddress, getObject, updateAddress, updateUser} from "../../api";
 import { Context } from "../../store";
 
 const breadCrumbs = [
@@ -25,28 +25,44 @@ const breadCrumbs = [
 ];
 
 const Notification = () => {
-    const [state] = useContext(Context);
-    const [form, setForm] = useState({
-        firstName: state.user.firstName,
-        lastName: state.user.lastName,
-        secondName: state.user.secondName,
-        phone: state.user.phone,
-        receiveNewsletter: false,
-        reminderTransferOfCounters: false
-    });
+    const [state, dispatch] = useContext(Context);
+    // const [newsletter, setNewsletter] = useState(state.user.receiveNewsletter)
+    // const [form, setForm] = useState({
+    //     firstName: state.user.firstName,
+    //     lastName: state.user.lastName,
+    //     secondName: state.user.secondName,
+    //     phone: state.user.phone,
+    //     receiveNewsletter: state.user.receiveNewsletter,
+    // });
 
-    const Submit = (event) => {
-        event.preventDefault();
-        updateUser(form).catch((error) => {
-            console.error(error.message);
-        });
+    // const Submit = (event) => {
+    //     event.preventDefault();
+    //     updateUser(form).catch((error) => {
+    //         console.error(error.message);
+    //     });
+    //     getAddress()
+    //         .then((data) => dispatch({ type: 'setAddresses', payload: data }))
+    //         .catch((error) => dispatch({ type: 'error', payload: error }))
+    // };
+
+    const handleInputChange = (event, objectId) => {
+        const reminderTransferOfCounters = event.target.checked;
+        updateAddress(objectId, {reminderTransferOfCounters})
+            .then(() => {
+                getAddress().then((data) => dispatch({ type: 'setAddresses', payload: data}))
+            })
     };
-    const handleInputChange = (event) => {
-        const value = (event.target.type === 'checkbox') ? event.target.checked : event.target.value;
-        setForm((prevProps) => ({
-            ...prevProps,
-            [event.target.name]: value
-        }));
+
+    const handleInputChange2 = (event) => {
+        const payload = {
+            ...state.user,
+            receiveNewsletter: event.target.checked
+        }
+        updateUser(payload).then(() => {
+            getObject().then((data) => {
+                dispatch({ type: 'setAccount', payload: data.account });
+            });
+        })
     };
 
     return (
@@ -69,8 +85,8 @@ const Notification = () => {
                                            id="reminderTransferOfCounters"
                                            name={'reminderTransferOfCounters'}
                                            type="checkbox"
-                                           checked={form.reminderTransferOfCounters}
-                                           onChange={handleInputChange}
+                                           checked={state.addresses[key].reminderTransferOfCounters}
+                                           onChange={(event ) => handleInputChange(event, item.objectId)}
                                     />
                                     <div className="px-1 font-light text-sm">
                                         { item.name }
@@ -84,8 +100,8 @@ const Notification = () => {
                             id="receiveNewsletter"
                             name={'receiveNewsletter'}
                             type="checkbox"
-                            checked={form.receiveNewsletter}
-                            onChange={handleInputChange}
+                            checked={state.user.receiveNewsletter}
+                            onChange={handleInputChange2}
                         />
                         <div className="px-1">
                             Отримувати листи с новинами
@@ -94,9 +110,9 @@ const Notification = () => {
                 </div>
 
                 {/*<div className="text-xs text-red-900 text-center">{ formError }</div>*/}
-                <div className="w-[368px]">
-                    <Button type="button" label={'Зберігти зміни'} cssType={'primary'} onClick={Submit}/>
-                </div>
+                {/*<div className="w-[368px]">*/}
+                {/*    <Button type="button" label={'Зберігти зміни'} cssType={'primary'} onClick={Submit}/>*/}
+                {/*</div>*/}
             </div>
         </>
     );

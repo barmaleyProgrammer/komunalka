@@ -17,6 +17,7 @@ const checkUser = () => {
         phone: '',
         createdDateTime: '',
         updatedDateTime: '',
+        receiveNewsletter: false
     };
 };
 

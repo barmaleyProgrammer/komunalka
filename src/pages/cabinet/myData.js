@@ -38,7 +38,7 @@ const MyData = () => {
         lastName: state.user.lastName,
         secondName: state.user.secondName,
         phone: state.user.phone,
-        source: (process.env.NODE_ENV === 'development') ? 'localhost_3000' : '2',
+        // source: (process.env.NODE_ENV === 'development') ? 'localhost_3000' : '2',
 
     });
     const [password, setPassword] = useState('');
