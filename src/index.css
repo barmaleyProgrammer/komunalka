@@ -161,8 +161,12 @@ input::-webkit-inner-spin-button {
 input[type=number] {
     -moz-appearance: textfield;
 }
-.AiOutlineMinusClassNames:hover {
-    color: #FDC500;
+/*.AiOutlineMinusClassNames > *:hover {*/
+/*    color: #FDC500;*/
+/*}*/
+
+span:hover > svg#minus path {
+    stroke: #FDC500;
 }
 .wrong_code {
     content: url('./img/wrong_code.svg');
