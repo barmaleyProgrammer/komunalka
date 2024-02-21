@@ -5,7 +5,6 @@ import { Carousel } from 'react-responsive-carousel';
 
 import Button from '../components/button';
 import { NavLink } from 'react-router-dom';
-import {AiOutlineMinus, AiOutlinePlus} from 'react-icons/ai';
 import {Collapse} from 'react-collapse';
 import {useEffect, useState} from 'react';
 import Modal from "../components/modal/modal";
@@ -86,9 +85,26 @@ const Home = () => {
             <div>
                 <div className="bg-white flex justify-between items-center cursor-pointer" onClick={toggle}>
                     <p className="text-base font-medium py-3">{tittle}</p>
-                    <div>
-                        {open ? <AiOutlineMinus /> : <AiOutlinePlus /> }
-                    </div>
+                        {open ?
+                            <span className="p-1">
+                                <svg width="16" height="2" id="minus" viewBox="0 0 16 2" fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1 1H15"
+                                          stroke="#2A3744"
+                                          strokeWidth="2"
+                                          strokeLinecap="round" />
+                                </svg>
+                            </span>
+                            :
+                            <span>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M6 12H12M12 12H18M12 12V6M12 12V18"
+                                          stroke="#2A3744"
+                                          strokeWidth="1.5"
+                                          strokeLinecap="round" />
+                                    </svg>
+                            </span>
+                        }
                 </div>
                 <Collapse isOpened={open}>
                     <div className="font-normal text-sm ">{desc}</div>
@@ -133,28 +149,6 @@ const Home = () => {
                                  )
                             })
                         }
-                        {/*<p className="py-6 text-xl text-center">Актуальні показання</p>*/}
-                        {/*<p className="text-sm font-light px-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit.*/}
-                        {/*    Ut quis libero quis arcu laoreet</p>*/}
-                        {/*<div className="w-56 mx-auto mt-6">*/}
-                        {/*    <Button type="submit" label={'Перевірити показання'} cssType={'secondary'} onClick={(e) => HomeBlock(e, 'indication')} />*/}
-                        {/*</div>*/}
-                    {/*<div className="rounded-lg shadow-myCustom w-[361px] h-52">*/}
-                    {/*    <p className="py-6 text-xl text-center">Калькулятор споживання</p>*/}
-                    {/*    <p className="text-sm font-light px-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit.*/}
-                    {/*        Ut quis libero quis arcu laoreet</p>*/}
-                    {/*    <div className="w-56 mx-auto mt-6 whitespace-nowrap">*/}
-                    {/*        <Button type="submit" label={'Розрахувати споживання'} cssType={'secondary'} onClick={(e) => HomeBlock(e, 'calculator')} />*/}
-                    {/*    </div>*/}
-                    {/*</div>*/}
-                    {/*<div className="rounded-lg shadow-myCustom w-[361px] h-52">*/}
-                    {/*    <p className="py-6 text-xl text-center">Некоректні показання</p>*/}
-                    {/*    <p className="text-sm font-light px-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit.*/}
-                    {/*        Ut quis libero quis arcu laoreet</p>*/}
-                    {/*    <div className="w-56 mx-auto mt-6">*/}
-                    {/*        <Button type="submit" label={'Надіслати запит'} cssType={'secondary'} />*/}
-                    {/*    </div>*/}
-                    {/*</div>*/}
                 </div>
                 {
                     modalCountersHomeBlock && (
