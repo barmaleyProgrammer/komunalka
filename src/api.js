@@ -281,7 +281,7 @@ export const getServiceTypes = () => {
 };
 
 export const getAddress = () => {
-    return connect.get('/v2/account/address')
+    return connect.get('/v2/account/address?withParameters=true')
         .then((res) => {
             localStorage.setItem('addresses', JSON.stringify(res.data));
             return res.data;

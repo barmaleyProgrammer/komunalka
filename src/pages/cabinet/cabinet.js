@@ -114,10 +114,9 @@ const Cabinet = () => {
                 </div>
                 <div className="pt-2 text-sm mb-4 object-name" title={item.address}>{ item.address }</div>
                 <div className="text-xs space-y-1">
-                    <p>Загальна площа xx м2</p>
-                    <p>Опалювальна площа xx м2</p>
-                    <p>Проживаючих x</p>
-                    <p>Кількість лічильників x</p>
+                    <p>Загальна площа {item.parameters.totalArea} м2</p>
+                    <p>Опалювальна площа {item.parameters.livingArea} м2</p>
+                    <p>Проживаючих {item.parameters.residentsCount}</p>
                 </div>
                 <div className="absolute bottom-6 left-[100px] text-base font-medium w-40 h-10 mt-4">
                     <Button type="submit" cssType="secondary" label={'Перейти'} />
