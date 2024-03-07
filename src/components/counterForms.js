@@ -69,8 +69,7 @@ const CounterForms = ({counters, setCounters, Save}) => {
                                 <Tooltip
                                     id="tooltip_readingDayComment"
                                     arrowColor="#FDC500"
-                                    // openOnClick={true}
-                                    // isOpen={true}
+                                    className={'z-10'}
                                 />
                             </div>
                             <Neironka />
