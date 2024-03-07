@@ -66,6 +66,7 @@ const CounterForms = ({counters, setCounters, Save}) => {
                                     step={'0.01'}
                                     onChange={(e) => handleInputChange(e, item)}
                                 />
+                                {/*https://react-tooltip.com/docs/options*/}
                                 <Tooltip
                                     id="tooltip_readingDayComment"
                                     arrowColor="#FDC500"
