@@ -114,8 +114,8 @@ const GraphsTables = () => {
                     <thead>
                     <tr>
                         <td className="border-[#E7E7E7] text-sm border-l-0 border-b border-r p-2">Період</td>
-                        <td className="border-[#E7E7E7] text-sm border-l-0 border-b border-r p-2">oldValue</td>
-                        <td className="border-[#E7E7E7] text-sm border-l-0 border-b border-r p-2">newValue</td>
+                        <td className="border-[#E7E7E7] text-sm border-l-0 border-b border-r p-2">попередні</td>
+                        <td className="border-[#E7E7E7] text-sm border-l-0 border-b border-r p-2">поточні</td>
                         <td className="border-[#E7E7E7] font-normal border-b text-sm p-2">{`${moment(state.startDate).format('DD.MM.YYYY')} - ${moment(state.endDate).format('DD.MM.YYYY')}`}</td>
                     </tr>
                     </thead>
