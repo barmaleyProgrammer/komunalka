@@ -123,11 +123,11 @@ const GraphsTables = () => {
                     {
                         items.map((item, index) => {
                             return (
-                                <tr key={index}>
+                                <tr className="text-center" key={index}>
                                     <td className="border-[#E7E7E7] font-normal border-r p-2">{moment(item.newTransmissionTime).format('DD.MM.YYYY')}</td>
-                                    <td className="border-[#E7E7E7] font-normal border-r p-2">{(item.oldValue)}</td>
-                                    <td className="border-[#E7E7E7] font-normal border-r p-2">{(item.newValue)}</td>
-                                    <td className="border-[#E7E7E7] font-normal text-sm p-2">{(Number(item.newValue) - Number(item.oldValue)).toFixed(2) }</td>
+                                    <td className="border-[#E7E7E7] font-normal border-r p-2">{fixNum(item.oldValue)}</td>
+                                    <td className="border-[#E7E7E7] font-normal border-r p-2">{fixNum(item.newValue)}</td>
+                                    <td className="border-[#E7E7E7] font-normal text-sm p-2">{fixValue(item.oldValue, item.newValue)}</td>
                                 </tr>
                             );
                         })
@@ -166,6 +166,24 @@ const GraphsTables = () => {
                 <Line options={options} data={data} />
             </div>
         );
+    };
+
+    const fixNum = (value) => {
+        if (!value) {
+            return '-';
+        }
+        return value.toFixed(2);
+    };
+    const fixValue = (oldValue, newValue) => {
+        if (!newValue) {
+            return '-';
+        }
+        if (!oldValue && newValue) {
+            return newValue.toFixed(2);
+        }
+        if (oldValue && newValue) {
+            return (newValue - oldValue).toFixed(2)
+        }
     };
 
     return (

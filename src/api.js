@@ -244,11 +244,18 @@ export const getCountersHistory = (objectId, dateStart, dateEnd) => {
 
     return connect.get(`/v2/counter/meters/history/data?objectId=${objectId}&dateStart=${dateStart}&dateEnd=${dateEnd}`)
         .then((res) => {
+            const data = res.data.data.map((item) => {
+               return {
+                   ...item,
+                   oldValue: item.oldValue ? Number(item.oldValue.replace(",", ".")) : 0,
+                   newValue: item.newValue ? Number(item.newValue.replace(",", ".")) : 0,
+               };
+            });
             const result = {
-                all: res.data.data,
-                serviceTypes: UniqueServiceTypes(res.data.data),
-                providers: UniqueProviders(res.data.data),
-                counters: UniqueCounters(res.data.data),
+                all: data,
+                serviceTypes: UniqueServiceTypes(data),
+                providers: UniqueProviders(data),
+                counters: UniqueCounters(data),
             };
             sessionStorage.setItem(key, JSON.stringify(result));
             return result;
