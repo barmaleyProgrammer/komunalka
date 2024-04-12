@@ -175,16 +175,16 @@ const GraphsTables = () => {
         return value.toFixed(2);
     };
     const fixValue = (oldValue, newValue) => {
-        if (!newValue) {
+        if (!newValue || !oldValue) {
             return '-';
         }
-        if (!oldValue && newValue) {
-            return newValue.toFixed(2);
-        }
+        // if (!oldValue && newValue) {
+        //     return newValue.toFixed(2);
+        // }
         if (oldValue && newValue) {
             return (newValue - oldValue).toFixed(2)
         }
-    };
+    };2
 
     return (
         <div className="font-normal mb-4">
