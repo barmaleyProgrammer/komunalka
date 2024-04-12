@@ -184,7 +184,7 @@ const GraphsTables = () => {
         if (oldValue && newValue) {
             return (newValue - oldValue).toFixed(2)
         }
-    };2
+    };
 
     return (
         <div className="font-normal mb-4">
