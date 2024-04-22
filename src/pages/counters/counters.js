@@ -64,6 +64,8 @@ const Counters = () => {
                 idPlat: item.idPlat || '',
                 abccnt: item.abccnt || '',
                 isseveralTarif: item.isseveralTarif || '',
+                nameFirme: item.nameFirme || '',
+                namePlat: item.namePlat || '',
                 abcounter: item.abcounter || '',
                 uniqId: item.uniqId || '',
                 counterNo: item.counterNo || '',
