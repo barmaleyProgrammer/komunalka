@@ -135,15 +135,17 @@ const Home = () => {
                 }
             </Carousel>
             <section>
-                <div className="flex justify-center gap-8 mt-24 mb-28">
+                <div className="grid grid-cols-3 gap-8 mt-24 mb-28">
                         {
                             indicators.map((item, key) => {
                                  return (
-                                     <div key={key} className="rounded-lg shadow-myCustom w-[361px] h-52">
-                                         <p className="py-6 text-xl text-center">{item.title}</p>
-                                         <p className="text-sm font-light px-4">{item.body}</p>
-                                         <div className="w-56 mx-auto mt-6">
-                                             <Button type="submit" cssType={'secondary'} label={item.label_button}  onClick={(e) => HomeBlock(e, `${item.type_button}`)} />
+                                     <div key={key} className="rounded-lg shadow-myCustom relative">
+                                         <div className="mb-24">
+                                             <p className="py-6 text-xl text-center">{item.title}</p>
+                                             <p className="text-sm font-light px-4">{item.body}</p>
+                                         </div>
+                                         <div className="w-56 absolute mx-auto inset-x-3 bottom-4 mt-6">
+                                            <Button type="submit" cssType={'secondary'} label={item.label_button}  onClick={(e) => HomeBlock(e, `${item.type_button}`)} />
                                          </div>
                                      </div>
                                  )
